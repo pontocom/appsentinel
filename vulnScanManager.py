@@ -2,6 +2,31 @@
 import os.path
 import argparse
 
+
+def listPlugins():
+    print("These are the available plugins:")
+    for m in plugins:
+        print(m.pluginName)
+
+
+def runPlugins():
+    print("Running all the available plugins:")
+    for m in plugins:
+        c = m.PluginClass()
+        c.run()
+
+
+def selectPlugin(pluginNum):
+    thisPlugin = plugins[modNum]
+
+
+def runSelectedPlugin():
+    if thisPlugin == 0:
+        raise ArgumentError("you didn't assign a module yet.")
+    c = thisPlugin.PluginClass()
+    c.run()
+
+
 if __name__=="__main__":
     VERSION = '0.1'
     banner = """
@@ -21,8 +46,6 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser(description = text)
     parser.add_argument('-v', '--version', action='version', version='Vulnerability Scan Manager ' + VERSION)
     parser.add_argument('-d', '--directory', help='Location to the directory that contains APKs to analyse.', action='store', dest='apkdir', nargs=1, default='./')
-    parser.add_argument('-p', '--plugins', help='Location of the plugins directory.',
-                        action='store', dest='plugdir', nargs=1, default='./')
     args = parser.parse_args()
 
     print(args)
@@ -31,16 +54,18 @@ if __name__=="__main__":
     pluginDir = os.path.dirname(os.path.abspath(__file__))
     print(pluginDir)
 
-    for file in os.listdir(pluginDir + "/plugins"):
+    for file in os.listdir(pluginDir):
         if file[0:7] == "plugin_" and file[-3:] == ".py":
             print(file)
             # we need to do something with them... need to check if it is beter ti import or to spawn
             print("Importing -> " + ".".join(file.split(".")[0:-1]))
-            #thisPlugin = __import__("plugins." + ".".join(file.split(".")[0:-1]))
             thisPlugin = __import__(".".join(file.split(".")[0:-1]))
-            if thisPlugin.enable == True:
+            if thisPlugin.enable:
                 plugins.append(thisPlugin)
 
     # looking for the APKs to analyse
     # we use the same approach to look for the APKs to analyse
+    listPlugins()
+    runPlugins()
+
 
