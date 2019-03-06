@@ -36,7 +36,8 @@ if __name__=="__main__":
             print(file)
             # we need to do something with them... need to check if it is beter ti import or to spawn
             print("Importing -> " + ".".join(file.split(".")[0:-1]))
-            thisPlugin = __import__("plugins." + ".".join(file.split(".")[0:-1]))
+            #thisPlugin = __import__("plugins." + ".".join(file.split(".")[0:-1]))
+            thisPlugin = __import__(".".join(file.split(".")[0:-1]))
             if thisPlugin.enable == True:
                 plugins.append(thisPlugin)
 
