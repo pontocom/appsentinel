@@ -2,6 +2,7 @@
 import os.path
 import argparse
 
+# location of the results of the tool
 jsonResultsLocation = "./json_results"
 
 def listPlugins():
