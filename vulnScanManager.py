@@ -4,6 +4,8 @@ import argparse
 
 # location of the results of the tool
 jsonResultsLocation = "./json_results"
+# location of the unprocessed APKs
+apkDir = "/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/"
 
 def listPlugins():
     print("These are the available plugins:")
@@ -71,5 +73,5 @@ if __name__=="__main__":
 
     # we use the same approach to look for the APKs to analyse
     listPlugins()
-    runPlugins("/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/")
+    runPlugins(apkDir)
 
