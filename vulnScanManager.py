@@ -2,6 +2,7 @@
 import os.path
 import argparse
 
+jsonResultsLocation = "./json_results"
 
 def listPlugins():
     print("These are the available plugins:")
@@ -9,11 +10,11 @@ def listPlugins():
         print(m.pluginName)
 
 
-def runPlugins():
+def runPlugins(apkLocation):
     print("Running all the available plugins:")
     for m in plugins:
         c = m.PluginClass()
-        c.run()
+        c.run(apkLocation)
 
 
 def selectPlugin(pluginNum):
@@ -54,18 +55,20 @@ if __name__=="__main__":
     pluginDir = os.path.dirname(os.path.abspath(__file__))
     print(pluginDir)
 
+    # test the existence of the results directory
+    if not os.path.exists(jsonResultsLocation):
+        os.system("mkdir " + jsonResultsLocation)
+
     for file in os.listdir(pluginDir):
         if file[0:7] == "plugin_" and file[-3:] == ".py":
             print(file)
-            # we need to do something with them... need to check if it is beter ti import or to spawn
+            # we need to do something with them... need to check if it is better to import or to spawn (decide later)
             print("Importing -> " + ".".join(file.split(".")[0:-1]))
             thisPlugin = __import__(".".join(file.split(".")[0:-1]))
             if thisPlugin.enable:
                 plugins.append(thisPlugin)
 
-    # looking for the APKs to analyse
     # we use the same approach to look for the APKs to analyse
     listPlugins()
-    runPlugins()
-
+    runPlugins("/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/")
 
