@@ -21,7 +21,7 @@ def runPlugins(apkLocation):
 
 
 def selectPlugin(pluginNum):
-    thisPlugin = plugins[modNum]
+    thisPlugin = plugins[pluginNum]
 
 
 def runSelectedPlugin():
@@ -30,7 +30,9 @@ def runSelectedPlugin():
     c = thisPlugin.PluginClass()
     c.run()
 
-
+'''
+A tool to scan APKs and look for vulnerabilities
+'''
 if __name__=="__main__":
     VERSION = '0.1'
     banner = """

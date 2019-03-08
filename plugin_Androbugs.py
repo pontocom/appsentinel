@@ -7,6 +7,9 @@ enable = True
 jsonResultsLocation = "./json_results/" + pluginName + "/"
 
 class PluginClass:
+    def __init__(self):
+        ''' constructor '''
+        
     def run(self, apkLocation):
         print("Running the Androbugs plugin!...")
         # test the existence of the results directory

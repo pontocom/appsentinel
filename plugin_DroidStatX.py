@@ -8,12 +8,15 @@ enable = True
 # TODO: depends on ´aapt2´ tool -> hardcode path, needs to be replaced - needed to get package name!
 aapt2ToolLocation = "/usr/local/Caskroom/android-sdk/4333796/build-tools/28.0.3/"
 # TODO: hardcoded -> needs to be customised
-droidStatXLocation = "../droidstatx/"
+droidStatXLocation = "../tools/droidstatx/"
 
 jsonResultsLocation = "./json_results/" + pluginName + "/"
 
 
 class PluginClass:
+    def __init__(self):
+        ''' constructor '''
+        
     def run(self, apkLocation):
         print("Running the DroidStatX plugin!...")
         # test the existence of the results directory
