@@ -1,6 +1,5 @@
 # Plugin to handle the tools capable of setting the input for "DroidstatX" and handle the output
 import os
-import subprocess
 
 pluginName = "DroidStatX"
 enable = True

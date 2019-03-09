@@ -1,6 +1,7 @@
 # vulnScanManager, will be responsible for checking a specific directory for apks and for processing them!
 import os.path
 import argparse
+import multiprocessing
 
 # location of the results of the tool
 jsonResultsLocation = "./json_results"
@@ -30,6 +31,13 @@ def runSelectedPlugin():
     c = thisPlugin.PluginClass()
     c.run()
 
+
+def run_this_plugin(plugin_number, apk_location):
+    thisPlugin = plugins[plugin_number]
+    c = thisPlugin.PluginClass()
+    c.run(apk_location)
+
+
 '''
 A tool to scan APKs and look for vulnerabilities
 '''
@@ -45,11 +53,12 @@ if __name__=="__main__":
 
     plugins = []
     thisPlugin = 0
+    counter_plugins = 0
 
     print(str(banner))
 
     text = "Tool that scans APKs and looks for vulnerabilities"
-    parser = argparse.ArgumentParser(description = text)
+    parser = argparse.ArgumentParser(description=text)
     parser.add_argument('-v', '--version', action='version', version='Vulnerability Scan Manager ' + VERSION)
     parser.add_argument('-d', '--directory', help='Location to the directory that contains APKs to analyse.', action='store', dest='apkdir', nargs=1, default='./')
     args = parser.parse_args()
@@ -72,8 +81,18 @@ if __name__=="__main__":
             thisPlugin = __import__(".".join(file.split(".")[0:-1]))
             if thisPlugin.enable:
                 plugins.append(thisPlugin)
+                counter_plugins = counter_plugins + 1
 
     # we use the same approach to look for the APKs to analyse
     listPlugins()
-    runPlugins(apkDir)
+
+    # this version runs the plugins concurrently
+    # runPlugins(apkDir)
+
+    # an alternative testing to run the tools in parallel
+    for i in range(counter_plugins):
+        jobs = []
+        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkDir))
+        jobs.append(p)
+        p.start()
 
