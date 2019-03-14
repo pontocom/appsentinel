@@ -3,8 +3,7 @@ from flask import (
     render_template,
     Blueprint
 )
-import scanner_api as scanner_api
-import recommendation_api as recommendation_api
+import vscanner_api as vscanner_api
 
 # Create the application instance
 app = Flask(__name__, template_folder="templates")
@@ -17,8 +16,7 @@ def find_blueprint(api):
     return None
 
 
-app.register_blueprint(find_blueprint(scanner_api))
-app.register_blueprint(find_blueprint(recommendation_api))
+app.register_blueprint(find_blueprint(vscanner_api))
 
 
 # Create a URL route in our application for "/"
