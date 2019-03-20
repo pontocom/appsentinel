@@ -2,7 +2,7 @@
 import os
 
 pluginName = "DroidStatX"
-enable = False
+enable = True
 
 # TODO: depends on ´aapt2´ tool -> hardcode path, needs to be replaced - needed to get package name!
 aapt2ToolLocation = "/usr/local/Caskroom/android-sdk/4333796/build-tools/28.0.3/"

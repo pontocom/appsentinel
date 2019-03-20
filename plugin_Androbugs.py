@@ -2,7 +2,7 @@
 import os
 
 pluginName = "Androbugs"
-enable = True
+enable = False
 
 jsonResultsLocation = "./json_results/" + pluginName + "/"
 
