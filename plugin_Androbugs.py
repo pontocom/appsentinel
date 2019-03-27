@@ -12,7 +12,7 @@ class PluginClass:
     def __init__(self):
         ''' constructor '''
         
-    def run(self, apkLocation):
+    def run(self, apkLocation, md5):
         print("Running the Androbugs plugin!...")
         # test the existence of the results directory
         if not os.path.exists(jsonResultsLocation):

@@ -1,0 +1,1744 @@
+{
+  "results": [
+    {
+      "structure": "org.xmind.ui.logic.right",
+      "title": "16052005",
+      "topic": {
+        "title": "photo.editor.polarr",
+        "topics": [
+          {
+            "title": "Information Gathering",
+            "topics": [
+              {
+                "title": "Properties",
+                "topics": [
+                  {
+                    "title": "Version Name",
+                    "topics": [
+                      {
+                        "title": "5.2.0.5"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Version Code",
+                    "topics": [
+                      {
+                        "title": "16052005"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "SHA 256",
+                    "topics": [
+                      {
+                        "title": "23d8ba5ef99e7d8d17322e37555e6c3e2542420999beecc9df00dc122abfb5e6"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Minimum SDK Version",
+                    "topics": [
+                      {
+                        "title": "23 ( Marshmallow 6.0)"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Target SDK Version",
+                    "topics": [
+                      {
+                        "title": "27 ( Oreo 8.1.0)"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Xamarin",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Cordova",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Outsystems",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Backup Enabled",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Multiple Dex Classes",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Secret Codes",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "title": "Permissions",
+                "topics": [
+                  {
+                    "title": "android.permission.READ_EXTERNAL_STORAGE"
+                  },
+                  {
+                    "title": "android.permission.USE_CREDENTIALS"
+                  },
+                  {
+                    "title": "android.permission.CAMERA"
+                  },
+                  {
+                    "title": "android.permission.ACCESS_NETWORK_STATE"
+                  },
+                  {
+                    "title": "android.permission.INTERNET"
+                  },
+                  {
+                    "title": "android.permission.WRITE_EXTERNAL_STORAGE"
+                  },
+                  {
+                    "title": "com.android.vending.BILLING"
+                  }
+                ]
+              },
+              {
+                "title": "Exported Components",
+                "topics": [
+                  {
+                    "title": "Activities",
+                    "topics": [
+                      {
+                        "title": "co.polarr.polarrphotoeditor.EditorActivity",
+                        "topics": [
+                          {
+                            "title": "Intent Filter 1",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.MAIN"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.LAUNCHER"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data"
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 2",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.VIEW"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "mimeType:image/*"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 3",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.VIEW"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  },
+                                  {
+                                    "title": "android.intent.category.BROWSABLE"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "scheme:polarr"
+                                  },
+                                  {
+                                    "title": "host:open"
+                                  },
+                                  {
+                                    "title": "scheme:polarr"
+                                  },
+                                  {
+                                    "title": "host:greereward"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 4",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.SEND"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "mimeType:application/vnd.google.panorama360+jpg"
+                                  },
+                                  {
+                                    "title": "mimeType:image/jpeg"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 5",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.EDIT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "mimeType:application/vnd.google.panorama360+jpg"
+                                  },
+                                  {
+                                    "title": "mimeType:image/jpeg"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "title": "photo.editor.polarr.wxapi.WXPayEntryActivity"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Broadcast Receivers",
+                    "topics": [
+                      {
+                        "title": "Dynamically Registered",
+                        "topics": [
+                          {
+                            "title": null
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Content Providers"
+                  },
+                  {
+                    "title": "Services"
+                  }
+                ]
+              },
+              {
+                "note": "Excluded files/locations: \".css\",\".png\",\".jpg\",\"jpeg\",\".gif\",\"res/anim\",\"res/color\",\"res/drawable\",\"res/menu\",\"res/layout\",\"assets/fonts\",\"AndroidManifest.xml\",\"resources.arsc\"",
+                "title": "Files",
+                "topics": [
+                  {
+                    "title": "Assets",
+                    "topics": [
+                      {
+                        "title": "assets/editor/android.html"
+                      },
+                      {
+                        "title": "assets/editor/fonts/AbrilFatface-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/AmaticaSC-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Audiowide-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Bangers.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/BioRhyme-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Cinzel-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/FredokaOne-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/GUERRILLA-Normal.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Intro-Inline.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Intro.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Lato-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Monoton-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Montserrat-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/OpenSans-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-BlackCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-BlackitalicCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-LightCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-LightitalicCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/PolarrArtwork.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Poppins-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Raleway-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SensaBrush-FillDemo.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SourceSansPro-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SpecialElite.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SpriteGraffiti.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Sunday-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Ubuntu-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Unkempt-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/pahnto.woff2"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/brush_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/color_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/face_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/gradient_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/icons_landscape.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/icons_portrait.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/radial_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/layers_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/perspective_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/sample_video.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/selective_adjustments_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/text_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/ipc.js"
+                      },
+                      {
+                        "title": "assets/editor/js/build/editor.js"
+                      },
+                      {
+                        "title": "assets/editor/js/config/android.js"
+                      },
+                      {
+                        "title": "assets/editor/js/splash.js"
+                      },
+                      {
+                        "title": "assets/SecShell0.jar"
+                      },
+                      {
+                        "title": "assets/meta-data/rsa.sig"
+                      },
+                      {
+                        "title": "assets/meta-data/rsa.pub"
+                      },
+                      {
+                        "title": "assets/meta-data/manifest.mf"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Libs",
+                    "topics": [
+                      {
+                        "title": "lib/armeabi-v7a/libandroid_dlib.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libpolarr.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libraw.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libSecShell-x86.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libSecShell.so"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Raw Resources",
+                    "topics": [
+                      {
+                        "title": "res/raw/face.dat"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Dex Classes",
+                    "topics": [
+                      {
+                        "title": "classes.dex"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Cordova Files"
+                  },
+                  {
+                    "title": "Xamarin Assemblies"
+                  },
+                  {
+                    "title": "Other",
+                    "topics": [
+                      {
+                        "title": "META-INF/MANIFEST.MF"
+                      },
+                      {
+                        "title": "META-INF/POLARRAN.SF"
+                      },
+                      {
+                        "title": "META-INF/POLARRAN.RSA"
+                      },
+                      {
+                        "title": "META-INF/README.txt"
+                      },
+                      {
+                        "title": "META-INF/android.arch.core_runtime.version"
+                      },
+                      {
+                        "title": "META-INF/android.arch.lifecycle_livedata-core.version"
+                      },
+                      {
+                        "title": "META-INF/android.arch.lifecycle_runtime.version"
+                      },
+                      {
+                        "title": "META-INF/android.arch.lifecycle_viewmodel.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_animated-vector-drawable.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_appcompat-v7.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_design.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_recyclerview-v7.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-compat.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-core-ui.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-core-utils.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-fragment.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-media-compat.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-v4.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-vector-drawable.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_transition.version"
+                      },
+                      {
+                        "title": "okhttp3/internal/publicsuffix/publicsuffixes.gz"
+                      },
+                      {
+                        "title": "play-services-base.properties"
+                      },
+                      {
+                        "title": "play-services-basement.properties"
+                      },
+                      {
+                        "title": "play-services-clearcut.properties"
+                      },
+                      {
+                        "title": "play-services-flags.properties"
+                      },
+                      {
+                        "title": "play-services-phenotype.properties"
+                      },
+                      {
+                        "title": "play-services-tasks.properties"
+                      },
+                      {
+                        "title": "play-services-vision-common.properties"
+                      },
+                      {
+                        "title": "play-services-vision.properties"
+                      },
+                      {
+                        "title": "res/mipmap-anydpi-v26/ic_launcher.xml"
+                      },
+                      {
+                        "title": "res/mipmap-anydpi-v26/ic_launcher_round.xml"
+                      },
+                      {
+                        "title": "res/xml/exported_paths.xml"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "title": "Object Usage",
+                "topics": [
+                  {
+                    "title": "WebViews loadUrl"
+                  },
+                  {
+                    "title": "Cryptographic Functions",
+                    "topics": [
+                      {
+                        "title": "Encryption"
+                      },
+                      {
+                        "title": "Decryption"
+                      },
+                      {
+                        "title": "Undetermined"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Custom"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Methodology",
+            "topics": [
+              {
+                "title": "Improper Platform Usage",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-sensitive-functionality-exposure-through-ipc",
+                    "title": "Malicious interaction possible with exported components?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master//Document/0x05i-Testing-Code-Quality-and-Build-Settings.md#testing-if-the-app-is-debuggable",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "Application is not debuggable"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-fragment-injection",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No activities vulnerable to Fragment Injection"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#determining-whether-java-objects-are-exposed-through-webviews",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No presence of JavascriptInterface"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#determining-whether-java-objects-are-exposed-through-webviews",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No WebView with Javascript enabled."
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-webview-protocol-handlers",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No WebView with fileAccess enabled."
+                  },
+                  {
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No WebView with Universal Access from File URLs found."
+                  }
+                ]
+              },
+              {
+                "title": "Insecure Communication",
+                "topics": [
+                  {
+                    "title": "SSL Implementation",
+                    "topics": [
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate",
+                        "title": "Accepts self-sign certificates?"
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification#hostname-verification",
+                        "title": "Accepts wrong host name?"
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning",
+                        "title": "Lack of Certificate Pinning?"
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No vulnerable Trust Manager found."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No WebView with SSL Errror Bypass found."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No vulnerable HostnameVerifiers found."
+                      },
+                      {
+                        "link": "hhttps://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No vulnerable setHostnameVerifiers found."
+                      },
+                      {
+                        "link": "http://",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No direct usage of Socket without HostnameVerifiers."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#network-security-configuration",
+                        "makers": [
+                          "flag-yellow"
+                        ],
+                        "title": "No usage of NetworkSecurityConfig file."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning",
+                        "makers": [
+                          "flag-yellow"
+                        ],
+                        "title": "No usage of Certificate Pinning"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Mixed Mode Communication?"
+                  }
+                ]
+              },
+              {
+                "title": "Insecure Data Storage",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-local-storage-for-sensitive-data",
+                    "title": "Sensitive information stored in cleartext in sdcard/sandbox?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-logs-for-sensitive-data",
+                    "title": "Sensitive information saved to system logs?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#finding-sensitive-information-in-auto-generated-screenshots",
+                    "title": "Background screenshot with sensitive information?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#finding-sensitive-information-in-auto-generated-screenshots",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "All activities have FLAG_SECURE or android:excludeFromRecents."
+                  }
+                ]
+              },
+              {
+                "title": "Insufficient Cryptography",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms",
+                    "title": "Using weak algorithms/modes?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05e-Testing-Cryptography.md#verifying-the-configuration-of-cryptographic-standard-algorithms",
+                    "title": "Using hardcoded properties?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No usage of AES with ECB Mode"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No usage of DES or 3DES"
+                  },
+                  {
+                    "makers": [
+                      "flag-yellow"
+                    ],
+                    "title": "No usage of Android KeyStore"
+                  }
+                ]
+              },
+              {
+                "title": "Code Tampering",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-root-detection",
+                    "title": "Lack of root detection?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-detection-of-reverse-engineering-tools",
+                    "title": "Lack of hooking detection?"
+                  }
+                ]
+              },
+              {
+                "title": "Reverse Engineering",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-obfuscation",
+                    "title": "Lack of code obfuscation?"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "structure": "org.xmind.ui.logic.right",
+      "title": "16052005",
+      "topic": {
+        "title": "photo.editor.polarr",
+        "topics": [
+          {
+            "title": "Information Gathering",
+            "topics": [
+              {
+                "title": "Properties",
+                "topics": [
+                  {
+                    "title": "Version Name",
+                    "topics": [
+                      {
+                        "title": "5.2.0.5"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Version Code",
+                    "topics": [
+                      {
+                        "title": "16052005"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "SHA 256",
+                    "topics": [
+                      {
+                        "title": "23d8ba5ef99e7d8d17322e37555e6c3e2542420999beecc9df00dc122abfb5e6"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Minimum SDK Version",
+                    "topics": [
+                      {
+                        "title": "23 ( Marshmallow 6.0)"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Target SDK Version",
+                    "topics": [
+                      {
+                        "title": "27 ( Oreo 8.1.0)"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Xamarin",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Cordova",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Outsystems",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Backup Enabled",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Multiple Dex Classes",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Secret Codes",
+                    "topics": [
+                      {
+                        "title": "No"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "title": "Permissions",
+                "topics": [
+                  {
+                    "title": "android.permission.READ_EXTERNAL_STORAGE"
+                  },
+                  {
+                    "title": "android.permission.USE_CREDENTIALS"
+                  },
+                  {
+                    "title": "android.permission.CAMERA"
+                  },
+                  {
+                    "title": "android.permission.ACCESS_NETWORK_STATE"
+                  },
+                  {
+                    "title": "android.permission.INTERNET"
+                  },
+                  {
+                    "title": "android.permission.WRITE_EXTERNAL_STORAGE"
+                  },
+                  {
+                    "title": "com.android.vending.BILLING"
+                  }
+                ]
+              },
+              {
+                "title": "Exported Components",
+                "topics": [
+                  {
+                    "title": "Activities",
+                    "topics": [
+                      {
+                        "title": "co.polarr.polarrphotoeditor.EditorActivity",
+                        "topics": [
+                          {
+                            "title": "Intent Filter 1",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.MAIN"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.LAUNCHER"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data"
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 2",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.VIEW"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "mimeType:image/*"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 3",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.VIEW"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  },
+                                  {
+                                    "title": "android.intent.category.BROWSABLE"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "scheme:polarr"
+                                  },
+                                  {
+                                    "title": "host:open"
+                                  },
+                                  {
+                                    "title": "scheme:polarr"
+                                  },
+                                  {
+                                    "title": "host:greereward"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 4",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.SEND"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "mimeType:application/vnd.google.panorama360+jpg"
+                                  },
+                                  {
+                                    "title": "mimeType:image/jpeg"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "title": "Intent Filter 5",
+                            "topics": [
+                              {
+                                "title": "Action",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.action.EDIT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Categories",
+                                "topics": [
+                                  {
+                                    "title": "android.intent.category.DEFAULT"
+                                  }
+                                ]
+                              },
+                              {
+                                "title": "Data",
+                                "topics": [
+                                  {
+                                    "title": "mimeType:application/vnd.google.panorama360+jpg"
+                                  },
+                                  {
+                                    "title": "mimeType:image/jpeg"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "title": "photo.editor.polarr.wxapi.WXPayEntryActivity"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Broadcast Receivers",
+                    "topics": [
+                      {
+                        "title": "Dynamically Registered",
+                        "topics": [
+                          {
+                            "title": null
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Content Providers"
+                  },
+                  {
+                    "title": "Services"
+                  }
+                ]
+              },
+              {
+                "note": "Excluded files/locations: \".css\",\".png\",\".jpg\",\"jpeg\",\".gif\",\"res/anim\",\"res/color\",\"res/drawable\",\"res/menu\",\"res/layout\",\"assets/fonts\",\"AndroidManifest.xml\",\"resources.arsc\"",
+                "title": "Files",
+                "topics": [
+                  {
+                    "title": "Assets",
+                    "topics": [
+                      {
+                        "title": "assets/editor/android.html"
+                      },
+                      {
+                        "title": "assets/editor/fonts/AbrilFatface-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/AmaticaSC-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Audiowide-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Bangers.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/BioRhyme-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Cinzel-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/FredokaOne-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/GUERRILLA-Normal.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Intro-Inline.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Intro.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Lato-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Monoton-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Montserrat-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/OpenSans-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-BlackCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-BlackitalicCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-LightCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Panton-LightitalicCaps.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/PolarrArtwork.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Poppins-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Raleway-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SensaBrush-FillDemo.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SourceSansPro-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SpecialElite.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/SpriteGraffiti.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Sunday-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Ubuntu-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/Unkempt-Regular.woff2"
+                      },
+                      {
+                        "title": "assets/editor/fonts/pahnto.woff2"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/brush_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/color_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/face_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/gradient_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/icons_landscape.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/icons_portrait.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/guides/radial_0.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/layers_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/perspective_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/sample_video.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/selective_adjustments_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/img/sample_images/text_preview.mp4"
+                      },
+                      {
+                        "title": "assets/editor/ipc.js"
+                      },
+                      {
+                        "title": "assets/editor/js/build/editor.js"
+                      },
+                      {
+                        "title": "assets/editor/js/config/android.js"
+                      },
+                      {
+                        "title": "assets/editor/js/splash.js"
+                      },
+                      {
+                        "title": "assets/SecShell0.jar"
+                      },
+                      {
+                        "title": "assets/meta-data/rsa.sig"
+                      },
+                      {
+                        "title": "assets/meta-data/rsa.pub"
+                      },
+                      {
+                        "title": "assets/meta-data/manifest.mf"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Libs",
+                    "topics": [
+                      {
+                        "title": "lib/armeabi-v7a/libandroid_dlib.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libpolarr.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libraw.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libSecShell-x86.so"
+                      },
+                      {
+                        "title": "lib/armeabi-v7a/libSecShell.so"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Raw Resources",
+                    "topics": [
+                      {
+                        "title": "res/raw/face.dat"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Dex Classes",
+                    "topics": [
+                      {
+                        "title": "classes.dex"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Cordova Files"
+                  },
+                  {
+                    "title": "Xamarin Assemblies"
+                  },
+                  {
+                    "title": "Other",
+                    "topics": [
+                      {
+                        "title": "META-INF/MANIFEST.MF"
+                      },
+                      {
+                        "title": "META-INF/POLARRAN.SF"
+                      },
+                      {
+                        "title": "META-INF/POLARRAN.RSA"
+                      },
+                      {
+                        "title": "META-INF/README.txt"
+                      },
+                      {
+                        "title": "META-INF/android.arch.core_runtime.version"
+                      },
+                      {
+                        "title": "META-INF/android.arch.lifecycle_livedata-core.version"
+                      },
+                      {
+                        "title": "META-INF/android.arch.lifecycle_runtime.version"
+                      },
+                      {
+                        "title": "META-INF/android.arch.lifecycle_viewmodel.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_animated-vector-drawable.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_appcompat-v7.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_design.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_recyclerview-v7.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-compat.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-core-ui.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-core-utils.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-fragment.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-media-compat.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-v4.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_support-vector-drawable.version"
+                      },
+                      {
+                        "title": "META-INF/com.android.support_transition.version"
+                      },
+                      {
+                        "title": "okhttp3/internal/publicsuffix/publicsuffixes.gz"
+                      },
+                      {
+                        "title": "play-services-base.properties"
+                      },
+                      {
+                        "title": "play-services-basement.properties"
+                      },
+                      {
+                        "title": "play-services-clearcut.properties"
+                      },
+                      {
+                        "title": "play-services-flags.properties"
+                      },
+                      {
+                        "title": "play-services-phenotype.properties"
+                      },
+                      {
+                        "title": "play-services-tasks.properties"
+                      },
+                      {
+                        "title": "play-services-vision-common.properties"
+                      },
+                      {
+                        "title": "play-services-vision.properties"
+                      },
+                      {
+                        "title": "res/mipmap-anydpi-v26/ic_launcher.xml"
+                      },
+                      {
+                        "title": "res/mipmap-anydpi-v26/ic_launcher_round.xml"
+                      },
+                      {
+                        "title": "res/xml/exported_paths.xml"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "title": "Object Usage",
+                "topics": [
+                  {
+                    "title": "WebViews loadUrl"
+                  },
+                  {
+                    "title": "Cryptographic Functions",
+                    "topics": [
+                      {
+                        "title": "Encryption"
+                      },
+                      {
+                        "title": "Decryption"
+                      },
+                      {
+                        "title": "Undetermined"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Custom"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Methodology",
+            "topics": [
+              {
+                "title": "Improper Platform Usage",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-sensitive-functionality-exposure-through-ipc",
+                    "title": "Malicious interaction possible with exported components?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master//Document/0x05i-Testing-Code-Quality-and-Build-Settings.md#testing-if-the-app-is-debuggable",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "Application is not debuggable"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-fragment-injection",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No activities vulnerable to Fragment Injection"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#determining-whether-java-objects-are-exposed-through-webviews",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No presence of JavascriptInterface"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#determining-whether-java-objects-are-exposed-through-webviews",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No WebView with Javascript enabled."
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-webview-protocol-handlers",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No WebView with fileAccess enabled."
+                  },
+                  {
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No WebView with Universal Access from File URLs found."
+                  }
+                ]
+              },
+              {
+                "title": "Insecure Communication",
+                "topics": [
+                  {
+                    "title": "SSL Implementation",
+                    "topics": [
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate",
+                        "title": "Accepts self-sign certificates?"
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification#hostname-verification",
+                        "title": "Accepts wrong host name?"
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning",
+                        "title": "Lack of Certificate Pinning?"
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No vulnerable Trust Manager found."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No WebView with SSL Errror Bypass found."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No vulnerable HostnameVerifiers found."
+                      },
+                      {
+                        "link": "hhttps://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No vulnerable setHostnameVerifiers found."
+                      },
+                      {
+                        "link": "http://",
+                        "makers": [
+                          "flag-green"
+                        ],
+                        "title": "No direct usage of Socket without HostnameVerifiers."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#network-security-configuration",
+                        "makers": [
+                          "flag-yellow"
+                        ],
+                        "title": "No usage of NetworkSecurityConfig file."
+                      },
+                      {
+                        "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning",
+                        "makers": [
+                          "flag-yellow"
+                        ],
+                        "title": "No usage of Certificate Pinning"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Mixed Mode Communication?"
+                  }
+                ]
+              },
+              {
+                "title": "Insecure Data Storage",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-local-storage-for-sensitive-data",
+                    "title": "Sensitive information stored in cleartext in sdcard/sandbox?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#testing-logs-for-sensitive-data",
+                    "title": "Sensitive information saved to system logs?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#finding-sensitive-information-in-auto-generated-screenshots",
+                    "title": "Background screenshot with sensitive information?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#finding-sensitive-information-in-auto-generated-screenshots",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "All activities have FLAG_SECURE or android:excludeFromRecents."
+                  }
+                ]
+              },
+              {
+                "title": "Insufficient Cryptography",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms",
+                    "title": "Using weak algorithms/modes?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05e-Testing-Cryptography.md#verifying-the-configuration-of-cryptographic-standard-algorithms",
+                    "title": "Using hardcoded properties?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No usage of AES with ECB Mode"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms",
+                    "makers": [
+                      "flag-green"
+                    ],
+                    "title": "No usage of DES or 3DES"
+                  },
+                  {
+                    "makers": [
+                      "flag-yellow"
+                    ],
+                    "title": "No usage of Android KeyStore"
+                  }
+                ]
+              },
+              {
+                "title": "Code Tampering",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-root-detection",
+                    "title": "Lack of root detection?"
+                  },
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-detection-of-reverse-engineering-tools",
+                    "title": "Lack of hooking detection?"
+                  }
+                ]
+              },
+              {
+                "title": "Reverse Engineering",
+                "topics": [
+                  {
+                    "link": "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05j-Testing-Resiliency-Against-Reverse-Engineering.md#testing-obfuscation",
+                    "title": "Lack of code obfuscation?"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "results_history": [
+    {
+      "created_at": "Wed, 27 Mar 2019 00:53:34 GMT",
+      "id": 3,
+      "md5": "677ca631b93cc129695849aa3d622317",
+      "results_location": "./json_results/DroidStatX/677ca631b93cc129695849aa3d622317.json",
+      "scantool": "DroidStatX"
+    }
+  ],
+  "status": true
+}

@@ -36,10 +36,10 @@ def runSelectedPlugin():
     c.run()
 
 
-def run_this_plugin(plugin_number, apk_location):
+def run_this_plugin(plugin_number, apk_location, apk_md5):
     thisPlugin = plugins[plugin_number]
     c = thisPlugin.PluginClass()
-    c.run(apk_location)
+    c.run(apk_location, apk_md5)
 
 
 '''
@@ -60,13 +60,17 @@ if __name__=="__main__":
     parser.add_argument('-v', '--version', action='version', version='Vulnerability Scan Manager ' + VERSION)
     parser.add_argument('-f', '--file', help='The APK file to analyse.',
                         action='store', dest='apkfile', nargs=1, default='')
+    parser.add_argument('-m', '--md5', help='The APK file MD5 id to analyse.',
+                        action='store', dest='md5Id', nargs=1, default='')
     args = parser.parse_args()
 
     print(args)
 
     apkFile = args.apkfile[0]
+    md5Id = args.md5Id[0]
 
     print("APK FILE -> " + apkFile)
+    print("APK MD5 -> " + md5Id)
 
     # looking for the plugins
     pluginDir = os.path.dirname(os.path.abspath(__file__))
@@ -95,7 +99,7 @@ if __name__=="__main__":
     # an alternative testing to run the tools in parallel
     for i in range(counter_plugins):
         jobs = []
-        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkFile))
+        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkFile, md5Id))
         jobs.append(p)
         p.start()
 

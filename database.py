@@ -1,8 +1,24 @@
 import pymysql
 import configparser
+import json
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+
+def insert_results(md5, tool, results_location):
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    sql = "INSERT INTO apkresults (md5, scantool, results_location, created_at) VALUES ('%s', '%s', '%s', NOW())" % (md5, tool, results_location)
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        print("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
+        db.rollback()
+        return False
+    db.close()
 
 
 def insert_new_apk2scan(md5):
@@ -59,8 +75,20 @@ def insert_new_apk(md5, applicationName, applicationPackage, applicationVersion,
     db.close()
 
 
-def update_apk_status(md5):
-    return True
+def get_apk_status(md5):
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    sql = "SELECT * FROM apkresults WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
+    print(sql)
+    cursor.execute(sql)
+    json_data = []
+    row_headers = [x[0] for x in cursor.description]
+    results = cursor.fetchall()
+    for result in results:
+        json_data.append(dict(zip(row_headers, result)))
+    db.close()
+    return json_data
 
 
 

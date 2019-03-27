@@ -1,5 +1,6 @@
 # Plugin to handle the tools capable of setting the input for "DroidstatX" and handle the output
 import os
+import database as db
 import subprocess
 import configparser
 
@@ -19,7 +20,7 @@ class PluginClass:
     def __init__(self):
         ''' constructor '''
         
-    def run(self, apk_file):
+    def run(self, apk_file, md5):
         print("Running the DroidStatX plugin!...")
         # test the existence of the results directory
         if not os.path.exists(jsonResultsLocation):
@@ -41,5 +42,8 @@ class PluginClass:
             print("Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             os.system("xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             # move the json results to proper folder
-            os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation)
+            print("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            # have also the information registered on the database
+            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json")
 
