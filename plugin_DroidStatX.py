@@ -26,11 +26,11 @@ class PluginClass:
         if not os.path.exists(jsonResultsLocation):
             os.system("mkdir " + jsonResultsLocation)
 
-        print("FILE -> " + apk_file)
+        print(pluginName + ": FILE -> " + apk_file)
 
         if apk_file[-4:] == ".apk":
-            print("Running on -> " + apk_file)
-            print("Executing -> python2 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            print(pluginName + ": Running on -> " + apk_file)
+            print(pluginName + ": Executing -> python2 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
             os.system("python2 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
@@ -39,10 +39,10 @@ class PluginClass:
             apkPackageName = str(output)[15:-9]
             # convert .xmind file to JSON -> using xmindparser (already installed)
             # from here: https://github.com/tobyqin/xmindparser
-            print("Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
+            print(pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             os.system("xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             # move the json results to proper folder
-            print("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
             os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
             # have also the information registered on the database
             db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json")
