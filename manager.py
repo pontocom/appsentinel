@@ -16,6 +16,10 @@ json_dir = config['DOWNLOAD']['jsonDir']
 
 
 def download_apk(which_apk):
+    # check if the download dir exists or not
+    if not os.path.exists(dir):
+        os.system("mkdir " + dir)
+
     # write the file to the filesystem
     a = urlparse(appPath)
     filename = dir + "/" + os.path.basename(a.path)
@@ -43,6 +47,10 @@ def get_json_data(which_apk):
 
 
 def write_json_data(jsondata, whick_apk):
+    # check if the json dir exists or not
+    if not os.path.exists(json_dir):
+        os.system("mkdir " + json_dir)
+
     filename = json_dir + "/" + whick_apk + ".json"
     with open(filename, 'w') as f:
         f.write(json.dumps(jsondata))
