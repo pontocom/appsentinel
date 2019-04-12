@@ -6,9 +6,12 @@ from tqdm import tqdm
 import math
 import json
 import configparser
+import logging as log
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
 
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
 dir = config['DOWNLOAD']['apkDownloadDir']
@@ -63,6 +66,9 @@ if __name__=="__main__":
     banner = "APK Downloader"
     print(str(banner))
 
+    log.debug("------------------------")
+    log.debug("APPSENTINEL MANAGER HAS BEEN INVOKED!!!!")
+
     # 1. Go to the database and check if there are APKs to download
     apks = db.get_all_apk2scan()
     # 2. For each APK on the database, download it locally, add to the apk table and delete from the table
@@ -77,12 +83,17 @@ if __name__=="__main__":
             appPath = jsondata["nodes"]["meta"]["data"]["file"]["path"]
             apkfile = appPath[appPath.rfind("/") + 1:]
             print("Getting the following APK => " + applicationName)
+            log.debug("Getting the following APK => " + applicationName)
             print(applicationPackage + " (" + appVersion + ") -> " + appMD5)
+            log.debug(applicationPackage + " (" + appVersion + ") -> " + appMD5)
             print(appPath)
+            log.debug(appPath)
             download_apk(appPath)
             write_json_data(jsondata, apk[1])
             db.insert_new_apk(apk[1], applicationName, applicationPackage, appVersion, appPath, apkfile)
+            log.debug("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
             os.system("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
             db.delete_apk2scan(apk[1])
     else:
         print("No apks yet... waiting patiently!!!")
+        log.debug("No apks yet... waiting patiently!!!")
