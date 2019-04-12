@@ -8,7 +8,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 pluginName = "DroidStatX"
-enable = True
+enable = False
 
 aapt2ToolLocation = config['DROIDSTATX']['aapt2ToolLocation']
 droidStatXLocation = config['DROIDSTATX']['droidStatXLocation']
@@ -30,7 +30,7 @@ class PluginClass:
 
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> python2 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            print(pluginName + ": Executing -> python3 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
             os.system("python2 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
