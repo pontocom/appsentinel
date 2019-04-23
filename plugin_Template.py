@@ -1,9 +1,13 @@
 # Plugin to handle the tools capable of setting the input for "TEMPLATE" and handle the output
 import os
 import configparser
+import logging as log
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
+
+log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
 
 pluginName = "Template"
 enable = False
