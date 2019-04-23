@@ -26,5 +26,7 @@ CREATE TABLE apkresults (
   md5 VARCHAR(32) NOT NULL ,
   scantool VARCHAR(32) NOT NULL ,
   results_location VARCHAR(128) NOT NULL ,
+  status INTEGER NOT NULL,
+  details TEXT ,
   created_at DATETIME NOT NULL
 );

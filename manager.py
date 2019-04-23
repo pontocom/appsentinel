@@ -77,24 +77,31 @@ if __name__=="__main__":
         for apk in apks:
             print(apk[1])
             jsondata = get_json_data(apk[1])
-            applicationName = jsondata["nodes"]["meta"]["data"]["name"]
-            applicationPackage = jsondata["nodes"]["meta"]["data"]["package"]
-            appVersion = jsondata["nodes"]["meta"]["data"]["file"]["vername"]
-            appMD5 = jsondata["nodes"]["meta"]["data"]["file"]["md5sum"]
-            appPath = jsondata["nodes"]["meta"]["data"]["file"]["path"]
-            apkfile = appPath[appPath.rfind("/") + 1:]
-            print("Getting the following APK => " + applicationName)
-            log.debug("Getting the following APK => " + applicationName)
-            print(applicationPackage + " (" + appVersion + ") -> " + appMD5)
-            log.debug(applicationPackage + " (" + appVersion + ") -> " + appMD5)
-            print(appPath)
-            log.debug(appPath)
-            download_apk(appPath)
-            write_json_data(jsondata, apk[1])
-            db.insert_new_apk(apk[1], applicationName, applicationPackage, appVersion, appPath, apkfile)
-            log.debug("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
-            os.system("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
-            db.delete_apk2scan(apk[1])
+            # check what is the return of the API call -> check if the APK exists!!!
+            if jsondata["info"]["status"] == "FAIL":
+                # that APK can't be found
+                log.debug("This APK doesn't exist on APTOIDE -> APK = " + apk[1])
+                db.delete_apk2scan(apk[1])
+                db.insert_results(apk[1], "", "", -1, "This APK does not exist, or it could not be downloaded from the Aptoide app store!")
+            else:
+                applicationName = jsondata["nodes"]["meta"]["data"]["name"]
+                applicationPackage = jsondata["nodes"]["meta"]["data"]["package"]
+                appVersion = jsondata["nodes"]["meta"]["data"]["file"]["vername"]
+                appMD5 = jsondata["nodes"]["meta"]["data"]["file"]["md5sum"]
+                appPath = jsondata["nodes"]["meta"]["data"]["file"]["path"]
+                apkfile = appPath[appPath.rfind("/") + 1:]
+                print("Getting the following APK => " + applicationName)
+                log.debug("Getting the following APK => " + applicationName)
+                print(applicationPackage + " (" + appVersion + ") -> " + appMD5)
+                log.debug(applicationPackage + " (" + appVersion + ") -> " + appMD5)
+                print(appPath)
+                log.debug(appPath)
+                download_apk(appPath)
+                write_json_data(jsondata, apk[1])
+                db.insert_new_apk(apk[1], applicationName, applicationPackage, appVersion, appPath, apkfile)
+                log.debug("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
+                os.system("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
+                db.delete_apk2scan(apk[1])
     else:
         print("No apks yet... waiting patiently!!!")
         log.debug("No apks yet... waiting patiently!!!")

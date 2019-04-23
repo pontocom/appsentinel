@@ -82,10 +82,14 @@ def apkfeedback(id):
     else:
         results_data = db.get_apk_status(id)
         if results_data:
-            print(results_data[0]['results_location'])
-            file = open(results_data[0]['results_location'])
-            json_data = json.load(file)
-            return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200
+            # we need to check the status...
+            if results_data[0]['status'] != -1:
+                print(results_data[0]['results_location'])
+                file = open(results_data[0]['results_location'])
+                json_data = json.load(file)
+                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200
+            else:
+                return jsonify({'status': False, 'message': results_data[0]['details']}), 500
         else:
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500
 

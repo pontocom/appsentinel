@@ -45,5 +45,5 @@ class PluginClass:
             print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
             os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
             # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json")
+            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
 
