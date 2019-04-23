@@ -1,6 +1,3 @@
-[GENERAL]
-logDir = /home/cserrao/Documents/AppSentinel/appsentinel/
-
 [DOWNLOAD]
 aptoideAPIEndpoint = http://ws2.aptoide.com/api/7/app/get/apk_md5sum=
 apkDownloadDir = ./download
@@ -16,11 +13,12 @@ password = test123
 jsonResultsLocation = ./json_results
 
 [DROIDSTATX]
-aapt2ToolLocation =  /usr/bin/
+aapt2ToolLocation =  /usr/local/Caskroom/android-sdk/4333796/build-tools/28.0.3/
 droidStatXLocation = ../tools/droidstatx/
 
 [ANDROBUGS]
 androbugsLocation = ../tools/AndroBugs/
+
 
 [TOOLSPECIFIC]
 TOOLSPECIFICLocation = ./
