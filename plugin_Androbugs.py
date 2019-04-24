@@ -38,7 +38,7 @@ class PluginClass:
             # run the tool
             os.system("python2 " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
             # this tool produces a text-based output... we need to consider what to do with this
-            # TODO: output in TXT format - needs to be handled in a different manner
+            # TODO: output in TXT format - needs to be handled in a different manner -> translate to JSON!!!
             # have also the information registered on the database
             db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".txt", 0, "NOT YET IN THE FINAL FORMAT")
 
