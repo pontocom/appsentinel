@@ -11,7 +11,7 @@ config.read('config.ini')
 log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
 
 pluginName = "DroidStatX"
-enable = True
+enable = False
 
 aapt2ToolLocation = config['DROIDSTATX']['aapt2ToolLocation']
 droidStatXLocation = config['DROIDSTATX']['droidStatXLocation']
