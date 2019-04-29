@@ -76,11 +76,6 @@ class PluginClass:
                 info.append(line_counter)
             line_counter = line_counter + 1
 
-        # print(critical)
-        # print(warning)
-        # print(notice)
-        # print(info)
-
         # now let's try to put everything on a JSON format :-)
         json_file = open(jsonResultsLocation + md5 + ".json", "w")
         json_file.write("{")
