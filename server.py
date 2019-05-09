@@ -1,7 +1,8 @@
 from flask import (
     Flask,
     jsonify,
-    request
+    request,
+    Response
 )
 import database as db
 from flasgger import Swagger
@@ -54,22 +55,23 @@ def home():
 def apkscan():
     log.debug("APKSCAN REQUEST RECEIVED")
     data = request.values
+
     # check if an MD5 has been passed
     if "md5" not in data:
-        return jsonify({'status': False, 'message': 'Hey...! Where is my MD5???'}), 200
+        return jsonify({'status': False, 'message': 'Hey...! Where is my MD5???'}), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         md5Apk = data["md5"]
         log.debug("APK MD5 = " + md5Apk)
         # 1. add the apk to scan to the database
         if db.apk_id_exists(md5Apk, 'apkresults'):
             return jsonify({'status': False,
-                            'message': 'That APK was previously processed and exists on the results database. Please check the results using the appropriate API call!'}), 200
+                            'message': 'That APK was previously processed and exists on the results database. Please check the results using the appropriate API call!'}), 200, {'Access-Control-Allow-Origin':'*'}
         else:
             if db.apk_id_exists(md5Apk, 'apk2scan'):
-                return jsonify({'status': False, 'message': 'That APK is already in the pipeline to be processed... wait for the results!'}), 200
+                return jsonify({'status': False, 'message': 'That APK is already in the pipeline to be processed... wait for the results!'}), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 db.insert_new_apk2scan(md5Apk)
-                return jsonify({'status': True, 'message': 'APK was passed to the scanning engine... please hold on!'}), 200
+                return jsonify({'status': True, 'message': 'APK was passed to the scanning engine... please hold on!'}), 200, {'Access-Control-Allow-Origin':'*'}
 
 
 @app.route('/apkfeedback/<id>', methods=['GET'])
@@ -78,7 +80,7 @@ def apkfeedback(id):
     log.debug("APKSCAN REQUEST RECEIVED")
     log.debug("APK MD5 = " + id)
     if not id:
-        jsonify({'status': False, 'message': 'No MD5 APK id was passed'}), 500
+        return jsonify({'status': False, 'message': 'No MD5 APK id was passed'}), 500, {'Access-Control-Allow-Origin':'*'}
     else:
         results_data = db.get_apk_status(id)
         if results_data:
@@ -87,11 +89,11 @@ def apkfeedback(id):
                 print(results_data[0]['results_location'])
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
-                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200
+                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
             else:
-                return jsonify({'status': False, 'message': results_data[0]['details']}), 500
+                return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
         else:
-            return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500
+            return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
 # If we're running in stand alone mode, run the application
