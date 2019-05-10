@@ -55,80 +55,120 @@ if __name__ == "__main__":
             info.append(line_counter)
         line_counter = line_counter + 1
 
-    # print(critical)
-    # print(warning)
-    # print(notice)
-    # print(info)
+    #print(critical)
+    #print(warning)
+    #print(notice)
+    #print(info)
 
     # now let's try to put everything on a JSON format :-)
     json_file = open("./json_results/Androbugs/8657024da129fc6982f9daa7f3775cf6.json", "w")
     json_file.write("{")
     json_file.write("\"results\": ")
-    json_file.write("{\"critical_level\": [")
+    json_file.write("{\"M1\": [")
     text2write = ""
     is_first = True
     for critical_line in critical:
         if critical_line == 'Critical' and is_first:
-            text2write = text2write + "{\"critical\": \""
+            text2write = text2write + "{\"vulnerability\": \""
             is_first = False
             continue
         if critical_line == 'Critical' and not is_first:
-            text2write = text2write + "\"}, {\"critical\": \""
+            text2write = text2write + "\", "
+            text2write = text2write + "\"details\": \"\", \"severity\": \"Critical\", \"detectedby\": [\"Androbugs\"],"
+            text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+            text2write = text2write + "}, {\"vulnerability\": \""
         else:
             what2write = linecache.getline("./json_results/Androbugs/8657024da129fc6982f9daa7f3775cf6.txt", critical_line)
             text2write = text2write + what2write.replace('"', '\\"')[:-1]
-    text2write = text2write + "\"}]"
+    text2write = text2write + "\", "
+    text2write = text2write + "\"details\": \"\", \"severity\": \"Critical\", \"detectedby\": [\"Androbugs\"],"
+    text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+    text2write = text2write + "}]"
     json_file.write(text2write)
+    # print(text2write)
     json_file.write(",")
-    json_file.write("\"warning_level\": [")
+    json_file.write("\"M2\": [")
     text2write = ""
     is_first = True
     for warning_line in warning:
         if warning_line == 'Warning' and is_first:
-            text2write = text2write + "{\"warning\": \""
+            text2write = text2write + "{\"vulnerability\": \""
             is_first = False
             continue
         if warning_line == 'Warning' and not is_first:
-            text2write = text2write + "\"}, {\"warning\": \""
+            text2write = text2write + "\", "
+            text2write = text2write + "\"details\": \"\", \"severity\": \"Warning\", \"detectedby\": [\"Androbugs\"],"
+            text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+            text2write = text2write + "}, {\"vulnerability\": \""
         else:
             what2write = linecache.getline("./json_results/Androbugs/8657024da129fc6982f9daa7f3775cf6.txt", warning_line)
             text2write = text2write + what2write.replace('"', '\\"')[:-1]
-    text2write = text2write + "\"}"
+    text2write = text2write + "\", "
+    text2write = text2write + "\"details\": \"\", \"severity\": \"Critical\", \"detectedby\": [\"Androbugs\"],"
+    text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+    text2write = text2write + "}]"
     json_file.write(text2write)
-    json_file.write("],")
-    json_file.write("\"notice_level\": [")
+    # print(text2write)
+    json_file.write(",")
+    json_file.write("\"M3\": [")
     text2write = ""
     is_first = True
     for notice_line in notice:
         if notice_line == 'Notice' and is_first:
-            text2write = text2write + "{\"notice\": \""
+            text2write = text2write + "{\"vulnerability\": \""
             is_first = False
             continue
         if notice_line == 'Notice' and not is_first:
-            text2write = text2write + "\"}, {\"notice\": \""
+            text2write = text2write + "\", "
+            text2write = text2write + "\"details\": \"\", \"severity\": \"Notice\", \"detectedby\": [\"Androbugs\"],"
+            text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+            text2write = text2write + "}, {\"vulnerability\": \""
         else:
             what2write = linecache.getline("./json_results/Androbugs/8657024da129fc6982f9daa7f3775cf6.txt",
                                            notice_line)
             text2write = text2write + what2write.replace('"', '\\"')[:-1]
-    text2write = text2write + "\"}"
+    text2write = text2write + "\", "
+    text2write = text2write + "\"details\": \"\", \"severity\": \"Critical\", \"detectedby\": [\"Androbugs\"],"
+    text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+    text2write = text2write + "}]"
     json_file.write(text2write)
-    json_file.write("],")
-    json_file.write("\"info_level\": [")
+    # print(text2write)
+    json_file.write(",")
+    json_file.write("\"M4\": [")
     text2write = ""
     is_first = True
     for info_line in info:
         if info_line == 'Info' and is_first:
-            text2write = text2write + "{\"info\": \""
+            text2write = text2write + "{\"vulnerability\": \""
             is_first = False
             continue
         if info_line == 'Info' and not is_first:
-            text2write = text2write + "\"}, {\"info\": \""
+            text2write = text2write + "\", "
+            text2write = text2write + "\"details\": \"\", \"severity\": \"Info\", \"detectedby\": [\"Androbugs\"],"
+            text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+            text2write = text2write + "}, {\"vulnerability\": \""
         else:
             what2write = linecache.getline("./json_results/Androbugs/8657024da129fc6982f9daa7f3775cf6.txt",
                                            info_line)
             text2write = text2write + what2write.replace('"', '\\"')[:-1]
-    text2write = text2write + "\"}"
+    text2write = text2write + "\", "
+    text2write = text2write + "\"details\": \"\", \"severity\": \"Critical\", \"detectedby\": [\"Androbugs\"],"
+    text2write = text2write + "\"feedback\": [{\"url\":\"\"}, {\"video\":\"\"}, {\"book\":\"\"}, {\"other\":\"\"}]"
+    text2write = text2write + "}"
+    # print(text2write)
     json_file.write(text2write)
+    json_file.write("],")
+    json_file.write("\"M5\": [")
+    json_file.write("],")
+    json_file.write("\"M6\": [")
+    json_file.write("],")
+    json_file.write("\"M7\": [")
+    json_file.write("],")
+    json_file.write("\"M8\": [")
+    json_file.write("],")
+    json_file.write("\"M9\": [")
+    json_file.write("],")
+    json_file.write("\"M10\": [")
     json_file.write("]")
     json_file.write("}")
     json_file.write("}")
