@@ -204,8 +204,8 @@ class PluginClass:
 
         # now let's try to put everything on a JSON format :-)
         json_file = open(jsonResultsLocation + md5 + ".json", "w")
-        json_file.write("{")
-        json_file.write("\"results\": ")
+        #json_file.write("{")
+        #json_file.write("\"results\": ")
         json_file.write("{\"M1\": [")
         text2write = ""
         is_first = True
@@ -311,7 +311,7 @@ class PluginClass:
         json_file.write("\"M10\": [")
         json_file.write("]")
         json_file.write("}")
-        json_file.write("}")
+        #json_file.write("}")
 
     def run(self, apk_file, md5):
         print(pluginName + ": Running the Androbugs plugin!...")

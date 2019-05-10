@@ -62,8 +62,8 @@ if __name__ == "__main__":
 
     # now let's try to put everything on a JSON format :-)
     json_file = open("./json_results/Androbugs/8657024da129fc6982f9daa7f3775cf6.json", "w")
-    json_file.write("{")
-    json_file.write("\"results\": ")
+    #json_file.write("{")
+    #json_file.write("\"results\": ")
     json_file.write("{\"M1\": [")
     text2write = ""
     is_first = True
@@ -171,6 +171,6 @@ if __name__ == "__main__":
     json_file.write("\"M10\": [")
     json_file.write("]")
     json_file.write("}")
-    json_file.write("}")
+    #json_file.write("}")
 
 
