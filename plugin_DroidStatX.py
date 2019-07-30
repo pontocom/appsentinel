@@ -40,6 +40,7 @@ class PluginClass:
             log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
             os.system(config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            # probably it is not necessary to have this... maybe apktool is enough for this
             cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
             p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
             (output, err) = p.communicate()
