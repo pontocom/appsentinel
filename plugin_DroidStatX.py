@@ -36,10 +36,10 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> python3 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
-            log.debug(pluginName + ": Executing -> python3 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
-            os.system("python2 " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            os.system(config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
             p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
             (output, err) = p.communicate()

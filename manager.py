@@ -99,8 +99,8 @@ if __name__=="__main__":
                 download_apk(appPath)
                 write_json_data(jsondata, apk[1])
                 db.insert_new_apk(apk[1], applicationName, applicationPackage, appVersion, appPath, apkfile)
-                log.debug("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
-                os.system("python3 scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
+                log.debug(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
+                os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
                 db.delete_apk2scan(apk[1])
     else:
         print("No apks yet... waiting patiently!!!")
