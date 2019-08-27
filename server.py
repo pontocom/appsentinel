@@ -96,6 +96,29 @@ def apkfeedback(id):
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
+@app.route('/apkvullevel/<id>', methods=['GET'])
+@swag_from('./docs/apkvullevel.yml')
+def apkvullevel(id):
+    log.debug("REQUEST TO GET VULNERABILITIES LEVEL")
+    log.debug("APK MD5 = " + id)
+    if not id:
+        return jsonify({'status': False, 'message': 'No MD5 APK id was passed'}), 500, {'Access-Control-Allow-Origin':'*'}
+    else:
+        results_data = db.get_apk_vuln_level(id)
+        if results_data:
+            # we need to check the status...
+            if results_data[0]['status'] != -1:
+                print(results_data[0]['results_location'])
+                file = open(results_data[0]['results_location'])
+                json_data = json.load(file)
+                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+            else:
+                return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
+        else:
+            return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
+
+
+
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
