@@ -22,6 +22,7 @@ from ConfigParser import SafeConfigParser
 import platform
 import imp
 import sys
+import json
 
 """
 	*****************************************************************************
@@ -166,6 +167,10 @@ class Writer :
 
 		self.__file_io_result_output_list = []			#Analyze vector result (for more convenient to save in disk)
 		self.__file_io_information_output_list = []		#Analyze header result (include package_name, md5, sha1, etc.)
+		self.__output = []
+
+	def get_Output(self):
+		return self.__output
 
 	def simplifyClassPath(self, class_name) :
 		if class_name.startswith('L') and class_name.endswith(';') :
@@ -273,6 +278,26 @@ class Writer :
 			dict_tmp_information["cve_number"] = cve_number
 
 		self.__output_dict_vector_result_information[tag] = dict_tmp_information
+
+
+		#data = {}
+		#data['vulnerability'] = []
+		#data[].append({
+		#	'tag': tag,
+		#	'level': level,
+		#	'summary': summary,
+		#	'title': title_msg
+		#})
+
+		datas = ""
+		datas ={'tag': tag,
+			'level': level,
+			'summary': summary,
+			'title': title_msg}
+
+		self.__output.append(datas)
+
+
 		
 	def get_valid_encoding_utf8_string(self, utf8_string) :
 		"""
@@ -3450,6 +3475,10 @@ Please modify or remove these vulnerable code:
 	writer.writeInf_ForceNoPrint("time_finish_analyze", datetime.utcnow())
 
 
+
+
+
+
 def __persist_db(writer, args) :
 	
 	# starting_dvm
@@ -3640,15 +3669,20 @@ def main() :
 		__persist_db(writer, args)
 
 
-	if writer.get_analyze_status() == "success" :
+	# if writer.get_analyze_status() == "success" :
 
-		if REPORT_OUTPUT == TYPE_REPORT_OUTPUT_ONLY_PRINT :
-			writer.show(args)
-		elif REPORT_OUTPUT == TYPE_REPORT_OUTPUT_ONLY_FILE :
-			__persist_file(writer, args)	#write report to "disk"
-		elif REPORT_OUTPUT == TYPE_REPORT_OUTPUT_PRINT_AND_FILE :
-			writer.show(args)
-			__persist_file(writer, args)	#write report to "disk"
+		#if REPORT_OUTPUT == TYPE_REPORT_OUTPUT_ONLY_PRINT :
+		#	writer.show(args)
+		#elif REPORT_OUTPUT == TYPE_REPORT_OUTPUT_ONLY_FILE :
+		#	__persist_file(writer, args)	#write report to "disk"
+		#elif REPORT_OUTPUT == TYPE_REPORT_OUTPUT_PRINT_AND_FILE :
+		#	writer.show(args)
+		#	__persist_file(writer, args)	#write report to "disk"
+
+
+	#build json file
+	with open(args.report_output_dir + args.md5file+".txt", 'w') as write_file:
+		json.dump(writer.get_Output(), write_file )
 
 
 if __name__ == "__main__":
