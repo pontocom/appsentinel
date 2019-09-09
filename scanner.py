@@ -9,6 +9,8 @@ config.read('config.ini')
 
 # location of the results of the tool
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
+jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
+
 # location of the unprocessed APKs
 # apkDir = "/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/"
 
