@@ -429,10 +429,10 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> python2 " + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
-            log.debug(pluginName + ": Executing -> python2 " + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+            print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
             # run the tool
-            os.system("python2 " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
+            os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
             # this tool produces a text-based output... we need to consider what to do with this
             # convert to JSON
             #self.convert_to_json(md5)
