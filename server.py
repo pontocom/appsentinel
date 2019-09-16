@@ -177,7 +177,7 @@ def apkmonthlevels(id):
             json_data = json.dumps(data)
             return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
         else:
-            return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
+            return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
 @app.route('/apklevels/<id>', methods=['GET'])

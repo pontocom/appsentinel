@@ -169,15 +169,16 @@ def get_apk_month_level(id):
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     now = datetime.datetime.now()
-    now_date = str(now.year)+ '/' + str(now.month) + '/' + str(now.day)
+    now_date = str(now.year)+ '/' + str(now.month) + '/' + str(now.day+1)
 
     start_date = ""
 
     if int(id) <= now.month:
         start_date = str(now.year) + '/' + str((now.month - int(id) + 1)) + '/' + str(now.day)
+        print(start_date)
     if int(id) > now.month:
         start_date = str((now.year - 1)) + '/' + str((12 - int(id) + now.month + 1)) + '/' + str(now.day)
-
+        print(start_date)
     cursor = db.cursor()
     sql = "SELECT * FROM apkvullevel WHERE created_at BETWEEN '" + start_date + "' AND '" + now_date+"'"
 
