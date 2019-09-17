@@ -208,6 +208,60 @@ def get_apk_levels(md5):
     return json_data
 
 
+def get_all_apk_levels():
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    sql = "SELECT * FROM apkvullevel"
+    log.debug(sql)
+    cursor.execute(sql)
+    json_data = []
+    row_headers = [x[0] for x in cursor.description]
+    results = cursor.fetchall()
+    for result in results:
+        json_data.append(dict(zip(row_headers, result)))
+    db.close()
+    return json_data
 
+def get_rules():
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    sql = "SELECT * FROM apkrules"
+    log.debug(sql)
+    json_data = []
+    if cursor.execute(sql) > 0:
+        row_headers = [x[0] for x in cursor.description]
+        results = cursor.fetchall()
+        for result in results:
+            json_data.append(dict(zip(row_headers, result)))
+        db.close()
+    else :
+        sql = "INSERT INTO apkrules (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES (FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,'email')"
+        cursor.execute(sql)
+        db.commit()
+        sql = "SELECT * FROM apkrules"
+        cursor.execute(sql)
+        row_headers = [x[0] for x in cursor.description]
+        results = cursor.fetchall()
+        for result in results:
+            json_data.append(dict(zip(row_headers, result)))
+        db.close()
+    return json_data
 
+def insert_rules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template):
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    sql = "INSERT INTO apkrules (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES ('%r','%r','%r','%r','%r','%r','%r','%r','%s')" % (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
+    log.debug(sql)
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        print("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
+        log.debug("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
+        db.rollback()
+        return False
+    db.close()
 

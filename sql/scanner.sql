@@ -50,3 +50,15 @@ CREATE TABLE  apklevels (
   details TEXT ,
   created_at DATETIME NOT NULL
 );
+
+CREATE TABLE apkrules (
+  info BOOLEAN not null default 0,
+  notice BOOLEAN not null default 0,
+  warning BOOLEAN not null default 0,
+  critical BOOLEAN not null default 0,
+  vulnerability_name BOOLEAN not null default 0,
+  videos BOOLEAN not null default 0,
+  link BOOLEAN not null default 0,
+  severity_levels BOOLEAN not null default 0,
+  email_template VARCHAR(400) 'email'
+)

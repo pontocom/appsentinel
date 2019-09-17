@@ -73,6 +73,7 @@ def apkscan():
                 return jsonify({'status': False, 'message': 'That APK is already in the pipeline to be processed... wait for the results!'}), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 db.insert_new_apk2scan(md5Apk)
+                db.insert_new_rule(md5Apk)
                 return jsonify({'status': True, 'message': 'APK was passed to the scanning engine... please hold on!'}), 200, {'Access-Control-Allow-Origin':'*'}
 
 
@@ -141,11 +142,8 @@ def apkmonthlevels(id):
             for x in results_data:
                 month = time.strftime('%B', time.struct_time((0,x['created_at'].month,0,)+(0,)*6))
                 print(month)
-                #print(x[0]['results_location'])
                 file = open(x['results_location'])
                 json_data = json.load(file)
-
-                # A lot to do
 
                 for p in json_data['vulnerabilities&level']:
                     if 'Info' in p['severity']:
@@ -164,13 +162,7 @@ def apkmonthlevels(id):
                     'Warning': warning,
                     'Critical': critical
                 })
-            #data['September'] = []
-            #data['September'] = ({
-             #   'Info': info,
-              #  'Notice': notice,
-               # 'Warning': warning,
-                #'Critical': critical
-            #})
+
 
 
 
@@ -202,6 +194,87 @@ def apklevels(id):
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
+@app.route('/apkslist/', methods=['GET'])
+@swag_from('./docs/apkslist.yml')
+def apkslist():
+    log.debug("REQUEST TO GET APKS LIST INFORMATION")
+    info=0
+    notice=0
+    warning=0
+    critical=0
+    data={}
+    data['apkslistinfo'] = []
+
+    results_data = db.get_all_apk_levels()
+
+    if results_data:
+        for x in results_data:
+            file = open(x['results_location'])
+            json_data = json.load(file)
+
+            for p in json_data['vulnerabilities&level']:
+                if 'Info' in p['severity']:
+                    info += 1
+                if 'Notice' in p['severity']:
+                    notice += 1
+                if 'Warning' in p['severity']:
+                    warning += 1
+                if 'Critical' in p['severity']:
+                    critical += 1
+
+            # to do download and rating
+
+            data['apkslistinfo'].append({
+                'status': x['status'],
+                'md5': x['md5'],
+                'vulnerability_levels':[{'Info': info},
+                                        {'Notice': notice},
+                                        {'Warning': warning},
+                                        {'Critical': critical}],
+                'download': '23456',
+                'rating': '5'
+            })
+
+
+        json_data = json.dumps(data)
+        return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+    else:
+        return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
+
+
+@app.route('/feedback/getrules/', methods=['GET'])
+@swag_from('./docs/getrules.yml')
+def getrules():
+    log.debug("REQUEST TO GET RULES INFORMATION")
+    results_data = db.get_rules()
+
+    data={}
+    data['rules']=[]
+    if results_data:
+        for row in results_data:
+            data['rules'] = ({
+                'vulnerability_levels':[{
+                    'info': row['info'],
+                    'notice': row['notice'],
+                    'warning': row['warning'],
+                    'critical': row['critical']
+                    }],
+                'vulnerability_name': row['vulnerability_name'],
+                'videos': row['videos'],
+                'links': row['link'],
+                'severity_levels': row['severity_levels'],
+                'email_template': row['email_template']
+            })
+        json_data = json.dumps(data)
+        return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+    else:
+        return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
+
+
+@app.route('/feedback/updaterules/', methods=['PUT'])
+@swag_from('./docs/updaterules.yml')
+def updaterules():
+    log.debug("UPDATE RULES INFORMATION")
 
 
 # If we're running in stand alone mode, run the application
