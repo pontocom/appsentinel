@@ -73,7 +73,7 @@ def apkscan():
                 return jsonify({'status': False, 'message': 'That APK is already in the pipeline to be processed... wait for the results!'}), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 db.insert_new_apk2scan(md5Apk)
-                db.insert_new_rule(md5Apk)
+
                 return jsonify({'status': True, 'message': 'APK was passed to the scanning engine... please hold on!'}), 200, {'Access-Control-Allow-Origin':'*'}
 
 
