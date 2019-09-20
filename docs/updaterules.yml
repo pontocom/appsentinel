@@ -1,0 +1,69 @@
+This is the language awesomeness API
+   UPDATE RULES
+    ---
+    tags:
+      - Awesomeness Language API
+    parameters:
+      - name: info
+        in: info
+        type: boolean
+        required: true
+        description: level
+      - name: notice
+        in: notice
+        type: boolean
+        required: true
+        description: level
+      - name: warning
+        in: warning
+        type: boolean
+        required: true
+        description: level
+      - name: critical
+        in: critical
+        type: boolean
+        required: true
+        description: level
+      - name: vulnerability_name
+        in: vulnerability_name
+        type: boolean
+        required: true
+        description: name of vulnerability
+      - name: videos
+        in: videos
+        type: boolean
+        required: true
+        description: videos info
+      - name: link
+        in: link
+        type: boolean
+        required: true
+        description: links info
+      - name: severity_levels
+        in: severity_levels
+        type: boolean
+        required: true
+        description: levels info
+      - name: notice
+        in: notice
+        type: boolean
+        required: true
+        description: level
+    responses:
+      500:
+        description: Error The language is not awesome!
+      200:
+        description: A language with its awesomeness
+        schema:
+          id: awesome
+          properties:
+            language:
+              type: string
+              description: The language name
+              default: Lua
+            features:
+              type: array
+              description: The awesomeness list
+              items:
+                type: string
+              default: ["perfect", "simple", "lovely"]

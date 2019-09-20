@@ -273,7 +273,7 @@ def getrules():
 
 @app.route('/feedback/updaterules/', methods=['PUT'])
 @swag_from('./docs/updaterules.yml')
-def updaterules():
+def updaterules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template):
     log.debug("UPDATE RULES INFORMATION")
 
 

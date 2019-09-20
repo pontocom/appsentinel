@@ -1,0 +1,30 @@
+GET RULES
+    ---
+    tags:
+      - RULES INFO
+    responses:
+      500:
+        description: Some error has occurred
+        schema:
+          id: result
+          properties:
+            status:
+              type: boolean
+              description: A status code indicating the result of the operation
+            message:
+              type: string
+              description: A message that contain details about the results of the operation
+      200:
+        description: Returns the result for the specific APK MD5 requested
+        schema:
+          id: result
+          properties:
+            status:
+              type: boolean
+              description: A status code indicating the result of the operation
+            features:
+              type: array
+              description: The awesomeness list
+              items:
+                type: string
+              default: ["perfect", "simple", "lovely"]
