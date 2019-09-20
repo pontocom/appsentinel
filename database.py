@@ -249,19 +249,21 @@ def get_rules():
         db.close()
     return json_data
 
+
 def insert_rules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template):
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apkrules (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES ('%r','%r','%r','%r','%r','%r','%r','%r','%s')" % (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
+    sql = "UPDATE apkrules SET info = %r, notice = %r, warning = %r, critical = %r, vulnerability_name = %r, videos = %r, link = %r, severity_levels = %r, email_template = '%s' WHERE id = 1" % (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
     log.debug(sql)
     try:
         cursor.execute(sql)
         db.commit()
     except:
-        print("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
-        log.debug("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
+        print("AN ERROR OCCURED WHILE UPDATING DATA -> " + sql)
+        log.debug("AN ERROR OCCURED WHILE UPDATING DATA -> " + sql)
         db.rollback()
         return False
     db.close()
+    return True
 

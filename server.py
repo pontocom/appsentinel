@@ -163,9 +163,6 @@ def apkmonthlevels(id):
                     'Critical': critical
                 })
 
-
-
-
             json_data = json.dumps(data)
             return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
         else:
@@ -248,8 +245,8 @@ def getrules():
     log.debug("REQUEST TO GET RULES INFORMATION")
     results_data = db.get_rules()
 
-    data={}
-    data['rules']=[]
+    data = {}
+    data['rules'] = []
     if results_data:
         for row in results_data:
             data['rules'] = ({
@@ -266,16 +263,20 @@ def getrules():
                 'email_template': row['email_template']
             })
         json_data = json.dumps(data)
-        return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+        return jsonify({'status': True, 'rules': results_data}), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
 @app.route('/feedback/updaterules/', methods=['PUT'])
 @swag_from('./docs/updaterules.yml')
-def updaterules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template):
+def updaterules():
     log.debug("UPDATE RULES INFORMATION")
-    db.insert_rules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
+    data = request.values
+    if db.insert_rules(data['info'], data['notice'], data['warning'], data['critical'], data['vulnerability_name'], data['videos'], data['link'], data['severity_levels'], data['email_template']):
+        return jsonify({'status': True, 'message': 'This was called and returns something!'}), 200, {'Access-Control-Allow-Origin': '*'}
+    else:
+        return jsonify({'status': True, 'message': 'Some error occured while updating the feedback rules!!!'}), 200, {'Access-Control-Allow-Origin': '*'}
 
 
 # If we're running in stand alone mode, run the application

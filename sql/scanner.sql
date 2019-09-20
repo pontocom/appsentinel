@@ -52,6 +52,7 @@ CREATE TABLE  apklevels (
 );
 
 CREATE TABLE apkrules (
+  id INTEGER PRIMARY KEY NOT NULL,
   info BOOLEAN not null default 0,
   notice BOOLEAN not null default 0,
   warning BOOLEAN not null default 0,
@@ -60,5 +61,7 @@ CREATE TABLE apkrules (
   videos BOOLEAN not null default 0,
   link BOOLEAN not null default 0,
   severity_levels BOOLEAN not null default 0,
-  email_template VARCHAR(400) default 'email'
+  email_template TEXT default 'email'
 );
+
+INSERT INTO apkrules (id, info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES (1, 0,0,0,0,0,0,0,0,'Email Template');
