@@ -275,6 +275,7 @@ def getrules():
 @swag_from('./docs/updaterules.yml')
 def updaterules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template):
     log.debug("UPDATE RULES INFORMATION")
+    db.insert_rules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
 
 
 # If we're running in stand alone mode, run the application
