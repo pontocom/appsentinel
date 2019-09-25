@@ -15,7 +15,7 @@ pluginName = "Androbugs"
 vullevelfolder = "vulnerabilities_level"
 levelsfolder = "levels_for_apk"
 
-enable = False
+enable = True
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation'] + "/" + pluginName + "/"
 jsonResultsLocationVulnLevel = config['SCANNER']['jsonResultsLocation'] + "/" + pluginName + "/" + vullevelfolder + "/"
