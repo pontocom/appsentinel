@@ -356,6 +356,10 @@ class PluginClass:
 
         data = {}
         data['M1'] = []
+        data['M2'] = []
+        data['M3'] = []
+        data['M4'] = []
+        dataResult = {}
 
         data_vuln_level ={}
         data_vuln_level['vulnerabilities&level'] = []
@@ -369,17 +373,51 @@ class PluginClass:
         critical = 0
 
         for x in read_content:
-            data['M1'].append({
-                'vulnerability': x['tag'],
-                'details': x['title'],
-                'severity': x['level'],
-                'detectedby': 'Androbugs',
-                'feedback': [{ "url": "Nothing to show"},
-                             {"video": "Nothing to show"},
-                             {"book": "Nothing to show"},
-                             {"other": "Nothing to show"}]
-            })
-
+            if x['level'] == 'Info':
+             data['M1'].append({
+                    'vulnerability': x['tag'],
+                    'details': x['title'],
+                    'severity': x['level'],
+                    'detectedby': 'Androbugs',
+                    'feedback': [{ "url": "Nothing to show"},
+                                 {"video": "Nothing to show"},
+                                 {"book": "Nothing to show"},
+                                 {"other": "Nothing to show"}]
+                })
+            if x['level'] == 'Notice':
+             data['M2'].append({
+                    'vulnerability': x['tag'],
+                    'details': x['title'],
+                    'severity': x['level'],
+                    'detectedby': 'Androbugs',
+                    'feedback': [{ "url": "Nothing to show"},
+                                 {"video": "Nothing to show"},
+                                 {"book": "Nothing to show"},
+                                 {"other": "Nothing to show"}]
+                })
+            if x['level'] == 'Warning':
+             data['M3'].append({
+                    'vulnerability': x['tag'],
+                    'details': x['title'],
+                    'severity': x['level'],
+                    'detectedby': 'Androbugs',
+                    'feedback': [{ "url": "Nothing to show"},
+                                 {"video": "Nothing to show"},
+                                 {"book": "Nothing to show"},
+                                 {"other": "Nothing to show"}]
+                })
+            if x['level'] == 'Critical':
+             data['M4'].append({
+                    'vulnerability': x['tag'],
+                    'details': x['title'],
+                    'severity': x['level'],
+                    'detectedby': 'Androbugs',
+                    'feedback': [{ "url": "Nothing to show"},
+                                 {"video": "Nothing to show"},
+                                 {"book": "Nothing to show"},
+                                 {"other": "Nothing to show"}]
+                })
+        for x in read_content:
             data_vuln_level['vulnerabilities&level'].append({
                 'vulnerability': x['tag'],
                 'severity': x['level'],
@@ -402,6 +440,7 @@ class PluginClass:
             'Critical': critical
         })
 
+        #dataResult = "\"M1\"{"+data['M1']+"}"+"\"M2\"{"+data['M2']+"}"+"\"M3\"{"+data['M3']+"}"+"\"M4\"{"+data['M4']+"}"
 
         with open(jsonResultsLocation + md5 + ".json", "a") as save_file:
             json.dump(data, save_file)
@@ -437,10 +476,10 @@ class PluginClass:
             # convert to JSON
             #self.convert_to_json(md5)
             #self.convert_to_new_json(md5)
-            self.build_scan_format(md5)
+            #self.build_scan_format(md5)
             # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+            #db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
             # add vulnerability and level information to database
-            db.insert_results_vullevel(md5, pluginName, jsonResultsLocationVulnLevel + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
+            #db.insert_results_vullevel(md5, pluginName, jsonResultsLocationVulnLevel + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
             # add level information to database
-            db.insert_results_levels(md5, pluginName, jsonResultsLocationLevels + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
+            #db.insert_results_levels(md5, pluginName, jsonResultsLocationLevels + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
