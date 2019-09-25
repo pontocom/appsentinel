@@ -12,7 +12,7 @@ config.read('config.ini')
 log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
 
 pluginName = "AndroWarn"
-enable = False
+enable = True
 
 # Define any specific configuration directives here
 androWarnLocation = config['ANDROWARN']['androWarnLocation']
@@ -32,5 +32,12 @@ class PluginClass:
         if not os.path.exists(jsonResultsLocation):
             os.system("mkdir " + jsonResultsLocation)
 
-        # everything bellow this is specific of your plugin
+        print(pluginName + ": FILE -> " + apk_file)
+        log.debug(pluginName + ": FILE -> " + apk_file)
+
+        if apk_file[-4:] == ".apk":
+            print(pluginName + ": Running on -> " + apk_file)
+            log.debug(pluginName + ": Running on -> " + apk_file)
+            print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androWarnLocation + " androwarn.py -i " + apk_file + " -r json -v 3")
+            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androWarnLocation + " androwarn.py -i " + apk_file + " -r json -v 3")
 
