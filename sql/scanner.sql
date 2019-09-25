@@ -61,7 +61,7 @@ CREATE TABLE apkrules (
   videos BOOLEAN not null default 0,
   link BOOLEAN not null default 0,
   severity_levels BOOLEAN not null default 0,
-  email_template TEXT default 'email'
+  email_template TEXT
 );
 
 INSERT INTO apkrules (id, info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES (1, 0,0,0,0,0,0,0,0,'Email Template');

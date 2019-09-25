@@ -451,6 +451,7 @@ class PluginClass:
         with open(jsonResultsLocationLevels + md5 + ".json", "a") as save_file:
             json.dump(data_level_for_apk, save_file)
 
+
     def run(self, apk_file, md5):
         print(pluginName + ": Running the Androbugs plugin!...")
         log.debug(pluginName + ": Running the Androbugs plugin!...")
