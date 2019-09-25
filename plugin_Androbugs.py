@@ -15,7 +15,7 @@ pluginName = "Androbugs"
 vullevelfolder = "vulnerabilities_level"
 levelsfolder = "levels_for_apk"
 
-enable = False
+enable = True
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation'] + "/" + pluginName + "/"
 jsonResultsLocationVulnLevel = config['SCANNER']['jsonResultsLocation'] + "/" + pluginName + "/" + vullevelfolder + "/"
@@ -356,10 +356,6 @@ class PluginClass:
 
         data = {}
         data['M1'] = []
-        data['M2'] = []
-        data['M3'] = []
-        data['M4'] = []
-        dataResult = {}
 
         data_vuln_level ={}
         data_vuln_level['vulnerabilities&level'] = []
@@ -373,51 +369,17 @@ class PluginClass:
         critical = 0
 
         for x in read_content:
-            if x['level'] == 'Info':
-             data['M1'].append({
-                    'vulnerability': x['tag'],
-                    'details': x['title'],
-                    'severity': x['level'],
-                    'detectedby': 'Androbugs',
-                    'feedback': [{ "url": "Nothing to show"},
-                                 {"video": "Nothing to show"},
-                                 {"book": "Nothing to show"},
-                                 {"other": "Nothing to show"}]
-                })
-            if x['level'] == 'Notice':
-             data['M2'].append({
-                    'vulnerability': x['tag'],
-                    'details': x['title'],
-                    'severity': x['level'],
-                    'detectedby': 'Androbugs',
-                    'feedback': [{ "url": "Nothing to show"},
-                                 {"video": "Nothing to show"},
-                                 {"book": "Nothing to show"},
-                                 {"other": "Nothing to show"}]
-                })
-            if x['level'] == 'Warning':
-             data['M3'].append({
-                    'vulnerability': x['tag'],
-                    'details': x['title'],
-                    'severity': x['level'],
-                    'detectedby': 'Androbugs',
-                    'feedback': [{ "url": "Nothing to show"},
-                                 {"video": "Nothing to show"},
-                                 {"book": "Nothing to show"},
-                                 {"other": "Nothing to show"}]
-                })
-            if x['level'] == 'Critical':
-             data['M4'].append({
-                    'vulnerability': x['tag'],
-                    'details': x['title'],
-                    'severity': x['level'],
-                    'detectedby': 'Androbugs',
-                    'feedback': [{ "url": "Nothing to show"},
-                                 {"video": "Nothing to show"},
-                                 {"book": "Nothing to show"},
-                                 {"other": "Nothing to show"}]
-                })
-        for x in read_content:
+            data['M1'].append({
+                'vulnerability': x['tag'],
+                'details': x['title'],
+                'severity': x['level'],
+                'detectedby': 'Androbugs',
+                'feedback': [{ "url": "Nothing to show"},
+                             {"video": "Nothing to show"},
+                             {"book": "Nothing to show"},
+                             {"other": "Nothing to show"}]
+            })
+
             data_vuln_level['vulnerabilities&level'].append({
                 'vulnerability': x['tag'],
                 'severity': x['level'],
@@ -440,7 +402,6 @@ class PluginClass:
             'Critical': critical
         })
 
-        #dataResult = "\"M1\"{"+data['M1']+"}"+"\"M2\"{"+data['M2']+"}"+"\"M3\"{"+data['M3']+"}"+"\"M4\"{"+data['M4']+"}"
 
         with open(jsonResultsLocation + md5 + ".json", "a") as save_file:
             json.dump(data, save_file)
@@ -450,7 +411,6 @@ class PluginClass:
 
         with open(jsonResultsLocationLevels + md5 + ".json", "a") as save_file:
             json.dump(data_level_for_apk, save_file)
-
 
     def run(self, apk_file, md5):
         print(pluginName + ": Running the Androbugs plugin!...")
