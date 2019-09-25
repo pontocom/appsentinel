@@ -40,4 +40,9 @@ class PluginClass:
             log.debug(pluginName + ": Running on -> " + apk_file)
             print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androWarnLocation + " androwarn.py -i " + apk_file + " -r json -v 3")
             log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androWarnLocation + " androwarn.py -i " + apk_file + " -r json -v 3")
+            # probably it is not necessary to have this... maybe apktool is enough for this
+            cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
+            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+            (output, err) = p.communicate()
+            apkPackageName = str(output)[15:-9]
 
