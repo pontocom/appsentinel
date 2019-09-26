@@ -35,14 +35,17 @@ class PluginClass:
         print(pluginName + ": FILE -> " + apk_file)
         log.debug(pluginName + ": FILE -> " + apk_file)
 
+        apkPackageName = os.path.basename(apk_file)
+
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androWarnLocation + " androwarn.py -i " + apk_file + " -r json -v 3")
-            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androWarnLocation + " androwarn.py -i " + apk_file + " -r json -v 3")
-            # probably it is not necessary to have this... maybe apktool is enough for this
-            cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
-            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-            (output, err) = p.communicate()
-            apkPackageName = str(output)[15:-9]
-
+            print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androWarnLocation + "androwarn.py -i " + apk_file + " -r json -v 3")
+            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androWarnLocation + "androwarn.py -i " + apk_file + " -r json -v 3")
+            os.system(config['GENERAL']['python2cmd'] + " " + androWarnLocation + "androwarn.py -i " + apk_file + " -r json -v 3")
+            # move the json result file to the appropriate location
+            print(pluginName + ": mv " + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            log.debug(pluginName + ": mv " + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            os.system("mv " + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            # have also the information registered on the database
+            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
