@@ -29,11 +29,12 @@ def runPlugins(apkLocation):
 
 def selectPlugin(pluginNum):
     thisPlugin = plugins[pluginNum]
+    return thisPlugin
 
 
 def runSelectedPlugin():
     if thisPlugin == 0:
-        raise ArgumentError("you didn't assign a module yet.")
+        raise Exception("you didn't assign a module yet.")
     c = thisPlugin.PluginClass()
     c.run()
 
