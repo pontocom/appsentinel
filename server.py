@@ -262,7 +262,6 @@ def getrules():
                 'severity_levels': row['severity_levels'],
                 'email_template': row['email_template']
             })
-        json_data = json.dumps(data)
         return jsonify({'status': True, 'rules': results_data}), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
