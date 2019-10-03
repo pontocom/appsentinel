@@ -1,0 +1,292 @@
+{
+  "results": [
+    {
+      "name": "SSL_URLS_NOT_IN_HTTPS",
+      "category": "M3"
+    },
+    {
+      "name": "Security_Methods",
+      "category": "M1"
+    },
+    {
+      "name": "Security_Classes",
+      "category": "M1"
+    },
+    {
+      "name": "MASTER_KEY",
+      "category": "M5"
+    },
+    {
+      "name": "DEBUGGABLE",
+      "category": "M1"
+    },
+    {
+      "name": "HACKER_DEBUGGABLE_CHECK",
+      "category": "M1"
+    },
+    {
+      "name": "USE_PERMISSION_ACCESS_MOCK_LOCATION",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_GROUP_EMPTY_VALUE",
+      "category": "M1"
+    },
+    {
+      "name": "USE_PERMISSION_SYSTEM_APP",
+      "category": "M1"
+    },
+    {
+      "name": "USE_PERMISSION_CRITICAL",
+      "category": "M1"
+    },
+    {
+      "name": "USE_PERMISSION_SYSTEM_APP",
+      "category": "M1"
+    },
+    {
+      "name": "MANIFEST_GCM",
+      "category": "M1"
+    },
+    {
+      "name": "USE_PERMISSION_INTERNET",
+      "category": "M1"
+    },
+    {
+      "name": "HACKER_BASE64_STRING_DECODE",
+      "category": "M3"
+    },
+    {
+      "name": "HACKER_BASE64_URL_DECODE",
+      "category": "M3"
+    },
+    {
+      "name": "HACKER_BASE64_STRING_DECODE",
+      "category": "M4"
+    },
+    {
+      "name": "HACKER_KEYSTORE_NO_PWD",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_KEYSTORE_SSL_PINNING",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_KEYSTORE_NO_PWD",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_KEYSTORE_SSL_PINNING2",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_KEYSTORE_LOCATION1",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_KEYSTORE_LOCATION2",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_KEYSTORE_LOCATION1",
+      "category": "M5"
+    },
+    {
+      "name": "KEYSTORE_TYPE_CHECK",
+      "category": "M5"
+    },
+    {
+      "name": "HACKER_SIGNATURE_CHECK",
+      "category": "M8"
+    },
+    {
+      "name": "HACKER_PREVENT_SCREENSHOT_CHECK",
+      "category": "M10"
+    },
+    {
+      "name": "COMMAND",
+      "category": "M6"
+    },
+    {
+      "name": "COMMAND_SU",
+      "category": "M6"
+    },
+    {
+      "name": "SSL_CN1",
+      "category": "M3"
+    },
+    {
+      "name": "SSL_CN2",
+      "category": "M3"
+    },
+    {
+      "name": "SSL_CN3",
+      "category": "M3"
+    },
+    {
+      "name": "SSL_DEFAULT_SCHEME_NAME",
+      "category": "M3"
+    },
+    {
+      "name": "SSL_WEBVIEW",
+      "category": "M3"
+    },
+    {
+      "name": "WEBVIEW_JS_ENABLED",
+      "category": "M10"
+    },
+    {
+      "name": "HTTPURLCONNECTION_BUG",
+      "category": "M3"
+    },
+    {
+      "name": "DB_DEPRECATED_USE1",
+      "category": "M2"
+    },
+    {
+      "name": "MODE_WORLD_READABLE_OR_MODE_WORLD_WRITEABLE",
+      "category": "M1"
+    },
+    {
+      "name": "NATIVE_LIBS_LOADING",
+      "category": "M1"
+    },
+    {
+      "name": "NATIVE_METHODS",
+      "category": "M1"
+    },
+    {
+      "name": "FRAMEWORK_BANGCLE",
+      "category": "M5"
+    },
+    {
+      "name": "FRAMEWORK_IJIAMI",
+      "category": "M5"
+    },
+    {
+      "name": "FRAMEWORK_MONODROID",
+      "category": "M5"
+    },
+    {
+      "name": "DYNAMIC_CODE_LOADING",
+      "category": "M10"
+    },
+    {
+      "name": "EXTERNAL_STORAGE",
+      "category": "M2"
+    },
+    {
+      "name": "FRAGMENT_INJECTION",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_DANGEROUS",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_NORMAL",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_NO_PREFIX_EXPORTED",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_EXPORTED",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_EXPORTED_GOOGLE",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_EXPORTED",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_PROVIDER_IMPLICIT_EXPORTED",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_PROVIDER_EXPLICIT_EXPORTED",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_PROVIDER_IMPLICIT_EXPORTED",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_INTENT_FILTER_MISCONFIG",
+      "category": "M1"
+    },
+    {
+      "name": "PERMISSION_IMPLICIT_SERVICE",
+      "category": "M1"
+    },
+    {
+      "name": "DB_SQLITE_JOURNAL",
+      "category": "M2"
+    },
+    {
+      "name": "DB_SQLCIPHER",
+      "category": "M2"
+    },
+    {
+      "name": "DB_SEE",
+      "category": "M2"
+    },
+    {
+      "name": "HACKER_DB_KEY",
+      "category": "M2"
+    },
+    {
+      "name": "COMMAND_MAYBE_SYSTEM",
+      "category": "M8"
+    },
+    {
+      "name": "SENSITIVE_DEVICE_ID",
+      "category": "M1"
+    },
+    {
+      "name": "SENSITIVE_SECURE_ANDROID_ID",
+      "category": "M2"
+    },
+    {
+      "name": "SENSITIVE_SMS",
+      "category": "M10"
+    },
+    {
+      "name": "SHARED_USER_ID",
+      "category": "M1"
+    },
+    {
+      "name": "MASTER_KEY_SYSTEM_APP",
+      "category": "M8"
+    },
+    {
+      "name": "FILE_DELETE",
+      "category": "M2"
+    },
+    {
+      "name": "HACKER_INSTALL_SOURCE_CHECK",
+      "category": "M8"
+    },
+    {
+      "name": "WEBVIEW_ALLOW_FILE_ACCESS",
+      "category": "M1"
+    },
+    {
+      "name": "ALLOW_BACKUP",
+      "category": "M1"
+    },
+    {
+      "name": "SSL_X509",
+      "category": "M3"
+    },
+    {
+      "name": "WEBVIEW_RCE",
+      "category": "M10"
+    }
+  ]
+}

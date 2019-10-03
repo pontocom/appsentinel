@@ -31,10 +31,9 @@ CREATE TABLE apkresults (
   created_at DATETIME NOT NULL
 );
 
-CREATE TABLE  apkvullevel (
+CREATE TABLE  apkvulnerabilitylevel (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   md5 VARCHAR(32) NOT NULL ,
-  scantool VARCHAR(32) NOT NULL ,
   results_location VARCHAR(128) NOT NULL ,
   status INTEGER NOT NULL,
   details TEXT ,
@@ -44,7 +43,6 @@ CREATE TABLE  apkvullevel (
 CREATE TABLE  apklevels (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   md5 VARCHAR(32) NOT NULL ,
-  scantool VARCHAR(32) NOT NULL ,
   results_location VARCHAR(128) NOT NULL ,
   status INTEGER NOT NULL,
   details TEXT ,
@@ -62,6 +60,15 @@ CREATE TABLE apkrules (
   link BOOLEAN not null default 0,
   severity_levels BOOLEAN not null default 0,
   email_template TEXT
+);
+
+CREATE TABLE apkfinalresults (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  md5 VARCHAR(32) NOT NULL ,
+  results_location VARCHAR(128) NOT NULL ,
+  status INTEGER NOT NULL,
+  details TEXT ,
+  created_at DATETIME NOT NULL
 );
 
 INSERT INTO apkrules (id, info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES (1, 0,0,0,0,0,0,0,0,'Email Template');

@@ -7,6 +7,7 @@ import math
 import json
 import configparser
 import logging as log
+import owasp_engine as oe
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -102,6 +103,7 @@ if __name__=="__main__":
                 log.debug(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
                 os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
                 db.delete_apk2scan(apk[1])
+                oe.startEngine(appMD5)
     else:
         print("No apks yet... waiting patiently!!!")
         log.debug("No apks yet... waiting patiently!!!")

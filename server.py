@@ -99,8 +99,8 @@ def apkfeedback(id):
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
-@app.route('/apkvullevel/<id>', methods=['GET'])
-@swag_from('./docs/apkvullevel.yml')
+@app.route('/vulnerabilities/<id>', methods=['GET'])
+@swag_from('./docs/vulnerabilities.yml')
 def apkvullevel(id):
     log.debug("REQUEST TO GET VULNERABILITIES LEVEL")
     log.debug("APK MD5 = " + id)
@@ -145,7 +145,7 @@ def apkmonthlevels(id):
                 file = open(x['results_location'])
                 json_data = json.load(file)
 
-                for p in json_data['vulnerabilities&level']:
+                for p in json_data['vulnerabilities']:
                     if 'Info' in p['severity']:
                         info += 1
                     if 'Notice' in p['severity']:
@@ -169,7 +169,7 @@ def apkmonthlevels(id):
             return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
-@app.route('/apklevels/<id>', methods=['GET'])
+@app.route('/vulnerabilities/apklevels/<id>', methods=['GET'])
 @swag_from('./docs/apklevels.yml')
 def apklevels(id):
 

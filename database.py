@@ -26,11 +26,11 @@ def insert_results(md5, tool, results_location, status, details):
         return False
     db.close()
 
-def insert_results_vullevel(md5, tool, results_location, status, details):
+def insert_final_results(md5, results_location, status, details):
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apkvullevel (md5, scantool, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', NOW())" % (md5, tool, results_location, status, details)
+    sql = "INSERT INTO apkfinalresults (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -42,11 +42,27 @@ def insert_results_vullevel(md5, tool, results_location, status, details):
         return False
     db.close()
 
-def insert_results_levels(md5, tool, results_location, status, details):
+def insert_results_vulnerabilitylevel(md5, results_location, status, details):
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apklevels (md5, scantool, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', NOW())" % (md5, tool, results_location, status, details)
+    sql = "INSERT INTO apkvulnerabilitylevel (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
+    log.debug(sql)
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except:
+        print("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
+        log.debug("AN ERROR OCCURED WHILE INSERTING DATA -> " + sql)
+        db.rollback()
+        return False
+    db.close()
+
+def insert_results_levels(md5, results_location, status, details):
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    sql = "INSERT INTO apklevels (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -137,7 +153,7 @@ def get_apk_status(md5):
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "SELECT * FROM apkresults WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
+    sql = "SELECT * FROM apkfinalresults WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
     log.debug(sql)
     cursor.execute(sql)
     json_data = []
@@ -153,7 +169,7 @@ def get_apk_vuln_level(md5):
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "SELECT * FROM apkvullevel WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
+    sql = "SELECT * FROM apkvulnerabilitylevel WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
     log.debug(sql)
     cursor.execute(sql)
     json_data = []
@@ -180,7 +196,7 @@ def get_apk_month_level(id):
         start_date = str((now.year - 1)) + '/' + str((12 - int(id) + now.month + 1)) + '/' + str(now.day)
         print(start_date)
     cursor = db.cursor()
-    sql = "SELECT * FROM apkvullevel WHERE created_at BETWEEN '" + start_date + "' AND '" + now_date+"'"
+    sql = "SELECT * FROM apkvulnerabilitylevel WHERE created_at BETWEEN '" + start_date + "' AND '" + now_date+"'"
 
     log.debug(sql)
     cursor.execute(sql)
