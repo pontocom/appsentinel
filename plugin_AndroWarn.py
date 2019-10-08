@@ -12,7 +12,7 @@ config.read('config.ini')
 log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
 
 pluginName = "AndroWarn"
-enable = True
+enable = False
 
 # Define any specific configuration directives here
 androWarnLocation = config['ANDROWARN']['androWarnLocation']

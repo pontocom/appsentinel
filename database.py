@@ -228,7 +228,7 @@ def get_all_apk_levels():
     db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
                          config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "SELECT * FROM apkvullevel"
+    sql = "SELECT * FROM apkvulnerabilitylevel"
     log.debug(sql)
     cursor.execute(sql)
     json_data = []

@@ -122,7 +122,7 @@ def apkvullevel(id):
 
 
 
-@app.route('/apkmonthlevels/<id>', methods=['GET'])
+@app.route('/vulnerabilities/sort/<id>', methods=['GET'])
 @swag_from('./docs/apkmonthlevels.yml')
 def apkmonthlevels(id):
     log.debug("REQUEST TO GET VULNERABILITIES LEVEL BY MONTH")
@@ -169,7 +169,7 @@ def apkmonthlevels(id):
             return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
-@app.route('/vulnerabilities/apklevels/<id>', methods=['GET'])
+@app.route('/vulnerabilities/levels/<id>', methods=['GET'])
 @swag_from('./docs/apklevels.yml')
 def apklevels(id):
 
@@ -190,8 +190,51 @@ def apklevels(id):
         else:
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
+@app.route('/vulnerabilities/levels', methods=['GET'])
+@swag_from('./docs/allapksvulnlevels.yml')
+def allapksvulnlevels():
+    log.debug("REQUEST TO GET APKS LIST INFORMATION")
+    info=0
+    notice=0
+    warning=0
+    critical=0
+    data={}
+    data['apkslistinfo'] = []
 
-@app.route('/apkslist/', methods=['GET'])
+    results_data = db.get_all_apk_levels()
+
+    if results_data:
+        for x in results_data:
+            file = open(x['results_location'])
+            json_data = json.load(file)
+
+            for p in json_data['vulnerabilities']:
+                if 'Info' in p['severity']:
+                    info += 1
+                if 'Notice' in p['severity']:
+                    notice += 1
+                if 'Warning' in p['severity']:
+                    warning += 1
+                if 'Critical' in p['severity']:
+                    critical += 1
+
+            # to do download and rating
+
+        data['apkslistinfo'].append({
+            'status': x['status'],
+            'list':[{'Info': info},
+                                    {'Notice': notice},
+                                    {'Warning': warning},
+                                    {'Critical': critical}],
+        })
+
+
+        json_data = json.dumps(data)
+        return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+    else:
+        return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
+
+@app.route('/vulnerabilities/apks/list/', methods=['GET'])
 @swag_from('./docs/apkslist.yml')
 def apkslist():
     log.debug("REQUEST TO GET APKS LIST INFORMATION")
@@ -209,7 +252,7 @@ def apkslist():
             file = open(x['results_location'])
             json_data = json.load(file)
 
-            for p in json_data['vulnerabilities&level']:
+            for p in json_data['vulnerabilities']:
                 if 'Info' in p['severity']:
                     info += 1
                 if 'Notice' in p['severity']:
@@ -224,12 +267,12 @@ def apkslist():
             data['apkslistinfo'].append({
                 'status': x['status'],
                 'md5': x['md5'],
-                'vulnerability_levels':[{'Info': info},
+                'list':[{'Info': info},
                                         {'Notice': notice},
                                         {'Warning': warning},
                                         {'Critical': critical}],
-                'download': '23456',
-                'rating': '5'
+                'download': '23456*****',
+                'rating': '5****'
             })
 
 

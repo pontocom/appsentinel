@@ -10,6 +10,8 @@ config.read('config.ini')
 
 plugins_name ={'Androbugs'}
 
+plugins_name_sorted={'DroidStatX'}
+
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 
 resultsFeedback = './json_results/Final_Output/feedback/'
@@ -55,6 +57,21 @@ def feedback(md5):
                                      {"other": "Nothing to show"}]
                             })
                             break;
+    for name in plugins_name_sorted:
+        with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
+            read_data = json.load(plugin_output)
+        for category in owasp_category:
+            for x in read_data[category]:
+                data[category].append({
+                                    'vulnerability': x['vulnerability'],
+                                    'details': x['details'],
+                                    'severity': x['severity'],
+                                    'detectedby': 'DroidStatX',
+                                    'feedback': [{ "url": x['link']},
+                                         {"video": "Nothing to show"},
+                                         {"book": "Nothing to show"},
+                                         {"other": "Nothing to show"}]
+                                })
     if not os.path.exists(resultsFeedback):
             os.system("mkdir " + resultsFeedback)
     with open('./json_results/Final_Output/feedback/'+md5+'.json', 'w') as f:

@@ -355,21 +355,22 @@ class PluginClass:
 
 
         data = {}
-        data['M1'] = []
+        data['results']=[]
 
-        data_vuln_level ={}
-        data_vuln_level['vulnerabilities&level'] = []
 
-        data_level_for_apk = {}
-        data_level_for_apk['levelsForApk'] = []
+        #data_vuln_level ={}
+        #data_vuln_level['vulnerabilities&level'] = []
 
-        info = 0
-        notice = 0
-        warning = 0
-        critical = 0
+        #data_level_for_apk = {}
+        #data_level_for_apk['levelsForApk'] = []
+
+        #info = 0
+        #notice = 0
+        #warning = 0
+        #critical = 0
 
         for x in read_content:
-            data['M1'].append({
+            data['results'].append({
                 'vulnerability': x['tag'],
                 'details': x['title'],
                 'severity': x['level'],
@@ -380,37 +381,37 @@ class PluginClass:
                              {"other": "Nothing to show"}]
             })
 
-            data_vuln_level['vulnerabilities&level'].append({
-                'vulnerability': x['tag'],
-                'severity': x['level'],
-            })
+            #data_vuln_level['vulnerabilities&level'].append({
+            #    'vulnerability': x['tag'],
+            #    'severity': x['level'],
+            #})
 
-            if 'Info' in x['level']:
-                info += 1
-            if 'Notice' in x['level']:
-                notice += 1
-            if 'Warning' in x['level']:
-                warning += 1
-            if 'Critical' in x['level']:
-                critical += 1
+            #if 'Info' in x['level']:
+            #    info += 1
+            #if 'Notice' in x['level']:
+            #    notice += 1
+            #if 'Warning' in x['level']:
+            #    warning += 1
+            #if 'Critical' in x['level']:
+            #    critical += 1
 
 
-        data_level_for_apk['levelsForApk']=({
-            'Info':info,
-            'Notice': notice,
-            'Warning': warning,
-            'Critical': critical
-        })
+        #data_level_for_apk['levelsForApk']=({
+        #    'Info':info,
+        #    'Notice': notice,
+        #    'Warning': warning,
+        #    'Critical': critical
+        #})
 
 
         with open(jsonResultsLocation + md5 + ".json", "a") as save_file:
             json.dump(data, save_file)
 
-        with open(jsonResultsLocationVulnLevel + md5 + ".json", "a") as save_file:
-            json.dump(data_vuln_level, save_file)
+        #with open(jsonResultsLocationVulnLevel + md5 + ".json", "a") as save_file:
+        #    json.dump(data_vuln_level, save_file)
 
-        with open(jsonResultsLocationLevels + md5 + ".json", "a") as save_file:
-            json.dump(data_level_for_apk, save_file)
+        #with open(jsonResultsLocationLevels + md5 + ".json", "a") as save_file:
+        #    json.dump(data_level_for_apk, save_file)
 
     def run(self, apk_file, md5):
         print(pluginName + ": Running the Androbugs plugin!...")
@@ -418,10 +419,10 @@ class PluginClass:
         # test the existence of the results directory
         if not os.path.exists(jsonResultsLocation):
             os.system("mkdir " + jsonResultsLocation)
-        if not os.path.exists(jsonResultsLocationVulnLevel):
-            os.system("mkdir " + jsonResultsLocationVulnLevel)
-        if not os.path.exists(jsonResultsLocationLevels):
-            os.system("mkdir " + jsonResultsLocationLevels)
+        #if not os.path.exists(jsonResultsLocationVulnLevel):
+         #   os.system("mkdir " + jsonResultsLocationVulnLevel)
+        #if not os.path.exists(jsonResultsLocationLevels):
+         #   os.system("mkdir " + jsonResultsLocationLevels)
 
         # don't know why, but Androbugs requires running from the APK dir
         # print("ANDROBUGS cd " + apkLocation)
@@ -441,6 +442,6 @@ class PluginClass:
             # have also the information registered on the database
             db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
             # add vulnerability and level information to database
-            db.insert_results_vullevel(md5, pluginName, jsonResultsLocationVulnLevel + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
+            #db.insert_results_vullevel(md5, pluginName, jsonResultsLocationVulnLevel + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
             # add level information to database
-            db.insert_results_levels(md5, pluginName, jsonResultsLocationLevels + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
+            #db.insert_results_levels(md5, pluginName, jsonResultsLocationLevels + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
