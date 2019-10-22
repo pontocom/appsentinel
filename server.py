@@ -190,6 +190,7 @@ def apklevels(id):
         else:
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
+
 @app.route('/vulnerabilities/levels', methods=['GET'])
 @swag_from('./docs/allapksvulnlevels.yml')
 def allapksvulnlevels():
