@@ -371,8 +371,8 @@ class PluginClass:
 
         for x in read_content:
             data['results'].append({
-                'vulnerability': x['tag'],
-                'details': x['title'],
+                'vulnerability': x['vulnerability'],
+                'details': x['details'],
                 'severity': x['level'],
                 'detectedby': 'Androbugs',
                 'feedback': [{ "url": "Nothing to show"},

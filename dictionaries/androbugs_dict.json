@@ -1,292 +1,492 @@
 {
   "results": [
     {
-      "name": "SSL_URLS_NOT_IN_HTTPS",
-      "category": "M3"
+      "name": "SSL Connection Checking",
+      "category": "M3",
+      "level": "critical",
+      "link": ["https://www.owasp.org/index.php/Insecure_Transport"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Security Methods Checking",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Unsafe_Mobile_Code"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Security Classes Checking",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Unsafe_Mobile_Code"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Master Key Type I Vulnerability",
+      "category": "M5",
+      "level": "Critical",
+      "link": ["https://nvd.nist.gov/vuln/detail/CVE-2013-4787","https://cwe.mitre.org/data/definitions/320.html","https://www.owasp.org/index.php/Category:Cryptographic_Vulnerability","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Android Debug Mode Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://cwe.mitre.org/data/definitions/215.html","https://nvd.nist.gov/vuln/detail/CVE-2019-10212","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md","https://www.owasp.org/index.php/Projects/OWASP_Mobile_Security_Project_-_Security_Testing#Debugging"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Codes for Checking Android Debug Mode",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Leftover_Debug_Code"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Unnecessary Permission Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Least_Privilege_Violation"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "AndroidManifest PermissionGroup Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://developer.android.com/guide/topics/permissions/overview", "https://developer.android.com/guide/topics/manifest/permission-group-element"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "AndroidManifest System Use Permission Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://developer.android.com/reference/android/Manifest.permission.html#BIND_VPN_SERVICE"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "AndroidManifest Critical Use Permission Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://developer.android.com/reference/android/Manifest.permission.html#BIND_VPN_SERVICE"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Google Cloud Messaging Suggestion",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://developer.android.com/about/dashboards/index.html","http://developer.android.com/google/gcm/gcm.html"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Base64 String Encryption",
+      "category": "M3",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "KeyStore Protection Checking",
+      "category": "M2",
+      "level": "Critical",
+      "link": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md", "https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "Security_Methods",
-      "category": "M1"
+      "name": "KeyStore Protection Information",
+      "category": "M3",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning", "https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "Security_Classes",
-      "category": "M1"
+      "name": "KeyStore File Location",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage", "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "MASTER_KEY",
-      "category": "M5"
+      "name": "Possible KeyStore File Location",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage", "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "DEBUGGABLE",
-      "category": "M1"
+      "name": "KeyStore Type Checking",
+      "category": "M2",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage", "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_DEBUGGABLE_CHECK",
-      "category": "M1"
+      "name": "Getting Signature Code Checking",
+      "category": "M8",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "USE_PERMISSION_ACCESS_MOCK_LOCATION",
-      "category": "M1"
+      "name": "Code Setting Preventing Screenshot Capturing",
+      "category": "M10",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M10-Extraneous_Functionality"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "PERMISSION_GROUP_EMPTY_VALUE",
-      "category": "M1"
+      "name": "Runtime Command Checking",
+      "category": "M7",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "USE_PERMISSION_SYSTEM_APP",
-      "category": "M1"
+      "name": "Runtime Critical Command Checking",
+      "category": "M6",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Category:Access_Control"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "USE_PERMISSION_CRITICAL",
-      "category": "M1"
+      "name": "SSL Implementation Checking (Verifying Host Name in Custom Classes)",
+      "category": "M3",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication","https://developer.android.com/training/articles/security-ssl.html"],
+      "book": ["http://goo.gl/BFb65r "],
+      "video": []
     },
     {
-      "name": "USE_PERMISSION_SYSTEM_APP",
-      "category": "M1"
+      "name": "SSL Implementation Checking (Verifying Host Name in Fields)",
+      "category": "M3",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication","https://developer.android.com/training/articles/security-ssl.html"],
+      "book": ["http://goo.gl/BFb65r "],
+      "video": []
     },
     {
-      "name": "MANIFEST_GCM",
-      "category": "M1"
+      "name": "SSL Implementation Checking (Insecure component)",
+      "category": "M3",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication","https://developer.android.com/training/articles/security-ssl.html","http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html#getInsecure(int, android.net.SSLSessionCache)."],
+      "book": ["http://goo.gl/BFb65r "],
+      "video": []
     },
     {
-      "name": "USE_PERMISSION_INTERNET",
-      "category": "M1"
+      "name": "SSL Implementation Checking (HttpHost)",
+      "category": "M3",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication","https://developer.android.com/training/articles/security-ssl.html","http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html#getInsecure(int, android.net.SSLSessionCache)."],
+      "book": ["The Most Dangerous Code in the World: Validating SSL Certificates in Non-Browser Software"],
+      "video": []
     },
     {
-      "name": "HACKER_BASE64_STRING_DECODE",
-      "category": "M3"
+      "name": "SSL Implementation Checking (WebViewClient for WebView)",
+      "category": "M3",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication","https://jira.appcelerator.org/browse/TIMOB-4488"],
+      "book": ["http://seclab.tuwien.ac.at/papers/webview_leet13.pdf","https://www.owasp.org/images/9/99/GiuseppePorcu-OWASPItalyDay19-10-2018.pdf"],
+      "video": []
     },
     {
-      "name": "HACKER_BASE64_URL_DECODE",
-      "category": "M3"
+      "name": "WebView Potential XSS Attacks Checking",
+      "category": "M10",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M10-Extraneous_Functionality","https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_BASE64_STRING_DECODE",
-      "category": "M4"
+      "name": "SQLiteDatabase Transaction Deprecated Checking",
+      "category": "M2",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage","https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#beginTransactionNonExclusive()"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_NO_PWD",
-      "category": "M5"
+      "name": "App Sandbox Permission Checking",
+      "category": "M2",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_SSL_PINNING",
-      "category": "M5"
+      "name": "Native Library Loading Checking",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://www.owasp.org/index.php/Unsafe_JNI"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_NO_PWD",
-      "category": "M5"
+      "name": "Native Methods Checking",
+      "category": "M7",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_SSL_PINNING2",
-      "category": "M5"
+      "name": "Encryption Framework - Bangcle",
+      "category": "M5",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M5-Insufficient_Cryptography"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_LOCATION1",
-      "category": "M5"
+      "name": "Encryption Framework - Ijiami",
+      "category": "M5",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M5-Insufficient_Cryptography"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_LOCATION2",
-      "category": "M5"
+      "name": "Framework - MonoDroid",
+      "category": "M5",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M5-Insufficient_Cryptography"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_KEYSTORE_LOCATION1",
-      "category": "M5"
+      "name": "Dynamic Code Loading",
+      "category": "M7",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "KEYSTORE_TYPE_CHECK",
-      "category": "M5"
+      "name": "External Storage Accessing",
+      "category": "M2",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage","https://www.owasp.org/index.php/Insecure_Storage"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HACKER_SIGNATURE_CHECK",
-      "category": "M8"
+      "name": "Fragment Vulnerability Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6271","https://securityintelligence.com/new-vulnerability-android-framework-fragment-injection/"],
+      "book": ["https://securityintelligence.com/wp-content/uploads/2013/12/android-collapses-into-fragments.pdf"],
+      "video": []
     },
     {
-      "name": "HACKER_PREVENT_SCREENSHOT_CHECK",
-      "category": "M10"
+      "name": "AndroidManifest Dangerous ProtectionLevel of Permission Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "COMMAND",
-      "category": "M6"
+      "name": "AndroidManifest Normal ProtectionLevel of Permission Checking",
+      "category": "M1",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "COMMAND_SU",
-      "category": "M6"
+      "name": "AndroidManifest Exported Lost Prefix Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://nvd.nist.gov/vuln/detail/CVE-2013-6272"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "SSL_CN1",
-      "category": "M3"
+      "name": "AndroidManifest Exported Components Checking",
+      "category": "M1",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://developer.android.com/guide/topics/manifest/manifest-intro.html"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "SSL_CN2",
-      "category": "M3"
+      "name": "AndroidManifest Exported Components Checking 2",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://developer.android.com/guide/topics/manifest/manifest-intro.html"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "SSL_CN3",
-      "category": "M3"
+      "name": "AndroidManifest ContentProvider Exported Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://developer.android.com/guide/topics/manifest/manifest-intro.html","https://www.nowsecure.com/blog/2013/10/03/ebay-for-android-content-provider-injection-vulnerability/"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "SSL_DEFAULT_SCHEME_NAME",
-      "category": "M3"
+      "name": "AndroidManifest \"intent-filter\" Settings Checking",
+      "category": "M1",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://developer.android.com/guide/topics/manifest/manifest-intro.html","http://developer.android.com/guide/topics/manifest/intent-filter-element.html"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "SSL_WEBVIEW",
-      "category": "M3"
+      "name": "Implicit Service Checking",
+      "category": "M1",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","http://developer.android.com/guide/components/intents-filters.html"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "WEBVIEW_JS_ENABLED",
-      "category": "M10"
+      "name": "Android SQLite Databases Vulnerability Checking",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "HTTPURLCONNECTION_BUG",
-      "category": "M3"
+      "name": "Android SQLite Databases Encryption (SQLCipher)",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md"],
+      "book": ["https://www.owasp.org/images/5/56/OWASP_ChapterMeeting_SqlCipher-2012.pdf"],
+      "video": []
     },
     {
-      "name": "DB_DEPRECATED_USE1",
-      "category": "M2"
+      "name": "Android SQLite Databases Encryption (SQLite Encryption Extension (SEE))",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage","http://www.sqlite.org/android"],
+      "book": [],
+      "video": []
     },
     {
-      "name": "MODE_WORLD_READABLE_OR_MODE_WORLD_WRITEABLE",
-      "category": "M1"
-    },
-    {
-      "name": "NATIVE_LIBS_LOADING",
-      "category": "M1"
-    },
-    {
-      "name": "NATIVE_METHODS",
-      "category": "M1"
-    },
-    {
-      "name": "FRAMEWORK_BANGCLE",
-      "category": "M5"
-    },
-    {
-      "name": "FRAMEWORK_IJIAMI",
-      "category": "M5"
-    },
-    {
-      "name": "FRAMEWORK_MONODROID",
-      "category": "M5"
-    },
-    {
-      "name": "DYNAMIC_CODE_LOADING",
-      "category": "M10"
-    },
-    {
-      "name": "EXTERNAL_STORAGE",
-      "category": "M2"
-    },
-    {
-      "name": "FRAGMENT_INJECTION",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_DANGEROUS",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_NORMAL",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_NO_PREFIX_EXPORTED",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_EXPORTED",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_EXPORTED_GOOGLE",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_EXPORTED",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_PROVIDER_IMPLICIT_EXPORTED",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_PROVIDER_EXPLICIT_EXPORTED",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_PROVIDER_IMPLICIT_EXPORTED",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_INTENT_FILTER_MISCONFIG",
-      "category": "M1"
-    },
-    {
-      "name": "PERMISSION_IMPLICIT_SERVICE",
-      "category": "M1"
-    },
-    {
-      "name": "DB_SQLITE_JOURNAL",
-      "category": "M2"
-    },
-    {
-      "name": "DB_SQLCIPHER",
-      "category": "M2"
-    },
-    {
-      "name": "DB_SEE",
-      "category": "M2"
-    },
-    {
-      "name": "HACKER_DB_KEY",
-      "category": "M2"
-    },
-    {
-      "name": "COMMAND_MAYBE_SYSTEM",
-      "category": "M8"
-    },
-    {
-      "name": "SENSITIVE_DEVICE_ID",
-      "category": "M1"
-    },
-    {
-      "name": "SENSITIVE_SECURE_ANDROID_ID",
-      "category": "M2"
-    },
-    {
-      "name": "SENSITIVE_SMS",
-      "category": "M10"
-    },
-    {
-      "name": "SHARED_USER_ID",
-      "category": "M1"
-    },
-    {
-      "name": "MASTER_KEY_SYSTEM_APP",
-      "category": "M8"
-    },
-    {
-      "name": "FILE_DELETE",
-      "category": "M2"
-    },
-    {
-      "name": "HACKER_INSTALL_SOURCE_CHECK",
-      "category": "M8"
-    },
-    {
-      "name": "WEBVIEW_ALLOW_FILE_ACCESS",
-      "category": "M1"
-    },
-    {
-      "name": "ALLOW_BACKUP",
-      "category": "M1"
-    },
-    {
-      "name": "SSL_X509",
-      "category": "M3"
-    },
-    {
-      "name": "WEBVIEW_RCE",
-      "category": "M10"
+      "name": "Key for Android SQLite Databases Encryption",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Executing \"root\" or System Privilege Checking",
+      "category": "M8",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Getting IMEI and Device ID",
+      "category": "M9",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M9-Reverse_Engineering","https://android-developers.googleblog.com/2011/03/identifying-app-installations.html"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Getting ANDROID_ID",
+      "category": "M9",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M9-Reverse_Engineering","http://android-developers.blogspot.tw/2011/03/identifying-app-installations.html"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Codes for Sending SMS",
+      "category": "M10",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M10-Extraneous_Functionality"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "AndroidManifest sharedUserId Checking",
+      "category": "M1",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05a-Platform-Overview.md"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "Rooting System with Master Key Vulnerability",
+      "category": "M8",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04h-Testing-Code-Quality.md"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "File Unsafe Delete Checking",
+      "category": "M7",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality"],
+      "book": [],
+      "video": ["https://www.youtube.com/watch?v=tGw1fxUD-uY"]
+    },
+    {
+      "name": "APK Installing Source Checking",
+      "category": "M8",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "WebView Local File Access Attacks Checking",
+      "category": "M8",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering","https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/","http://developer.android.com/reference/android/webkit/WebSettings.html"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "AndroidManifest Adb Backup Checking",
+      "category": "M2",
+      "level": "Notice",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage","http://developer.android.com/guide/topics/manifest/application-element.html","http://blog.c22.cc/advisories/cve-2013-5112-evernote-android-insecure-storage-of-pin-data-bypass-of-pin-protection/","http://www.securityfocus.com/archive/1/530288/30/0/threaded"],
+      "book": [],
+      "video": []
+    },
+    {
+      "name": "SSL Certificate Verification Checking",
+      "category": "M3",
+      "level": "Warning",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication"],
+      "book": ["http://goo.gl/BFb65r"],
+      "video": []
+    },
+    {
+      "name": "WebView RCE Vulnerability Checking",
+      "category": "M10",
+      "level": "Critical",
+      "link": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M10-Extraneous_Functionality","http://developer.android.com/reference/android/webkit/WebView.html","https://labs.mwrinfosecurity.com/blog/2013/09/24/webview-addjavascriptinterface-remote-code-execution/","http://blog.trustlook.com/2013/09/04/alert-android-webview-addjavascriptinterface-code-execution-vulnerability/"],
+      "book": [],
+      "video": []
     }
   ]
 }

@@ -131,6 +131,7 @@ def apkmonthlevels():
     warning=0
     critical=0
     data={}
+    data_month={}
 
     id = request.args.get('sort')
     if int(id) not in range(3, 13):
@@ -154,13 +155,26 @@ def apkmonthlevels():
                     if 'Critical' in p['severity']:
                         critical += 1
 
-                data[month] = []
-                data[month] = ({
+                data_month[month] = []
+                data_month[month] = ({
                     'Info': info,
                     'Notice': notice,
                     'Warning': warning,
                     'Critical': critical
                 })
+
+                data_month['info'] = []
+                data_month['info'].append({
+                    'month': month,
+                    'values': [
+                        {'Info': info},
+                        {'Notice': notice},
+                        {'Warning': warning},
+                        {'Critical': critical}]
+                })
+
+
+                data={'status': 'OK', 'info': data_month['info']}
 
             json_data = json.dumps(data)
             return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
@@ -199,7 +213,8 @@ def allapksvulnlevels():
     warning=0
     critical=0
     data={}
-    data['apkslistinfo'] = []
+    data_list={}
+    data_list['list'] = []
 
     results_data = db.get_all_apk_levels()
 
@@ -220,13 +235,18 @@ def allapksvulnlevels():
 
             # to do download and rating
 
-        data['apkslistinfo'].append({
-            'status': x['status'],
-            'list':[{'Info': info},
-                                    {'Notice': notice},
-                                    {'Warning': warning},
-                                    {'Critical': critical}],
-        })
+        data_list['list'] = [{
+            'level': 'Info',
+            'value': info},
+            {'level': 'Notice',
+            'value': notice},
+            {'level': 'Warinig',
+            'value': warning},
+            {'level': 'Critical',
+            'value': critical}]
+
+
+        data = {'status' : 'OK', 'list': data_list['list']}
 
 
         json_data = json.dumps(data)
@@ -242,8 +262,10 @@ def apkslist():
     notice=0
     warning=0
     critical=0
+    data_list={}
+    data_list['apkslistinfo'] = []
     data={}
-    data['apkslistinfo'] = []
+
 
     results_data = db.get_all_apk_levels()
 
@@ -253,8 +275,6 @@ def apkslist():
             json_data = json.load(file)
 
             for p in json_data['vulnerabilities']:
-                if 'Info' in p['severity']:
-                    info += 1
                 if 'Notice' in p['severity']:
                     notice += 1
                 if 'Warning' in p['severity']:
@@ -263,18 +283,18 @@ def apkslist():
                     critical += 1
 
             # to do download and rating
+            #'status': x['status'],
 
-            data['apkslistinfo'].append({
-                'status': x['status'],
-                'md5': x['md5'],
-                'list':[{'Info': info},
+            data_list['apkslistinfo'].append({
+                'apk_md5': x['md5'],
+                'vulnerability_levels':[{'Info': info},
                                         {'Notice': notice},
                                         {'Warning': warning},
                                         {'Critical': critical}],
-                'download': '23456*****',
-                'rating': '5****'
+                'download': '23456',
+                'rating': '5'
             })
-
+        data = {'status': 'OK', 'list': data_list['apkslistinfo']}
 
         json_data = json.dumps(data)
         return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}

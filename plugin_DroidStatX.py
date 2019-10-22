@@ -142,8 +142,8 @@ class PluginClass:
     def flag_to_severity(self, flag):
         switcher = {
             #'flag-green': 'info',
-            'flag-yellow': 'warning',
-            'flag-red': 'critical'
+            'flag-yellow': 'Warning',
+            'flag-red': 'Critical'
         }
         return switcher.get(flag, "nothing")
 

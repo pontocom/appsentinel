@@ -290,10 +290,9 @@ class Writer :
 		#})
 
 		datas = ""
-		datas ={'tag': tag,
+		datas ={'vulnerability': summary,
 			'level': level,
-			'summary': summary,
-			'title': title_msg}
+			'details': title_msg}
 
 		self.__output.append(datas)
 
