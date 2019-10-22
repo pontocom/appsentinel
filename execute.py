@@ -1,20 +1,17 @@
 import xlsxwriter
 import json
+import os
 import datetime
 import requests
+import manager as man
 import configparser
 
 config = configparser.ConfigParser()
-config.read('../config.ini')
+config.read('config.ini')
 
-workbook = xlsxwriter.Workbook("tests.xlsx")
+workbook = xlsxwriter.Workbook("./tests/testResults-"+str(datetime.datetime.now())+".xlsx")
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
-
-
-def get_json_data(which_apk):
-    response = requests.get(aptoide_API_endpoint + which_apk)
-    jsondata = response.json()
-    return jsondata
+dir = config['DOWNLOAD']['apkDownloadDir']
 
 
 def run_multiple_tests(number_apk):
@@ -36,17 +33,30 @@ def run_sequence_tests():
     rows = 1
     with open('apks.txt') as f:
         for line in f:
-            id_app = line
-            data = get_json_data(id_app)
+            id_app = line[:len(line) - 1]
+            data = man.get_json_data(id_app)
             count = count + 1
             sheet.write(rows, 0, count)
             sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
             print(data["nodes"]["meta"]["data"]["file"]["md5sum"])
-            sheet.write(rows, 2, datetime.datetime.now().timestamp())
+            appPath = data["nodes"]["meta"]["data"]["file"]["path"]
+            print("appPath = " + appPath)
+            apkfile = appPath[appPath.rfind("/") + 1:]
+            print("apkFile = " + apkfile)
+            #man.download_apk(appPath)
+            starttime = datetime.datetime.now()
+            format2 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+            sheet.write(rows, 2, starttime, format2)
             # all the relevant stuff should happen here
             #######
-            sheet.write(rows, 3, datetime.datetime.now().timestamp())
-            sheet.write(rows, 4, "=D"+str(rows+1)+"-C"+str(rows+1))
+            man.write_json_data(data, id_app)
+            print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + apkfile)
+            #os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + apkfile)
+            format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+            endtime = datetime.datetime.now()
+            sheet.write(rows, 3, endtime, format3)
+            format4 = workbook.add_format({'num_format': 'mm:ss'})
+            sheet.write(rows, 4, "=D"+str(rows+1)+"-C"+str(rows+1), format4)
             sheet.write(rows, 5, data["nodes"]["meta"]["data"]["name"])
             sheet.write(rows, 6, data["nodes"]["meta"]["data"]["package"])
             sheet.write(rows, 7, data["nodes"]["meta"]["data"]["store"]["stats"]["downloads"])

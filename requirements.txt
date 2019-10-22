@@ -3,3 +3,4 @@ pymysql
 flasgger
 tqdm
 xmindparser
+XlsxWriter
