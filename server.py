@@ -122,9 +122,9 @@ def apkvullevel(id):
 
 
 
-@app.route('/vulnerabilities/sort/<id>', methods=['GET'])
+@app.route('/vulnerabilities', methods=['GET'])
 @swag_from('./docs/apkmonthlevels.yml')
-def apkmonthlevels(id):
+def apkmonthlevels():
     log.debug("REQUEST TO GET VULNERABILITIES LEVEL BY MONTH")
     info=0
     notice=0
@@ -132,12 +132,11 @@ def apkmonthlevels(id):
     critical=0
     data={}
 
+    id = request.args.get('sort')
     if int(id) not in range(3, 13):
-        return jsonify({'status': False, 'message': 'id between 3 and 12'}), 500, {'Access-Control-Allow-Origin':'*'}
+        return jsonify({'status': False, 'message': 'sort value must be between 3 and 12'}), 500, {'Access-Control-Allow-Origin':'*'}
     else:
-
         results_data = db.get_apk_month_level(id)
-
         if results_data:
             for x in results_data:
                 month = time.strftime('%B', time.struct_time((0,x['created_at'].month,0,)+(0,)*6))
