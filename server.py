@@ -173,11 +173,10 @@ def apkmonthlevels():
                         {'Critical': critical}]
                 })
 
+                data = {'status': 'OK', 'info': data_month['info']}
 
-                data={'status': 'OK', 'info': data_month['info']}
-
-            json_data = json.dumps(data)
-            return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+            #json_data = json.dumps(data)
+            return jsonify({'status': True, 'results_history': results_data, 'results': data}), 200, {'Access-Control-Allow-Origin':'*'}
         else:
             return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
@@ -245,12 +244,10 @@ def allapksvulnlevels():
             {'level': 'Critical',
             'value': critical}]
 
+        data = {'status': 'OK', 'list': data_list['list']}
 
-        data = {'status' : 'OK', 'list': data_list['list']}
-
-
-        json_data = json.dumps(data)
-        return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+        #json_data = json.dumps(data)
+        return jsonify({'status': True, 'results_history': results_data, 'results': data}), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
@@ -258,21 +255,22 @@ def allapksvulnlevels():
 @swag_from('./docs/apkslist.yml')
 def apkslist():
     log.debug("REQUEST TO GET APKS LIST INFORMATION")
-    info=0
-    notice=0
-    warning=0
-    critical=0
-    data_list={}
+    info = 0
+    notice = 0
+    warning = 0
+    critical = 0
+    data_list = {}
     data_list['apkslistinfo'] = []
-    data={}
-
+    data = {}
 
     results_data = db.get_all_apk_levels()
 
     if results_data:
         for x in results_data:
             file = open(x['results_location'])
+            print("File to open: " + x['results_location'])
             json_data = json.load(file)
+            print("JSON data: " + str(json_data))
 
             for p in json_data['vulnerabilities']:
                 if 'Notice' in p['severity']:
@@ -287,17 +285,16 @@ def apkslist():
 
             data_list['apkslistinfo'].append({
                 'apk_md5': x['md5'],
-                'vulnerability_levels':[{'Info': info},
+                'vulnerability_levels': [{'Info': info},
                                         {'Notice': notice},
                                         {'Warning': warning},
                                         {'Critical': critical}],
                 'download': '23456',
                 'rating': '5'
             })
-        data = {'status': 'OK', 'list': data_list['apkslistinfo']}
 
-        json_data = json.dumps(data)
-        return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+        data = {'status': 'OK', 'list': data_list['apkslistinfo']}
+        return jsonify({'status': True, 'results_history': results_data, 'results': data}), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 

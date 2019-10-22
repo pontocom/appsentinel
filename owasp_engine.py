@@ -4,7 +4,6 @@ import database as db
 import os
 
 
-
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -28,6 +27,7 @@ def startEngine(md5):
     feedback_levels(md5)
     feedback_vulnerability_levels(md5)
 
+
 def feedback(md5):
     data={}
     owasp_category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
@@ -35,6 +35,7 @@ def feedback(md5):
        data[o]= []
     for name in plugins_name:
         with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
+            print("OEngine: Reading -> " + jsonResultsLocation + '/' + name + '/' + md5 + '.json')
             read_data = json.load(plugin_output)
         with open(dictionaryAndrobugs, 'r') as d:
             dict = json.load(d)
@@ -56,7 +57,7 @@ def feedback(md5):
                                      {"book": y["video"]},
                                      {"other": "Nothing to show"}]
                             })
-                            break;
+                            break
     for name in plugins_name_sorted:
         with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
             read_data = json.load(plugin_output)

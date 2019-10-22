@@ -349,14 +349,13 @@ class PluginClass:
         json_file.write("}")
         # json_file.write("}")
 
-    def build_scan_format(self,md5):
+    def build_scan_format(self, md5):
+        print("plugin_Androbugs: trying to read " + jsonResultsLocation + md5 + ".txt")
         with open(jsonResultsLocation + md5 + ".txt", "r") as json_file:
             read_content = json.load(json_file)
 
-
         data = {}
-        data['results']=[]
-
+        data['results'] = []
 
         #data_vuln_level ={}
         #data_vuln_level['vulnerabilities&level'] = []
@@ -375,7 +374,7 @@ class PluginClass:
                 'details': x['details'],
                 'severity': x['level'],
                 'detectedby': 'Androbugs',
-                'feedback': [{ "url": "Nothing to show"},
+                'feedback': [{"url": "Nothing to show"},
                              {"video": "Nothing to show"},
                              {"book": "Nothing to show"},
                              {"other": "Nothing to show"}]
