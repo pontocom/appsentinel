@@ -282,7 +282,7 @@ def apkslist():
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
-@app.route('/feedback/getrules/', methods=['GET'])
+@app.route('/feedback/rules/', methods=['GET'])
 @swag_from('./docs/getrules.yml')
 def getrules():
     log.debug("REQUEST TO GET RULES INFORMATION")
@@ -310,7 +310,7 @@ def getrules():
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
-@app.route('/feedback/updaterules/', methods=['PUT'])
+@app.route('/feedback/rules/', methods=['PUT'])
 @swag_from('./docs/updaterules.yml')
 def updaterules():
     log.debug("UPDATE RULES INFORMATION")

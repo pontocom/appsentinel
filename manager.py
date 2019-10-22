@@ -26,11 +26,11 @@ def download_apk(which_apk):
         os.system("mkdir " + dir)
 
     # write the file to the filesystem
-    a = urlparse(appPath)
+    a = urlparse(which_apk)
     filename = dir + "/" + os.path.basename(a.path)
 
     # Streaming, so we can iterate over the response.
-    r = requests.get(appPath, stream=True)
+    r = requests.get(which_apk, stream=True)
 
     # Total size in bytes.
     total_size = int(r.headers.get('content-length', 0))
