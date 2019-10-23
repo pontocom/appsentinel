@@ -403,7 +403,7 @@ class PluginClass:
         #})
 
 
-        with open(jsonResultsLocation + md5 + ".json", "a") as save_file:
+        with open(jsonResultsLocation + md5 + ".json", "w") as save_file:
             json.dump(data, save_file)
 
         #with open(jsonResultsLocationVulnLevel + md5 + ".json", "a") as save_file:

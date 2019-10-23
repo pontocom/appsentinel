@@ -12,20 +12,28 @@ plugins_name ={'Androbugs'}
 plugins_name_sorted={'DroidStatX'}
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
+resultsOWASP = config['OWASP_OUTPUT']['owasp_OutputLocation']
+resultsFeedback =config['OWASP_OUTPUT']['feedbackResultsLocation']
+resultsFeedbackLevels = config['OWASP_OUTPUT']['feedback_levelsResultsLocation']
+resultsFeedbackVulnerabilityLevels = config['OWASP_OUTPUT']['feedback_vuln_levelsResultsLocation']
 
-resultsFeedback = './json_results/Final_Output/feedback/'
-
-resultsFeedbackLevels = './json_results/Final_Output/feedback_levels/'
-
-resultsFeedbackVulnerabilityLevels = './json_results/Final_Output/feedback_vulnerability_levels/'
-
-dictionaryAndrobugs = './dictionaries/androbugs_dict.json'
-
+dictionaryAndrobugs = config['DICTIONARY']['androbugsDict']
 
 def startEngine(md5):
+    init()
     feedback(md5)
     feedback_levels(md5)
     feedback_vulnerability_levels(md5)
+
+def init():
+    if not os.path.exists(resultsOWASP):
+        os.system("mkdir " + resultsOWASP)
+    if not os.path.exists(resultsFeedback):
+        os.system("mkdir " + resultsFeedback)
+    if not os.path.exists(resultsFeedbackLevels):
+        os.system("mkdir " + resultsFeedbackLevels)
+    if not os.path.exists(resultsFeedbackVulnerabilityLevels):
+        os.system("mkdir " + resultsFeedbackVulnerabilityLevels)
 
 
 def feedback(md5):
@@ -73,15 +81,14 @@ def feedback(md5):
                                          {"book": "Nothing to show"},
                                          {"other": "Nothing to show"}]
                                 })
-    if not os.path.exists(resultsFeedback):
-            os.system("mkdir " + resultsFeedback)
-    with open('./json_results/Final_Output/feedback/'+md5+'.json', 'w') as f:
+
+    with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
         json.dump(data, f)
-    db.insert_final_results(md5, './json_results/Final_Output/feedback/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    db.insert_final_results(md5, resultsFeedback + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
 
 
 def feedback_levels(md5):
-    with open(resultsFeedback + md5 + ".json", "r") as json_file:
+    with open(resultsFeedback +'/'+ md5 + ".json", "r") as json_file:
         read_content = json.load(json_file)
     data_apk_levels = {}
     data_apk_levels['value'] = []
@@ -113,14 +120,12 @@ def feedback_levels(md5):
 
     data = {'status': 'OK', 'value': '0,5'}
 
-    if not os.path.exists(resultsFeedbackLevels):
-            os.system("mkdir " + resultsFeedbackLevels)
-    with open(resultsFeedbackLevels + md5 + ".json", "a") as save_file:
+    with open(resultsFeedbackLevels +'/'+ md5 + ".json", "a") as save_file:
         json.dump(data, save_file)
-    db.insert_results_levels(md5, resultsFeedbackLevels + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
 
 def feedback_vulnerability_levels(md5):
-    with open(resultsFeedback + md5 + ".json", "r") as json_file:
+    with open(resultsFeedback + '/' + md5 + ".json", "r") as json_file:
         read_content = json.load(json_file)
     data_vuln_level ={}
     data_vuln_level['vulnerabilities'] = []
@@ -137,8 +142,7 @@ def feedback_vulnerability_levels(md5):
             })
 
     data = {'status':'OK', 'vulnerabilities': data_vuln_level['vulnerabilities']}
-    if not os.path.exists(resultsFeedbackVulnerabilityLevels):
-            os.system("mkdir " + resultsFeedbackVulnerabilityLevels)
-    with open(resultsFeedbackVulnerabilityLevels + md5 + ".json", "a") as save_file:
+
+    with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "a") as save_file:
         json.dump(data, save_file)
-    db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
