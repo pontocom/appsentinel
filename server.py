@@ -92,7 +92,24 @@ def apkfeedback(id):
                 print(results_data[0]['results_location'])
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
-                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+
+                # OWASP_category=['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10']
+                # data = {}
+                # for m_level in OWASP_category:
+                #     data = data + {m_level : json_data[m_level]}
+
+                data = {'status': 'OK', 
+                'M1': json_data['M1'], 
+                'M2': json_data['M2'],
+                'M3': json_data['M3'],
+                'M4': json_data['M4'],
+                'M5': json_data['M5'],
+                'M6': json_data['M6'],
+                'M7': json_data['M7'],
+                'M8': json_data['M8'],
+                'M9': json_data['M9'],
+                'M10': json_data['M10']}
+                return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
         else:
@@ -114,7 +131,8 @@ def apkvullevel(id):
                 print(results_data[0]['results_location'])
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
-                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+                data = {'status': 'OK', 'vulnerabilities': json_data['vulnerabilities']}
+                return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
         else:
@@ -176,7 +194,7 @@ def apkmonthlevels():
                 data = {'status': 'OK', 'info': data_month['info']}
 
             #json_data = json.dumps(data)
-            return jsonify({'status': True, 'results_history': results_data, 'results': data}), 200, {'Access-Control-Allow-Origin':'*'}
+            return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
         else:
             return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
@@ -196,7 +214,8 @@ def apklevels(id):
                 print(results_data[0]['results_location'])
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
-                return jsonify({'status': True, 'results_history': results_data, 'results': json_data}), 200, {'Access-Control-Allow-Origin':'*'}
+                data={'status':'OK', 'value': 0.5}
+                return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
         else:
@@ -247,7 +266,7 @@ def allapksvulnlevels():
         data = {'status': 'OK', 'list': data_list['list']}
 
         #json_data = json.dumps(data)
-        return jsonify({'status': True, 'results_history': results_data, 'results': data}), 200, {'Access-Control-Allow-Origin':'*'}
+        return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
@@ -294,7 +313,7 @@ def apkslist():
             })
 
         data = {'status': 'OK', 'list': data_list['apkslistinfo']}
-        return jsonify({'status': True, 'results_history': results_data, 'results': data}), 200, {'Access-Control-Allow-Origin':'*'}
+        return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
@@ -310,6 +329,7 @@ def getrules():
     if results_data:
         for row in results_data:
             data['rules'] = ({
+                'status': 'OK',
                 'vulnerability_levels':[{
                     'info': row['info'],
                     'notice': row['notice'],
@@ -322,7 +342,7 @@ def getrules():
                 'severity_levels': row['severity_levels'],
                 'email_template': row['email_template']
             })
-        return jsonify({'status': True, 'rules': results_data}), 200, {'Access-Control-Allow-Origin':'*'}
+        return jsonify(data['rules']), 200, {'Access-Control-Allow-Origin':'*'}
     else:
         return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
 
