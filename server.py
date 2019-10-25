@@ -10,7 +10,7 @@ from flasgger.utils import swag_from
 import json
 import logging as log
 import configparser
-from datetime import datetime
+import datetime
 import time
 
 config = configparser.ConfigParser()
@@ -109,6 +109,7 @@ def apkfeedback(id):
                 'M8': json_data['M8'],
                 'M9': json_data['M9'],
                 'M10': json_data['M10']}
+
                 return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
@@ -150,11 +151,24 @@ def apkmonthlevels():
     critical=0
     data={}
     data_month={}
+    lista=[]
+    month_list={}
+    
 
     id = request.args.get('sort')
     if int(id) not in range(3, 13):
         return jsonify({'status': False, 'message': 'sort value must be between 3 and 12'}), 500, {'Access-Control-Allow-Origin':'*'}
+    
     else:
+
+        now = datetime.datetime.now()
+        for number in range(0,int(id)):
+            month = datetime.date(now.year,abs(now.month-number),now.day).strftime('%B')
+            lista.append(month)
+            month_list[month]=False
+            #print(month_list)
+        
+
         results_data = db.get_apk_month_level(id)
         if results_data:
             for x in results_data:
@@ -162,7 +176,13 @@ def apkmonthlevels():
                 print(month)
                 file = open(x['results_location'])
                 json_data = json.load(file)
-
+                month_list[month]=True
+                #print(month)
+                print(lista)
+                try:
+                    lista.remove(month)
+                except:
+                    pass
                 for p in json_data['vulnerabilities']:
                     if 'Info' in p['severity']:
                         info += 1
@@ -194,6 +214,16 @@ def apkmonthlevels():
                 data = {'status': 'OK', 'info': data_month['info']}
 
             #json_data = json.dumps(data)
+            for empty_values in lista:
+                data_month['info'].append({
+                    'month': empty_values,
+                    'values': [
+                        {'Info': 0},
+                        {'Notice': 0},
+                        {'Warning': 0},
+                        {'Critical': 0}]
+                })
+            print(month_list)
             return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
         else:
             return jsonify({'status': False, 'message': 'Error'}), 500, {'Access-Control-Allow-Origin':'*'}
