@@ -168,7 +168,7 @@ def apkmonthlevels():
             else:
                 month = datetime.date(now.year,abs(now.month-number),now.day).strftime('%B')
             month_list.append(month)
-            month_list[month]=False
+
 
         
 
@@ -179,7 +179,7 @@ def apkmonthlevels():
 
                 file = open(x['results_location'])
                 json_data = json.load(file)
-                month_list[month]=True
+
 
                 try:
                     month_list.remove(month)
