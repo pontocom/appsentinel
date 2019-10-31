@@ -2824,7 +2824,7 @@ Related Cases: (1)http://blog.curesec.com/article/blog/35.html
 	if list_alerting_exposing_components_NonGoogle or list_alerting_exposing_components_Google :
 		if list_alerting_exposing_components_NonGoogle:
 			writer.startWriter("PERMISSION_EXPORTED", LEVEL_WARNING, "AndroidManifest Exported Components Checking",
-				"""Found "exported" components(except for Launcher) for receiving outside applications' actions (AndroidManifest.xml). 
+				"""Found "exported" components(except for Launcher) for receiving outside applications actions (AndroidManifest.xml). 
 These components can be initilized by other apps. You should add or modify the attribute to [exported="false"] if you don't want to. 
 You can also protect it with a customized permission with "signature" or higher protectionLevel and specify in "android:permission" attribute.""")
 
