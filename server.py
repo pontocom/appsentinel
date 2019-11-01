@@ -247,8 +247,11 @@ def apklevels(id):
                 print(results_data[0]['results_location'])
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
+
                 value = calculator.caclculate(id)
                 data={'status':'OK', 'value': value}
+
+                # data={'status':'OK', 'value':0.5}
                 return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
