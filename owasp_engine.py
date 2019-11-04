@@ -120,7 +120,7 @@ def feedback_levels(md5):
 
     data = {'status': 'OK', 'value': '0,5'}
 
-    with open(resultsFeedbackLevels +'/'+ md5 + ".json", "a") as save_file:
+    with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
     db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
 
@@ -143,6 +143,6 @@ def feedback_vulnerability_levels(md5):
 
     data = {'status':'OK', 'vulnerabilities': data_vuln_level['vulnerabilities']}
 
-    with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "a") as save_file:
+    with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
     db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
