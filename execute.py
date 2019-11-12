@@ -43,7 +43,7 @@ def run_sequence_tests():
             print("appPath = " + appPath)
             apkfile = appPath[appPath.rfind("/") + 1:]
             print("apkFile = " + apkfile)
-            #man.download_apk(appPath)
+            man.download_apk(appPath)
             starttime = datetime.datetime.now()
             format2 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
             sheet.write(rows, 2, starttime, format2)
@@ -51,7 +51,7 @@ def run_sequence_tests():
             #######
             man.write_json_data(data, id_app)
             print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + apkfile)
-            #os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + apkfile)
+            os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + apkfile)
             format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
             endtime = datetime.datetime.now()
             sheet.write(rows, 3, endtime, format3)
