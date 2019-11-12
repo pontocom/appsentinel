@@ -1,6 +1,8 @@
+requests
 Flask
 pymysql
 flasgger
 tqdm
 xmindparser
 XlsxWriter
+bs4
