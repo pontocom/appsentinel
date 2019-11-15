@@ -1,4 +1,6 @@
 import requests
+import xlsxwriter
+import datetime
 from bs4 import BeautifulSoup
 import manager as man
 import configparser
@@ -11,45 +13,95 @@ dir = config['DOWNLOAD']['apkDownloadDir']
 
 DEFAULT_URL = "https://en.aptoide.com/group/applications"
 
-print("Starting web scrapping of Aptoide web site.... :-)")
-print("... getting stuff from ->" + DEFAULT_URL)
-response = requests.get(DEFAULT_URL)
-html = BeautifulSoup(response.text, 'html.parser')
+workbook = xlsxwriter.Workbook("./tests/testResults-init.xlsx")
 
-print("Extracting categories...")
-categories = html.find_all(class_="aptweb-button aptweb-button--see-more")
+'''
+A tool to scan APKs and look for vulnerabilities
+'''
+if __name__ == "__main__":
+    print("Starting web scrapping of Aptoide web site.... :-)")
+    print("... getting stuff from ->" + DEFAULT_URL)
+    response = requests.get(DEFAULT_URL)
+    html = BeautifulSoup(response.text, 'html.parser')
 
-for category in categories:
-    category_location = category.find("a")['href']
-    print("Entering -> " + category_location)
+    vars = ["#", "MD5", "Download Start", "Download End", "Duration", "Name", "Package", "Category", "Downloads",
+            "APK Size",
+            "Version Name", "Version Code"]
+    sheet = workbook.add_worksheet("Results - Sequence")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
 
-    category_page_response = requests.get(category_location)
-    category_page_html = BeautifulSoup(category_page_response.text, 'html.parser')
+    count = 0
+    rows = 1
 
-    # bundle = category_page_html.find_all(class_="bundle")
-    cat_button_more_location = category_page_html.find_all(class_="bundle")[2].find(class_="aptweb-button aptweb-button--see-more").find("a")['href']
-    print("Now getting -> " + cat_button_more_location)
+    print("Extracting categories...")
+    categories = html.find_all(class_="aptweb-button aptweb-button--see-more")
 
-    apps_page_response = requests.get(cat_button_more_location)
-    apps_page_html = BeautifulSoup(apps_page_response.text, 'html.parser')
+    for category in categories:
+        category_location = category.find("a")['href']
+        print("Entering -> " + category_location)
 
-    apps_html = apps_page_html.find_all(class_="bundle-item__info__span bundle-item__info__span--big")
+        category_page_response = requests.get(category_location)
+        category_page_html = BeautifulSoup(category_page_response.text, 'html.parser')
 
-    for app in apps_html:
-        if app.find("a") != "None":
-            app_location = app.find("a")['href']
+        category_name = category_page_html.find("h1").text.strip()
+        print(category_name)
 
-            # print("Entering App Page -> " + app_location)
+        # bundle = category_page_html.find_all(class_="bundle")
+        cat_button_more_location = category_page_html.find_all(class_="bundle")[2].find(class_="aptweb-button aptweb-button--see-more").find("a")['href']
+        print("Now getting -> " + cat_button_more_location)
 
-            app_page_response = requests.get(app_location)
-            if app_page_response:
-                app_page_html = BeautifulSoup(app_page_response.text, 'html.parser')
+        apps_page_response = requests.get(cat_button_more_location)
+        apps_page_html = BeautifulSoup(apps_page_response.text, 'html.parser')
 
-                info_table = app_page_html.find_all(class_="app-info__row")
-                print("[" + info_table[0].find_all("td")[1].get_text() + " : " + info_table[8].find_all("td")[1].get_text() + "]")
-                id_app = info_table[8].find_all("td")[1].get_text()
+        apps_html = apps_page_html.find_all(class_="bundle-item__info__span bundle-item__info__span--big")
 
-                # download the APK to local temp dir
-                data = man.get_json_data(id_app)
-                appPath = data["nodes"]["meta"]["data"]["file"]["path"]
-                man.download_apk(appPath)
+        for app in apps_html:
+            if app.find("a") != "None":
+                app_location = app.find("a")['href']
+
+                # print("Entering App Page -> " + app_location)
+
+                app_page_response = requests.get(app_location)
+                if app_page_response:
+                    app_page_html = BeautifulSoup(app_page_response.text, 'html.parser')
+
+                    info_table = app_page_html.find_all(class_="app-info__row")
+                    print("[" + category_name + "][" + info_table[0].find_all("td")[1].get_text() + " : " + info_table[8].find_all("td")[
+                        1].get_text() + "]")
+                    id_app = info_table[8].find_all("td")[1].get_text()
+
+                    # download the APK to local temp dir
+                    data = man.get_json_data(id_app)
+
+                    count = count + 1
+                    sheet.write(rows, 0, count)
+                    sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
+                    starttime = datetime.datetime.now()
+                    print("start = " + str(starttime))
+                    format2 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+                    sheet.write(rows, 2, starttime, format2)
+
+                    appPath = data["nodes"]["meta"]["data"]["file"]["path"]
+                    man.download_apk(appPath)
+
+                    format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+                    endtime = datetime.datetime.now()
+                    print("start = " + str(starttime))
+                    sheet.write(rows, 3, endtime, format3)
+                    format4 = workbook.add_format({'num_format': 'mm:ss'})
+                    sheet.write(rows, 4, "=D" + str(rows + 1) + "-C" + str(rows + 1), format4)
+                    sheet.write(rows, 5, category_name)
+                    sheet.write(rows, 6, data["nodes"]["meta"]["data"]["name"])
+                    sheet.write(rows, 7, data["nodes"]["meta"]["data"]["package"])
+                    sheet.write(rows, 8, data["nodes"]["meta"]["data"]["store"]["stats"]["downloads"])
+                    sheet.write(rows, 9, data["nodes"]["meta"]["data"]["size"])
+                    sheet.write(rows, 10, data["nodes"]["meta"]["data"]["file"]["vername"])
+                    sheet.write(rows, 11, data["nodes"]["meta"]["data"]["file"]["vercode"])
+                    rows = rows + 1
+
+    workbook.close()
