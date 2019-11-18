@@ -1,7 +1,8 @@
 import configparser
 import json
-import database as db
+
 import os
+import databaseMG as dbMG
 
 
 config = configparser.ConfigParser()
@@ -20,20 +21,20 @@ resultsFeedbackVulnerabilityLevels = config['OWASP_OUTPUT']['feedback_vuln_level
 dictionaryAndrobugs = config['DICTIONARY']['androbugsDict']
 
 def startEngine(md5):
-    init()
+
     feedback(md5)
     feedback_levels(md5)
     feedback_vulnerability_levels(md5)
 
-def init():
-    if not os.path.exists(resultsOWASP):
-        os.system("mkdir " + resultsOWASP)
-    if not os.path.exists(resultsFeedback):
-        os.system("mkdir " + resultsFeedback)
-    if not os.path.exists(resultsFeedbackLevels):
-        os.system("mkdir " + resultsFeedbackLevels)
-    if not os.path.exists(resultsFeedbackVulnerabilityLevels):
-        os.system("mkdir " + resultsFeedbackVulnerabilityLevels)
+#def init():
+    # if not os.path.exists(resultsOWASP):
+    #     os.system("mkdir " + resultsOWASP)
+    # if not os.path.exists(resultsFeedback):
+    #     os.system("mkdir " + resultsFeedback)
+    # if not os.path.exists(resultsFeedbackLevels):
+    #     os.system("mkdir " + resultsFeedbackLevels)
+    # if not os.path.exists(resultsFeedbackVulnerabilityLevels):
+    #     os.system("mkdir " + resultsFeedbackVulnerabilityLevels)
 
 
 def feedback(md5):
@@ -42,12 +43,14 @@ def feedback(md5):
     for o in owasp_category:
        data[o]= []
     for name in plugins_name:
-        with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
-            print("OEngine: Reading -> " + jsonResultsLocation + '/' + name + '/' + md5 + '.json')
-            read_data = json.load(plugin_output)
+        #with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
+            #print("OEngine: Reading -> " + jsonResultsLocation + '/' + name + '/' + md5 + '.json')
+            #read_data = json.load(plugin_output)
+        read = dbMG.get_apk_results_by_tool(md5, name)
+        json_data = read[0]['results']
         with open(dictionaryAndrobugs, 'r') as d:
             dict = json.load(d)
-        for x in read_data['results']:
+        for x in json_data:
              for z in owasp_category:
                  for y in dict['results']:
 
@@ -67,10 +70,13 @@ def feedback(md5):
                             })
                             break
     for name in plugins_name_sorted:
-        with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
-            read_data = json.load(plugin_output)
+        # with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
+        #     read_data = json.load(plugin_output)
+        read = dbMG.get_apk_results_by_tool(md5, name)
+        json_data = read[0]['results']
         for category in owasp_category:
-            for x in read_data[category]:
+            for x in json_data[category]:
+
                 data[category].append({
                                     'vulnerability': x['vulnerability'],
                                     'details': x['details'],
@@ -82,17 +88,24 @@ def feedback(md5):
                                          {"other": "Nothing to show"}]
                                 })
 
-    with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
-        json.dump(data, f)
-    db.insert_final_results(md5, resultsFeedback + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    # with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
+    #     json.dump(data, f)
+    dbMG.insert_final_results(md5, data, 0)
+    # dataJson = json.dumps(data)
+    # db.insert_final_results(md5, resultsFeedback + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+
+    #db.insert_apkexample(md5, dataJson, 0, "NOT YET IN THE FINAL FORMAT")
 
 
 def feedback_levels(md5):
-    with open(resultsFeedback +'/'+ md5 + ".json", "r") as json_file:
-        read_content = json.load(json_file)
+    # with open(resultsFeedback +'/'+ md5 + ".json", "r") as json_file:
+    #     read_content = json.load(json_file)
     data_apk_levels = {}
     data_apk_levels['value'] = []
     data = {}
+
+    read = dbMG.get_apk_finalresults(md5)
+    json_data = read[0]['results']
     
     info = 0
     notice = 0
@@ -101,7 +114,7 @@ def feedback_levels(md5):
 
     category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
     for c in category:
-        for x in read_content[c]:
+        for x in json_data[c]:
             if 'Info' in x['severity']:
                 info += 1
             if 'Notice' in x['severity']:
@@ -120,22 +133,26 @@ def feedback_levels(md5):
 
     data = {'status': 'OK', 'value': '0,5'}
 
-    with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
-        json.dump(data, save_file)
-    db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    # with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
+    #     json.dump(data, save_file)
+    # db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    dbMG.insert_results_levels(md5, data, 0)
 
 def feedback_vulnerability_levels(md5):
-    with open(resultsFeedback + '/' + md5 + ".json", "r") as json_file:
-        read_content = json.load(json_file)
+    # with open(resultsFeedback + '/' + md5 + ".json", "r") as json_file:
+    #     read_content = json.load(json_file)
     data_vuln_level ={}
     data_vuln_level['vulnerabilities'] = []
 
     data={}
 
+    read = dbMG.get_apk_finalresults(md5)
+    json_data = read[0]['results']
+
     category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
 
     for c in category:
-        for x in read_content[c]:
+        for x in json_data[c]:
             data_vuln_level['vulnerabilities'].append({
                 'vulnerability': x['vulnerability'],
                 'severity': x['severity'],
@@ -143,6 +160,7 @@ def feedback_vulnerability_levels(md5):
 
     data = {'status':'OK', 'vulnerabilities': data_vuln_level['vulnerabilities']}
 
-    with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "w") as save_file:
-        json.dump(data, save_file)
-    db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    # with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "w") as save_file:
+    #     json.dump(data, save_file)
+    # db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    dbMG.insert_results_vulnerabilitylevel(md5, data, 0)

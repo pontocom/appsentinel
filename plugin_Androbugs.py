@@ -1,10 +1,11 @@
 # Plugin to handle the tools capable of setting the input for "DroidstatX" and handle the output
 import os
-import database as db
+
 import configparser
 import logging as log
 import linecache
 import json
+import databaseMG as dbMG
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -351,24 +352,15 @@ class PluginClass:
 
     def build_scan_format(self, md5):
         print("plugin_Androbugs: trying to read " + jsonResultsLocation + md5 + ".txt")
-        with open(jsonResultsLocation + md5 + ".txt", "r") as json_file:
-            read_content = json.load(json_file)
-
+        #with open(jsonResultsLocation + md5 + ".txt", "r") as json_file:
+        #    read_content = json.load(json_file)
+        read_content = dbMG.get_temporary_results_by_tool(md5,pluginName)[0]
+    
+        #json_content = json.dumps(read_content)
         data = {}
         data['results'] = []
 
-        #data_vuln_level ={}
-        #data_vuln_level['vulnerabilities&level'] = []
-
-        #data_level_for_apk = {}
-        #data_level_for_apk['levelsForApk'] = []
-
-        #info = 0
-        #notice = 0
-        #warning = 0
-        #critical = 0
-
-        for x in read_content:
+        for x in read_content['results']:
             data['results'].append({
                 'vulnerability': x['vulnerability'],
                 'details': x['details'],
@@ -380,37 +372,11 @@ class PluginClass:
                              {"other": "Nothing to show"}]
             })
 
-            #data_vuln_level['vulnerabilities&level'].append({
-            #    'vulnerability': x['tag'],
-            #    'severity': x['level'],
-            #})
+        # with open(jsonResultsLocation + md5 + ".json", "w") as save_file:
+        #     json.dump(data, save_file)
 
-            #if 'Info' in x['level']:
-            #    info += 1
-            #if 'Notice' in x['level']:
-            #    notice += 1
-            #if 'Warning' in x['level']:
-            #    warning += 1
-            #if 'Critical' in x['level']:
-            #    critical += 1
-
-
-        #data_level_for_apk['levelsForApk']=({
-        #    'Info':info,
-        #    'Notice': notice,
-        #    'Warning': warning,
-        #    'Critical': critical
-        #})
-
-
-        with open(jsonResultsLocation + md5 + ".json", "w") as save_file:
-            json.dump(data, save_file)
-
-        #with open(jsonResultsLocationVulnLevel + md5 + ".json", "a") as save_file:
-        #    json.dump(data_vuln_level, save_file)
-
-        #with open(jsonResultsLocationLevels + md5 + ".json", "a") as save_file:
-        #    json.dump(data_level_for_apk, save_file)
+        dbMG.insert_results(md5, pluginName, data['results'], 0)
+        dbMG.delete_temporary_results(md5, pluginName)
 
     def run(self, apk_file, md5):
         print(pluginName + ": Running the Androbugs plugin!...")
@@ -439,7 +405,8 @@ class PluginClass:
             #self.convert_to_new_json(md5)
             self.build_scan_format(md5)
             # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+            #db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+
             # add vulnerability and level information to database
             #db.insert_results_vullevel(md5, pluginName, jsonResultsLocationVulnLevel + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
             # add level information to database

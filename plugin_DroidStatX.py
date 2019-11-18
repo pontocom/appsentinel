@@ -1,10 +1,11 @@
 # Plugin to handle the tools capable of setting the input for "DroidstatX" and handle the output
 import os
-import database as db
+
 import subprocess
 import configparser
 import logging as log
 import json
+import databaseMG as dbMG
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -28,8 +29,8 @@ class PluginClass:
         print("Running the DroidStatX plugin!...")
         log.debug("Running the DroidStatX plugin!...")
         # test the existence of the results directory
-        if not os.path.exists(jsonResultsLocation):
-            os.system("mkdir " + jsonResultsLocation)
+        # if not os.path.exists(jsonResultsLocation):
+        #     os.system("mkdir " + jsonResultsLocation)
 
         print(pluginName + ": FILE -> " + apk_file)
         log.debug(pluginName + ": FILE -> " + apk_file)
@@ -54,13 +55,19 @@ class PluginClass:
             # move the json results to proper folder
             print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
             log.debug(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
-            os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            #os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+            # insert data to DB
+            results_location = droidStatXLocation + "output_xmind/" + apkPackageName + ".json"
+            with open (results_location, 'r') as read_data:
+                results = json.load(read_data)
+                dbMG.insert_temporary_results_by_tool(md5, pluginName, results)
+                os.system("rm " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json")
 
             self.analyseVulnerability(md5)
 
 
             # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
+            #db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
 
 
 
@@ -70,8 +77,9 @@ class PluginClass:
         m_aux_array= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
         for level in m_aux_array:
             output[level] = []
-        with open(jsonResultsLocation + md5 + '.json', 'r') as f:
-            read_data = json.load(f)
+        #with open(jsonResultsLocation + md5 + '.json', 'r') as f:
+             #read_data = json.load(f)
+        read_data = dbMG.get_temporary_results_by_tool(md5, pluginName)[0]['results']
         data = read_data[0]
         methodology = data['topic']['topics'][1]['topics']
 
@@ -118,9 +126,11 @@ class PluginClass:
                             'details' : _details,
                             'detectedby': 'droidstatx'})
 
-        with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
-            json.dump(output, outfile)
+        # with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
+        #     json.dump(output, outfile)
 
+        dbMG.insert_results(md5, pluginName, output, 0)
+        dbMG.delete_temporary_results(md5, pluginName)
 
     # set the current OWASP M level
     def owasp_level(self, argument):

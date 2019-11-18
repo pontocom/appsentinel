@@ -23,6 +23,8 @@ import platform
 import imp
 import sys
 import json
+from pymongo import MongoClient
+
 
 """
 	*****************************************************************************
@@ -3680,9 +3682,27 @@ def main() :
 
 
 	#build json file
-	with open(args.report_output_dir + args.md5file+".txt", 'w') as write_file:
-		json.dump(writer.get_Output(), write_file )
+	#with open(args.report_output_dir + args.md5file+".txt", 'w') as write_file:
+	#	json.dump(writer.get_Output(), write_file )
+	client = MongoClient('localhost',27017)
+	db = client['apkscanner']
+	apkresults = db.apktemporaryresults
+    # todo logs
+	md5 = args.md5file
+	output = writer.get_Output()
+	try:
+		data={
+			'md5': md5,
+			'tool':'Androbugs',
+			'results':output
+		}
 
+		apkresults.insert_one(data)
+		client.close()
+		print('inseriu os dados -----> Androbugs')
+	except:
+		print("AN ERROR OCCURED WHILE INSERTING DATA")
+       
 
 if __name__ == "__main__":
 	main()

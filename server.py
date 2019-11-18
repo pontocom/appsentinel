@@ -4,7 +4,7 @@ from flask import (
     request,
     Response
 )
-import database as db
+#import database as db
 from flasgger import Swagger
 from flasgger.utils import swag_from
 import json
@@ -13,6 +13,7 @@ import configparser
 import datetime
 import time
 import vulnCalculator as calculator
+import databaseMG as dbMG
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -66,14 +67,14 @@ def apkscan():
         md5Apk = data["md5"]
         log.debug("APK MD5 = " + md5Apk)
         # 1. add the apk to scan to the database
-        if db.apk_id_exists(md5Apk, 'apkresults'):
+        if dbMG.apk_id_exists(md5Apk, 'apkresults'):
             return jsonify({'status': False,
                             'message': 'That APK was previously processed and exists on the results database. Please check the results using the appropriate API call!'}), 200, {'Access-Control-Allow-Origin':'*'}
         else:
-            if db.apk_id_exists(md5Apk, 'apk2scan'):
+            if dbMG.apk_id_exists(md5Apk, 'apk2scan'):
                 return jsonify({'status': False, 'message': 'That APK is already in the pipeline to be processed... wait for the results!'}), 200, {'Access-Control-Allow-Origin':'*'}
             else:
-                db.insert_new_apk2scan(md5Apk)
+                dbMG.insert_new_apk2scan(md5Apk)
 
                 return jsonify({'status': True, 'message': 'APK was passed to the scanning engine... please hold on!'}), 200, {'Access-Control-Allow-Origin':'*'}
 
@@ -86,18 +87,13 @@ def apkfeedback(id):
     if not id:
         return jsonify({'status': False, 'message': 'No MD5 APK id was passed'}), 500, {'Access-Control-Allow-Origin':'*'}
     else:
-        results_data = db.get_apk_status(id)
+        results_data = dbMG.get_apk_status(id)
         if results_data:
             # we need to check the status...
             if results_data[0]['status'] != -1:
-                print(results_data[0]['results_location'])
-                file = open(results_data[0]['results_location'])
-                json_data = json.load(file)
+              
 
-                # OWASP_category=['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10']
-                # data = {}
-                # for m_level in OWASP_category:
-                #     data = data + {m_level : json_data[m_level]}
+                json_data = results_data[0]['results']
 
                 data = {'status': 'OK', 
                 'M1': json_data['M1'], 
@@ -126,13 +122,13 @@ def apkvullevel(id):
     if not id:
         return jsonify({'status': False, 'message': 'No MD5 APK id was passed'}), 500, {'Access-Control-Allow-Origin':'*'}
     else:
-        results_data = db.get_apk_vuln_level(id)
+       
+        results_data = dbMG.get_apk_vuln_level(id)
         if results_data:
             # we need to check the status...
             if results_data[0]['status'] != -1:
-                print(results_data[0]['results_location'])
-                file = open(results_data[0]['results_location'])
-                json_data = json.load(file)
+                
+                json_data = results_data[0]['results']
                 data = {'status': 'OK', 'vulnerabilities': json_data['vulnerabilities']}
                 return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
@@ -173,13 +169,16 @@ def apkmonthlevels():
 
         
 
-        results_data = db.get_apk_month_level(id)
+        #results_data = db.get_apk_month_level(id)
+        results_data = dbMG.get_apk_month_level(id)
+
         if results_data:
             for x in results_data:
+
                 month = time.strftime('%B', time.struct_time((0,x['created_at'].month,0,)+(0,)*6))
 
-                file = open(x['results_location'])
-                json_data = json.load(file)
+                #file = open(x['results_location'])
+                json_data = x['results']
 
 
                 try:
@@ -187,6 +186,7 @@ def apkmonthlevels():
                 except:
                     pass
                 for p in json_data['vulnerabilities']:
+
                     if 'Info' in p['severity']:
                         info += 1
                     if 'Notice' in p['severity']:
@@ -196,13 +196,13 @@ def apkmonthlevels():
                     if 'Critical' in p['severity']:
                         critical += 1
 
-                data_month[month] = []
-                data_month[month] = ({
-                    'Info': info,
-                    'Notice': notice,
-                    'Warning': warning,
-                    'Critical': critical
-                })
+               # data_month[month] = []
+               # data_month[month] = ({
+               #     'Info': info,
+               #     'Notice': notice,
+               #     'Warning': warning,
+               #     'Critical': critical
+               # })
 
                 data_month['info'] = []
                 data_month['info'].append({
@@ -214,7 +214,7 @@ def apkmonthlevels():
                         {'Critical': critical}]
                 })
 
-                data = {'status': 'OK', 'info': data_month['info']}
+
 
             #json_data = json.dumps(data)
             for empty_values in month_list:
@@ -226,6 +226,8 @@ def apkmonthlevels():
                         {'Warning': 0},
                         {'Critical': 0}]
                 })
+
+            data = {'status': 'OK', 'info': data_month['info']}
 
             return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
         else:
@@ -240,13 +242,12 @@ def apklevels(id):
     if not id:
         return jsonify({'status': False, 'message': 'No MD5 APK id was passed'}), 500, {'Access-Control-Allow-Origin':'*'}
     else:
-        results_data = db.get_apk_levels(id)
+        results_data = dbMG.get_apk_levels(id)
         if results_data:
             # we need to check the status...
             if results_data[0]['status'] != -1:
-                print(results_data[0]['results_location'])
-                file = open(results_data[0]['results_location'])
-                json_data = json.load(file)
+                
+                json_data = results_data[0]['results']
 
                 value = calculator.caclculate(id)
                 data={'status':'OK', 'value': value}
@@ -259,7 +260,7 @@ def apklevels(id):
             return jsonify({'status': False, 'message': 'APK work was not finished... please come back l8r!'}), 500, {'Access-Control-Allow-Origin':'*'}
 
 
-@app.route('/vulnerabilities/levels', methods=['GET'])
+@app.route('/vulnerabilities/levels/', methods=['GET'])
 @swag_from('./docs/allapksvulnlevels.yml')
 def allapksvulnlevels():
     log.debug("REQUEST TO GET APKS LIST INFORMATION")
@@ -271,12 +272,12 @@ def allapksvulnlevels():
     data_list={}
     data_list['list'] = []
 
-    results_data = db.get_all_apk_levels()
+    results_data = dbMG.get_all_apk_levels()
 
     if results_data:
         for x in results_data:
-            file = open(x['results_location'])
-            json_data = json.load(file)
+            
+            json_data = x['results']
 
             for p in json_data['vulnerabilities']:
                 if 'Info' in p['severity']:
@@ -311,22 +312,22 @@ def allapksvulnlevels():
 @swag_from('./docs/apkslist.yml')
 def apkslist():
     log.debug("REQUEST TO GET APKS LIST INFORMATION")
-    info = 0
-    notice = 0
-    warning = 0
-    critical = 0
+
     data_list = {}
     data_list['apkslistinfo'] = []
     data = {}
 
-    results_data = db.get_all_apk_levels()
+    results_data = dbMG.get_all_apk_levels()
 
     if results_data:
         for x in results_data:
-            file = open(x['results_location'])
-            print("File to open: " + x['results_location'])
-            json_data = json.load(file)
-            print("JSON data: " + str(json_data))
+            
+            json_data = x['results']
+
+            info = 0
+            notice = 0
+            warning = 0
+            critical = 0
 
             for p in json_data['vulnerabilities']:
                 if 'Notice' in p['severity']:
@@ -336,8 +337,7 @@ def apkslist():
                 if 'Critical' in p['severity']:
                     critical += 1
 
-            # to do download and rating
-            #'status': x['status'],
+
 
             data_list['apkslistinfo'].append({
                 'apk_md5': x['md5'],
@@ -349,6 +349,7 @@ def apkslist():
                 'rating': '5'
             })
 
+
         data = {'status': 'OK', 'list': data_list['apkslistinfo']}
         return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
     else:
@@ -359,25 +360,26 @@ def apkslist():
 @swag_from('./docs/getrules.yml')
 def getrules():
     log.debug("REQUEST TO GET RULES INFORMATION")
-    results_data = db.get_rules()
+    #results_data = db.get_rules()
+    results_data = dbMG.get_rules()
 
     data = {}
     data['rules'] = []
     if results_data:
-        for row in results_data:
-            data['rules'] = ({
-                'status': 'OK',
-                'vulnerability_levels':[{
-                    'info': row['info'],
-                    'notice': row['notice'],
-                    'warning': row['warning'],
-                    'critical': row['critical']
-                    }],
-                'vulnerability_name': row['vulnerability_name'],
-                'videos': row['videos'],
-                'links': row['link'],
-                'severity_levels': row['severity_levels'],
-                'email_template': row['email_template']
+
+        data['rules'] = ({
+            'status': 'OK',
+            'vulnerability_levels':[{
+                'info': results_data['info'],
+                'notice': results_data['notice'],
+                'warning': results_data['warning'],
+                'critical': results_data['critical']
+                }],
+            'vulnerability_name': results_data['vulnerability_name'],
+            'videos': results_data['videos'],
+            'links': results_data['link'],
+            'severity_levels': results_data['severity_levels'],
+            'email_template': results_data['email_template']
             })
         return jsonify(data['rules']), 200, {'Access-Control-Allow-Origin':'*'}
     else:
@@ -389,7 +391,7 @@ def getrules():
 def updaterules():
     log.debug("UPDATE RULES INFORMATION")
     data = request.values
-    if db.insert_rules(data['info'], data['notice'], data['warning'], data['critical'], data['vulnerability_name'], data['videos'], data['link'], data['severity_levels'], data['email_template']):
+    if dbMG.insert_rules(data['info'], data['notice'], data['warning'], data['critical'], data['vulnerability_name'], data['videos'], data['link'], data['severity_levels'], data['email_template']):
         return jsonify({'status': True, 'message': 'This was called and returns something!'}), 200, {'Access-Control-Allow-Origin': '*'}
     else:
         return jsonify({'status': True, 'message': 'Some error occured while updating the feedback rules!!!'}), 200, {'Access-Control-Allow-Origin': '*'}

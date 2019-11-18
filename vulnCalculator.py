@@ -1,6 +1,7 @@
-import database as db
+
 import json
 import configparser
+import databaseMG as dbMG
 
 def caclculate(md5):
 
@@ -14,12 +15,14 @@ def caclculate(md5):
     
     count_values = 0
 
-    with open('json_results/final_output/feedback_vulnerability_levels/'+ md5 + ".json", "r") as json_file:
-        read_content = json.load(json_file)
+    #with open('json_results/final_output/feedback_vulnerability_levels/'+ md5 + ".json", "r") as json_file:
+    #    read_content = json.load(json_file)
+
+    read_content = dbMG.get_apk_vuln_level(md5)
     
     if read_content:
-        if read_content['vulnerabilities']:
-            for vulnerability in read_content['vulnerabilities']:
+        if read_content[0]['results']['vulnerabilities']:
+            for vulnerability in read_content[0]['results']['vulnerabilities']:
                 if vulnerability['severity'] == 'Notice':
                     notice += 1
                 if vulnerability['severity'] == 'Warning':
