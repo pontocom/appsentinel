@@ -3699,7 +3699,7 @@ def main() :
 
 		apkresults.insert_one(data)
 		client.close()
-		print('inseriu os dados -----> Androbugs')
+		
 	except:
 		print("AN ERROR OCCURED WHILE INSERTING DATA")
        
