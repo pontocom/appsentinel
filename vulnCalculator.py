@@ -40,5 +40,5 @@ class calculatorClass:
         warning_score *= warning
         critical_score *= critical
 
-        return (notice_score+warning_score+critical_score)/count_values
+        return round((notice_score+warning_score+critical_score)/count_values ,2)
 
