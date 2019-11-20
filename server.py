@@ -12,7 +12,7 @@ import logging as log
 import configparser
 import datetime
 import time
-import vulnCalculator as calculator
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -94,10 +94,7 @@ def apkfeedback(id):
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
 
-                # OWASP_category=['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10']
-                # data = {}
-                # for m_level in OWASP_category:
-                #     data = data + {m_level : json_data[m_level]}
+                
 
                 data = {'status': 'OK', 
                 'M1': json_data['M1'], 
@@ -248,11 +245,8 @@ def apklevels(id):
                 file = open(results_data[0]['results_location'])
                 json_data = json.load(file)
 
-                value = calculator.caclculate(id)
-                data={'status':'OK', 'value': value}
-
-                # data={'status':'OK', 'value':0.5}
-                return jsonify(data), 200, {'Access-Control-Allow-Origin':'*'}
+               
+                return jsonify(json_data), 200, {'Access-Control-Allow-Origin':'*'}
             else:
                 return jsonify({'status': False, 'message': results_data[0]['details']}), 500, {'Access-Control-Allow-Origin':'*'}
         else:
@@ -336,8 +330,7 @@ def apkslist():
                 if 'Critical' in p['severity']:
                     critical += 1
 
-            # to do download and rating
-            #'status': x['status'],
+            
 
             data_list['apkslistinfo'].append({
                 'apk_md5': x['md5'],
