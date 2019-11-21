@@ -4,3 +4,4 @@ flasgger
 tqdm
 xmindparser
 XlsxWriter
+requests
