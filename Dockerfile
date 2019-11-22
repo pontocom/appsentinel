@@ -3,14 +3,13 @@ FROM python:3.7.3-slim
 # Adding server directory to make absolute filepaths consistent across services
 WORKDIR /server
 
-# Copy our code from the current folder to /app inside the container
+# Copy our code from the current folder to /server inside the container
 COPY . /server
 
 # Install system dependencies
-RUN apt-get update && \ 
-apt-get install -y python-pip \
-default-jre \
-aapt
+RUN apt-get update && \
+apt-get upgrade -y && \
+apt-get install -y python-pip git aapt
 
 # Install python dependencies
 ADD requirements.txt /server/requirements.txt

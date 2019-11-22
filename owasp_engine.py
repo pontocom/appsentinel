@@ -4,12 +4,13 @@ import database as db
 import os
 from vulnCalculator import calculatorClass
 import requests
+import plugin_DroidStatX as plugDroid
+import plugin_Androbugs as plugAbugs
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
 plugins_name ={'Androbugs'}
-
 plugins_name_sorted={'DroidStatX'}
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
@@ -42,46 +43,48 @@ def feedback(md5):
     owasp_category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
     for o in owasp_category:
        data[o]= []
-    for name in plugins_name:
-        with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
-            print("OEngine: Reading -> " + jsonResultsLocation + '/' + name + '/' + md5 + '.json')
-            read_data = json.load(plugin_output)
-        with open(dictionaryAndrobugs, 'r') as d:
-            dict = json.load(d)
-        for x in read_data['results']:
-             for z in owasp_category:
-                 for y in dict['results']:
+    if plugAbugs.enable:
+        for name in plugins_name:
+            with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
+                print("OEngine: Reading -> " + jsonResultsLocation + '/' + name + '/' + md5 + '.json')
+                read_data = json.load(plugin_output)
+            with open(dictionaryAndrobugs, 'r') as d:
+                dict = json.load(d)
+            for x in read_data['results']:
+                for z in owasp_category:
+                    for y in dict['results']:
 
-                    if y['category'] == z:
+                        if y['category'] == z:
 
-                        if y['name'] == x['vulnerability'] and y['level'] == x['severity']:
+                            if y['name'] == x['vulnerability'] and y['level'] == x['severity']:
 
-                            data[z].append({
-                                'vulnerability': x['vulnerability'],
-                                'details': x['details'],
-                                'severity': x['severity'],
-                                'detectedby': 'Androbugs',
-                                'feedback': [{ "url": "Nothing to show"},
-                                     {"video": y["book"]},
-                                     {"book": y["video"]},
-                                     {"other": "Nothing to show"}]
-                            })
-                            break
-    for name in plugins_name_sorted:
-        with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
-            read_data = json.load(plugin_output)
-        for category in owasp_category:
-            for x in read_data[category]:
-                data[category].append({
+                                data[z].append({
                                     'vulnerability': x['vulnerability'],
                                     'details': x['details'],
                                     'severity': x['severity'],
-                                    'detectedby': 'DroidStatX',
-                                    'feedback': [{ "url": x['link']},
-                                         {"video": "Nothing to show"},
-                                         {"book": "Nothing to show"},
-                                         {"other": "Nothing to show"}]
+                                    'detectedby': 'Androbugs',
+                                    'feedback': [{ "url": "Nothing to show"},
+                                        {"video": y["book"]},
+                                        {"book": y["video"]},
+                                        {"other": "Nothing to show"}]
                                 })
+                                break
+    if plugDroid.enable:
+        for name in plugins_name_sorted:
+            with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
+                read_data = json.load(plugin_output)
+            for category in owasp_category:
+                for x in read_data[category]:
+                    data[category].append({
+                                        'vulnerability': x['vulnerability'],
+                                        'details': x['details'],
+                                        'severity': x['severity'],
+                                        'detectedby': 'DroidStatX',
+                                        'feedback': [{ "url": x['link']},
+                                            {"video": "Nothing to show"},
+                                            {"book": "Nothing to show"},
+                                            {"other": "Nothing to show"}]
+                                    })
 
     with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
         json.dump(data, f)

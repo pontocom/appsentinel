@@ -18,20 +18,20 @@ services:
     volumes:
       - ./server:/root/server:cached
   
-  # DataBase Service (MariaDB)
-  database:
-    image: mariadb
-    build: ./sql
-    network_mode: host
-    ports:
-      - "3306:3306"
-    # command: cd sql
-    # volumes:
-    #   - ./sql/scanner.sql:/data/app/sql/scanner.sql
-    #   - ./sql:/root/sql:cached
-    environment:
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: apkscanner
-      MYSQL_USER: appsentinel
-      MYSQL_PASSWORD: teste123
-    # restart: on-failure
+  # # DataBase Service (MariaDB)
+  # database:
+  #   image: mariadb
+  #   build: ./sql
+  #   network_mode: host
+  #   ports:
+  #     - "3306:3306"
+  #   # command: cd sql
+  #   # volumes:
+  #   #   - ./sql/scanner.sql:/data/app/sql/scanner.sql
+  #   #   - ./sql:/root/sql:cached
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 123
+  #     MYSQL_DATABASE: apkscanner
+  #     MYSQL_USER: appsentinel
+  #     MYSQL_PASSWORD: teste123
+  #   # restart: on-failure
