@@ -37,7 +37,7 @@ def init():
 
 
 def feedback(md5):
-    data={}
+    data = {}
     owasp_category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
     for o in owasp_category:
        data[o]= []

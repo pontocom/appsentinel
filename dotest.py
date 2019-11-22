@@ -12,6 +12,60 @@ config.read('config.ini')
 workbook = xlsxwriter.Workbook("./tests/testResults-analysis-"+str(datetime.datetime.now())+".xlsx")
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
 dir = config['DOWNLOAD']['apkDownloadDir']
+dir_results = config['SCANNER']['jsonResultsLocation']
+
+
+def run_post_processing():
+    vars1 = ["#", "MD5", "Androbugs"]
+    vars2 = ["#", "MD5", "Droidstatx"]
+    sheet1 = workbook.add_worksheet("Androbugs")
+    sheet2 = workbook.add_worksheet("Droidstatx")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars1:
+        sheet1.write(0, cols, var, bold)
+        cols = cols + 1
+    cols = 0
+    for var in vars2:
+        sheet2.write(0, cols, var, bold)
+        cols = cols + 1
+
+    count = 0
+    rows = 1
+
+    for file in os.listdir(dir_results + "/Androbugs"):
+        if file[-5:] == ".json":
+            id_app = file[-37:-5]
+            count = count + 1
+            print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
+            sheet1.write(rows, 0, count)
+            sheet1.write(rows, 1, id_app)
+            if os.path.getsize(dir_results + "/Androbugs/" + file) == 0:
+                sheet1.write(rows, 2, "N")
+            else:
+                sheet1.write(rows, 2, "Y")
+            rows = rows + 1
+
+    print("[ANDROBUGS COUNT]" + str(count))
+
+    count = 0
+    rows = 1
+
+    for file in os.listdir(dir_results + "/DroidStatX"):
+        if file[-5:] == ".json":
+            id_app = file[-37:-5]
+            count = count + 1
+            sheet2.write(rows, 0, count)
+            sheet2.write(rows, 1, id_app)
+            print("[DROIDSTATX][" + str(count) + "][" + id_app + "][" + file + "]")
+            if os.path.getsize(dir_results + "/DroidStatX/" + file) == 0:
+                sheet2.write(rows, 2, "N")
+            else:
+                sheet2.write(rows, 2, "Y")
+            rows = rows + 1
+
+    print("[DROIDSTATX COUNT]" + str(count))
 
 
 def run_multiple_tests(number_apk):
@@ -103,6 +157,7 @@ def run_sequence_tests_from_scraping():
 
 
 if __name__=="__main__":
-    run_sequence_tests_from_scraping()
-    run_multiple_tests(10)
+    #run_sequence_tests_from_scraping()
+    #run_multiple_tests(10)
+    run_post_processing()
     workbook.close()
