@@ -3,6 +3,7 @@ import os
 import datetime
 import requests
 import manager as man
+import owasp_engine as oe
 import os.path
 import configparser
 
@@ -13,6 +14,21 @@ workbook = xlsxwriter.Workbook("./tests/testResults-analysis-"+str(datetime.date
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
 dir = config['DOWNLOAD']['apkDownloadDir']
 dir_results = config['SCANNER']['jsonResultsLocation']
+
+
+def put_the_results_on_database():
+    count = 0
+
+    for file in os.listdir(dir_results + "/Androbugs"):
+        if file[-5:] == ".json":
+            id_app = file[-37:-5]
+            count = count + 1
+            print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
+            if os.path.exists(dir_results + "/DroidStatX/" + file):
+                if os.path.getsize(dir_results + "/DroidStatX/" + file) != 0:
+                    oe.startEngine(id_app)
+
+    print("[ANDROBUGS COUNT]" + str(count))
 
 
 def run_post_processing():
@@ -159,5 +175,6 @@ def run_sequence_tests_from_scraping():
 if __name__=="__main__":
     #run_sequence_tests_from_scraping()
     #run_multiple_tests(10)
-    run_post_processing()
+    #run_post_processing()
+    put_the_results_on_database()
     workbook.close()
