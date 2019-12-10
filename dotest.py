@@ -289,9 +289,8 @@ def run_sequence_tests_from_scraping():
 
 
 if __name__=="__main__":
-    run_sequence_tests_from_scraping()
-    #run_multiple_tests(10)
+    #run_sequence_tests_from_scraping()
     #run_post_processing()
     #put_the_results_on_database()
-    #get_num_vulns()
+    get_num_vulns()
     workbook.close()
