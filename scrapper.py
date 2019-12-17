@@ -46,13 +46,13 @@ def run_scrapper():
         category_page_html = BeautifulSoup(category_page_response.text, 'html.parser')
 
         category_name = category_page_html.find("h1").text.strip()
-        # print(category_name)
+        print(category_name)
 
         # bundle = category_page_html.find_all(class_="bundle")
         cat_button_more_location = \
-        category_page_html.find_all(class_="bundle")[2].find(class_="aptweb-button aptweb-button--see-more").find("a")[
+        category_page_html.find_all(class_="bundle")[0].find(class_="aptweb-button aptweb-button--see-more").find("a")[
             'href']
-        # print("Now getting -> " + cat_button_more_location)
+        print("Now getting -> " + cat_button_more_location)
 
         apps_page_response = requests.get(cat_button_more_location)
         apps_page_html = BeautifulSoup(apps_page_response.text, 'html.parser')
@@ -63,7 +63,7 @@ def run_scrapper():
             if app.find("a") != "None":
                 app_location = app.find("a")['href']
 
-                # print("Entering App Page -> " + app_location)
+                print("Entering App Page -> " + app_location)
 
                 app_page_response = requests.get(app_location)
                 if app_page_response:
@@ -81,7 +81,7 @@ def run_scrapper():
                     sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
 
                     appPath = data["nodes"]["meta"]["data"]["file"]["path"]
-                    man.download_apk(appPath)
+                    #man.download_apk(appPath)
 
                     sheet.write(rows, 2, data["nodes"]["meta"]["data"]["name"])
                     sheet.write(rows, 3, data["nodes"]["meta"]["data"]["package"])
@@ -128,10 +128,29 @@ def run_analyse_downloads():
             rows = rows + 1
 
 
+def download_all_apks():
+    count = 1
+    w = open('./apks_failed.txt', 'w')
+    with open('./apks.txt') as f:
+        for line in f:
+            id_app = line
+            data = man.get_json_data(id_app)
+            #print(data)
+            if(data["info"]["status"] != "FAIL"): 
+                appPath = data["nodes"]["meta"]["data"]["file"]["path"]
+                print("[" + str(count) + "][" + appPath + "]")
+                man.download_apk(appPath)
+            else:
+                w.write(str(id_app))
+            count = count + 1
+    w.close()
+
+
 '''
 A tool to scan APKs and look for vulnerabilities
 '''
 if __name__ == "__main__":
-    run_scrapper()
+    #run_scrapper()
+    download_all_apks()
     #run_analyse_downloads()
     workbook.close()
