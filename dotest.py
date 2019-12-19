@@ -1,4 +1,3 @@
-import xlsxwriter
 import os
 import datetime
 import requests
@@ -7,6 +6,7 @@ import owasp_engine as oe
 import os.path
 import configparser
 import json
+import xlsxwriter
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -28,7 +28,6 @@ def put_the_results_on_database():
                     count = count + 1
                     print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
                     oe.startEngine(id_app)
-
     print("[ANDROBUGS COUNT]" + str(count))
 
 
@@ -289,8 +288,8 @@ def run_sequence_tests_from_scraping():
 
 
 if __name__=="__main__":
-    #run_sequence_tests_from_scraping()
+    run_sequence_tests_from_scraping()
     #run_post_processing()
     #put_the_results_on_database()
-    get_num_vulns()
+    #get_num_vulns()
     workbook.close()
