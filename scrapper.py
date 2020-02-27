@@ -14,6 +14,8 @@ dir = config['DOWNLOAD']['apkDownloadDir']
 
 DEFAULT_URL = "https://en.aptoide.com/group/applications"
 
+APPS_PER_CATEGORY = 9
+
 workbook = xlsxwriter.Workbook("./tests/testResults-init-"+str(datetime.datetime.now())+".xlsx")
 
 
@@ -62,7 +64,7 @@ def run_scrapper():
         # small modification to consider only the top 10 apps in each category 
         count_apps = 0    
         for app in apps_html:
-            if app.find("a") != "None" and count_apps <= 9:
+            if app.find("a") != "None" and count_apps <= APPS_PER_CATEGORY:
                 app_location = app.find("a")['href']
 
                 print("Entering App Page -> " + app_location)
