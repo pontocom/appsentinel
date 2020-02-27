@@ -270,6 +270,7 @@ def run_sequence_tests_from_scraping():
         if file[-4:] == ".apk":
             id_app = file[-36:-4]
             count = count + 1
+            print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
             sheet.write(rows, 0, count)
             sheet.write(rows, 1, id_app)
             starttime = datetime.datetime.now()

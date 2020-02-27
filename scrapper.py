@@ -59,8 +59,10 @@ def run_scrapper():
 
         apps_html = apps_page_html.find_all(class_="bundle-item__info__span bundle-item__info__span--big")
 
+        # small modification to consider only the top 10 apps in each category 
+        count_apps = 0    
         for app in apps_html:
-            if app.find("a") != "None":
+            if app.find("a") != "None" and count_apps <= 9:
                 app_location = app.find("a")['href']
 
                 print("Entering App Page -> " + app_location)
@@ -75,7 +77,7 @@ def run_scrapper():
                     data = man.get_json_data(id_app)
 
                     count = count + 1
-                    print("[" + str(count) + "][" + category_name + "][" + data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" + info_table[0].find_all("td")[1].get_text() + " : " + info_table[8].find_all("td")[1].get_text() + "]")
+                    print("[" + str(count) + "][" + category_name + "][" + str(count_apps + 1) + "][" + data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" + info_table[0].find_all("td")[1].get_text() + " : " + info_table[8].find_all("td")[1].get_text() + "]")
 
                     sheet.write(rows, 0, count)
                     sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
@@ -91,6 +93,9 @@ def run_scrapper():
                     sheet.write(rows, 7, data["nodes"]["meta"]["data"]["file"]["vername"])
                     sheet.write(rows, 8, data["nodes"]["meta"]["data"]["file"]["vercode"])
                     rows = rows + 1
+                    count_apps = count_apps + 1
+            if count_apps == 10:
+                break
 
 
 def run_analyse_downloads():
@@ -150,7 +155,7 @@ def download_all_apks():
 A tool to scan APKs and look for vulnerabilities
 '''
 if __name__ == "__main__":
-    #run_scrapper()
-    download_all_apks()
+    run_scrapper()
+    #download_all_apks()
     #run_analyse_downloads()
     workbook.close()
