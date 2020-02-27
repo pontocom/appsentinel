@@ -17,7 +17,7 @@ plugins_name_sorted={'DroidStatX'}
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 resultsOWASP = config['OWASP_OUTPUT']['owasp_OutputLocation']
-resultsFeedback =config['OWASP_OUTPUT']['feedbackResultsLocation']
+resultsFeedback = config['OWASP_OUTPUT']['feedbackResultsLocation']
 resultsFeedbackLevels = config['OWASP_OUTPUT']['feedback_levelsResultsLocation']
 resultsFeedbackVulnerabilityLevels = config['OWASP_OUTPUT']['feedback_vuln_levelsResultsLocation']
 
@@ -28,6 +28,7 @@ def startEngine(md5):
     feedback(md5)
     feedback_vulnerability_levels(md5)
     feedback_levels(md5)
+
 
 def init():
     if not os.path.exists(resultsOWASP):
@@ -41,7 +42,7 @@ def init():
 
 
 def feedback(md5):
-    data={}
+    data = {}
     owasp_category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
     for o in owasp_category:
        data[o]= []
@@ -164,3 +165,41 @@ def feedback_vulnerability_levels(md5):
     with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
     db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+
+
+def get_number_owasp_vulns(md5):
+    read_content = {}
+    m1 = 0,
+    m2 = 0
+    m3 = 0
+    m4 = 0
+    m5 = 0
+    m6 = 0
+    m7 = 0
+    m8 = 0
+    m9 = 0
+    m10 = 0
+
+    print(resultsFeedback + '/' + md5 + ".json")
+    print(os.path.exists(resultsFeedback + '/' + md5 + ".json"))
+    if os.path.exists(resultsFeedback + '/' + md5 + ".json"):
+        with open(resultsFeedback + '/' + md5 + ".json", "r") as json_file:
+            read_content = json.load(json_file)
+
+        if read_content:
+            m1 = len(read_content["M1"])
+            m2 = len(read_content["M2"])
+            m3 = len(read_content["M3"])
+            m4 = len(read_content["M4"])
+            m5 = len(read_content["M5"])
+            m6 = len(read_content["M6"])
+            m7 = len(read_content["M7"])
+            m8 = len(read_content["M8"])
+            m9 = len(read_content["M9"])
+            m10 = len(read_content["M10"])
+
+    print("M1:" + str(m1) + ":M2:" + str(m2) + ":M3:" + str(m3) + ":M4:" + str(m4) + ":M5:" + str(m5) + ":M6:" + str(m6) + ":M7:" + str(m7) + ":M8:" + str(m8) + ":M9:" + str(m9) + ":M10:" + str(m10))
+
+    data = {'status': 'OK', 'M1': str(m1), 'M2': str(m2), 'M3': str(m3), 'M4': str(m4), 'M5': str(m5), 'M6': str(m6), 'M7': str(m7), 'M8': str(m8), 'M9': str(m9), 'M10': str(m10)}
+
+

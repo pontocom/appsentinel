@@ -37,8 +37,8 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
-            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
             os.system(config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # probably it is not necessary to have this... maybe apktool is enough for this
