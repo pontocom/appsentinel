@@ -14,7 +14,7 @@ dir = config['DOWNLOAD']['apkDownloadDir']
 
 DEFAULT_URL = "https://en.aptoide.com/group/applications"
 
-APPS_PER_CATEGORY = 9
+APPS_PER_CATEGORY = 1
 
 workbook = xlsxwriter.Workbook("./tests/testResults-init-"+str(datetime.datetime.now())+".xlsx")
 
@@ -85,7 +85,7 @@ def run_scrapper():
                     sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
 
                     appPath = data["nodes"]["meta"]["data"]["file"]["path"]
-                    #man.download_apk(appPath)
+                    man.download_apk(appPath)
 
                     sheet.write(rows, 2, data["nodes"]["meta"]["data"]["name"])
                     sheet.write(rows, 3, data["nodes"]["meta"]["data"]["package"])
@@ -157,7 +157,7 @@ def download_all_apks():
 A tool to scan APKs and look for vulnerabilities
 '''
 if __name__ == "__main__":
-    run_scrapper()
-    #download_all_apks()
-    #run_analyse_downloads()
+    # run_scrapper()
+    # download_all_apks()
+    run_analyse_downloads()
     workbook.close()

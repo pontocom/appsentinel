@@ -14,9 +14,11 @@ config.read('config.ini')
 workbook = xlsxwriter.Workbook("./tests/testResults-analysis-"+str(datetime.datetime.now())+".xlsx")
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
 dir = config['DOWNLOAD']['apkDownloadDir']
+ext_apps = config['DOWNLOAD']['external_apps']
 dir_results = config['SCANNER']['jsonResultsLocation']
 resultsFeedback = config['OWASP_OUTPUT']['feedbackResultsLocation']
-
+riskLevel = config['OWASP_OUTPUT']['feedback_levelsResultsLocation']
+vulnResults = config['OWASP_OUTPUT']['feedback_vuln_levelsResultsLocation']
 
 def put_the_results_on_database():
     count = 0
@@ -30,6 +32,54 @@ def put_the_results_on_database():
                     oe.startEngine(id_app)
     print("[ANDROBUGS COUNT]" + str(count))
 
+def get_riskLevels():
+    vars = ["#", "MD5", "RISK", "Vulnerabilities", "Notice", "Warning", "Critical"] 
+    sheet = workbook.add_worksheet("Results - RiskLevel")
+    bold = workbook.add_format({'bold': True})
+    count = 0
+    
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
+    rows = 1
+    for file in os.listdir(riskLevel):
+        id_app = file[-37:-5]
+        count = count + 1
+        value = 0.0
+        with open(riskLevel + '/' + id_app + ".json", "r") as json_file:
+            read_content = json.load(json_file)
+            value = read_content["value"]
+            sheet.write(rows, 0, count)
+            sheet.write(rows, 1, id_app)
+            sheet.write(rows, 2, value)
+            rows = rows + 1
+
+    # reset the value of rows
+    rows = 1
+    for file in os.listdir(vulnResults):
+        vulns = 0
+        notice = 0
+        warning = 0
+        critical = 0
+        id_app = file[-37:-5]
+        with open(vulnResults + '/' + id_app + ".json", "r") as json_file:
+            read_content = json.load(json_file)
+            print('Vulns for ' + id_app + ': ' + str(len(read_content['vulnerabilities'])))
+            vulns = len(read_content["vulnerabilities"])
+            for vulnerability in read_content['vulnerabilities']:
+                if vulnerability['severity'] == 'Notice':
+                    notice += 1
+                if vulnerability['severity'] == 'Warning':
+                    warning += 1
+                if vulnerability['severity'] == 'Critical':
+                    critical += 1
+        sheet.write(rows, 3, vulns)
+        sheet.write(rows, 4, notice)
+        sheet.write(rows, 5, warning)
+        sheet.write(rows, 6, critical)
+        rows = rows + 1
 
 def get_num_vulns():
     count = 0
@@ -265,6 +315,7 @@ def run_sequence_tests_from_scraping():
     rows = 1
 
     print(dir)
+    print(ext_apps)
 
     for file in os.listdir(dir):
         if file[-4:] == ".apk":
@@ -287,10 +338,48 @@ def run_sequence_tests_from_scraping():
             sheet.write(rows, 4, "=D" + str(rows + 1) + "-C" + str(rows + 1), format4)
             rows = rows + 1
 
+def run_tests_for_ext_apps():
+    vars = ["#", "ID_app", "Start Time", "End Time", "Duration"]
+    sheet = workbook.add_worksheet("Results - Sequence")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
+
+    count = 0
+    rows = 1
+
+    print(ext_apps)
+
+    for file in os.listdir(ext_apps):
+        if file[-4:] == ".apk":
+            id_app = file[:-4]
+            count = count + 1
+            print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
+            sheet.write(rows, 0, count)
+            sheet.write(rows, 1, id_app)
+            starttime = datetime.datetime.now()
+            format2 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+            sheet.write(rows, 2, starttime, format2)
+            # all the relevant stuff should happen here
+            #######
+            print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + ext_apps + "/" + file)
+            os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + ext_apps + "/" + file)
+            format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+            endtime = datetime.datetime.now()
+            sheet.write(rows, 3, endtime, format3)
+            format4 = workbook.add_format({'num_format': 'mm:ss'})
+            sheet.write(rows, 4, "=D" + str(rows + 1) + "-C" + str(rows + 1), format4)
+            rows = rows + 1
+
 
 if __name__=="__main__":
-    run_sequence_tests_from_scraping()
-    #run_post_processing()
-    #put_the_results_on_database()
-    #get_num_vulns()
+    # run_sequence_tests_from_scraping()
+    # run_tests_for_ext_apps()
+    # run_post_processing()
+    # put_the_results_on_database()
+    # get_num_vulns()
+    get_riskLevels()
     workbook.close()
