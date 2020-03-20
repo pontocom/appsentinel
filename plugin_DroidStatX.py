@@ -5,6 +5,7 @@ import subprocess
 import configparser
 import logging as log
 import json
+import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -40,6 +41,8 @@ class PluginClass:
             print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
+            # ----- Start Time ------
+            startTime = datetime.datetime.now()
             os.system(config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # probably it is not necessary to have this... maybe apktool is enough for this
             cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
@@ -61,6 +64,19 @@ class PluginClass:
 
             # have also the information registered on the database
             db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
+
+            endTime = datetime.datetime.now()
+
+            dir = './apkTimeAnalysis'
+            if not os.path.exists(dir):
+                os.system("mkdir " + dir)
+            
+            
+            
+            data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
+            
+            with open(dir + '.txt', 'a') as f:
+                f.write(data)
 
 
 
