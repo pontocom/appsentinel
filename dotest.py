@@ -374,12 +374,33 @@ def run_tests_for_ext_apps():
             sheet.write(rows, 4, "=D" + str(rows + 1) + "-C" + str(rows + 1), format4)
             rows = rows + 1
 
+def run_time_plugins():
+    dataResult=[]
+    with open('dataApk.json', 'r') as g:
+        dataApk = json.load(g)
+    with open('apkTimeAnalysis.txt', 'r') as f:
+        for line in f:
+            dataTime = line.split()
+            for info in dataApk:
+                
+                if(dataTime[0]==info['md5']):
+                    dataResult.append({
+                        'md5': info['md5'],
+                        'plugin': dataTime[1],
+                        'size': info['size'],
+                        'duration': dataTime[2]
+                    })
+
+    print(dataResult)
+
+
 
 if __name__=="__main__":
-    # run_sequence_tests_from_scraping()
+    run_sequence_tests_from_scraping()
     # run_tests_for_ext_apps()
     # run_post_processing()
     # put_the_results_on_database()
     # get_num_vulns()
-    get_riskLevels()
+    #get_riskLevels()
+    run_time_plugins()
     workbook.close()
