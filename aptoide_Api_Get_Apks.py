@@ -5,7 +5,7 @@ import manager
 
 urlApsList = 'http://ws75.aptoide.com/api/7/apps/get/store_name=apps/limit='
 
-
+APPS_PER_GROUP = 1
 
 #-------- get apks list -------
 totalApps = 0
@@ -13,16 +13,15 @@ totalApps = 0
 dataResult=[]
 
 
-with open('aptoideGroupsTest.txt', 'r') as f:
+with open('aptoideGroups.txt', 'r') as f:
     allGroups = f.readlines()
     for group in allGroups:
-        limitAppsPerGroup = 1
         print('antes')
-        response = requests.get(urlApsList + str(limitAppsPerGroup) +'/group_name=' + group)
+        response = requests.get(urlApsList + str(APPS_PER_GROUP) +'/group_name=' + group)
         content = response.json()
         #print(content)
         try:
-            for i in range(0,limitAppsPerGroup):
+            for i in range(0,APPS_PER_GROUP):
                 md5 = content['datalist']['list'][i]['file']['md5sum']
                 size = content['datalist']['list'][i]['file']['filesize']
                 data = manager.get_json_data(md5)
