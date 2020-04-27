@@ -12,6 +12,7 @@ import logging as log
 import configparser
 import datetime
 import time
+from flask_cors import CORS
 
 
 config = configparser.ConfigParser()
@@ -45,6 +46,9 @@ app = Flask(__name__, template_folder="templates")
 Swagger(app, template=template)
 
 log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
+
+# enable CORS
+CORS(app, resources={r'/*': {'origins': '*'}})
 
 # Create a URL route in our application for "/"
 # This is purely to see if the server is running, there is currently no website planned
