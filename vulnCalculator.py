@@ -47,49 +47,92 @@ class calculatorClass:
     
     def calculate_all_test(self):
         self.calculate_method_simple()
+        self.calculate_method_OWASP_risk()
         self.calculate_method_points()
-        self.calculate_method_API()
+        # self.calculate_method_API()
 
     def calculate_method_simple(self):
         start = datetime.datetime.now()
 
-        with open('json_results/final_output/feedback_vulnerability_levels/'+ self.md5 + ".json", "r") as json_file:
+        with open('json_results/final_output/feedback/'+ self.md5 + ".json", "r") as json_file:
             read_content = json.load(json_file)
         
-        notice = 0
-        warning = 0
-        critical = 0
-        total_vulns = 0
-
-        notice_score = 0.1
-        warning_score = 0.5
-        critical_score = 1
+        categories = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10"]
+        tool_scores=[]
+        active_tools = []
+        for cat in categories:
+            if read_content:
+                for vulnerability in read_content[cat]:
+                    if vulnerability['detectedby'] not in active_tools:
+                        active_tools.append(vulnerability['detectedby'])
+                    else:
+                        continue
+        for tool in active_tools:
+            if tool == 'Androbugs':
+                tool_scores.append(1.5)
+            elif tool == 'DroidStatX':
+                tool_scores.append(0.5)
         
-        if read_content:
-            if read_content['vulnerabilities']:
-                total_vulns = len(read_content['vulnerabilities'])
-                for vulnerability in read_content['vulnerabilities']:
-                    if vulnerability['severity'] == 'Notice':
-                        notice += 1
-                    if vulnerability['severity'] == 'Warning':
-                        warning += 1
-                    if vulnerability['severity'] == 'Critical':
-                        critical += 1
-            else:
-                return 0
-
-        total_vulns = notice+warning+critical
+        final_tool_scores = []
+        total_notices = 0
+        total_warnings = 0
+        total_criticals = 0
         
-        # Calculate with the simple scoring method
-        
-        notice_score *= notice
-        warning_score *= warning
-        critical_score *= critical
+        for tool in active_tools:
+            notice = 0
+            warning = 0
+            critical = 0
+            total_vulns = 0
 
-        final_score = round((notice_score+warning_score+critical_score)/total_vulns ,2)
-        score = final_score * 10
+            notice_score = 0.1
+            warning_score = 0.5
+            critical_score = 1
+
+            androbugs_score = 1.5   # experimental values
+            droidstatx_score = 0.5  #      "         " 
+
+            for cat in categories:
+                if read_content:
+                    for vulnerability in read_content[cat]:
+                        if vulnerability['detectedby'] == tool:
+                            if vulnerability['severity'] == 'Notice':
+                                notice += 1
+                            if vulnerability['severity'] == 'Warning':
+                                warning += 1
+                            if vulnerability['severity'] == 'Critical':
+                                critical += 1
+                else:
+                    return 0
+
+            total_vulns = notice+warning+critical
+            
+            # Calculate with the simple scoring method
+            
+            notice_score *= notice
+            warning_score *= warning
+            critical_score *= critical
+
+            final_tool_score = round((notice_score+warning_score+critical_score)/total_vulns ,2)
+            print('\n'+tool)
+            print('Criticals: '+str(critical)+' Warnings: '+str(warning)+' Notices: '+str(notice))
+            print('Calculated score'+str(final_tool_score))
+            final_tool_scores.append(final_tool_score)
+        
+        tool_ponderations=0
+        # score_orderd_tools[0] * androbugs_score + score_orderd_tools[1]*droidstatx_score
+
+        for i in range(0,len(final_tool_scores)):
+            tool_ponderations += tool_scores[i]*final_tool_scores[i]
+        
+        total_vulns = total_notices+total_warnings+total_criticals
+        print('\nCriticals: '+str(total_criticals)+' Warnings: '+str(total_warnings)+' Notices: '+str(total_notices))
+        print('Total vulns: '+str(total_vulns))
+        score = tool_ponderations/len(active_tools) * 10
+        print('Final score: '+str(score))
         end = datetime.datetime.now()
         duration = end-start
+        print('Duration: '+str(duration))
+
         self.test_score_results['results'].append({
             'simple': {
                 'duration':str(duration),
@@ -98,6 +141,92 @@ class calculatorClass:
         })
         return score
     
+    def calculate_method_OWASP_risk(self):
+        start = datetime.datetime.now()
+
+        print('Starting OWASP Risk method calculation\n')
+
+        with open('json_results/final_output/feedback/'+ self.md5 + ".json", "r") as json_file:
+            read_content = json.load(json_file)
+        
+        categories = ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "M10"]
+        categories_level_7 = ["M1", "M2", "M3", "M4", "M5", "M6", "M8", "M10"]
+
+        tool_scores=[]
+        final_tool_scores = []
+        active_tools = []
+
+        for cat in categories:
+            if read_content:
+                for vulnerability in read_content[cat]:
+                    if vulnerability['detectedby'] not in active_tools:
+                        active_tools.append(vulnerability['detectedby'])
+                    else:
+                        continue
+        for tool in active_tools:
+            if tool == 'Androbugs':
+                tool_scores.append(1.5)
+            elif tool == 'DroidStatX':
+                tool_scores.append(0.5)
+        
+        for tool in active_tools:
+
+            Ms_of_lvl7 = 0
+            M7s = 0
+            M9s = 0
+
+            otherMs_level = 0.7
+            M7_level = 0.27
+            M9_level = 0.53
+            total_vulns = 0
+
+            for cat in categories:
+                    if read_content:
+                        for vulnerability in read_content[cat]:
+                            if vulnerability['detectedby'] == tool:
+                                if cat in categories_level_7:
+                                    Ms_of_lvl7 += 1
+                                if cat == 'M7':
+                                    M7s += 1
+                                if cat == 'M9':
+                                    M9s += 1
+                    else:
+                        return 0
+
+            total_vulns = Ms_of_lvl7+M7s+M9s
+            # Calculate with the simple scoring method
+            
+            otherMs_level *= Ms_of_lvl7 
+            M7_level *= M7s
+            M9_level *= M9s
+
+            final_tool_score = round((otherMs_level+M7_level+M9_level)/total_vulns ,2)
+            print('\n'+tool)
+            print('Other Ms: '+str(Ms_of_lvl7)+' M7: '+str(M7s)+' M9s: '+str(M9s))
+            print('Calculated score'+str(final_tool_score))
+            final_tool_scores.append(final_tool_score)
+        
+        tool_ponderations=0
+        # score_orderd_tools[0] * androbugs_score + score_orderd_tools[1]*droidstatx_score
+
+        for i in range(0,len(final_tool_scores)):
+            tool_ponderations += tool_scores[i]*final_tool_scores[i]
+
+        print('Total vulns: '+str(total_vulns))
+        score = tool_ponderations/len(active_tools) * 10
+        print('Final score: '+str(score))
+        end = datetime.datetime.now()
+        duration = end-start
+        print('Duration: '+str(duration))
+
+        self.test_score_results['results'].append({
+            'OWASP_Risk': {
+                'duration':str(duration),
+                'level': score
+            }
+        })
+        return score
+
     def get_riskLevel(self, final_cves):
         return -1
 
