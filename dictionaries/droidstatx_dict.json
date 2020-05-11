@@ -1,0 +1,137 @@
+{
+    "results": [
+        {
+            "name": "Possibility of SQL Injection in exported ContentProvider",
+            "category": "M1",
+            "level": "warning",
+            "keywords": ["contentProvider", "androidManifest"]
+        },
+        {
+            "name": "Possibility of Path Traversal in exported ContentProvider",
+            "category": "M1",
+            "level": "warning",
+            "keywords":["contentProvider", "androidManifest"]
+        },
+        {
+            "name": "Application is debuggable",
+            "category": "M1",
+            "level": "critical",
+            "keywords":["debuggable"]
+        },
+        {
+            "name": "Activities vulnerable to Fragment Injection",
+            "category": "M1",
+            "level": "critical",
+            "keywords":["fragment"]
+        },
+        {
+            "name": "Activities with possible Fragment Injection (isValidFragment in place)",
+            "category": "M1",
+            "level": "warning",
+            "keywords":["fragment"]
+        },
+        {
+            "name": "JavascriptInterface with RCE possibility",
+            "category": "M1",
+            "level": "critical",
+            "keywords":["javascriptInterface"]
+        },
+        {
+            "name": "JavascriptInterface available.",
+            "category": "M1",
+            "level": "warning",
+            "keywords":["javascriptInterface"]
+        },
+        {
+            "name": "WebView with Javascript enabled.",
+            "category": "M1",
+            "level": "warning",
+            "keywords":["webview"]
+        },
+        {
+            "name": "WebView with fileAccess enabled.",
+            "category": "M1",
+            "level": "warning",
+            "keywords":["webview"]
+        },
+        {
+            "name": "WebView with Universal Access from File URLs enabled.",
+            "category": "M1",
+            "level": "warning",
+            "keywords":["webview"]
+        },
+        {
+            "name": "Vulnerable Trust Manager:",
+            "category": "M3",
+            "level": "critical",
+            "keywords":["trustManager", "CA"]
+        },
+        {
+            "name": "Webview with vulnerable SSL Implementation:",
+            "category": "M3",
+            "level": "critical",
+            "keywords":["webview", "CA", "ssl"]
+        },
+        {
+            "name": "Vulnerable HostnameVerifier found",
+            "category": "M3",
+            "level": "critical",
+            "keywords":["hostname verification", "ssl"]
+        },
+        {
+            "name": "setHostnameVerifier call with ALLOW_ALL_HOSTNAMES_VERIFIER",
+            "category": "M3",
+            "level": "critical",
+            "keywords":["hostname verification", "ssl"]
+        },
+        {
+            "name": "Direct usage of Socket without HostnameVerifier",
+            "category": "M3",
+            "level": "critical",
+            "keywords":["hostname verification", "ssl"]
+        },
+        {
+            "name": "Usage of NetworkSecurityConfig file.",
+            "category": "M3",
+            "level": "critical",
+            "keywords":["network security"]
+        },
+        {
+            "name": "No usage of NetworkSecurityConfig file.",
+            "category": "M3",
+            "level": "warning",
+            "keywords":["network security"]
+        },
+        {
+            "name": "No usage of Certificate Pinning",
+            "category": "M3",
+            "level": "warning",
+            "keywords":["certificate pinning"]
+        },
+        {
+            "name": "Activities without FLAG_SECURE or android:excludeFromRecents :",
+            "category": "M2",
+            "level": "warning",
+            "keywords":["data leaked"]
+        },
+        {
+            "name": "Usage of AES with ECB Mode",
+            "category": "M5",
+            "level": "critical",
+            "keywords":["encryption"]
+        },
+        {
+            "name": "Usage of DES or 3DES",
+            "category": "M5",
+            "level": "critical",
+            "keywords":["encryption"]
+        },
+        {
+            "name": "No usage of Android KeyStore",
+            "category": "M5",
+            "level": "warning",
+            "keywords":["keystore"]
+        }
+
+    ]
+}
