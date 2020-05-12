@@ -4,132 +4,176 @@
             "name": "Possibility of SQL Injection in exported ContentProvider",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 8.4,
+            "vectorStringV3": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
             "keywords": ["contentProvider", "androidManifest"]
         },
         {
             "name": "Possibility of Path Traversal in exported ContentProvider",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 6.8,
+            "vectorStringV3": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
             "keywords":["contentProvider", "androidManifest"]
         },
         {
             "name": "Application is debuggable",
             "category": "M1",
             "level": "critical",
+            "cvssV3":9.8,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
             "keywords":["debuggable"]
         },
         {
             "name": "Activities vulnerable to Fragment Injection",
             "category": "M1",
             "level": "critical",
+            "cvssV3": 8.1,
+            "vectorStringV3": "AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:L",
             "keywords":["fragment"]
         },
         {
             "name": "Activities with possible Fragment Injection (isValidFragment in place)",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 5.3,
+            "vectorStringV3": "AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N",
             "keywords":["fragment"]
         },
         {
             "name": "JavascriptInterface with RCE possibility",
             "category": "M1",
             "level": "critical",
+            "cvssV2": 9.3,
+            "vectorStringV2": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
             "keywords":["javascriptInterface"]
         },
         {
             "name": "JavascriptInterface available.",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 5.9,
+            "vectorStringV3": "AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N",
             "keywords":["javascriptInterface"]
         },
         {
             "name": "WebView with Javascript enabled.",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 5.4,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
             "keywords":["webview"]
         },
         {
             "name": "WebView with fileAccess enabled.",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 6.5,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
             "keywords":["webview"]
         },
         {
             "name": "WebView with Universal Access from File URLs enabled.",
             "category": "M1",
             "level": "warning",
+            "cvssV3": 5.4,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
             "keywords":["webview"]
         },
         {
             "name": "Vulnerable Trust Manager:",
             "category": "M3",
             "level": "critical",
+            "cvssV3": 8.6,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:L",
             "keywords":["trustManager", "CA"]
         },
         {
             "name": "Webview with vulnerable SSL Implementation:",
             "category": "M3",
             "level": "critical",
+            "cvssV3": 7.4,
+            "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["webview", "CA", "ssl"]
         },
         {
             "name": "Vulnerable HostnameVerifier found",
             "category": "M3",
             "level": "critical",
+            "cvssV3": 9.1,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["hostname verification", "ssl"]
         },
         {
             "name": "setHostnameVerifier call with ALLOW_ALL_HOSTNAMES_VERIFIER",
             "category": "M3",
             "level": "critical",
+            "cvssV3": 9.1,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["hostname verification", "ssl"]
         },
         {
             "name": "Direct usage of Socket without HostnameVerifier",
             "category": "M3",
             "level": "critical",
+            "cvssV3": 9.1,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["hostname verification", "ssl"]
         },
         {
             "name": "Usage of NetworkSecurityConfig file.",
             "category": "M3",
             "level": "critical",
+            "cvssV3": 8.2,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
             "keywords":["network security"]
         },
         {
             "name": "No usage of NetworkSecurityConfig file.",
             "category": "M3",
             "level": "warning",
+            "cvssV3": 6.0,
+            "vectorStringV3":"",
             "keywords":["network security"]
         },
         {
             "name": "No usage of Certificate Pinning",
             "category": "M3",
             "level": "warning",
+            "cvssV3": 9.1,
+            "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["certificate pinning"]
         },
         {
             "name": "Activities without FLAG_SECURE or android:excludeFromRecents :",
             "category": "M2",
             "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
             "keywords":["data leaked"]
         },
         {
             "name": "Usage of AES with ECB Mode",
             "category": "M5",
             "level": "critical",
+            "cvssV3": 7.4,
+            "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["encryption"]
         },
         {
             "name": "Usage of DES or 3DES",
             "category": "M5",
             "level": "critical",
+            "cvssV3": 7.4,
+            "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
             "keywords":["encryption"]
         },
         {
             "name": "No usage of Android KeyStore",
             "category": "M5",
             "level": "warning",
+            "cvssV3": 6.0,
+            "vectorStringV3": "",
             "keywords":["keystore"]
         }
 

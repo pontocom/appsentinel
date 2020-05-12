@@ -179,7 +179,7 @@
             "keywords":[
                 {
                     "name": "trustManager",
-                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate", "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification"],
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate", "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification","https://support.google.com/faqs/answer/6346016"],
                     "books": [],
                     "articles": []
                 },
@@ -215,7 +215,7 @@
                 },
                 {
                     "name": "hostname verification",
-                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification"],
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification", "https://support.google.com/faqs/answer/7188426?hl=en", "https://www.immuniweb.com/vulnerability/improper-validation-of-certificate-with-host-mismatch.html"],
                     "books": [],
                     "articles": []
                 },
