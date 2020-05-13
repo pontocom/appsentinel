@@ -41,11 +41,11 @@ class PluginClass:
             print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
             log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
             # run the tool and move the json results to proper folder
-            os.system(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
+            os.system(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + ' --results ./results/') 
             #os.system('mv results/'+)
             print(os.system)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + " --results " + jsonResultsLocation)
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + " --results " + jsonResultsLocation)
+            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
+            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
             b = './results/'
             a = glob.glob(b+"*")
             c = glob.glob(b + os.path.basename(a[0]) + '/*')
