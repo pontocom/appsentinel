@@ -1,0 +1,337 @@
+{
+    "results": [
+        {
+            "name": "URL Disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of private URLs.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Generic Exception in catch",
+            "deatils": "Exception catching should be specific. Generic Exception type could not be safe and lead to silent error suppresion",
+            "category": "",
+            "level": "low",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Generic Exception in Throws",
+            "deatils": "The exceptions thrown by a method should be specific. Generic Exception type could could not be safe and lead to silent error suppresion.",
+            "category": "",
+            "level": "low",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Hidden fields",
+            "deatils": "Hidden fields are often used to cover data from the user, but they are discouraged, since they can lead to data disclosure.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "IP Disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of private IPs.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Math Random method",
+            "deatils": "This method is not as random as it is supossed to be. It should not be use to generate OTP codes.",
+            "category": "",
+            "level": "low",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Unchecked output in Logs",
+            "deatils": "Sensitive information should never be logged since it can lead to that information being disclosed.",
+            "category": "",
+            "level": "low",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Hardcoded file separator",
+            "deatils": "Paths like C:\\\\Program Files\\\\... can cause problems, and are considered vulnerabilities, since some OSs use backslashes `\\\\` (DOS/Windows) and others slashes `/` (Unix).",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Weak Algorithms",
+            "deatils": "Using weak algorithms allows an attacker to break the cyphered communications gaining access to plain text content.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Sleep Method",
+            "deatils": "Sleep Method is used with vars as arguments. If those vars are modified it could force the aplication to stop indefinitely.",
+            "category": "",
+            "level": "low",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "World readable permissions",
+            "deatils": "Setting world readable permissions allows to anyone (with access to the target file) to read file content.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "World writable permissions",
+            "deatils": "Setting world writable permissions allows to anyone (with access to the target file) to modify file content.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Write-Read in external storage",
+            "deatils": "Application can read/write in external storage. Any app can read data written in external storage.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Temp File Use",
+            "deatils": "Applications is creating temp files. Sensitive information should never be written in temp files.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "WebView XSS",
+            "deatils": "Webview insecure implementation. This issue could allow to a remote attacker to code execution in WebView and performing Cross Site Scripting attacks.",
+            "category": "",
+            "level": "critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "WebView ignores SSL errors",
+            "deatils": "WebView is ignoring SSL errors and it accepts any SSL certificate. This application could be affected by Man in the Middle attacks.",
+            "category": "",
+            "level": "critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "SQL injection",
+            "deatils": "This application is vulnerable to SQL injection. Any data stored in database can be exposed as any attacker is able to retrive, modify and delete the stored information.",
+            "category": "",
+            "level": "critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Accepting all SSL certificates",
+            "deatils": "Insecure application SSL implementation. This application accepts all certificates, including self signed by default. This is a critical issue as Man in the Middle attacks may be performed.",
+            "category": "",
+            "level": "critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Sending sms-mms",
+            "deatils": "This application is sending sms or mms and it might be without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Super user privileges.",
+            "deatils": "This applications may require super user privileges.",
+            "category": "",
+            "level": "medium",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Rooted device detection",
+            "deatils": "This applications is performing checks for rooted device. This could be use to execute specific code if the device is rooted to take control of it.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Cell Location (Base Stations)",
+            "deatils": "This app is using cell location by Base Station method. This process might be performed without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Get Device ID",
+            "deatils": "The application is recording the device ID (IMEI). This process might be performed without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Get SIM Serial",
+            "deatils": "The application is recording the SIM serial. This process might be performed without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "GPS location",
+            "deatils": "This app is using cell location by GPS method. This process might be performed without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Base64 Encode",
+            "deatils": "This application is using Base64 encoding. This is not a secure method to encode data.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Base64 decode",
+            "deatils": "This application is using Base64 decoding.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Infinite Loop",
+            "deatils": "The application contains infinite loops. It is not a good practice to use infinite loops inside a program.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Email disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of private email information.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Certificate or Keystore disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of hardcoded certificate or keystore.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Get SIM Operator",
+            "deatils": "The application is recording the device network operator. This process might be performed without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Get SIM OperatorName",
+            "deatils": "The application is recording the device network operator name. This process might be performed without the user's knowledge.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Obfuscated code",
+            "deatils": "The code of this application could be obfuscated.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "System command execution",
+            "deatils": "The application could execute system command.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "SSL getInsecure method",
+            "deatils": "Insecure application SSL implementation. This applications in using the getInsecure Method which returns a new instance of a socketFactory with all SSL security checks disabled. These sockets are vulnerable to MITM attacks.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Finally with return statement",
+            "deatils": "Finally structure with return statement inside will bypass any error thrown.",
+            "category": "",
+            "level": "low",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Sleep Method",
+            "deatils": "Sleep Method is used with vars as arguments. If those vars are modified it could force the aplication to stop indefinitely.",
+            "category": "",
+            "level": "high",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        }
+    ]
+}
