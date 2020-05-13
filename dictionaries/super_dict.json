@@ -3,7 +3,7 @@
         {
             "name": "URL Disclosure",
             "deatils": "The decompilation of the source code could lead to the disclosure of private URLs.",
-            "category": "",
+            "category": "M2",
             "level": "warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -12,7 +12,7 @@
         {
             "name": "Generic Exception in catch",
             "deatils": "Exception catching should be specific. Generic Exception type could not be safe and lead to silent error suppresion",
-            "category": "",
+            "category": "M7",
             "level": "low",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -21,7 +21,7 @@
         {
             "name": "Generic Exception in Throws",
             "deatils": "The exceptions thrown by a method should be specific. Generic Exception type could could not be safe and lead to silent error suppresion.",
-            "category": "",
+            "category": "M7",
             "level": "low",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -30,7 +30,7 @@
         {
             "name": "Hidden fields",
             "deatils": "Hidden fields are often used to cover data from the user, but they are discouraged, since they can lead to data disclosure.",
-            "category": "",
+            "category": "M7",
             "level": "warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -39,7 +39,7 @@
         {
             "name": "IP Disclosure",
             "deatils": "The decompilation of the source code could lead to the disclosure of private IPs.",
-            "category": "",
+            "category": "M2",
             "level": "warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -48,7 +48,7 @@
         {
             "name": "Math Random method",
             "deatils": "This method is not as random as it is supossed to be. It should not be use to generate OTP codes.",
-            "category": "",
+            "category": "M7",
             "level": "low",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -57,7 +57,7 @@
         {
             "name": "Unchecked output in Logs",
             "deatils": "Sensitive information should never be logged since it can lead to that information being disclosed.",
-            "category": "",
+            "category": "M2",
             "level": "low",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -66,7 +66,7 @@
         {
             "name": "Hardcoded file separator",
             "deatils": "Paths like C:\\\\Program Files\\\\... can cause problems, and are considered vulnerabilities, since some OSs use backslashes `\\\\` (DOS/Windows) and others slashes `/` (Unix).",
-            "category": "",
+            "category": "M1",
             "level": "warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -75,7 +75,7 @@
         {
             "name": "Weak Algorithms",
             "deatils": "Using weak algorithms allows an attacker to break the cyphered communications gaining access to plain text content.",
-            "category": "",
+            "category": "M5",
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -84,7 +84,7 @@
         {
             "name": "Sleep Method",
             "deatils": "Sleep Method is used with vars as arguments. If those vars are modified it could force the aplication to stop indefinitely.",
-            "category": "",
+            "category": "M7",
             "level": "low",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -93,7 +93,7 @@
         {
             "name": "World readable permissions",
             "deatils": "Setting world readable permissions allows to anyone (with access to the target file) to read file content.",
-            "category": "",
+            "category": "M6",
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -102,7 +102,7 @@
         {
             "name": "World writable permissions",
             "deatils": "Setting world writable permissions allows to anyone (with access to the target file) to modify file content.",
-            "category": "",
+            "category": "M6",
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -111,7 +111,7 @@
         {
             "name": "Write-Read in external storage",
             "deatils": "Application can read/write in external storage. Any app can read data written in external storage.",
-            "category": "",
+            "category": "M6",
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -120,7 +120,7 @@
         {
             "name": "Temp File Use",
             "deatils": "Applications is creating temp files. Sensitive information should never be written in temp files.",
-            "category": "",
+            "category": "M2",
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -129,7 +129,7 @@
         {
             "name": "WebView XSS",
             "deatils": "Webview insecure implementation. This issue could allow to a remote attacker to code execution in WebView and performing Cross Site Scripting attacks.",
-            "category": "",
+            "category": "M1",
             "level": "critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
