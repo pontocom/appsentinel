@@ -1,6 +1,42 @@
 {
     "results": [
         {
+            "name": "Allows Backup",
+            "deatils": "This option allows backups of the application data via adb. Malicious people with physical access could use adb to get private data of your app into their PC.",
+            "category": "",
+            "level": "medium",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Allows Backup",
+            "deatils": "This option allows backups of the application data via adb. Malicious people with physical access could use adb to get private data of your app into their PC.",
+            "category": "",
+            "level": "medium",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Large heap",
+            "deatils": "The application needs a large heap. This is not a vulnerability as such, but could be in devices with small heap. Check if the large heap is actually needed.",
+            "category": "",
+            "level": "warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "Manifest Debug",
+            "deatils": "The application is in debug mode. This allows any malicious person to inject arbitrary code in the application. This option should only be used while in development.",
+            "category": "",
+            "level": "critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
             "name": "URL Disclosure",
             "deatils": "The decompilation of the source code could lead to the disclosure of private URLs.",
             "category": "",
