@@ -29,6 +29,9 @@ plugins_dict ={ 'DroidStatX': [dictionaryDroidstatx, plugDroid], 'Androbugs': [d
 
 baseknowledge = config['DICTIONARY']['baseKnowledge']
 
+enabled_plugins=[]
+
+
 def startEngine(md5):
     init()
     feedback(md5)
@@ -44,6 +47,16 @@ def init():
         os.system("mkdir " + resultsFeedbackLevels)
     if not os.path.exists(resultsFeedbackVulnerabilityLevels):
         os.system("mkdir " + resultsFeedbackVulnerabilityLevels)
+    # looking for the plugins
+    pluginDir = os.path.dirname(os.path.abspath(__file__))
+
+    for file in os.listdir(pluginDir):
+        if file[0:7] == "plugin_" and file[-3:] == ".py":
+            print(file)
+            # we need to do something with them... need to check if it is better to import or to spawn (decide later)
+            thisPlugin = __import__(".".join(file.split(".")[0:-1]))
+            if thisPlugin.enable:
+                enabled_plugins.append(thisPlugin)
 
 
 def feedback(md5):
@@ -53,49 +66,49 @@ def feedback(md5):
        data[o]= []
     with open(baseknowledge, 'r') as bk_file:
         bk_content = json.load(bk_file)
-    for name in plugins_dict:
-        if plugins_dict[name][1].enable:
-            if path.isfile(jsonResultsLocation + '/' + name + '/' + md5 + '.json') and os.stat(jsonResultsLocation + '/' + name + '/' + md5 + '.json').st_size > 0:
-                with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
-                    print("OEngine: Reading -> " + jsonResultsLocation + '/' + name + '/' + md5 + '.json')
-                    read_data = json.load(plugin_output)
-                with open(plugins_dict[name][0], 'r') as d:
-                    dict = json.load(d)
-                for x in read_data['results']:
-                    
-                    for z in owasp_category:
-                        for y in dict['results']:
+    for plugin in enabled_plugins:
+        if path.isfile(jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json') and os.stat(jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json').st_size > 0:
+            with open(jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json') as plugin_output:
+                print("OEngine: Reading -> " + jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json')
+                read_data = json.load(plugin_output)
+            dict_plugin_name = plugin.pluginName.lower()
+            with open('./dictionaries/'+dict_plugin_name+'_dict.json', 'r') as d:
+                dict = json.load(d)
+            for x in read_data['results']:
+                
+                for z in owasp_category:
+                    for y in dict['results']:
 
-                            if y['category'] == z:
+                        if y['category'] == z:
 
-                                if y['name'] == x['vulnerability'] :
-                                    q = """and y['level'] == x['severity']"""
-                                    data[z].append({
-                                        'vulnerability': x['vulnerability'],
-                                        'details': x['details'],
-                                        'severity': x['severity'],
-                                        'detectedby': name,
-                                        'feedback': {
-                                            "url": [] ,
-                                            "video": "",
-                                            "book": [],
-                                            "other": "Nothing to show"
-                                        }
-                                    })
-                                                    
-                for category in owasp_category:                     
-                    for d in data[category]:
-                        for info in dict['results']:
-                            if d['vulnerability']== info['name']:
+                            if y['name'] == x['vulnerability'] :
+                                q = """and y['level'] == x['severity']"""
+                                data[z].append({
+                                    'vulnerability': x['vulnerability'],
+                                    'details': x['details'],
+                                    'severity': x['severity'],
+                                    'detectedby': plugin.pluginName,
+                                    'feedback': {
+                                        "url": [] ,
+                                        "video": "",
+                                        "book": [],
+                                        "other": "Nothing to show"
+                                    }
+                                })
+                                                
+            for category in owasp_category:                     
+                for d in data[category]:
+                    for info in dict['results']:
+                        if d['vulnerability']== info['name']:
 
-                                for content in bk_content['results']:
-                                    for bk_info in content['keywords']:
-                                        for keyword in info['keywords']:
-                                            
-                                            if keyword==bk_info['name']:
-                                                for link in bk_info['links']:
-                                                    d['feedback']['url'].append(link)
-                                                                   
+                            for content in bk_content['results']:
+                                for bk_info in content['keywords']:
+                                    for keyword in info['keywords']:
+                                        
+                                        if keyword==bk_info['name']:
+                                            for link in bk_info['links']:
+                                                d['feedback']['url'].append(link)
+                                                                
 
     # if plugDroid.enable:
     #     with open(dictionaryDroidstatx, 'r') as d:

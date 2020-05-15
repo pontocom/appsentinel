@@ -26,7 +26,7 @@ class PluginClass:
         ''' constructor '''
 
     def run(self, apk_file, md5):
-        print('Running the Super plugin!...')
+        print('\nRunning the Super plugin!...')
         log.debug('Running the Super plugin!...')
         if not os.path.exists(jsonResultsLocation):
             os.system('chmod 755 ' + superLocation)
@@ -38,10 +38,11 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ': Running on -> ' + apk_file)
             log.debug(pluginName + ': Running on -> ' + apk_file)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
+            os.chdir(superLocation)
+            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
+            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
             # run the tool and move the json results to proper folder
-            os.system(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + ' --results ./results/') 
+            os.system(config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
             #os.system('mv results/'+)
             print(os.system)
             print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
