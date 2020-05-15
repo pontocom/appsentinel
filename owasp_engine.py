@@ -8,6 +8,7 @@ from vulnCalculator import calculatorClass
 import requests
 import plugin_DroidStatX as plugDroid
 import plugin_Androbugs as plugAbugs
+import plugin_Super as plugSuper
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -22,8 +23,9 @@ resultsFeedbackVulnerabilityLevels = config['OWASP_OUTPUT']['feedback_vuln_level
 
 dictionaryAndrobugs = config['DICTIONARY']['androbugsDict']
 dictionaryDroidstatx = config['DICTIONARY']['droidstatxDict']
+dictionarySuper = config['DICTIONARY']['superDict']
 
-plugins_dict ={ 'DroidStatX': [dictionaryDroidstatx, plugDroid], 'Androbugs': [dictionaryAndrobugs, plugAbugs]}
+plugins_dict ={ 'DroidStatX': [dictionaryDroidstatx, plugDroid], 'Androbugs': [dictionaryAndrobugs, plugAbugs],'Super':[dictionarySuper, plugSuper]}
 
 baseknowledge = config['DICTIONARY']['baseKnowledge']
 
