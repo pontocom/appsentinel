@@ -46,11 +46,17 @@ class PluginClass:
             print(os.system)
             print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
             log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
-            b = './results/'
-            a = glob.glob(b+"*")
-            c = glob.glob(b + os.path.basename(a[0]) + '/*')
-            os.system('mv ' + a[0]+'/'+os.path.basename(c[0]) + ' ./json_results/Super/'+md5+'.json')
-            self.build_scan_format(md5)
+            path = './results/'
+            fileName = glob.glob(path+"*")
+            if not os.path.isdir(fileName[0]):  
+                os.system('mv ' + fileName[0] + ' ./json_results/Super/'+md5+'.json')
+                self.build_scan_format(md5)
+                os.system('rm -r ./results/')
+            else:
+                directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
+                os.system('mv ' + fileName[0]+'/'+os.path.basename(directory[0]) + ' ./json_results/Super/'+md5+'.json')
+                self.build_scan_format(md5)
+                os.system('rm -r ./results/')
 
     
     def build_scan_format(self, md5):
