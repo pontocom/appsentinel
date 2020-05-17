@@ -1,19 +1,22 @@
-FROM python:3.7.3-slim
+FROM ubuntu:18.04
 
 # Adding server directory to make absolute filepaths consistent across services
-WORKDIR /server
+WORKDIR /appsentinel
 
 # Copy our code from the current folder to /server inside the container
-COPY . /server
+COPY . /appsentinel
 
 # Install system dependencies
 RUN apt-get update && \
 apt-get upgrade -y && \
-apt-get install -y python-pip git aapt
+apt-get install -y python-minimal python-pip curl python3.6 python3-pip git aapt default-jre
 
 # Install python dependencies
 ADD requirements.txt /server/requirements.txt
 RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
+
+# Setup tools
+RUN python3 ./tools/droidstatx/install.py
 
 CMD ["python3", "server.py"]
 
