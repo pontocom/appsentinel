@@ -10,15 +10,6 @@
             "keywords": []
         },
         {
-            "name": "Allows Backup",
-            "deatils": "This option allows backups of the application data via adb. Malicious people with physical access could use adb to get private data of your app into their PC.",
-            "category": "",
-            "level": "medium",
-            "cvssV3": 0.0,
-            "vectorStringV3": "",
-            "keywords": []
-        },
-        {
             "name": "Large heap",
             "deatils": "The application needs a large heap. This is not a vulnerability as such, but could be in devices with small heap. Check if the large heap is actually needed.",
             "category": "",
@@ -34,7 +25,7 @@
             "level": "critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["debuggable"]
         },
         {
             "name": "URL Disclosure",
@@ -97,7 +88,7 @@
             "level": "low",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["logs"]
         },
         {
             "name": "Hardcoded file separator",
@@ -160,7 +151,7 @@
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["Temp File"]
         },
         {
             "name": "WebView XSS",
@@ -169,7 +160,7 @@
             "level": "critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["webview","RCE"]
         },
         {
             "name": "WebView ignores SSL errors",
@@ -178,7 +169,7 @@
             "level": "critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["webview","ssl"]
         },
         {
             "name": "SQL injection",
@@ -187,7 +178,7 @@
             "level": "critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["SQLInjection"]
         },
         {
             "name": "Accepting all SSL certificates",
@@ -196,7 +187,7 @@
             "level": "critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["ssl"]
         },
         {
             "name": "Sending sms-mms",
@@ -205,16 +196,16 @@
             "level": "warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["sms"]
         },
         {
             "name": "Super user privileges.",
             "deatils": "This applications may require super user privileges.",
-            "category": "",
+            "category": "M8",
             "level": "medium",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["privilege"]
         },
         {
             "name": "Rooted device detection",
@@ -241,7 +232,7 @@
             "level": "warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["identifiers"]
         },
         {
             "name": "Get SIM Serial",
@@ -336,11 +327,11 @@
         {
             "name": "System command execution",
             "deatils": "The application could execute system command.",
-            "category": "",
+            "category": "M7",
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["runtime command"]
         },
         {
             "name": "SSL getInsecure method",
@@ -349,7 +340,7 @@
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["ssl"]
         },
         {
             "name": "Finally with return statement",

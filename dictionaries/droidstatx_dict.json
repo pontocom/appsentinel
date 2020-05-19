@@ -6,7 +6,7 @@
             "level": "warning",
             "cvssV3": 8.4,
             "vectorStringV3": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-            "keywords": ["contentProvider", "androidManifest"]
+            "keywords": ["contentProvider", "androidManifest","SQLInjection"]
         },
         {
             "name": "Possibility of Path Traversal in exported ContentProvider",
@@ -46,7 +46,7 @@
             "level": "critical",
             "cvssV2": 9.3,
             "vectorStringV2": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
-            "keywords":["javascriptInterface"]
+            "keywords":["javascriptInterface", "RCE"]
         },
         {
             "name": "JavascriptInterface available.",
@@ -62,7 +62,7 @@
             "level": "warning",
             "cvssV3": 5.4,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
-            "keywords":["webview"]
+            "keywords":["webview", "JSenabled"]
         },
         {
             "name": "WebView with fileAccess enabled.",
@@ -70,7 +70,7 @@
             "level": "warning",
             "cvssV3": 6.5,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
-            "keywords":["webview"]
+            "keywords":["webview", "localFile"]
         },
         {
             "name": "WebView with Universal Access from File URLs enabled.",
@@ -86,7 +86,7 @@
             "level": "critical",
             "cvssV3": 8.6,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:L",
-            "keywords":["trustManager", "CA"]
+            "keywords":["trustManager", "CA","ssl"]
         },
         {
             "name": "Webview with vulnerable SSL Implementation:",

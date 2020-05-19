@@ -5,6 +5,41 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 6.5,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+                    "keywords":["webview", "localFile"]
+                },
+                {
+                    "score": 5.9,
+                    "keywords":["javascriptInterface"]
+                },
+                {
+                    "score":9.3,
+                    "keywords":["webview", "RCE"]
+                },
+                {
+                    "score":8.1,
+                    "keywords":["fragment"]
+                },
+                {
+                    "score":6.8,
+                    "keywords":["contentProvider", "androidManifest"]
+                },
+                {
+                    "score": 2.2,
+                    "keywords":["debuggable", "codes"]
+                },
+                {
+                    "score": 7.5,
+                    "keywords":["debuggable"]
+                },
+                {
+                    "score": 8.4,
+                    "keywords": ["contentProvider", "androidManifest","SQLInjection"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "contentProvider",
@@ -120,6 +155,13 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score":5.5,
+                    "vecctorString":"CVSS:3.0/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+                    "keywords":["data leaked"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "data leaked",
@@ -176,6 +218,21 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["certificate pinning"]
+                },
+                {
+                    "score":8.0,
+                    "keywords":["network security"]
+                },
+                {
+                    "score": 7.5,
+                    "keywords":["ssl"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "trustManager",
@@ -263,6 +320,23 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M5-Insufficient_Cryptography"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores": [
+                {
+                    "score": 1.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
+                    "keywords":["sqlite", "encryption"]
+                },
+                {
+                    "score": 6.0,
+                    "vectorStringV3":"",
+                    "keywords":["keystore","crypto"]
+                },
+                {
+                    "scores": 7.4,
+                    "vectorString": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["encryption"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "master key",
@@ -326,6 +400,23 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                {
+                    "cvssV3": 2.0,
+                    "vectorStringV3": "AV:L/AC:L/PR:H/UI:R/S:U/C:N/I:L/A:N",
+                    "keywords":["unsafe delete file"]
+                },
+                {
+                    "score": 9.8,
+                    "vectorString": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords":["runtime command","critical"]
+                },
+                {
+                    "score": 8.8,
+                    "vectorString": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords":["runtime command"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "runtime command",
@@ -345,6 +436,18 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                 {
+                    "score": 2.8,
+                    "vectorString": "AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:L/A:N",
+                    "keywords": ["signature"]
+                 },
+                 {
+                    "score": 3.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:L/A:L",
+                    "keywords":["privilege"]
+                 }
+            ],
             "keywords":[
                 {
                     "name": "signature",
@@ -383,6 +486,13 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M9-Reverse_Engineering"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 5.2,
+                    "vectorString": "",
+                    "keywords":["identifiers"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "identifiers",
@@ -402,6 +512,18 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M10-Extraneous_Functionality"],
             "books_by_category": [],
             "articles_by_cateory": [],
+            "scores":[
+                {
+                    "scores": 5.0,
+                    "vectorString": "",
+                    "keywords":["sms"]
+                },
+                {
+                    "score": 6.6,
+                    "vectorStringV3": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:L",
+                    "keywords":["dynamic code"]
+                }
+            ],
             "keywords":[
                 {
                     "name": "sms",

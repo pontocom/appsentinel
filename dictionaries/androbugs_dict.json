@@ -46,7 +46,7 @@
       "level": "Notice",
       "cvssV3":2.2,
       "vectorStringV3": "AV:L/AC:H/PR:L/UI:R/S:U/C:N/I:L/A:N",
-      "keywords":["debuggable"]
+      "keywords":["debuggable", "codes"]
     },
     {
       "name": "Unnecessary Permission Checking",
@@ -166,7 +166,7 @@
       "level": "Critical",
       "cvssV3": 9.8,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-      "keywords":["runtime command"]
+      "keywords":["runtime command","critical"]
     },
     {
       "name": "SSL Implementation Checking (Verifying Host Name in Custom Classes)",
@@ -342,7 +342,7 @@
       "level": "Critical",
       "cvssV3": 8.4,
       "vectorStringV3": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-      "keywords":["androidManifest","contentProvider"]
+      "keywords":["androidManifest","contentProvider", "SQLInjection"]
     },
     {
       "name": "AndroidManifest \"intent-filter\" Settings Checking",
@@ -398,7 +398,7 @@
       "level": "Notice",
       "cvssV3": 3.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:L/A:L",
-      "keywords":["previlege"]
+      "keywords":["privilege"]
     },
     {
       "name": "Getting IMEI and Device ID",
@@ -446,7 +446,7 @@
       "level": "Notice",
       "cvssV3": 2.0,
       "vectorStringV3": "AV:L/AC:L/PR:H/UI:R/S:U/C:N/I:L/A:N",
-      "keywords":["file"]
+      "keywords":["file","unsafe delete file"]
     },
     {
       "name": "APK Installing Source Checking",
@@ -458,7 +458,7 @@
     },
     {
       "name": "WebView Local File Access Attacks Checking",
-      "category": "M8",
+      "category": "M1",
       "level": "Warning",
       "cvssV3": 6.5,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
@@ -486,7 +486,7 @@
       "level": "Critical",
       "cvssV2": 9.3,
       "vectorStringV2": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
-      "keywords":["webview"]
+      "keywords":["webview", "RCE"]
     }
   ]
 }

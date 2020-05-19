@@ -55,7 +55,7 @@ def init():
             print(file)
             # we need to do something with them... need to check if it is better to import or to spawn (decide later)
             thisPlugin = __import__(".".join(file.split(".")[0:-1]))
-            if thisPlugin.enable:
+            if thisPlugin.enable and thisPlugin not in enabled_plugins:
                 enabled_plugins.append(thisPlugin)
 
 
@@ -182,7 +182,8 @@ def feedback_levels(md5):
     #     'Critical': critical
     # })
 
-    data = {'status': 'OK', 'value': calculatorClass.calculate(md5)}
+    score_calculator = calculatorClass(md5)
+    data = {'status': 'OK', 'value': score_calculator.calculate()}
 
     with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
         json.dump(data, save_file)

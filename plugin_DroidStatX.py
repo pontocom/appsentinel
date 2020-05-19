@@ -29,6 +29,7 @@ class PluginClass:
         
     def run(self, apk_file, md5):
         print("Running the DroidStatX plugin!...")
+        
         log.debug("Running the DroidStatX plugin!...")
         # test the existence of the results directory
         if not os.path.exists(jsonResultsLocation):
@@ -38,17 +39,17 @@ class PluginClass:
         log.debug(pluginName + ": FILE -> " + apk_file)
 
         if apk_file[-4:] == ".apk":
+            # probably it is not necessary to have this... maybe apktool is enough for this
+            cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
+            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+            (output, err) = p.communicate()
+            apkPackageName = str(output)[15:-9]
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
             print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
             os.system(config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
-            # probably it is not necessary to have this... maybe apktool is enough for this
-            cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
-            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-            (output, err) = p.communicate()
-            apkPackageName = str(output)[15:-9]
             # convert .xmind file to JSON -> using xmindparser (already installed)
             # from here: https://github.com/tobyqin/xmindparser
             print(pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
