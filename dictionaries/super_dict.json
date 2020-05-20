@@ -142,7 +142,7 @@
             "level": "high",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": []
+            "keywords": ["authorization"]
         },
         {
             "name": "Temp File Use",

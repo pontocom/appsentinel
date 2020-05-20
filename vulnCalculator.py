@@ -1,18 +1,104 @@
 import database as db
 import json
 import configparser
+import os
+import os.path
+from os import path
+from statistics import mean
 
 ## Testing Try to lool config.ini file
 config = configparser.ConfigParser()
 config.read('config.ini')
 
+
 plugin_scores={}
+n_plugins=0
+enabled_plugins=[]
+enabled_plugins_name=[]
+
+# looking for the plugins
+pluginDir = os.path.dirname(os.path.abspath(__file__))
+for file in os.listdir(pluginDir):
+    if file[0:7] == "plugin_" and file[-3:] == ".py":
+        # print(file)
+        # we need to do something with them... need to check if it is better to import or to spawn (decide later)
+        thisPlugin = __import__(".".join(file.split(".")[0:-1]))
+        # print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
+        if thisPlugin.enable and thisPlugin not in enabled_plugins:
+            # print('Adding '+thisPlugin.pluginName)
+            enabled_plugins.append(thisPlugin)
+            enabled_plugins_name.append(thisPlugin.pluginName.lower())
+
+# print(str(enabled_plugins))
+print(str(enabled_plugins_name))
+
 for section in config.sections():
     if str(section) == 'TOOL_SCORES':
-        for (key, val) in config.items(section):
-            plugin_scores[key]=val
+        for (name, val) in config.items(section):
+            if name in enabled_plugins_name:
+                plugin_scores[name]=val
+                n_plugins +=1
 print(plugin_scores)
+
 ############################
+
+## Test for getting the vulnerability scores
+
+plugin_vuln_scores={}
+
+def are_equal(arr1, arr2):
+    if (len(arr1) != len(arr2)):
+        print('Not equal, different lengths')
+        return False
+    arr1.sort()
+    arr2.sort()
+    for i in range(0, len(arr1)-1):
+        if(arr1[i] != arr2[i]):
+            print(arr1[i]+' Not equal '+arr2[i])
+            return False
+    print('THEY ARE EQUAL')
+    return True
+
+
+try:
+    with open('json_results/final_output/feedback/89b72ba327be2606114a4099e88fd8c0.json', "r") as json_file:
+                feedback_content = json.load(json_file)
+    with open('dictionaries/baseKnowledge.json', "r") as json_file:
+                baseKnowledge = json.load(json_file)
+except Exception as e:
+    print('ERROR in VulnCalculator: ' +e)
+    print('Type od error: '+type(e))
+
+for category in feedback_content:
+    for vuln in feedback_content[category]:
+        vuln_name = vuln['vulnerability']
+        # print('Checking for '+vuln_name)
+        detectedby = vuln['detectedby'].lower()  # this detectedby has to be an array
+        if detectedby not in plugin_vuln_scores:
+            plugin_vuln_scores[detectedby] = []
+        with open('dictionaries/'+detectedby+'_dict.json', "r") as json_file:
+            plugin_dict = json.load(json_file)
+        for result in plugin_dict['results']:
+            if result['name'] == vuln_name and len(result['keywords']) > 0:
+                # print(vuln_name+' is equal to '+result['name'])
+                keywords=result['keywords']
+                for data in baseKnowledge['results']:
+                    if category == data['category']:
+                        for score in data['scores']:
+                            if keywords==score['keywords']:
+                                # print(str(keywords)+' is equal to '+str(score['keywords']))
+                                fscore = score['score']
+                                plugin_vuln_scores[detectedby].append(fscore)
+                                # print('Score: '+str(score)) 
+print('\n'+str(plugin_vuln_scores))
+
+dividend_total=0
+for plugin in plugin_vuln_scores:
+    print("Calculando "+plugin)
+    dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
+
+final_score = dividend_total/float(len(enabled_plugins))
+print('Final Score ---> '+str(final_score))
 class calculatorClass:
 
     config = configparser.ConfigParser()
@@ -23,12 +109,38 @@ class calculatorClass:
         ''' constructor '''
         self.md5=md5
         self.plugin_scores={}
+        self.setup()
 
-    def get_tools(self):
-        for section in config.sections():
+    # Seting up the calculator, getting the enabled plugins and their correspondent scores
+    def setup(self):
+        print('Setting up the Calculator')
+        n_plugins=0
+        enabled_plugins=[]
+        enabled_plugins_name=[]
+
+        # looking for the plugins
+        pluginDir = os.path.dirname(os.path.abspath(__file__))
+        for file in os.listdir(pluginDir):
+            if file[0:7] == "plugin_" and file[-3:] == ".py":
+                # print(file)
+                # we need to do something with them... need to check if it is better to import or to spawn (decide later)
+                thisPlugin = __import__(".".join(file.split(".")[0:-1]))
+                print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
+                if thisPlugin.enable and thisPlugin not in enabled_plugins:
+                    print('Adding '+thisPlugin.pluginName)
+                    enabled_plugins.append(thisPlugin)
+                    enabled_plugins_name.append(thisPlugin.pluginName.lower())
+
+        print(str(enabled_plugins))
+        print(str(enabled_plugins_name))
+
+        for section in self.config.sections():
             if str(section) == 'TOOL_SCORES':
-                for (key, val) in config.items(section):
-                    self.plugin_scores[key]=val
+                for (name, val) in self.config.items(section):
+                    if name in enabled_plugins_name:
+                        self.plugin_scores[name]=val
+                        n_plugins +=1
+        print(self.plugin_scores)
 
     def calculate(self):
 
