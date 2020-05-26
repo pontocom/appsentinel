@@ -14,19 +14,21 @@ apt-get install -y python-minimal python-pip curl python3.6 python3-pip git aapt
 # TODO !!! It needs user interaction, automate-it 
 # RUN mysql_secure_installation
 
-# Cloning the external tools
+# Cloning the external tools and install python dependencies
 RUN git clone https://github.com/AndroBugs/AndroBugs_Framework.git ./tools/AndroBugs && \
 git clone https://github.com/clviper/droidstatx.git ./tools/droidstatx && \
-git clone https://github.com/SUPERAndroidAnalyzer/super.git ./tools/super
-
-# Install python dependencies
-ADD requirements.txt /server/requirements.txt
-RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
+git clone https://github.com/SUPERAndroidAnalyzer/super.git ./tools/super && \
+pip3 install --trusted-host pypi.python.org -r requirements.txt
 
 # Setup tools
 RUN rm ./tools/AndroBugs/androbugs.py && \
 cp extra/androbugs/androbugs.py tools/AndroBugs/androbugs.py && \
-python3 ./tools/droidstatx/install.py
+python3 ./tools/droidstatx/install.py && \
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+# RUN (cd tools/super; cargo build --release) IT FREEZES DURING THIS BUILD
+
+
 
 CMD ["python3", "server.py"]
 
