@@ -3,18 +3,18 @@
     {
       "name": "SSL Connection Checking",
       "category": "M3",
-      "level": "critical",
+      "level": "Critical",
       "cvssV3":7.5,
       "vectorStringV3": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-      "keywords":["ssl"]
+      "keywords":["ssl","checking"]
     },
     {
       "name": "Security Methods Checking",
-      "category": "M1",
+      "category": "M3",
       "level": "Notice",
       "cvssV3":1.6,
       "vectorStringV3": "CVSS:3.0/AV:P/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N",
-      "keywords":["security"]
+      "keywords":["security","method"]
     },
     {
       "name": "Security Classes Checking",
@@ -22,7 +22,7 @@
       "level": "Notice",
       "cvssV3":1.6,
       "vectorStringV3": "CVSS:3.0/AV:P/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N",
-      "keywords":["security"]
+      "keywords":["security", "classes"]
     },
     {
       "name": "Master Key Type I Vulnerability",
@@ -46,7 +46,7 @@
       "level": "Notice",
       "cvssV3":2.2,
       "vectorStringV3": "AV:L/AC:H/PR:L/UI:R/S:U/C:N/I:L/A:N",
-      "keywords":["debuggable"]
+      "keywords":["debuggable", "codes"]
     },
     {
       "name": "Unnecessary Permission Checking",
@@ -62,7 +62,7 @@
       "level": "Critical",
       "cvssV3": 8.2,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-      "keywords":["permission", "androidManifest"]
+      "keywords":["permissionGroup", "androidManifest"]
     },
     {
       "name": "AndroidManifest System Use Permission Checking",
@@ -94,7 +94,7 @@
       "level": "Critical",
       "cvssV3": 7.5,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
-      "keywords":["encryption"]
+      "keywords":["encryption","base64", "encode"]
     },
     {
       "name": "KeyStore Protection Checking",
@@ -102,15 +102,15 @@
       "level": "Critical",
       "cvssV3": 7.1,
       "vectorStringV3": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
-      "keywords":["keyStore"]
+      "keywords":["keyStore","sensitiveInfo"]
     },
     {
       "name": "KeyStore Protection Information",
-      "category": "M5",
+      "category": "M2",
       "level": "Notice",
       "cvssV3": 3.7,
       "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
-      "keywords":["keyStore"]
+      "keywords":["keyStoreSSL"]
     },
     {
       "name": "KeyStore File Location",
@@ -118,15 +118,7 @@
       "level": "Notice",
       "cvssV3": 2.6,
       "vectorStringV3": "AV:A/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N",
-      "keywords":["keyStore"]
-    },
-    {
-      "name": "Possible KeyStore File Location",
-      "category": "M2",
-      "level": "Notice",
-      "cvssV3": 2.6,
-      "vectorStringV3": "AV:A/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N",
-      "keywords":["keyStore"]
+      "keywords":["keyStore", "location"]
     },
     {
       "name": "KeyStore Type Checking",
@@ -134,7 +126,7 @@
       "level": "Critical",
       "cvssV3": 8.2,
       "vectorStringV3":"CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-      "keywords":["keyStore"]
+      "keywords":["keyStore", "BKS"]
     },
     {
       "name": "Getting Signature Code Checking",
@@ -150,7 +142,7 @@
       "level": "Notice",
       "cvssV3": 1.8,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:L/A:N",
-      "keywords":["security"]
+      "keywords":["screenshot"]
     },
     {
       "name": "Runtime Command Checking",
@@ -174,7 +166,7 @@
       "level": "Critical",
       "cvssV3": 8.2,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-      "keywords":["ssl"]
+      "keywords":["ssl","checking","hostName","class"]
     },
     {
       "name": "SSL Implementation Checking (Verifying Host Name in Fields)",
@@ -182,7 +174,7 @@
       "level": "Critical",
       "cvssV3": 7.4,
       "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-      "keywords":["ssl"]
+      "keywords":["ssl","checking","hostName","fields"]
     },
     {
       "name": "SSL Implementation Checking (Insecure component)",
@@ -190,7 +182,7 @@
       "level": "Critical",
       "cvssV3": 7.4,
       "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-      "keywords":["ssl"]
+      "keywords":["ssl","checking","component"]
     },
     {
       "name": "SSL Implementation Checking (HttpHost)",
@@ -198,7 +190,7 @@
       "level": "Critical",
       "cvssV3": 7.4,
       "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-      "keywords":["ssl"]
+      "keywords":["ssl","checking","httpHost"]
     },
     {
       "name": "SSL Implementation Checking (WebViewClient for WebView)",
@@ -206,7 +198,7 @@
       "level": "Critical",
       "cvssV3": 7.4,
       "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
-      "keywords":["ssl"]
+      "keywords":["ssl","checking","webviewClient"]
     },
     {
       "name": "WebView Potential XSS Attacks Checking",
@@ -214,7 +206,7 @@
       "level": "Warning",
       "cvssV3": 5.4,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
-      "keywords": ["webview","xss"]
+      "keywords": ["xss"]
     },
     {
       "name": "SQLiteDatabase Transaction Deprecated Checking",
@@ -222,7 +214,7 @@
       "level": "Critical",
       "cvssV3":9.8,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-      "keywords":["sqlite"]
+      "keywords":["sqlite","transaction"]
     },
     {
       "name": "App Sandbox Permission Checking",
@@ -230,7 +222,7 @@
       "level": "Critical",
       "cvssV3": 7.1,
       "vectorStringV3": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
-      "keywords":["permission"]
+      "keywords":["permission", "sandbox"]
     },
     {
       "name": "Native Library Loading Checking",
@@ -246,7 +238,7 @@
       "level": "Notice",
       "cvssV3": 1.6,
       "vectorStringV3": "AV:P/AC:H/PR:H/UI:N/S:U/C:N/I:N/A:L",
-      "keywords":["methods"]
+      "keywords":["nativeMethods"]
     },
     {
       "name": "Encryption Framework - Bangcle",
@@ -254,7 +246,7 @@
       "level": "Notice",
       "cvssV3":0.0,
       "vectorStringV3": "",
-      "keywords":["encryption"]
+      "keywords":["encryption","bangcle"]
     },
     {
       "name": "Encryption Framework - Ijiami",
@@ -262,7 +254,7 @@
       "level": "Notice",
       "cvssV3":0.0,
       "vectorStringV3": "",
-      "keywords":["encryption"]
+      "keywords":["encryption","Ijiami"]
     },
     {
       "name": "Framework - MonoDroid",
@@ -270,7 +262,7 @@
       "level": "Notice",
       "cvssV3":0.0,
       "vectorStringV3": "",
-      "keywords":["encryption"]
+      "keywords":["encryption", "MonoDroid"]
     },
     {
       "name": "Dynamic Code Loading",
@@ -286,7 +278,7 @@
       "level": "Warning",
       "cvssV3": 6.1,
       "vectorStringV3": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:L/A:N",
-      "keywords":["storage"]
+      "keywords":["externalStorage"]
     },
     {
       "name": "Fragment Vulnerability Checking",
@@ -294,7 +286,7 @@
       "level": "Critical",
       "cvssV3": 8.1,
       "vectorStringV3": "AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:L",
-      "keywords":["fragment"]
+      "keywords":["fragmentInjection", "vulnerable"]
     },
     {
       "name": "AndroidManifest Dangerous ProtectionLevel of Permission Checking",
@@ -318,7 +310,7 @@
       "level": "Critical",
       "cvssV3": 7.8,
       "vectorStringV3": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-      "keywords":["permission","androidManifest"]
+      "keywords":["prefix","androidManifest"]
     },
     {
       "name": "AndroidManifest Exported Components Checking",
@@ -326,7 +318,7 @@
       "level": "Warning",
       "cvssV3": 6.1,
       "vectorStringV3": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N",
-      "keywords":["permission","androidManifest"]
+      "keywords":["components","androidManifest"]
     },
     {
       "name": "AndroidManifest Exported Components Checking 2",
@@ -334,15 +326,7 @@
       "level": "Notice",
       "cvssV3": 2.3,
       "vectorStringV3": "AV:L/AC:L/PR:H/UI:N/S:U/C:N/I:L/A:N",
-      "keywords":["permission","androidManifest"]
-    },
-    {
-      "name": "AndroidManifest ContentProvider Exported Checking",
-      "category": "M1",
-      "level": "Critical",
-      "cvssV3": 8.4,
-      "vectorStringV3": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-      "keywords":["androidManifest","contentProvider"]
+      "keywords":["components","androidManifest"]
     },
     {
       "name": "AndroidManifest \"intent-filter\" Settings Checking",
@@ -350,7 +334,7 @@
       "level": "Warning",
       "cvssV3": 4.4,
       "vectorStringV3": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
-      "keywords":["intent"]
+      "keywords":["intent-filter"]
     },
     {
       "name": "Implicit Service Checking",
@@ -374,7 +358,7 @@
       "level": "Notice",
       "cvssV3": 1.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
-      "keywords":["sqlite", "encryption"]
+      "keywords":["sqlite", "encryption","sqlCipher"]
     },
     {
       "name": "Android SQLite Databases Encryption (SQLite Encryption Extension (SEE))",
@@ -382,7 +366,7 @@
       "level": "Notice",
       "cvssV3": 1.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
-      "keywords":["sqlite", "encryption"]
+      "keywords":["sqlite", "encryption", "SEE"]
     },
     {
       "name": "Key for Android SQLite Databases Encryption",
@@ -390,7 +374,7 @@
       "level": "Notice",
       "cvssV3": 1.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
-      "keywords":["sqlite", "encryption"]
+      "keywords":["sqlite", "encryption","key"]
     },
     {
       "name": "Executing \"root\" or System Privilege Checking",
@@ -398,7 +382,7 @@
       "level": "Notice",
       "cvssV3": 3.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:L/A:L",
-      "keywords":["previlege"]
+      "keywords":["privilege"]
     },
     {
       "name": "Getting IMEI and Device ID",
@@ -406,7 +390,7 @@
       "level": "Warning",
       "cvssV3": 5.2,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:H/A:L",
-      "keywords":["identifiers"]
+      "keywords":["identifiers","IMEI"]
     },
     {
       "name": "Getting ANDROID_ID",
@@ -414,7 +398,7 @@
       "level": "Warning",
       "cvssV2": 4.3,
       "vectorStringV2": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
-      "keywords":["identifiers"]
+      "keywords":["identifiers","android_ID"]
     },
     {
       "name": "Codes for Sending SMS",
@@ -438,7 +422,7 @@
       "level": "Critical",
       "cvssV3": 9.1,
       "vectorStringV3": "AV:N/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H",
-      "keywords":["master key"]
+      "keywords":["master key","root"]
     },
     {
       "name": "File Unsafe Delete Checking",
@@ -446,7 +430,7 @@
       "level": "Notice",
       "cvssV3": 2.0,
       "vectorStringV3": "AV:L/AC:L/PR:H/UI:R/S:U/C:N/I:L/A:N",
-      "keywords":["file"]
+      "keywords":["file","unsafe delete file"]
     },
     {
       "name": "APK Installing Source Checking",
@@ -458,11 +442,11 @@
     },
     {
       "name": "WebView Local File Access Attacks Checking",
-      "category": "M8",
+      "category": "M1",
       "level": "Warning",
       "cvssV3": 6.5,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
-      "keywords":["webview", "localFile"]
+      "keywords":["webview", "fileAcess"]
     },
     {
       "name": "AndroidManifest Adb Backup Checking",
@@ -470,7 +454,7 @@
       "level": "Notice",
       "cvssV3": 0.0,
       "vectorStringV3": "",
-      "keywords":["androidManifest", "backup"]
+      "keywords":["adb"]
     },
     {
       "name": "SSL Certificate Verification Checking",
@@ -478,7 +462,7 @@
       "level": "Warning",
       "cvssV3": 9.1,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-      "keywords":["ssl"]
+      "keywords":["webview", "CA","ssl"]
     },
     {
       "name": "WebView RCE Vulnerability Checking",
@@ -486,7 +470,7 @@
       "level": "Critical",
       "cvssV2": 9.3,
       "vectorStringV2": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
-      "keywords":["webview"]
+      "keywords":["webview", "RCE"]
     }
   ]
 }
