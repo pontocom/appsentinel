@@ -1,19 +1,34 @@
-FROM python:3.7.3-slim
+FROM ubuntu:18.04
 
 # Adding server directory to make absolute filepaths consistent across services
-WORKDIR /server
+WORKDIR /appsentinel
 
 # Copy our code from the current folder to /server inside the container
-COPY . /server
+COPY . /appsentinel
 
 # Install system dependencies
 RUN apt-get update && \
 apt-get upgrade -y && \
-apt-get install -y python-pip git aapt
+apt-get install -y python-minimal python-pip curl python3.6 python3-pip git aapt default-jre mariadb-server
 
-# Install python dependencies
-ADD requirements.txt /server/requirements.txt
-RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
+# TODO !!! It needs user interaction, automate-it 
+# RUN mysql_secure_installation
+
+# Cloning the external tools and install python dependencies
+RUN git clone https://github.com/AndroBugs/AndroBugs_Framework.git ./tools/AndroBugs && \
+git clone https://github.com/clviper/droidstatx.git ./tools/droidstatx && \
+git clone https://github.com/SUPERAndroidAnalyzer/super.git ./tools/super && \
+pip3 install --trusted-host pypi.python.org -r requirements.txt
+
+# Setup tools
+RUN rm ./tools/AndroBugs/androbugs.py && \
+cp extra/androbugs/androbugs.py tools/AndroBugs/androbugs.py && \
+python3 ./tools/droidstatx/install.py && \
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+# RUN (cd tools/super; cargo build --release) IT FREEZES DURING THIS BUILD
+
+
 
 CMD ["python3", "server.py"]
 
