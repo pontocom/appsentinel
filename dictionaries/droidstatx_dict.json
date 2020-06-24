@@ -18,7 +18,7 @@
         },
         {
             "name": "Application is debuggable",
-            "category": "M7",
+            "category": "M1",
             "level": "Critical",
             "cvssV3":9.8,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
@@ -30,7 +30,7 @@
             "level": "Critical",
             "cvssV3": 8.1,
             "vectorStringV3": "AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:L",
-            "keywords":["fragmentInjection","vulnerable"]
+            "keywords":["fragmentInjection"]
         },
         {
             "name": "Activities with possible Fragment Injection (isValidFragment in place)",
@@ -38,7 +38,7 @@
             "level": "Warning",
             "cvssV3": 5.3,
             "vectorStringV3": "AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N",
-            "keywords":["fragmentInjection", "possible"]
+            "keywords":["fragmentInjection"]
         },
         {
             "name": "JavascriptInterface with RCE possibility",
@@ -46,7 +46,7 @@
             "level": "Critical",
             "cvssV2": 9.3,
             "vectorStringV2": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
-            "keywords":["xss"]
+            "keywords":["webview", "RCE"]
         },
         {
             "name": "JavascriptInterface available.",
@@ -86,7 +86,7 @@
             "level": "Critical",
             "cvssV3": 8.6,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:L",
-            "keywords":["trustManager", "CA","ssl"]
+            "keywords":["trustManager"]
         },
         {
             "name": "Webview with vulnerable SSL Implementation:",
@@ -102,7 +102,7 @@
             "level": "Critical",
             "cvssV3": 9.1,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-            "keywords":["hostNameVerifier", "ssl"]
+            "keywords":["hostNameVerifier"]
         },
         {
             "name": "setHostnameVerifier call with ALLOW_ALL_HOSTNAMES_VERIFIER",
@@ -110,7 +110,7 @@
             "level": "Critical",
             "cvssV3": 9.1,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-            "keywords":["setHostnameVerifier", "ssl"]
+            "keywords":["setHostnameVerifier"]
         },
         {
             "name": "Direct usage of Socket without HostnameVerifier",
@@ -118,7 +118,7 @@
             "level": "Critical",
             "cvssV3": 9.1,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
-            "keywords":["hostNameVerifier", "ssl","noUsage"]
+            "keywords":["hostNameVerifier","noUsage"]
         },
         {
             "name": "Usage of NetworkSecurityConfig file.",
@@ -150,7 +150,7 @@
             "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords":["flag_secure","sensitiveInfo"]
+            "keywords":["flag_secure"]
         },
         {
             "name": "Usage of AES with ECB Mode",
@@ -174,7 +174,7 @@
             "level": "Warning",
             "cvssV3": 6.0,
             "vectorStringV3": "",
-            "keywords":["keystore", "sensitiveInfoe"]
+            "keywords":["keystore"]
         }
 
     ]

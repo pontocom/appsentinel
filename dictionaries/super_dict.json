@@ -21,7 +21,7 @@
         {
             "name": "Manifest Debug",
             "deatils": "The application is in debug mode. This allows any malicious person to inject arbitrary code in the application. This option should only be used while in development.",
-            "category": "M7",
+            "category": "M1",
             "level": "Critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -34,7 +34,7 @@
             "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": ["url", "sensitiveInfo"]
+            "keywords": ["url", "disclosure"]
         },
         {
             "name": "Generic Exception in catch",
@@ -70,7 +70,7 @@
             "level": "Notice",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": ["IP", "sensitiveInfo"]
+            "keywords": ["IP", "disclosure"]
         },
         {
             "name": "Math Random method",
@@ -138,11 +138,11 @@
         {
             "name": "Write-Read in external storage",
             "deatils": "Application can read/write in external storage. Any app can read data written in external storage.",
-            "category": "M6",
+            "category": "M1",
             "level": "Critical",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": ["write","read","authorization"]
+            "keywords": ["write","read","external storage"]
         },
         {
             "name": "Temp File Use",
@@ -201,7 +201,7 @@
         {
             "name": "Super user privileges.",
             "deatils": "This applications may require super user privileges.",
-            "category": "M6",
+            "category": "M1",
             "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
@@ -268,7 +268,7 @@
             "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": ["encryption","base64","encode"]
+            "keywords": ["encryption","base64","decode"]
         },
         {
             "name": "Infinite Loop",
@@ -286,7 +286,7 @@
             "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": ["email","sensitiveInfo"]
+            "keywords": ["email","disclosure"]
         },
         {
             "name": "Certificate or Keystore disclosure",
@@ -295,7 +295,7 @@
             "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
-            "keywords": ["CA","keystore","sensitiveInfo"]
+            "keywords": ["keystore","disclosure"]
         },
         {
             "name": "Get SIM Operator",

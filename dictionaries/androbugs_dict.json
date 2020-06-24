@@ -18,7 +18,7 @@
     },
     {
       "name": "Security Classes Checking",
-      "category": "M1",
+      "category": "M3",
       "level": "Notice",
       "cvssV3":1.6,
       "vectorStringV3": "CVSS:3.0/AV:P/AC:H/PR:H/UI:R/S:U/C:L/I:N/A:N",
@@ -86,7 +86,7 @@
       "cvssV3" : 2.0,
       "vectorStringV3": "",
       "level": "Notice",
-      "keywords":["cloud"]
+      "keywords":["googleCloud","message"]
     },
     {
       "name": "Base64 String Encryption",
@@ -102,7 +102,7 @@
       "level": "Critical",
       "cvssV3": 7.1,
       "vectorStringV3": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
-      "keywords":["keyStore","sensitiveInfo"]
+      "keywords":["keystore"]
     },
     {
       "name": "KeyStore Protection Information",
@@ -110,7 +110,7 @@
       "level": "Notice",
       "cvssV3": 3.7,
       "vectorStringV3": "AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
-      "keywords":["keyStoreSSL"]
+      "keywords":["keystore","disclosure"]
     },
     {
       "name": "KeyStore File Location",
@@ -202,7 +202,7 @@
     },
     {
       "name": "WebView Potential XSS Attacks Checking",
-      "category": "M3",
+      "category": "M1",
       "level": "Warning",
       "cvssV3": 5.4,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
@@ -230,7 +230,7 @@
       "level": "Notice",
       "cvssV3": 2.7,
       "vectorStringV3": "AV:P/AC:H/PR:H/UI:N/S:U/C:N/I:L/A:L",
-      "keywords":["library"]
+      "keywords":["nativeLibrary"]
     },
     {
       "name": "Native Methods Checking",
@@ -286,7 +286,7 @@
       "level": "Critical",
       "cvssV3": 8.1,
       "vectorStringV3": "AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:L",
-      "keywords":["fragmentInjection", "vulnerable"]
+      "keywords":["fragmentInjection"]
     },
     {
       "name": "AndroidManifest Dangerous ProtectionLevel of Permission Checking",
@@ -334,7 +334,7 @@
       "level": "Warning",
       "cvssV3": 4.4,
       "vectorStringV3": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
-      "keywords":["intent-filter"]
+      "keywords":["androidManifest","intent-filter"]
     },
     {
       "name": "Implicit Service Checking",
@@ -362,7 +362,7 @@
     },
     {
       "name": "Android SQLite Databases Encryption (SQLite Encryption Extension (SEE))",
-      "category": "M2",
+      "category": "M5",
       "level": "Notice",
       "cvssV3": 1.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
@@ -370,7 +370,7 @@
     },
     {
       "name": "Key for Android SQLite Databases Encryption",
-      "category": "M2",
+      "category": "M5",
       "level": "Notice",
       "cvssV3": 1.9,
       "vectorStringV3": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
