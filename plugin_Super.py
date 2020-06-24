@@ -38,15 +38,11 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ': Running on -> ' + apk_file)
             log.debug(pluginName + ': Running on -> ' + apk_file)
-            os.chdir(superLocation)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
+            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + " --results ./results/")
+            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + " --results ./results/")
             # run the tool and move the json results to proper folder
-            os.system(config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
-            #os.system('mv results/'+)
-            print(os.system)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
+            os.system(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file +" --results ./results/")
+            
             path = './results/'
             fileName = glob.glob(path+"*")
             if not os.path.isdir(fileName[0]):  

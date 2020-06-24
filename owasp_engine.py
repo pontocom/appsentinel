@@ -9,6 +9,7 @@ import requests
 import plugin_DroidStatX as plugDroid
 import plugin_Androbugs as plugAbugs
 import plugin_Super as plugSuper
+from collections import Counter
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -29,7 +30,7 @@ plugins_dict ={ 'DroidStatX': [dictionaryDroidstatx, plugDroid], 'Androbugs': [d
 
 baseknowledge = config['DICTIONARY']['baseKnowledge']
 
-enabled_plugins=[]
+# enabled_plugins=[]
 
 
 def startEngine(md5):
@@ -48,106 +49,102 @@ def init():
     if not os.path.exists(resultsFeedbackVulnerabilityLevels):
         os.system("mkdir " + resultsFeedbackVulnerabilityLevels)
     # looking for the plugins
-    pluginDir = os.path.dirname(os.path.abspath(__file__))
+    # pluginDir = os.path.dirname(os.path.abspath(__file__))
 
-    for file in os.listdir(pluginDir):
-        if file[0:7] == "plugin_" and file[-3:] == ".py":
-            print(file)
-            # we need to do something with them... need to check if it is better to import or to spawn (decide later)
-            thisPlugin = __import__(".".join(file.split(".")[0:-1]))
-            if thisPlugin.enable:
-                enabled_plugins.append(thisPlugin)
+    # for file in os.listdir(pluginDir):
+    #     if file[0:7] == "plugin_" and file[-3:] == ".py":
+    #         print(file)
+    #         # we need to do something with them... need to check if it is better to import or to spawn (decide later)
+    #         thisPlugin = __import__(".".join(file.split(".")[0:-1]))
+    #         if thisPlugin.enable:
+    #             enabled_plugins.append(thisPlugin)
 
 
 def feedback(md5):
+    dataNormalization = {}
+    dataNormalization['results']=[]
     data={}
     owasp_category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
-    for o in owasp_category:
-       data[o]= []
+    for category in owasp_category:
+       data[category]= []
+       dataNormalization[category] = []
     with open(baseknowledge, 'r') as bk_file:
         bk_content = json.load(bk_file)
-    for plugin in enabled_plugins:
-        if path.isfile(jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json') and os.stat(jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json').st_size > 0:
-            with open(jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json') as plugin_output:
-                print("OEngine: Reading -> " + jsonResultsLocation + '/' + plugin.pluginName + '/' + md5 + '.json')
-                read_data = json.load(plugin_output)
-            dict_plugin_name = plugin.pluginName.lower()
-            with open('./dictionaries/'+dict_plugin_name+'_dict.json', 'r') as d:
-                dict = json.load(d)
-            for x in read_data['results']:
-                
-                for z in owasp_category:
-                    for y in dict['results']:
+    for plugin in plugins_dict:
+        if plugins_dict[plugin][1].enable:
+            if path.isfile(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json') and os.stat(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json').st_size > 0:
+                with open(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json') as plugin_output:
+                    print("OEngine: Reading -> " + jsonResultsLocation + '/' + plugin + '/' + md5 + '.json')
+                    read_data = json.load(plugin_output)
+                dict_plugin_name = plugin.lower()
+                with open('./dictionaries/'+dict_plugin_name+'_dict.json', 'r') as d:
+                    dictionary = json.load(d)
+                for x in read_data['results']:
+                    
+                    for z in owasp_category:
+                        for y in dictionary['results']:
 
-                        if y['category'] == z:
+                            if y['category'] == z:
 
-                            if y['name'] == x['vulnerability'] :
-                                q = """and y['level'] == x['severity']"""
-                                data[z].append({
-                                    'vulnerability': x['vulnerability'],
-                                    'details': x['details'],
-                                    'severity': x['severity'],
-                                    'detectedby': plugin.pluginName,
-                                    'feedback': {
-                                        "url": [] ,
-                                        "video": "",
-                                        "book": [],
-                                        "other": "Nothing to show"
-                                    }
-                                })
-                                                
-            for category in owasp_category:                     
-                for d in data[category]:
-                    for info in dict['results']:
-                        if d['vulnerability']== info['name']:
+                                if y['name'] == x['vulnerability'] :
 
-                            for content in bk_content['results']:
-                                for bk_info in content['keywords']:
-                                    for keyword in info['keywords']:
-                                        
-                                        if keyword==bk_info['name']:
-                                            for link in bk_info['links']:
-                                                d['feedback']['url'].append(link)
-                                                                
+                                    data[z].append({
+                                        'vulnerability': x['vulnerability'],
+                                        'details': x['details'],
+                                        'severity': x['severity'],
+                                        'detectedby': [plugin],
+                                        'feedback': {
+                                            "url": [] ,
+                                            "video": "",
+                                            "book": [],
+                                            "other": "Nothing to show"
+                                        },
+                                        'keywords': y['keywords']
+                                    })
+                                                    
+                for category in owasp_category:                     
+                    for d in data[category]:
+                        for info in dictionary['results']:
+                            if d['vulnerability']== info['name']:
 
-    # if plugDroid.enable:
-    #     with open(dictionaryDroidstatx, 'r') as d:
-    #         dict = json.load(d)
-    #     for name in plugins_name_sorted:
-    #         if path.isfile(jsonResultsLocation + '/' + name + '/' + md5 + '.json') and os.stat(jsonResultsLocation + '/' + name + '/' + md5 + '.json').st_size > 0:
-    #             with open(jsonResultsLocation + '/' + name + '/' + md5 + '.json') as plugin_output:
-    #                 read_data = json.load(plugin_output)
-    #             for category in owasp_category:
-    #                 for x in read_data[category]:
-    #                     data[category].append({
-    #                                         'vulnerability': x['vulnerability'],
-    #                                         'details': x['details'],
-    #                                         'severity': x['severity'],
-    #                                         'detectedby': 'DroidStatX',
-    #                                         'feedback':{
-    #                                             "url": [] ,
-    #                                             "video": "",
-    #                                             "book": [],
-    #                                             "other": "Nothing to show"
-    #                                         }
+                                for content in bk_content['results']:
+                                    for bk_info in content['keywords']:
+                                        for keyword in info['keywords']:
                                             
-    #                                     })
-    #     for category in owasp_category:                     
-    #         for d in data[category]:
-    #             #print(d['vulnerability'])
-    #             for info in dict['results']:
-    #                 if d['vulnerability']== info['name']:
+                                            if keyword==bk_info['name']:
+                                                for link in bk_info['links']:
+                                                    d['feedback']['url'].append(link)
 
-    #                     for content in bk_content['results']:
-    #                         for bk_info in content['keywords']:
-    #                             for keyword in info['keywords']:
-                                    
-    #                                 if keyword==bk_info['name']:
-    #                                     for link in bk_info['links']:
-    #                                         d['feedback']['url'].append(link)
+    isEqual = False
+    dataNormalization = data
+    for category in owasp_category:
+        #dataNormalization[category]=[]
+        for vul1 in data[category]:
+            #if dataNormalization[category]==[]:
+                #dataNormalization[category].append(vul1)
+            #print(vul1['keywords'])
+            for vul2 in dataNormalization[category]:
+                #if vul1 not in dataNormalization[category]:
+                    #print(vul2['keywords'][0] +' '+ vul1['keywords'][0])
+                if vul2['keywords'][0] == vul1['keywords'][0]:
+                    
+                    isEqual == True
+                    #print(vul2['detectedby'][0]+ ' '+vul1['detectedby'][0])
+
+                    if vul2['detectedby'][0] != vul1['detectedby'][0]:
+                        vul2['detectedby'].append(vul1['detectedby'][0])
+                vul2['detectedby']=list(dict.fromkeys(vul2['detectedby']))
+    
+    for category in owasp_category:
+        for key in dataNormalization[category]:
+            for key2 in dataNormalization[category]:
+                if Counter(key2['keywords']) == Counter(key['keywords']):
+                    if key2['vulnerability'] != key['vulnerability']:
+                        dataNormalization[category].remove(key2)
+                                            
             
     with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
-        json.dump(data, f)
+        json.dump(dataNormalization, f)
     db.insert_final_results(md5, resultsFeedback + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
 
 
