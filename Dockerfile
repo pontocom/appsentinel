@@ -23,7 +23,7 @@ pip3 install --trusted-host pypi.python.org -r requirements.txt
 # Setup tools
 RUN rm ./tools/AndroBugs/androbugs.py && \
 cp extra/androbugs/androbugs.py tools/AndroBugs/androbugs.py && \
-python3 ./tools/droidstatx/install.py && \
+cd tools/droidstatx; python3 install.py; cd ../.. && \
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 # RUN (cd tools/super; cargo build --release) IT FREEZES DURING THIS BUILD
