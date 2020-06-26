@@ -418,13 +418,15 @@ def run_time_plugins():
 
 if __name__ == "__main__":
     # 1st to run
-    run_sequence_tests_from_scraping()
+    # run_sequence_tests_from_scraping()
     # run_tests_for_ext_apps()
     # 2nd to run
     # run_post_processing()
     # 3rd to run
     # put_the_results_on_database()
+    # 4th to run
     # get_num_vulns()
+    # 5th to run
     # get_riskLevels()
     # run_time_plugins()
     workbook.close()
