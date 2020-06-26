@@ -6,15 +6,13 @@ from bs4 import BeautifulSoup
 import manager as man
 import configparser
 
-
 config = configparser.ConfigParser()
 config.read('config.ini')
 
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
 dir = config['DOWNLOAD']['apkDownloadDir']
 
-BASE_URL = "https://en.aptoide.com"
-DEFAULT_URL = BASE_URL + "/group/applications"
+DEFAULT_URL = "https://en.aptoide.com/group/applications"
 
 APPS_PER_CATEGORY = 1
 
@@ -40,24 +38,26 @@ def run_scrapper():
     rows = 1
 
     # print("Extracting categories...")
-    categories = html.find_all(class_="bundle-header__ButtonContainer-sc-5qh14w-2")
+    categories = html.find_all(class_="aptweb-button aptweb-button--see-more")
 
     for category in categories:
         category_location = category.find("a")['href']
-        print("Entering -> " + BASE_URL + category_location)
+        print("Entering -> " + category_location)
 
-        category_page_response = requests.get(BASE_URL + category_location)
+        category_page_response = requests.get(category_location)
         category_page_html = BeautifulSoup(category_page_response.text, 'html.parser')
 
         category_name = category_page_html.find("h1").text.strip()
-        print("CATEGORY = [" + category_name + "]")
+        print(category_name)
 
         # bundle = category_page_html.find_all(class_="bundle")
-        # cat_button_more_location = category_page_html.find_all(class_="bundle")[0].find(class_="aptweb-button aptweb-button--see-more").find("a")['href']
-        # print("Now getting -> " + cat_button_more_location)
+        cat_button_more_location = \
+        category_page_html.find_all(class_="bundle")[0].find(class_="aptweb-button aptweb-button--see-more").find("a")[
+            'href']
+        print("Now getting -> " + cat_button_more_location)
 
-        # apps_page_response = requests.get(cat_button_more_location)
-        # apps_page_html = BeautifulSoup(apps_page_response.text, 'html.parser')
+        apps_page_response = requests.get(cat_button_more_location)
+        apps_page_html = BeautifulSoup(apps_page_response.text, 'html.parser')
 
         apps_html = apps_page_html.find_all(class_="bundle-item__info__span bundle-item__info__span--big")
 
