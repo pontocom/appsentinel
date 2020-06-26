@@ -24,6 +24,9 @@ jsonResultsLocationLevels = config['SCANNER']['jsonResultsLocation'] + "/" + plu
 
 androbugsLocation = config['ANDROBUGS']['androbugsLocation']
 
+dictionary = config['DICTIONARY']['androbugsDict']
+
+
 
 class PluginClass:
     def __init__(self):

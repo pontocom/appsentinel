@@ -20,6 +20,9 @@ droidStatXLocation = config['DROIDSTATX']['droidStatXLocation']
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation'] + "/" + pluginName + "/"
 
+dictionary = config['DICTIONARY']['droidstatxDict']
+
+
 
 class PluginClass:
     def __init__(self):
@@ -82,14 +85,16 @@ class PluginClass:
 
 
     def analyseVulnerability(self, md5):
-        output={}
-        m_aux_array= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
-        for level in m_aux_array:
-            output[level] = []
+        data = {}
+        data['results'] = []
+        #output={}
+        #m_aux_array= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
+        #for level in m_aux_array:
+        #    output[level] = []
         with open(jsonResultsLocation + md5 + '.json', 'r') as f:
             read_data = json.load(f)
-        data = read_data[0]
-        methodology = data['topic']['topics'][1]['topics']
+        content = read_data[0]
+        methodology = content['topic']['topics'][1]['topics']
 
         for m_level in methodology:
             m_title=m_level['title']
@@ -127,15 +132,27 @@ class PluginClass:
                         else:
                             _link = vulnerability['link']
 
-                        output[self.owasp_level(m_title)].append({
+                        #data[self.owasp_level(m_title)].append({
+                        #    'vulnerability': vulnerability['title'],
+                        #    'severity': _severity,
+                        #    'link': _link,
+                        #    'details' : _details,
+                        #    'detectedby': 'droidstatx'})
+
+                        data['results'].append({
                             'vulnerability': vulnerability['title'],
+                            'details': "",
                             'severity': _severity,
-                            'link': _link,
-                            'details' : _details,
-                            'detectedby': 'droidstatx'})
+                            'detectedby': 'Droidstatx',
+                            'feedback': [{"url": ""},
+                                         {"video": ""},
+                                         {"book": ""},
+                                         {"other": ""}]
+                        })
+
 
         with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
-            json.dump(output, outfile)
+            json.dump(data, outfile)
 
 
     # set the current OWASP M level
@@ -158,13 +175,13 @@ class PluginClass:
     def flag_to_severity(self, flag):
         switcher = {
             #'flag-green': 'info',
-            'flag-yellow': 'Warning',
-            'flag-red': 'Critical'
+            'flag-yellow': 'warning',
+            'flag-red': 'critical'
         }
         return switcher.get(flag, "nothing")
 
     # some vulnerabilities have topics that contains more vulnerabilites
-    def hasMoreVulnerabilities(vulnerability):
+    def hasMoreVulnerabilities(self, vulnerability):
         if 'topics' not in vulnerability:
             return False
         else:
