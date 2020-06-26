@@ -11,6 +11,10 @@ config.read('config.ini')
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 
+plugins = []
+thisPlugin = None
+counter_plugins = 0
+
 # location of the unprocessed APKs
 # apkDir = "/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/"
 
@@ -51,11 +55,6 @@ A tool to scan APKs and look for vulnerabilities
 if __name__=="__main__":
     VERSION = '0.1'
     banner = "SCANNER"
-
-    plugins = []
-    thisPlugin = 0
-    counter_plugins = 0
-
     print(str(banner))
 
     text = "Tool that scans APKs and looks for vulnerabilities"
@@ -72,8 +71,12 @@ if __name__=="__main__":
     apkFile = args.apkfile[0]
     md5Id = args.md5Id[0]
 
-    print("APK FILE -> " + apkFile)
-    print("APK MD5 -> " + md5Id)
+    #if args.apkfile != "":
+    #    apkFile = args.apkfile[0]
+    #    print("APK FILE -> " + apkFile)
+    #else:
+    #    md5Id = args.md5Id[0]
+    #    print("APK MD5 -> " + md5Id)
 
     # looking for the plugins
     pluginDir = os.path.dirname(os.path.abspath(__file__))

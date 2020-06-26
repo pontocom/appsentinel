@@ -283,3 +283,21 @@ def insert_rules(info, notice, warning, critical, vulnerability_name, videos, li
     db.close()
     return True
 
+def reset_database(tables):
+    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
+                         config['MYSQL']['database'])
+    cursor = db.cursor()
+    for table in tables:
+        sql = "DELETE FROM " + str(table)
+        try:
+            print(sql)
+            log.debug(sql)
+            cursor.execute(sql)
+            db.commit()
+        except:
+            print("AN ERROR OCCURED WHILE DELETING DATA -> " + sql)
+            log.debug("AN ERROR OCCURED WHILE DELETING DATA -> " + sql)
+            db.rollback()
+            return False
+    db.close()
+    return True
