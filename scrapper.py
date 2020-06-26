@@ -121,6 +121,8 @@ def run_analyse_downloads():
             sheet.write(rows, 1, id_app)
             # download the APK to local temp dir
             data = man.get_json_data(id_app)
+            print(data)
+            exit(0)
 
             print("[" + str(count) + "][" + data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" + data["nodes"]["meta"]["data"]["name"] + "]")
             sheet.write(rows, 0, count)
@@ -159,5 +161,5 @@ A tool to scan APKs and look for vulnerabilities
 if __name__ == "__main__":
     # run_scrapper()
     # download_all_apks()
-    # run_analyse_downloads()
+    run_analyse_downloads()
     workbook.close()
