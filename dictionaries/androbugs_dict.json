@@ -62,7 +62,7 @@
       "level": "Critical",
       "cvssV3": 8.2,
       "vectorStringV3": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
-      "keywords":["permissionGroup", "androidManifest"]
+      "keywords":["permission", "androidManifest"]
     },
     {
       "name": "AndroidManifest System Use Permission Checking",
