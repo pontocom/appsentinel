@@ -72,24 +72,74 @@ except Exception as e:
 for category in feedback_content:
     for vuln in feedback_content[category]:
         vuln_name = vuln['vulnerability']
-        # print('Checking for '+vuln_name)
-        detectedby = vuln['detectedby'].lower()  # this detectedby has to be an array
-        if detectedby not in plugin_vuln_scores:
-            plugin_vuln_scores[detectedby] = []
-        with open('dictionaries/'+detectedby+'_dict.json', "r") as json_file:
-            plugin_dict = json.load(json_file)
-        for result in plugin_dict['results']:
-            if result['name'] == vuln_name and len(result['keywords']) > 0:
-                # print(vuln_name+' is equal to '+result['name'])
-                keywords=result['keywords']
-                for data in baseKnowledge['results']:
-                    if category == data['category']:
-                        for score in data['scores']:
-                            if keywords==score['keywords']:
-                                # print(str(keywords)+' is equal to '+str(score['keywords']))
-                                fscore = score['score']
-                                plugin_vuln_scores[detectedby].append(fscore)
-                                # print('Score: '+str(score)) 
+        print('Checking for '+vuln_name)
+        detectedby=""
+        if isinstance(vuln['detectedby'], list):
+            detectedby = []
+            for plug in vuln['detectedby']:
+                detectedby.append(plug.lower())
+        else:
+            print('IS NOT A LIST')
+            break
+            # detectedby = vuln['detectedby'].lower()  # this detectedby has to be an array
+        # for detectedby as an Array
+        for p in detectedby:
+            print('checking if '+p+' is in '+str(plugin_vuln_scores))
+            if p not in plugin_vuln_scores:
+                print('Plugin: '+p+' plug_vulns: '+str(plugin_vuln_scores))
+                print('Adding '+p+' in plugin_vuln_scores')
+                plugin_vuln_scores[p] = []
+        for plug in detectedby:
+            # if plug not in plugin_vuln_scores:
+            #     print('Adding '+plug+' in plugin_vuln_scores')
+            #     plugin_vuln_scores[plug] = []
+            with open('dictionaries/'+plug+'_dict.json', "r") as json_file:
+                plugin_dict = json.load(json_file)
+            for result in plugin_dict['results']:
+                if result['name'] == vuln_name and len(result['keywords']) > 0:
+                    print('Checking: '+vuln_name+' is equal to '+result['name'])
+                    keywords=result['keywords']
+                    print('These are the keywords for this vuln: '+str(keywords))
+                    for data in baseKnowledge['results']:
+                        if category == data['category']:
+                            _aux = {}
+                            _aux_score = 0
+                            isMatch = False
+                            for score in data['scores']:
+                                print('Comparing: '+str(keywords)+' with '+str(score['keywords']))
+                                # checking if there are more matching keywords
+                                if len(_aux)<len(set(keywords)&set(score['keywords'])):
+                                    print('NEW CANDIDATE')
+                                    _aux = set(keywords)&set(score['keywords'])
+                                    _aux_score = score['score']
+                                print('Test: '+str(_aux))
+                                if keywords==score['keywords']:
+                                    isMatch = True
+                                    _aux_score = score['score']
+                                    break
+                            fscore = _aux_score
+                            ## Adding the score for each plugin that detected it
+                            for plugin in detectedby:
+                                plugin_vuln_scores[plugin].append(fscore)
+                                print('plugin_vuln_scores: '+str(plugin_vuln_scores))
+                            print('Score: '+str(score))
+        # if detectedby not in plugin_vuln_scores:
+        #     plugin_vuln_scores[detectedby] = []
+        # with open('dictionaries/'+detectedby+'_dict.json', "r") as json_file:
+        #     plugin_dict = json.load(json_file)
+        # for result in plugin_dict['results']:
+        #     if result['name'] == vuln_name and len(result['keywords']) > 0:
+        #         print('Checking: '+vuln_name+' is equal to '+result['name'])
+        #         keywords=result['keywords']
+        #         for data in baseKnowledge['results']:
+        #             if category == data['category']:
+        #                 for score in data['scores']:
+        #                     print('Comparing: '+str(keywords)+' with '+str(score['keywords']))
+        #                     if keywords==score['keywords']:
+        #                         print(str(keywords)+' is equal to '+str(score['keywords']))
+        #                         fscore = score['score']
+        #                         plugin_vuln_scores[detectedby].append(fscore)
+        #                         print('Score: '+str(score)) 
 print('\n'+str(plugin_vuln_scores))
 
 dividend_total=0
