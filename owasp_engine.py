@@ -36,8 +36,8 @@ baseknowledge = config['DICTIONARY']['baseKnowledge']
 def startEngine(md5):
     init()
     feedback(md5)
-    #feedback_vulnerability_levels(md5)
-    #feedback_levels(md5)
+    feedback_vulnerability_levels(md5)
+    feedback_levels(md5)
 
 
 def init():
@@ -182,15 +182,7 @@ def feedback_levels(md5):
     # })
 
     score_calculator = calculatorClass(md5)
-
-    # Here the calculator is being used for test purposes
-    # score_calculator.calculate_all_test()
-    # data = {'status':'OK', 'value':score_calculator.test_score_results}
-    # with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
-    #     json.dump(data, save_file)
-    
-    # Normal usage of the calculator
-    data = {'status': 'OK', 'value': score_calculator.calculate_method_simple()}
+    data = {'status': 'OK', 'value': score_calculator.calculate()}
 
     with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
         json.dump(data, save_file)

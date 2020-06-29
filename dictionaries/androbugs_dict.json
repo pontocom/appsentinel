@@ -274,7 +274,7 @@
     },
     {
       "name": "External Storage Accessing",
-      "category": "M2",
+      "category": "M6",
       "level": "Warning",
       "cvssV3": 6.1,
       "vectorStringV3": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:L/A:N",
@@ -294,7 +294,7 @@
       "level": "Critical",
       "cvssV3": 8.0,
       "vectorStringV3": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:L",
-      "keywords":["permission","androidManifest"]
+      "keywords":["permission","androidManifest","dangerous"]
     },
     {
       "name": "AndroidManifest Normal ProtectionLevel of Permission Checking",
@@ -302,7 +302,7 @@
       "level": "Warning",
       "cvssV3": 6.1,
       "vectorStringV3": "AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:L",
-      "keywords":["permission","androidManifest"]
+      "keywords":["permission","androidManifest","normal"]
     },
     {
       "name": "AndroidManifest Exported Lost Prefix Checking",
