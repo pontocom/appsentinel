@@ -8,7 +8,7 @@ import datetime
 
 urlApsList = 'http://ws75.aptoide.com/api/7/apps/get/sort=downloads/order=DESC/limit='
 
-APPS_PER_GROUP = 1
+APPS_PER_GROUP = 10
 
 # -------- get apks list -------
 totalApps = 0
