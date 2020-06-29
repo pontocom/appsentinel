@@ -215,8 +215,10 @@ def get_num_vulns():
 def run_post_processing():
     vars1 = ["#", "MD5", "Androbugs"]
     vars2 = ["#", "MD5", "Droidstatx"]
+    vars3 = ["#", "MD5", "Super"]
     sheet1 = workbook.add_worksheet("Androbugs")
     sheet2 = workbook.add_worksheet("Droidstatx")
+    sheet2 = workbook.add_worksheet("Super")
     bold = workbook.add_format({'bold': True})
     # write the header
     cols = 0
@@ -225,6 +227,11 @@ def run_post_processing():
         cols = cols + 1
     cols = 0
     for var in vars2:
+        sheet2.write(0, cols, var, bold)
+        cols = cols + 1
+
+    cols = 0
+    for var in vars3:
         sheet2.write(0, cols, var, bold)
         cols = cols + 1
 
@@ -263,6 +270,24 @@ def run_post_processing():
             rows = rows + 1
 
     print("[DROIDSTATX COUNT]" + str(count))
+
+    count = 0
+    rows = 1
+
+    for file in os.listdir(dir_results + "/Super"):
+        if file[-5:] == ".json":
+            id_app = file[-37:-5]
+            count = count + 1
+            sheet2.write(rows, 0, count)
+            sheet2.write(rows, 1, id_app)
+            print("[SUPER][" + str(count) + "][" + id_app + "][" + file + "]")
+            if os.path.getsize(dir_results + "/Super/" + file) == 0:
+                sheet2.write(rows, 2, "N")
+            else:
+                sheet2.write(rows, 2, "Y")
+            rows = rows + 1
+
+    print("[SUPER COUNT]" + str(count))
 
 
 def run_multiple_tests(number_apk):
@@ -425,7 +450,7 @@ if __name__ == "__main__":
     # 3rd to run
     # put_the_results_on_database()
     # 4th to run
-    # get_num_vulns()
+    get_num_vulns()
     # 5th to run
     # get_riskLevels()
     # run_time_plugins()
