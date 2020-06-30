@@ -71,19 +71,19 @@ class PluginClass:
             content = json.load(json_file)
 
         for key in content['criticals']:
-            data[key['name']]=[key['description'], key['criticality']]
+            data[key['name']]=[key['description'], 'Critical']
 
         for key in content['highs']:
-            data[key['name']]=[key['description'], key['criticality']]
+            data[key['name']]=[key['description'], 'Critical']
 
         for key in content['mediums']:
-            data[key['name']]=[key['description'], key['criticality']]
+            data[key['name']]=[key['description'], 'Warning']
 
         for key in content['lows']:
-            data[key['name']]=[key['description'], key['criticality']]
+            data[key['name']]=[key['description'], 'Notice']
 
         for key in content['warnings']:
-            data[key['name']]=[key['description'], key['criticality']]
+            data[key['name']]=[key['description'], 'Notice']
 
         
         for key in data:
