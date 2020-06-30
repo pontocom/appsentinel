@@ -13,8 +13,8 @@ config.read('config.ini')
 appsentinel = config['GENERAL']['appsentinel']
 
 locations = [
-    config['DOWNLOAD']['apkDownloadDir'],
-    config['DOWNLOAD']['jsonDir'], 
+    #config['DOWNLOAD']['apkDownloadDir'],
+    #config['DOWNLOAD']['jsonDir'], 
     config['DROIDSTATX']['dstatx_out_txt'], 
     config['DROIDSTATX']['dstatx_out_xmind'], 
     config['OWASP_OUTPUT']['feedbackResultsLocation'], 
@@ -22,7 +22,8 @@ locations = [
     config['OWASP_OUTPUT']['feedback_vuln_levelsResultsLocation'],
     config['SCANNER']['json_results_androbugs'],
     config['SCANNER']['json_results_droidstatx'],
-    config['DROIDSTATX']['dstatx_out_apktool']
+    config['DROIDSTATX']['dstatx_out_apktool'],
+    config['SCANNER']['json_results_super']
     ]
 
 # First delete files in file system
@@ -58,3 +59,4 @@ tables = [
     'apkvulnerabilitylevel'
 ]
 db.reset_database(tables)
+
