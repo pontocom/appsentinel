@@ -89,71 +89,76 @@ class PluginClass:
         data = {}
         data['results'] = []
         #output={}
-        #m_aux_array= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
+        category= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
         #for level in m_aux_array:
         #    output[level] = []
-        with open(jsonResultsLocation + md5 + '.json', 'r') as f:
-            read_data = json.load(f)
-        content = read_data[0]
-        methodology = content['topic']['topics'][1]['topics']
+        try:
+            with open(jsonResultsLocation + md5 + '.json', 'r') as f:
+                read_data = json.load(f)
+            content = read_data[0]
+            methodology = content['topic']['topics'][1]['topics']
 
-        for m_level in methodology:
-            m_title=m_level['title']
-            for vulnerability in m_level['topics']:
-                if 'makers' in vulnerability:
-                    if 'green' in vulnerability['makers'][0]:
-                        continue
-                    else:
-               # if '?' not in vulnerability['title']:
-                        _link = ''
-                        _severity = ''
-                        _details = 'nothing'
-                        #if hasMoreVulnerabilities(vulnerability):
-                        #    analyseVulnerability(vulnerability['topics'])
-                        # inside a vulnerabilities there is another JSON array with some details
-                        # if 'topics' in vulnerability:
-                        #     i = 0
-                        #     for detail in vulnerability['topics']:
-                        #         if '?' not in detail['title']:
-                        #             _details[i]=detail['title']
-                        #         i = i+1
-                        # else:
-                        #     _details = 'nothing'
-
-                        # some vulnerabilities dont have flags
-
-                        #if 'makers' not in vulnerability:
-                        #    _severity = 'info'
-                        #else:
-                        _severity = self.flag_to_severity(vulnerability['makers'][0])
-
-                        # some vulnerabilities dont have links
-                        if 'link' not in vulnerability:
-                            _link = 'nothing'
+            for m_level in methodology:
+                m_title=m_level['title']
+                for vulnerability in m_level['topics']:
+                    if 'makers' in vulnerability:
+                        if 'green' in vulnerability['makers'][0]:
+                            continue
                         else:
-                            _link = vulnerability['link']
+                # if '?' not in vulnerability['title']:
+                            _link = ''
+                            _severity = ''
+                            _details = 'nothing'
+                            #if hasMoreVulnerabilities(vulnerability):
+                            #    analyseVulnerability(vulnerability['topics'])
+                            # inside a vulnerabilities there is another JSON array with some details
+                            # if 'topics' in vulnerability:
+                            #     i = 0
+                            #     for detail in vulnerability['topics']:
+                            #         if '?' not in detail['title']:
+                            #             _details[i]=detail['title']
+                            #         i = i+1
+                            # else:
+                            #     _details = 'nothing'
 
-                        #data[self.owasp_level(m_title)].append({
-                        #    'vulnerability': vulnerability['title'],
-                        #    'severity': _severity,
-                        #    'link': _link,
-                        #    'details' : _details,
-                        #    'detectedby': 'droidstatx'})
+                            # some vulnerabilities dont have flags
 
-                        data['results'].append({
-                            'vulnerability': vulnerability['title'],
-                            'details': "",
-                            'severity': _severity,
-                            'detectedby': 'Droidstatx',
-                            'feedback': [{"url": ""},
-                                         {"video": ""},
-                                         {"book": ""},
-                                         {"other": ""}]
-                        })
+                            #if 'makers' not in vulnerability:
+                            #    _severity = 'info'
+                            #else:
+                            _severity = self.flag_to_severity(vulnerability['makers'][0])
+
+                            # some vulnerabilities dont have links
+                            if 'link' not in vulnerability:
+                                _link = 'nothing'
+                            else:
+                                _link = vulnerability['link']
+
+                            #data[self.owasp_level(m_title)].append({
+                            #    'vulnerability': vulnerability['title'],
+                            #    'severity': _severity,
+                            #    'link': _link,
+                            #    'details' : _details,
+                            #    'detectedby': 'droidstatx'})
+
+                            data['results'].append({
+                                'vulnerability': vulnerability['title'],
+                                'details': "",
+                                'severity': _severity,
+                                'detectedby': 'Droidstatx',
+                                'feedback': [{"url": ""},
+                                            {"video": ""},
+                                            {"book": ""},
+                                            {"other": ""}]
+                            })
 
 
-        with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
-            json.dump(data, outfile)
+            with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
+                json.dump(data, outfile)
+        
+        except:
+            with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
+                json.dump(data, outfile)
 
 
     # set the current OWASP M level
