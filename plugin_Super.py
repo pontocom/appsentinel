@@ -101,13 +101,3 @@ class PluginClass:
 
         with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
             json.dump(data_formated, outfile)
-
-
-
-
-
-
-
-
-
-
