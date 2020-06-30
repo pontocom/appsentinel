@@ -38,22 +38,28 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ': Running on -> ' + apk_file)
             log.debug(pluginName + ': Running on -> ' + apk_file)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + " --results ./results/")
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file + " --results ./results/")
+            os.chdir(superLocation)
+            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
+            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
             # run the tool and move the json results to proper folder
-            os.system(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file +" --results ./results/")
-            
-            path = './results/'
+            os.system(config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
+            #os.system('mv results/'+)
+            os.chdir('../../')
+            print(os.system)
+            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
+            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
+            path = './tools/super/results/'
             fileName = glob.glob(path+"*")
+            print('Filename ---> '+str(fileName))
             if not os.path.isdir(fileName[0]):  
                 os.system('mv ' + fileName[0] + ' ./json_results/Super/'+md5+'.json')
                 self.build_scan_format(md5)
-                os.system('rm -r ./results/')
+                os.system('rm -r ./tools/super/results/')
             else:
                 directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
                 os.system('mv ' + fileName[0]+'/'+os.path.basename(directory[0]) + ' ./json_results/Super/'+md5+'.json')
                 self.build_scan_format(md5)
-                os.system('rm -r ./results/')
+                os.system('rm -r ./tools/super/results/')
 
     
     def build_scan_format(self, md5):
@@ -95,13 +101,3 @@ class PluginClass:
 
         with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
             json.dump(data_formated, outfile)
-
-
-
-
-
-
-
-
-
-
