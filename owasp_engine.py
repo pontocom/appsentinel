@@ -93,7 +93,7 @@ def feedback(md5):
                                     data[z].append({
                                         'vulnerability': x['vulnerability'],
                                         'details': x['details'],
-                                        'severity': x['severity'],
+                                        'severity': y['level'],
                                         'detectedby': [plugin],
                                         'feedback': {
                                             "url": [] ,
