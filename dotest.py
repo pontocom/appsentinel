@@ -218,7 +218,7 @@ def run_post_processing():
     vars3 = ["#", "MD5", "Super"]
     sheet1 = workbook.add_worksheet("Androbugs")
     sheet2 = workbook.add_worksheet("Droidstatx")
-    sheet2 = workbook.add_worksheet("Super")
+    sheet3 = workbook.add_worksheet("Super")
     bold = workbook.add_format({'bold': True})
     # write the header
     cols = 0
@@ -232,7 +232,7 @@ def run_post_processing():
 
     cols = 0
     for var in vars3:
-        sheet2.write(0, cols, var, bold)
+        sheet3.write(0, cols, var, bold)
         cols = cols + 1
 
     count = 0
@@ -278,13 +278,13 @@ def run_post_processing():
         if file[-5:] == ".json":
             id_app = file[-37:-5]
             count = count + 1
-            sheet2.write(rows, 0, count)
-            sheet2.write(rows, 1, id_app)
+            sheet3.write(rows, 0, count)
+            sheet3.write(rows, 1, id_app)
             print("[SUPER][" + str(count) + "][" + id_app + "][" + file + "]")
             if os.path.getsize(dir_results + "/Super/" + file) == 0:
-                sheet2.write(rows, 2, "N")
+                sheet3.write(rows, 2, "N")
             else:
-                sheet2.write(rows, 2, "Y")
+                sheet3.write(rows, 2, "Y")
             rows = rows + 1
 
     print("[SUPER COUNT]" + str(count))
@@ -450,7 +450,7 @@ if __name__ == "__main__":
     # 3rd to run
     # put_the_results_on_database()
     # 4th to run
-    get_num_vulns()
+    # get_num_vulns()
     # 5th to run
     # get_riskLevels()
     # run_time_plugins()
