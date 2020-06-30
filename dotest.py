@@ -38,8 +38,8 @@ def put_the_results_on_database():
 # This test requires that the calculator is using all methods to calculate the score (check how is being called in
 # owasp_engine.py)
 def get_riskLevels():
-    vars = ["#", "MD5", "Simple", "Duration", "Points", "Duration", "API", "Duration", "Vulnerabilities", "Notice",
-            "Warning", "Critical"]
+    vars = ["#", "MD5", "Score","Vulnerabilities", "Notice", "Warning", "Critical"]
+
     sheet = workbook.add_worksheet("Results - RiskLevel")
     bold = workbook.add_format({'bold': True})
     count = 0
@@ -56,19 +56,10 @@ def get_riskLevels():
         value = 0.0
         with open(riskLevel + '/' + id_app + ".json", "r") as json_file:
             read_content = json.load(json_file)
-            results = read_content["value"]['results']
-            for result in results:
-                sheet.write(rows, 0, count)
-                sheet.write(rows, 1, id_app)
-                if 'simple' in result:
-                    sheet.write(rows, 2, result['simple']['level'])
-                    sheet.write(rows, 3, result['simple']['duration'])
-                elif 'points' in result:
-                    sheet.write(rows, 4, result['points']['level'])
-                    sheet.write(rows, 5, result['points']['duration'])
-                else:
-                    sheet.write(rows, 6, result['API']['level'])
-                    sheet.write(rows, 7, result['API']['duration'])
+            result = read_content["value"]
+            sheet.write(rows, 0, count)
+            sheet.write(rows, 1, id_app)
+            sheet.write(rows, 2, result)
             rows = rows + 1
 
     # reset the value of rows
@@ -81,19 +72,23 @@ def get_riskLevels():
         id_app = file[-37:-5]
         with open(vulnResults + '/' + id_app + ".json", "r") as json_file:
             read_content = json.load(json_file)
-            print('Vulns for ' + id_app + ': ' + str(len(read_content['vulnerabilities'])))
-            vulns = len(read_content["vulnerabilities"])
-            for vulnerability in read_content['vulnerabilities']:
-                if vulnerability['severity'] == 'Notice':
-                    notice += 1
-                if vulnerability['severity'] == 'Warning':
-                    warning += 1
-                if vulnerability['severity'] == 'Critical':
-                    critical += 1
-        sheet.write(rows, 8, vulns)
-        sheet.write(rows, 9, notice)
-        sheet.write(rows, 10, warning)
-        sheet.write(rows, 11, critical)
+        print('Vulns for ' + id_app + ': ' + str(len(read_content['vulnerabilities'])))
+        vulns = len(read_content["vulnerabilities"])
+        i = 0
+        for vulnerability in read_content['vulnerabilities']:
+            print('Severity: '+vulnerability['severity'].lower()+ ' | iteration: '+str(i))
+            if vulnerability['severity'].lower() == 'notice' or vulnerability['severity'].lower() =='low':
+                notice += 1
+            if vulnerability['severity'].lower() == 'warning' or vulnerability['severity'].lower() == 'medium':
+                warning += 1
+            if vulnerability['severity'].lower() == 'critical' or vulnerability['severity'].lower() == 'high':
+                critical += 1
+            i += 1
+        print('\tNotices: '+str(notice)+'; Warnigs: '+str(warning)+'; Criticals: '+str(critical))
+        sheet.write(rows, 3, vulns)
+        sheet.write(rows, 4, notice)
+        sheet.write(rows, 5, warning)
+        sheet.write(rows, 6, critical)
         rows = rows + 1
 
 
@@ -452,6 +447,8 @@ if __name__ == "__main__":
     # 4th to run
     # get_num_vulns()
     # 5th to run
+
     # get_riskLevels()
+
     # run_time_plugins()
     workbook.close()

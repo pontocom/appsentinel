@@ -373,16 +373,17 @@ class PluginClass:
         #critical = 0
 
         for x in read_content:
-            data['results'].append({
-                'vulnerability': x['vulnerability'],
-                'details': x['details'],
-                'severity': x['level'],
-                'detectedby': 'Androbugs',
-                'feedback': [{"url": "Nothing to show"},
-                             {"video": "Nothing to show"},
-                             {"book": "Nothing to show"},
-                             {"other": "Nothing to show"}]
-            })
+            if not x['level'].lower()=='info':
+                data['results'].append({
+                    'vulnerability': x['vulnerability'],
+                    'details': x['details'],
+                    'severity': x['level'],
+                    'detectedby': 'Androbugs',
+                    'feedback': [{"url": "Nothing to show"},
+                                {"video": "Nothing to show"},
+                                {"book": "Nothing to show"},
+                                {"other": "Nothing to show"}]
+                })
 
             #data_vuln_level['vulnerabilities&level'].append({
             #    'vulnerability': x['tag'],

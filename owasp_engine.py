@@ -36,8 +36,8 @@ baseknowledge = config['DICTIONARY']['baseKnowledge']
 def startEngine(md5):
     init()
     feedback(md5)
-    #feedback_vulnerability_levels(md5)
-    #feedback_levels(md5)
+    feedback_vulnerability_levels(md5)
+    feedback_levels(md5)
 
 
 def init():
@@ -93,7 +93,7 @@ def feedback(md5):
                                     data[z].append({
                                         'vulnerability': x['vulnerability'],
                                         'details': x['details'],
-                                        'severity': x['severity'],
+                                        'severity': y['level'],
                                         'detectedby': [plugin],
                                         'feedback': {
                                             "url": [] ,
@@ -182,25 +182,17 @@ def feedback_levels(md5):
     # })
 
     score_calculator = calculatorClass(md5)
+    data = {'status': 'OK', 'value': score_calculator.calculate()}
 
-    # Here the calculator is being used for test purposes
-    score_calculator.calculate_all_test()
-    data = {'status':'OK', 'value':score_calculator.test_score_results}
     with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
-    
-    # Normal usage of the calculator
-    # data = {'status': 'OK', 'value': score_calculator.calculate_method_simple()}
-
-    # with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
-    #     json.dump(data, save_file)
-    # db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
-    # try:
-    #     payload = {'md5': md5, 'Vulnerability_level': calculatorClass.calculate(md5)}
-    #     r = requests.post("https://5.79.81.140:5001/autoFeedback/send", data=payload)
-    #     print(r)
-    # except:
-    #     print('not sended')
+    db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    try:
+        payload = {'md5': md5, 'Vulnerability_level': calculatorClass.calculate(md5)}
+        r = requests.post("https://5.79.81.140:5001/autoFeedback/send", data=payload)
+        print(r)
+    except:
+        print('not sended')
 
         
 def feedback_vulnerability_levels(md5):

@@ -174,7 +174,7 @@
             "level": "Warning",
             "cvssV3": 6.0,
             "vectorStringV3": "",
-            "keywords":["keystore"]
+            "keywords":["keystore", "sensitiveInfo"]
         }
 
     ]

@@ -7,3 +7,5 @@ xmindparser
 XlsxWriter
 requests
 bs4
+nltk
+sklearn
