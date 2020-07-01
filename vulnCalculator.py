@@ -46,6 +46,51 @@ print(plugin_scores)
 
 plugin_vuln_scores={}
 
+def adjust_plugin_scores(plugin_vuln_scores):
+    print('\nOld plugin scores: '+str(plugin_scores))
+    new_plugin_scores = {}
+    for plug in plugin_vuln_scores:
+        print('The plug is: '+plug)
+        new_plugin_scores[plug] = plugin_scores[plug]
+        print('The new one! ' + str(new_plugin_scores))
+    if len(new_plugin_scores) == 1:
+        for plug in plugin_vuln_scores:
+            new_plugin_scores[plug] = 1
+    else:
+        new_scores = []
+        for plug in plugin_vuln_scores:
+            new_scores.append(float(new_plugin_scores[plug]))
+        print(new_scores)
+        bro = sum(new_scores)
+        print('The sum of new scores is: '+str(bro))
+        if bro < len(plugin_vuln_scores):
+            while sum(new_scores) < len(plugin_vuln_scores):
+                for i in range(len(new_scores)):
+                    new_scores[i] += 0.1
+            if sum(new_scores) > len(plugin_vuln_scores):
+                for i in range(len(new_scores)):
+                    new_scores[i] -= 0.05
+            i=0
+            for plug in new_plugin_scores:
+                new_plugin_scores[plug]=new_scores[i]
+                i+=1
+        else:
+            while sum(new_scores) > len(plugin_vuln_scores):
+                for i in range(len(new_scores)):
+                    new_scores[i] -= 0.1
+            if sum(new_scores) < len(plugin_vuln_scores):
+                for i in range(len(new_scores)):
+                    new_scores[i] += 0.05
+            i=0
+            for plug in new_plugin_scores:
+                new_plugin_scores[plug]=new_scores[i]
+                i+=1
+        print(sum(new_scores))
+
+    print('What about now!! ' + str(new_plugin_scores))
+    return new_plugin_scores
+
+
 def are_equal(arr1, arr2):
     if (len(arr1) != len(arr2)):
         print('Not equal, different lengths')
@@ -61,7 +106,7 @@ def are_equal(arr1, arr2):
 
 
 try:
-    with open('json_results/final_output/feedback/89b72ba327be2606114a4099e88fd8c0.json', "r") as json_file:
+    with open('json_results/final_output/feedback/597d87678d839d6f36e25c2dfe49bbd1.json', "r") as json_file:
                 feedback_content = json.load(json_file)
     with open('dictionaries/baseKnowledge.json', "r") as json_file:
                 baseKnowledge = json.load(json_file)
@@ -142,12 +187,17 @@ for category in feedback_content:
         #                         print('Score: '+str(score)) 
 print('\n'+str(plugin_vuln_scores))
 
+## Check which plugins detected for each apk and adjust the ponderations
+print('Tamanho de plugin_vuln_scores: '+str(len(plugin_vuln_scores)))
+if len(plugin_vuln_scores) < len(enabled_plugins):
+    plugin_scores = adjust_plugin_scores(plugin_vuln_scores)
+
 dividend_total=0
 for plugin in plugin_vuln_scores:
     print("Calculando "+plugin)
     dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
 
-final_score = dividend_total/float(len(enabled_plugins))
+final_score = dividend_total/float(len(plugin_vuln_scores))
 print('Final Score ---> '+str(final_score))
 class calculatorClass:
 
