@@ -30,7 +30,7 @@ for file in os.listdir(pluginDir):
             enabled_plugins_name.append(thisPlugin.pluginName.lower())
 
 # print(str(enabled_plugins))
-print(str(enabled_plugins_name))
+# print(str(enabled_plugins_name))
 
 for section in config.sections():
     if str(section) == 'TOOL_SCORES':
@@ -38,7 +38,7 @@ for section in config.sections():
             if name in enabled_plugins_name:
                 plugin_scores[name]=val
                 n_plugins +=1
-print(plugin_scores)
+# print(plugin_scores)
 
 ############################
 
@@ -71,7 +71,7 @@ class calculatorClass:
                 # print(file)
                 # we need to do something with them... need to check if it is better to import or to spawn (decide later)
                 thisPlugin = __import__(".".join(file.split(".")[0:-1]))
-                print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
+                # print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
                 if thisPlugin.enable and thisPlugin not in enabled_plugins:
                     # print('Adding '+thisPlugin.pluginName)
                     enabled_plugins.append(thisPlugin)
@@ -122,9 +122,9 @@ class calculatorClass:
                         # print('Adding '+p+' in plugin_vuln_scores')
                         plugin_vuln_scores[p] = []
                 for plug in detectedby:
-                    # if plug not in plugin_vuln_scores:
-                    #     print('Adding '+plug+' in plugin_vuln_scores')
-                    #     plugin_vuln_scores[plug] = []
+                    if plug not in plugin_vuln_scores:
+                        # print('Adding '+plug+' in plugin_vuln_scores')
+                        plugin_vuln_scores[plug] = []
                     with open('dictionaries/'+plug+'_dict.json', "r") as json_file:
                         plugin_dict = json.load(json_file)
                     for result in plugin_dict['results']:
@@ -136,7 +136,6 @@ class calculatorClass:
                                 if category == data['category']:
                                     _aux = {}
                                     _aux_score = 0
-                                    isMatch = False
                                     for score in data['scores']:
                                         # print('Comparing: '+str(keywords)+' with '+str(score['keywords']))
                                         # checking if there are more matching keywords
@@ -150,9 +149,9 @@ class calculatorClass:
                                             _aux_score = score['score']
                                             break
                                     fscore = _aux_score
-                                    ## Adding the score for each plugin that detected it
-                                    # for plugin in detectedby:
-                                    #     plugin_vuln_scores[plugin].append(fscore)
+                                    # Adding the score for each plugin that detected it
+                                    for plugin in detectedby:
+                                        plugin_vuln_scores[plugin].append(fscore)
                                     #     print('plugin_vuln_scores: '+str(plugin_vuln_scores))
                                     # print('Score: '+str(score))
                 # if detectedby not in plugin_vuln_scores:
@@ -172,16 +171,18 @@ class calculatorClass:
                 #                         fscore = score['score']
                 #                         plugin_vuln_scores[detectedby].append(fscore)
                 #                         print('Score: '+str(score)) 
-        print('\n'+str(plugin_vuln_scores))
+        # print('\n'+str(plugin_vuln_scores))
 
         dividend_total=0
         for plugin in plugin_vuln_scores:
-            if len(plugin_vuln_scores[plugin]) > 0:
-                print("Calculando "+plugin)
-                dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
-            else:
-                dividend_total += 0
+            # print("Calculando "+plugin)
+            dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
+            # if len(plugin_vuln_scores[plugin]) > 0:
+            #     print("Calculando "+plugin)
+            #     dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
+            # else:
+            #     dividend_total += 0
         final_score = dividend_total/float(len(enabled_plugins))
-        print('Final Score ---> '+str(final_score))
-        return final_score
+        # print('Final Score ---> '+str(final_score))
+        return round(final_score,2)
 
