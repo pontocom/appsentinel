@@ -1,0 +1,66 @@
+GET /android/categories/{CATEGORY_ID}/top.json
+
+Request example
+GET /android/categories/SOCIAL/top.json?country=us&language=us&type=free
+cURL example
+curl -X GET -H "X-Apptweak-Key: ${API_KEY}" https://api.apptweak.com/android/categories/SOCIAL/top.json?country=us&language=us&type=free
+
+Response Example
+
+{
+  "content": [
+    {
+      "id": "com.zhiliaoapp.musically",
+      "title": "TikTok - Make Your Day",
+      "icon": "https://lh3.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA",
+      "developer": "TikTok Inc.",
+      "price": "",
+      "genres": [
+        "SOCIAL"
+      ],
+      "rating": 4.4,
+      "ratings_count": 20270577,
+      "power": 100
+    },
+    {
+      "id": "com.owlreality.zynn",
+      "title": "Zynn",
+      "icon": "https://lh3.googleusercontent.com/pWAmBQKV4QH_PSYbs9Fk9Pk-Whj11jGoqvp4crzs0340n4e7x3-HDSYAauSOVLkSiUPh",
+      "developer": "OWLII INC.",
+      "price": "",
+      "genres": [
+        "SOCIAL"
+      ],
+      "rating": 4.6,
+      "ratings_count": 3619,
+      "power": 82.4
+    }
+  ],
+  "metadata": {
+    "request": {
+      "path": "/categories/SOCIAL/top.json",
+      "store": "android",
+      "params": {
+        "country": "us",
+        "language": "us",
+        "type": "free",
+        "category": "SOCIAL",
+        "format": "json"
+      },
+      "performed_at": "2018-11-13 09:40:58 UTC"
+    },
+    "content": {
+      "application_ids": [
+        "com.zhiliaoapp.musically",
+        "com.snapchat.android",
+        "com.instagram.android",
+        "com.facebook.katana",
+        "com.enflick.android.TextNow",
+        "com.pinterest",
+        "com.facebook.lite",
+        "com.boo.boomoji",
+        "com.pof.android"
+      ]
+    }
+  }
+}
