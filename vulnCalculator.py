@@ -6,38 +6,38 @@ import os.path
 from os import path
 from statistics import mean
 
-## Testing Try to lool config.ini file
-config = configparser.ConfigParser()
-config.read('config.ini')
+# ## Testing Try to lool config.ini file
+# config = configparser.ConfigParser()
+# config.read('config.ini')
 
 
-plugin_scores={}
-n_plugins=0
-enabled_plugins=[]
-enabled_plugins_name=[]
+# plugin_scores={}
+# n_plugins=0
+# enabled_plugins=[]
+# enabled_plugins_name=[]
 
-# looking for the plugins
-pluginDir = os.path.dirname(os.path.abspath(__file__))
-for file in os.listdir(pluginDir):
-    if file[0:7] == "plugin_" and file[-3:] == ".py":
-        # print(file)
-        # we need to do something with them... need to check if it is better to import or to spawn (decide later)
-        thisPlugin = __import__(".".join(file.split(".")[0:-1]))
-        # print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
-        if thisPlugin.enable and thisPlugin not in enabled_plugins:
-            # print('Adding '+thisPlugin.pluginName)
-            enabled_plugins.append(thisPlugin)
-            enabled_plugins_name.append(thisPlugin.pluginName.lower())
+# # looking for the plugins
+# pluginDir = os.path.dirname(os.path.abspath(__file__))
+# for file in os.listdir(pluginDir):
+#     if file[0:7] == "plugin_" and file[-3:] == ".py":
+#         # print(file)
+#         # we need to do something with them... need to check if it is better to import or to spawn (decide later)
+#         thisPlugin = __import__(".".join(file.split(".")[0:-1]))
+#         # print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
+#         if thisPlugin.enable and thisPlugin not in enabled_plugins:
+#             # print('Adding '+thisPlugin.pluginName)
+#             enabled_plugins.append(thisPlugin)
+#             enabled_plugins_name.append(thisPlugin.pluginName.lower())
 
 # print(str(enabled_plugins))
 # print(str(enabled_plugins_name))
 
-for section in config.sections():
-    if str(section) == 'TOOL_SCORES':
-        for (name, val) in config.items(section):
-            if name in enabled_plugins_name:
-                plugin_scores[name]=val
-                n_plugins +=1
+# for section in config.sections():
+#     if str(section) == 'TOOL_SCORES':
+#         for (name, val) in config.items(section):
+#             if name in enabled_plugins_name:
+#                 plugin_scores[name]=val
+#                 n_plugins +=1
 # print(plugin_scores)
 
 ############################
@@ -55,13 +55,13 @@ class calculatorClass:
         ''' constructor '''
         self.md5=md5
         self.plugin_scores={}
+        self.enabled_plugins=[]
         self.setup()
 
     # Seting up the calculator, getting the enabled plugins and their correspondent scores
     def setup(self):
         # print('Setting up the Calculator')
         n_plugins=0
-        enabled_plugins=[]
         enabled_plugins_name=[]
 
         # looking for the plugins
@@ -72,12 +72,12 @@ class calculatorClass:
                 # we need to do something with them... need to check if it is better to import or to spawn (decide later)
                 thisPlugin = __import__(".".join(file.split(".")[0:-1]))
                 # print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
-                if thisPlugin.enable and thisPlugin not in enabled_plugins:
+                if thisPlugin.enable and thisPlugin not in self.enabled_plugins:
                     # print('Adding '+thisPlugin.pluginName)
-                    enabled_plugins.append(thisPlugin)
+                    self.enabled_plugins.append(thisPlugin)
                     enabled_plugins_name.append(thisPlugin.pluginName.lower())
 
-        print(str(enabled_plugins))
+        print(str(self.enabled_plugins))
         print(str(enabled_plugins_name))
 
         for section in self.config.sections():
@@ -173,16 +173,69 @@ class calculatorClass:
                 #                         print('Score: '+str(score)) 
         # print('\n'+str(plugin_vuln_scores))
 
+        #### TODO ####
+        # Check how many plugins analysed the current apk and adjust the scores
+        # check plugin_vuln_scores and change plugin_scores
+        if len(plugin_vuln_scores) == 0:
+            return 0
+        
+        if len(plugin_vuln_scores) < len(self.enabled_plugins):
+            self.plugin_scores = self.adjust_plugin_scores(plugin_vuln_scores)
+        #### TODO ####
         dividend_total=0
         for plugin in plugin_vuln_scores:
             # print("Calculando "+plugin)
-            dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
+            dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(self.plugin_scores[plugin])
             # if len(plugin_vuln_scores[plugin]) > 0:
             #     print("Calculando "+plugin)
             #     dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
             # else:
             #     dividend_total += 0
-        final_score = dividend_total/float(len(enabled_plugins))
+        final_score = dividend_total/float(len(plugin_vuln_scores))
         # print('Final Score ---> '+str(final_score))
         return round(final_score,2)
 
+    def adjust_plugin_scores(self, plugin_vuln_scores):
+        print('\nSTARTING ADJSUTMENT')
+        print('\nOld plugin scores: '+str(self.plugin_scores))
+        new_plugin_scores = {}
+        for plug in plugin_vuln_scores:
+            print('The plug is: '+plug)
+            new_plugin_scores[plug] = self.plugin_scores[plug]
+            print('The new one! ' + str(new_plugin_scores))
+        if len(new_plugin_scores) == 1:
+            for plug in plugin_vuln_scores:
+                new_plugin_scores[plug] = 1
+        else:
+            new_scores = []
+            for plug in plugin_vuln_scores:
+                new_scores.append(float(new_plugin_scores[plug]))
+            print(new_scores)
+            bro = sum(new_scores)
+            print('The sum of new scores is: '+str(bro))
+            if bro < len(plugin_vuln_scores):
+                while sum(new_scores) < len(plugin_vuln_scores):
+                    for i in range(len(new_scores)):
+                        new_scores[i] += 0.1
+                if sum(new_scores) > len(plugin_vuln_scores):
+                    for i in range(len(new_scores)):
+                        new_scores[i] -= 0.05
+                i=0
+                for plug in new_plugin_scores:
+                    new_plugin_scores[plug]=new_scores[i]
+                    i+=1
+            else:
+                while sum(new_scores) > len(plugin_vuln_scores):
+                    for i in range(len(new_scores)):
+                        new_scores[i] -= 0.1
+                if sum(new_scores) < len(plugin_vuln_scores):
+                    for i in range(len(new_scores)):
+                        new_scores[i] += 0.05
+                i=0
+                for plug in new_plugin_scores:
+                    new_plugin_scores[plug]=new_scores[i]
+                    i+=1
+            print(sum(new_scores))
+
+            print('What about now!! ' + str(new_plugin_scores))
+            return new_plugin_scores
