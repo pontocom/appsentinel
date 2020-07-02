@@ -87,6 +87,7 @@ class PluginClass:
 
     def analyseVulnerability(self, md5):
         data = {}
+        
         data['results'] = []
         #output={}
         category= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
@@ -157,8 +158,10 @@ class PluginClass:
                 json.dump(data, outfile)
         
         except:
-            with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
-                json.dump(data, outfile)
+            try:
+                os.mknod(jsonResultsLocation + md5 + '.json')
+            except:
+                pass
 
 
     # set the current OWASP M level
