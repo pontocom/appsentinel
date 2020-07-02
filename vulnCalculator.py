@@ -116,7 +116,7 @@ class calculatorClass:
                     # detectedby = vuln['detectedby'].lower()  # this detectedby has to be an array
                 # for detectedby as an Array
                 for p in detectedby:
-                    print('checking if '+p+' is in '+str(plugin_vuln_scores))
+                    # print('checking if '+p+' is in '+str(plugin_vuln_scores))
                     if p not in plugin_vuln_scores:
                         # print('Plugin: '+p+' plug_vulns: '+str(plugin_vuln_scores))
                         # print('Adding '+p+' in plugin_vuln_scores')
@@ -179,12 +179,14 @@ class calculatorClass:
         if len(plugin_vuln_scores) == 0:
             return 0
         
+        # print('BEFORE plugin_scores: '+str(self.plugin_scores))
         if len(plugin_vuln_scores) < len(self.enabled_plugins):
             self.plugin_scores = self.adjust_plugin_scores(plugin_vuln_scores)
         #### TODO ####
         dividend_total=0
+        # print('New plugin_scores '+str(self.plugin_scores))
         for plugin in plugin_vuln_scores:
-            # print("Calculando "+plugin)
+            # print("\nCalculando "+plugin)
             dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(self.plugin_scores[plugin])
             # if len(plugin_vuln_scores[plugin]) > 0:
             #     print("Calculando "+plugin)
@@ -196,13 +198,14 @@ class calculatorClass:
         return round(final_score,2)
 
     def adjust_plugin_scores(self, plugin_vuln_scores):
-        print('\nSTARTING ADJSUTMENT')
-        print('\nOld plugin scores: '+str(self.plugin_scores))
+        # print('\nSTARTING ADJSUTMENT')
+        # print('plugin_vuln_scores: '+str(plugin_vuln_scores))
+        # print('\nOld plugin scores: '+str(self.plugin_scores))
         new_plugin_scores = {}
         for plug in plugin_vuln_scores:
-            print('The plug is: '+plug)
+            # print('The plug is: '+plug)
             new_plugin_scores[plug] = self.plugin_scores[plug]
-            print('The new one! ' + str(new_plugin_scores))
+            # print('The new one! ' + str(new_plugin_scores))
         if len(new_plugin_scores) == 1:
             for plug in plugin_vuln_scores:
                 new_plugin_scores[plug] = 1
@@ -210,9 +213,9 @@ class calculatorClass:
             new_scores = []
             for plug in plugin_vuln_scores:
                 new_scores.append(float(new_plugin_scores[plug]))
-            print(new_scores)
+            # print(new_scores)
             bro = sum(new_scores)
-            print('The sum of new scores is: '+str(bro))
+            # print('The sum of new scores is: '+str(bro))
             if bro < len(plugin_vuln_scores):
                 while sum(new_scores) < len(plugin_vuln_scores):
                     for i in range(len(new_scores)):
@@ -237,5 +240,5 @@ class calculatorClass:
                     i+=1
             print(sum(new_scores))
 
-            print('What about now!! ' + str(new_plugin_scores))
-            return new_plugin_scores
+        # print('What about now!! ' + str(new_plugin_scores))
+        return new_plugin_scores
