@@ -9,6 +9,9 @@ import datetime
 baseAPIURL = 'https://api.apptweak.com/android/categories/'
 APIKEY = 'zj3KJJShkBsvomVrxv8T16hD2IQ'
 
+baseAPIURL2 = 'https://api.appmonsta.com/v1/stores/android/details/'
+APIKEY2 = 'ea67957f7f28f0b01183c872412c1d649ce94046'
+
 APPS_PER_GROUP = 10
 
 totalApps = 0
@@ -18,51 +21,98 @@ dataResult = []
 
 workbook = xlsxwriter.Workbook("./tests/testResults-GPlay-init-" + str(datetime.datetime.now()) + ".xlsx")
 
-vars = ["#", "Name", "Package", "Category"]
-sheet = workbook.add_worksheet("Results")
-bold = workbook.add_format({'bold': True})
-# write the header
-cols = 0
-for var in vars:
-    sheet.write(0, cols, var, bold)
-    cols = cols + 1
-
 count = 0
-rows = 1
 
-# Run all the categories and download top apps as JSON format
-# with open('./gplay_categories.txt', 'r') as f:
-#    allGroups = f.readlines()
-#    for group in allGroups:
-#        print('[' + str(grpNumber + 1) + '][' + group.rstrip('\r\n').upper() + ']')
-#        print('Requesting [' + baseAPIURL + group.rstrip('\r\n') + '/top.json?country=us&language=us&type=free]')
-#        response = requests.get(baseAPIURL + group.rstrip('\r\n') + '/top.json?country=us&language=us&type=free', headers={"X-Apptweak-Key": APIKEY})
-#        content = response.json()
-#        print('./tops/' + group.rstrip('\r\n') + '.json')
-#        with open('./tops/' + group.rstrip('\r\n') + '.json', 'w') as s:
-#            json.dump(content, s)
-#        grpNumber += 1
+
+def get_top_apks():
+    vars = ["#", "Name", "Package", "Category"]
+    sheet = workbook.add_worksheet("Results")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
+
+    # Run all the categories and download top apps as JSON format
+    with open('./gplay_categories.txt', 'r') as f:
+       allGroups = f.readlines()
+       for group in allGroups:
+           print('[' + str(grpNumber + 1) + '][' + group.rstrip('\r\n').upper() + ']')
+           print('Requesting [' + baseAPIURL + group.rstrip('\r\n') + '/top.json?country=pt&language=en&type=free]')
+           response = requests.get(baseAPIURL + group.rstrip('\r\n') + '/top.json?country=pt&language=en&type=free', headers={"X-Apptweak-Key": APIKEY})
+           content = response.json()
+           print('./tops/' + group.rstrip('\r\n') + '.json')
+           with open('./tops/' + group.rstrip('\r\n') + '.json', 'w') as s:
+               json.dump(content, s)
+           grpNumber += 1
 
 
 # Run through all the JSON files and process the results
-for file in os.listdir("./tops"):
-    if file[-5:] == ".json":
-        print("CATEGORY NAME = " + file[:-5])
-        with open('./tops/' + file, 'r') as f:
-            # data = f.read()
-            content = json.load(f)
-            for i in range(0, APPS_PER_GROUP):
-                name = content['content'][i]['title']
-                package = content['content'][i]['id']
-                category = file[:-5]
-                sheet.write(rows, 0, count + 1)
-                sheet.write(rows, 1, name)
-                sheet.write(rows, 2, package)
-                sheet.write(rows, 3, category)
-                print('[' + str(count + 1) + '][' + category + '][' + package + ']')
-                print('EXECUTING: gplaycli -d ' + package + ' -f ./downloads')
-                os.system('gplaycli -d ' + package + ' -f ./downloads')
-                rows += 1
-                count += 1
+def download_apks():
+    rows = 1
+    for file in os.listdir("./tops"):
+        if file[-5:] == ".json":
+            print("CATEGORY NAME = " + file[:-5])
+            with open('./tops/' + file, 'r') as f:
+                content = json.load(f)
+                for i in range(0, APPS_PER_GROUP):
+                    name = content['content'][i]['title']
+                    package = content['content'][i]['id']
+                    category = file[:-5]
+                    sheet.write(rows, 0, count + 1)
+                    sheet.write(rows, 1, name)
+                    sheet.write(rows, 2, package)
+                    sheet.write(rows, 3, category)
+                    print('[' + str(count + 1) + '][' + category + '][' + package + ']')
+                    print('EXECUTING: gplaycli -d ' + package + ' -f ./downloads')
+                    os.system('gplaycli -d ' + package + ' -f ./downloads')
+                    rows += 1
+                    count += 1
 
-workbook.close()
+
+# Run get detailed information for APKs
+def get_apk_info():
+    count=0
+    rows = 1
+    vars = ["Package", "Downloads", "Version", "Release Date"]
+    sheet = workbook.add_worksheet("APK Details")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
+
+    for file in os.listdir("./downloads"):
+        if file[-4:] == ".apk":
+            print('[' + str(count + 1) + '][' + file[:-4] + '] Requesting [' + baseAPIURL2 + file[:-4] + ".json")
+            response = requests.get(baseAPIURL2 + file[:-4] + ".json",
+                                    auth=(APIKEY2, "X"),
+                                    params={"country": "US"},
+                                    headers={'Accept-Encoding': 'deflate, gzip'},
+                                    stream=True)
+            content = response.json()
+            print(response)
+            if response.status_code == 200:
+                sheet.write(rows, 0, file[:-4])
+                sheet.write(rows, 1, content['downloads'])
+                sheet.write(rows, 2, content['version'])
+                sheet.write(rows, 3, content['release_date'])
+                print('[' + str(count + 1) + '][' + file[:-4] + '][' + content['downloads'] + '][' + content['version'] + '][' + content[
+                    'release_date'] + ']')
+                count += 1
+                rows += 1
+            else:
+                print(content)
+                count += 1
+                continue
+
+
+if __name__ == "__main__":
+    # get_top_apks()
+    # download_apks()
+    get_apk_info()
+    workbook.close()
+
+# curl -u "ea67957f7f28f0b01183c872412c1d649ce94046:X" "https://api.appmonsta.com/v1/stores/android/details/com.facebook.orca.json?country=PT"
