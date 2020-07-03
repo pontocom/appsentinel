@@ -451,7 +451,7 @@
     {
       "name": "AndroidManifest Adb Backup Checking",
       "category": "M2",
-      "level": "Notice",
+      "level": "Warning",
       "cvssV3": 0.0,
       "vectorStringV3": "",
       "keywords":["adb"]
