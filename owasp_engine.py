@@ -143,7 +143,12 @@ def feedback(md5):
                 if Counter(key2['keywords']) == Counter(key['keywords']):
                     if key2['vulnerability'] != key['vulnerability']:
                         dataNormalization[category].remove(key2)
-                                            
+    
+    for cat in owasp_category:
+        for result in dataNormalization[cat]:
+            result.pop('keywords', None)
+        
+
             
     with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
         json.dump(dataNormalization, f)
