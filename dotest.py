@@ -242,7 +242,7 @@ def run_post_processing():
             print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
             sheet1.write(rows, 0, count)
             sheet1.write(rows, 1, id_app)
-            if os.path.getsize(dir_results + "/Androbugs/" + file) == 0:
+            if os.path.getsize(dir_results + "/Androbugs/" + file) == 0 or os.path.getsize(dir_results + "/Androbugs/" + file) == 15:
                 sheet1.write(rows, 2, "N")
             else:
                 sheet1.write(rows, 2, "Y")
@@ -441,7 +441,7 @@ def run_time_plugins():
 
 if __name__ == "__main__":
     # 1st to run
-    run_sequence_tests_from_scraping()
+    # run_sequence_tests_from_scraping()
     # run_tests_for_ext_apps()
     # 2nd to run
     # run_post_processing()
@@ -450,7 +450,7 @@ if __name__ == "__main__":
     # 4th to run
     # get_num_vulns()
     # 5th to run
-    # get_riskLevels()
+    get_riskLevels()
 
     # run_time_plugins()
     workbook.close()
