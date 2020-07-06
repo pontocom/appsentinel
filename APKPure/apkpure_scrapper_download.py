@@ -6,6 +6,8 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from tqdm import tqdm
 import math
+import hashlib
+import pyfiglet
 
 baseURL = 'https://apkpure.com'
 APPS_PER_GROUP = 10
@@ -100,6 +102,70 @@ def run_scrapper():
             grpNumber += 1
 
 
+def compute_md5():
+    count = 0
+    rows = 1
+    vars = ["Package", "Md5"]
+    sheet = workbook.add_worksheet("APK Md5")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
+
+    for file in os.listdir("./downloads"):
+        if file[-4:] == ".apk":
+            sheet.write(rows, 0, file[:-4])
+            hashvalue = hashlib.md5(open('./downloads/' + file, 'rb').read()).hexdigest()
+            sheet.write(rows, 1, hashvalue)
+            print('[' + str(count+1) + '][' + file[:-4] + '][' + hashvalue + ']')
+            count += 1
+            rows += 1
+
+
+def run_sequence_tests_from_scraping():
+    vars = ["#", "Package", "Start Time", "End Time", "Duration"]
+    sheet = workbook.add_worksheet("Results - Sequence")
+    bold = workbook.add_format({'bold': True})
+    # write the header
+    cols = 0
+    for var in vars:
+        sheet.write(0, cols, var, bold)
+        cols = cols + 1
+
+    count = 0
+    rows = 1
+
+    # print(dir)
+    # print(ext_apps)
+
+    for file in os.listdir('./downloads'):
+        if file[-4:] == ".apk":
+            id_app = file[:-4]
+            count = count + 1
+            print(pyfiglet.figlet_format(str(count)))
+            print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
+            sheet.write(rows, 0, count)
+            sheet.write(rows, 1, id_app)
+            starttime = datetime.datetime.now()
+            format2 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+            sheet.write(rows, 2, starttime, format2)
+            # all the relevant stuff should happen here
+            #######
+            print("python3 scanner.py --md5 " + id_app + " --file " + "./downloads/" + file)
+            # os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
+            format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
+            endtime = datetime.datetime.now()
+            sheet.write(rows, 3, endtime, format3)
+            format4 = workbook.add_format({'num_format': 'mm:ss'})
+            sheet.write(rows, 4, "=D" + str(rows + 1) + "-C" + str(rows + 1), format4)
+            rows = rows + 1
+
+
 if __name__ == "__main__":
-    run_scrapper()
+    # run_scrapper()
+    # compute file MD5
+    # compute_md5()
+    run_sequence_tests_from_scraping()
     workbook.close()

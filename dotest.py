@@ -7,6 +7,8 @@ import os.path
 import configparser
 import json
 import xlsxwriter
+import pyfiglet
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -360,6 +362,7 @@ def run_sequence_tests_from_scraping():
         if file[-4:] == ".apk":
             id_app = file[-36:-4]
             count = count + 1
+            print(pyfiglet.figlet_format(str(count)))
             print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
             sheet.write(rows, 0, count)
             sheet.write(rows, 1, id_app)
@@ -397,6 +400,7 @@ def run_tests_for_ext_apps():
         if file[-4:] == ".apk":
             id_app = file[:-4]
             count = count + 1
+            print(pyfiglet.figlet_format(str(count)))
             print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
             sheet.write(rows, 0, count)
             sheet.write(rows, 1, id_app)
@@ -406,8 +410,7 @@ def run_tests_for_ext_apps():
             # all the relevant stuff should happen here
             #######
             print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + ext_apps + "/" + file)
-            os.system(
-                config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + ext_apps + "/" + file)
+            os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + ext_apps + "/" + file)
             format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
             endtime = datetime.datetime.now()
             sheet.write(rows, 3, endtime, format3)
@@ -438,7 +441,7 @@ def run_time_plugins():
 
 if __name__ == "__main__":
     # 1st to run
-    # run_sequence_tests_from_scraping()
+    run_sequence_tests_from_scraping()
     # run_tests_for_ext_apps()
     # 2nd to run
     # run_post_processing()
@@ -447,7 +450,6 @@ if __name__ == "__main__":
     # 4th to run
     # get_num_vulns()
     # 5th to run
-
     # get_riskLevels()
 
     # run_time_plugins()
