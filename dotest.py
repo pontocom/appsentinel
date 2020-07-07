@@ -23,23 +23,26 @@ riskLevel = config['OWASP_OUTPUT']['feedback_levelsResultsLocation']
 vulnResults = config['OWASP_OUTPUT']['feedback_vuln_levelsResultsLocation']
 
 
-def put_the_results_on_database():
+def put_the_results_on_database(aptoide):
     count = 0
     for file in os.listdir(dir_results + "/Androbugs"):
         if file[-5:] == ".json":
-            id_app = file[-37:-5]
-            if os.path.exists(dir_results + "/Androbugs/" + file) and os.path.exists(
+            if aptoide == 1:
+                id_app = file[-37:-5]
+            else:
+                id_app = file[:-5]
+            if os.path.exists(dir_results + "/Androbugs/" + file) or os.path.exists(
                     dir_results + "/DroidStatX/" + file):
-                if os.path.getsize(dir_results + "/DroidStatX/" + file) != 0:
-                    count = count + 1
-                    print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
-                    oe.startEngine(id_app)
+                # if os.path.getsize(dir_results + "/DroidStatX/" + file) != 0:
+                count = count + 1
+                print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
+                oe.startEngine(id_app)
     print("[ANDROBUGS COUNT]" + str(count))
 
 
 # This test requires that the calculator is using all methods to calculate the score (check how is being called in
 # owasp_engine.py)
-def get_riskLevels():
+def get_riskLevels(aptoide):
     vars = ["#", "MD5", "Score","Vulnerabilities", "Notice", "Warning", "Critical"]
 
     sheet = workbook.add_worksheet("Results - RiskLevel")
@@ -53,7 +56,10 @@ def get_riskLevels():
         cols = cols + 1
     rows = 1
     for file in os.listdir(riskLevel):
-        id_app = file[-37:-5]
+        if aptoide == 1:
+            id_app = file[-37:-5]
+        else:
+            id_app = file[:-5]
         count = count + 1
         value = 0.0
         with open(riskLevel + '/' + id_app + ".json", "r") as json_file:
@@ -71,7 +77,10 @@ def get_riskLevels():
         notice = 0
         warning = 0
         critical = 0
-        id_app = file[-37:-5]
+        if aptoide == 1:
+            id_app = file[-37:-5]
+        else:
+            id_app = file[:-5]
         with open(vulnResults + '/' + id_app + ".json", "r") as json_file:
             read_content = json.load(json_file)
         print('Vulns for ' + id_app + ': ' + str(len(read_content['vulnerabilities'])))
@@ -94,7 +103,7 @@ def get_riskLevels():
         rows = rows + 1
 
 
-def get_num_vulns():
+def get_num_vulns(aptoide):
     count = 0
     vars = ["#", "MD5", "M1", "M2", "M2", "M4", "M5", "M6", "M7", "M8", "M9", "M10"]
     sheet = workbook.add_worksheet("Results - OWASP")
@@ -107,7 +116,10 @@ def get_num_vulns():
 
     rows = 1
     for file in os.listdir(resultsFeedback):
-        id_app = file[-37:-5]
+        if aptoide == 1:
+            id_app = file[-37:-5]
+        else:
+            id_app = file[:-5]
         count = count + 1
         print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
         m1 = 0
@@ -209,7 +221,7 @@ def get_num_vulns():
     # print("[ANDROBUGS COUNT]" + str(count))
 
 
-def run_post_processing():
+def run_post_processing(aptoide):
     vars1 = ["#", "MD5", "Androbugs"]
     vars2 = ["#", "MD5", "Droidstatx"]
     vars3 = ["#", "MD5", "Super"]
@@ -237,7 +249,10 @@ def run_post_processing():
 
     for file in os.listdir(dir_results + "/Androbugs"):
         if file[-5:] == ".json":
-            id_app = file[-37:-5]
+            if aptoide == 1:
+                id_app = file[-37:-5]
+            else:
+                id_app = file[:-5]
             count = count + 1
             print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
             sheet1.write(rows, 0, count)
@@ -255,7 +270,10 @@ def run_post_processing():
 
     for file in os.listdir(dir_results + "/DroidStatX"):
         if file[-5:] == ".json":
-            id_app = file[-37:-5]
+            if aptoide == 1:
+                id_app = file[-37:-5]
+            else:
+                id_app = file[:-5]
             count = count + 1
             sheet2.write(rows, 0, count)
             sheet2.write(rows, 1, id_app)
@@ -273,7 +291,10 @@ def run_post_processing():
 
     for file in os.listdir(dir_results + "/Super"):
         if file[-5:] == ".json":
-            id_app = file[-37:-5]
+            if aptoide == 1:
+                id_app = file[-37:-5]
+            else:
+                id_app = file[:-5]
             count = count + 1
             sheet3.write(rows, 0, count)
             sheet3.write(rows, 1, id_app)
@@ -361,6 +382,7 @@ def run_sequence_tests_from_scraping(aptoide):
     for file in os.listdir(dir):
         if file[-4:] == ".apk":
             id_app = file[-36:-4]
+            package_name = file[:-4]
             count = count + 1
             print(pyfiglet.figlet_format(str(count)))
             print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
@@ -372,8 +394,8 @@ def run_sequence_tests_from_scraping(aptoide):
             # all the relevant stuff should happen here
             #######
             if aptoide == 0:
-                print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --package " + id_app + " --file " + dir + "/" + file)
-                os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app  + " --package " + id_app + " --file " + dir + "/" + file)
+                print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --package " + package_name + " --file " + dir + "/" + file)
+                os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app  + " --package " + package_name + " --file " + dir + "/" + file)
             else:
                 print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
                 os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
@@ -445,16 +467,16 @@ def run_time_plugins():
 
 if __name__ == "__main__":
     # 1st to run
-    run_sequence_tests_from_scraping(1)
+    run_sequence_tests_from_scraping(0)
     # run_tests_for_ext_apps()
     # 2nd to run
-    run_post_processing()
+    run_post_processing(0)
     # 3rd to run
-    put_the_results_on_database()
+    put_the_results_on_database(0)
     # 4th to run
-    get_num_vulns()
+    get_num_vulns(0)
     # 5th to run
-    get_riskLevels()
+    get_riskLevels(0)
 
     # run_time_plugins()
     workbook.close()

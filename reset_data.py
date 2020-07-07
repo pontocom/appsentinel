@@ -38,6 +38,7 @@ for location in locations:
                     os.system("rm -R -- */")
                 else:
                     os.system("rm *")
+                    os.system("rm .*")
                 print("Deleted files in: " + location)
                 print("... \n")
                 os.chdir(appsentinel)
