@@ -25,7 +25,7 @@ class PluginClass:
     def __init__(self):
         ''' constructor '''
         
-    def run(self, apk_file, md5):
+    def run(self, apk_file, md5, package=''):
         print("Running the AndroWarn plugin!...")
         log.debug("Running the AndroWarn plugin!...")
         # test the existence of the results directory

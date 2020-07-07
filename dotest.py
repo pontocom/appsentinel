@@ -342,7 +342,7 @@ def run_sequence_tests():
             rows = rows + 1
 
 
-def run_sequence_tests_from_scraping():
+def run_sequence_tests_from_scraping(aptoide):
     vars = ["#", "MD5", "Start Time", "End Time", "Duration"]
     sheet = workbook.add_worksheet("Results - Sequence")
     bold = workbook.add_format({'bold': True})
@@ -371,8 +371,12 @@ def run_sequence_tests_from_scraping():
             sheet.write(rows, 2, starttime, format2)
             # all the relevant stuff should happen here
             #######
-            print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
-            os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
+            if aptoide == 0:
+                print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --package " + id_app + " --file " + dir + "/" + file)
+                os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app  + " --package " + id_app + " --file " + dir + "/" + file)
+            else:
+                print(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
+                os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + id_app + " --file " + dir + "/" + file)
             format3 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
             endtime = datetime.datetime.now()
             sheet.write(rows, 3, endtime, format3)
@@ -441,14 +445,14 @@ def run_time_plugins():
 
 if __name__ == "__main__":
     # 1st to run
-    # run_sequence_tests_from_scraping()
+    run_sequence_tests_from_scraping(1)
     # run_tests_for_ext_apps()
     # 2nd to run
-    # run_post_processing()
+    run_post_processing()
     # 3rd to run
-    # put_the_results_on_database()
+    put_the_results_on_database()
     # 4th to run
-    # get_num_vulns()
+    get_num_vulns()
     # 5th to run
     get_riskLevels()
 

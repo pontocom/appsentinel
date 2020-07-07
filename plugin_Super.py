@@ -25,7 +25,7 @@ class PluginClass:
     def __init__(self):
         ''' constructor '''
 
-    def run(self, apk_file, md5):
+    def run(self, apk_file, md5, package=''):
         print('\nRunning the Super plugin!...')
         log.debug('Running the Super plugin!...')
         if not os.path.exists(jsonResultsLocation):

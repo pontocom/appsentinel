@@ -28,7 +28,7 @@ class PluginClass:
     def __init__(self):
         ''' constructor '''
         
-    def run(self, apk_file, md5):
+    def run(self, apk_file, md5, package=''):
         print("Running the DroidStatX plugin!...")
         
         log.debug("Running the DroidStatX plugin!...")
@@ -37,14 +37,18 @@ class PluginClass:
             os.system("mkdir " + jsonResultsLocation)
 
         print(pluginName + ": FILE -> " + apk_file)
+        print(pluginName + ": PACKAGE -> " + package)
         log.debug(pluginName + ": FILE -> " + apk_file)
 
         if apk_file[-4:] == ".apk":
-            # probably it is not necessary to have this... maybe apktool is enough for this
-            cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
-            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-            (output, err) = p.communicate()
-            apkPackageName = str(output)[15:-9]
+            if package == '':
+                # probably it is not necessary to have this... maybe apktool is enough for this
+                cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
+                p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+                (output, err) = p.communicate()
+                apkPackageName = str(output)[15:-9]
+            else:
+                apkPackageName = package
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
             print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)

@@ -43,10 +43,10 @@ def runSelectedPlugin():
     c.run()
 
 
-def run_this_plugin(plugin_number, apk_location, apk_md5):
+def run_this_plugin(plugin_number, apk_location, apk_md5, package):
     thisPlugin = plugins[plugin_number]
     c = thisPlugin.PluginClass()
-    c.run(apk_location, apk_md5)
+    c.run(apk_location, apk_md5, package)
 
 
 '''
@@ -64,12 +64,18 @@ if __name__=="__main__":
                         action='store', dest='apkfile', nargs=1, default='')
     parser.add_argument('-m', '--md5', help='The APK file MD5 id to analyse.',
                         action='store', dest='md5Id', nargs=1, default='')
+    parser.add_argument('-p', '--package', help='The package name of the APK.',
+                        action='store', dest='packageName', nargs=1, default='')
     args = parser.parse_args()
 
     print(args)
 
     apkFile = args.apkfile[0]
     md5Id = args.md5Id[0]
+
+    package = ''
+    if args.packageName != '':
+        package = args.packageName[0]
 
     #if args.apkfile != "":
     #    apkFile = args.apkfile[0]
@@ -105,7 +111,7 @@ if __name__=="__main__":
     # an alternative testing to run the tools in parallel
     for i in range(counter_plugins):
         jobs = []
-        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkFile, md5Id))
+        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkFile, md5Id, package))
         jobs.append(p)
         p.start()
 
