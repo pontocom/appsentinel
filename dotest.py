@@ -31,8 +31,7 @@ def put_the_results_on_database(aptoide):
                 id_app = file[-37:-5]
             else:
                 id_app = file[:-5]
-            if os.path.exists(dir_results + "/Androbugs/" + file) or os.path.exists(
-                    dir_results + "/DroidStatX/" + file):
+            if os.path.exists(dir_results + "/Androbugs/" + file) or os.path.exists(dir_results + "/DroidStatX/" + file) or os.path.exists(dir_results + "/Super/" + file):
                 # if os.path.getsize(dir_results + "/DroidStatX/" + file) != 0:
                 count = count + 1
                 print("[ANDROBUGS][" + str(count) + "][" + id_app + "][" + file + "]")
