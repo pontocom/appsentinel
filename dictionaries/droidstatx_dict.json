@@ -62,7 +62,7 @@
             "level": "Warning",
             "cvssV3": 5.4,
             "vectorStringV3": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
-            "keywords":["webview", "JSenabled"]
+            "keywords":["xss"]
         },
         {
             "name": "WebView with fileAccess enabled.",

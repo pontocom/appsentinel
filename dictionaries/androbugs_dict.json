@@ -326,7 +326,7 @@
       "level": "Notice",
       "cvssV3": 2.3,
       "vectorStringV3": "AV:L/AC:L/PR:H/UI:N/S:U/C:N/I:L/A:N",
-      "keywords":["components","androidManifest"]
+      "keywords":["components","androidManifest", "2"]
     },
     {
       "name": "AndroidManifest \"intent-filter\" Settings Checking",

@@ -157,7 +157,7 @@
             "name": "WebView XSS",
             "deatils": "Webview insecure implementation. This issue could allow to a remote attacker to code execution in WebView and performing Cross Site Scripting attacks.",
             "category": "M1",
-            "level": "Critical",
+            "level": "Warning",
             "cvssV3": 0.0,
             "vectorStringV3": "",
             "keywords": ["xss"]
