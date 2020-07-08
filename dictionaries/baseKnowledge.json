@@ -975,7 +975,7 @@
             "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M5-Insufficient_Cryptography"],
             "books_by_category": [],
             "articles_by_cateory": [],
-            "scores": [
+            "scores":[
                 {
                     "score": 8.2,
                     "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
@@ -987,7 +987,7 @@
                     "keywords":["sqlite", "encryption"]
                 },
                 {
-                    "sxore": 7.1,
+                    "score": 7.1,
                     "vectorString": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
                     "keywords":["keystore"]
                 },
