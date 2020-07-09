@@ -1013,7 +1013,8 @@ def parseArgument():
 
 	#When you want to use "report_output_dir", remember to use "os.path.join(args.report_output_dir, [filename])"
 	parser.add_argument("-o", "--report_output_dir", help="Analysis Report Output Directory", type=str, required=False, default=DIRECTORY_REPORT_OUTPUT)
-	parser.add_argument("-a", "--md5file", help="Analysis Report Output Directory", type=str, required=False, default=DIRECTORY_REPORT_OUTPUT)
+	parser.add_argument("-a", "--md5file", help="Analysis Report Output Directory", type=str, required=False)
+	parser.add_argument("-p", "--package", help="Analysis Report Output Directory", type=str, required=False)
 
 	args = parser.parse_args()
 	return args
@@ -3680,9 +3681,13 @@ def main() :
 
 
 	#build json file
-	with open(args.report_output_dir + args.md5file+".txt", 'w') as write_file:
-		json.dump(writer.get_Output(), write_file )
-
+	print(args)
+	if args.md5file is not None:
+		with open(args.report_output_dir + args.md5file+".txt", 'w') as write_file:
+			json.dump(writer.get_Output(), write_file )
+	elif args.package is not None:
+		with open(args.report_output_dir + args.package+".txt", 'w') as write_file:
+			json.dump(writer.get_Output(), write_file )
 
 if __name__ == "__main__":
 	main()

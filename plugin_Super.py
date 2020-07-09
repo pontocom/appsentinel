@@ -51,15 +51,26 @@ class PluginClass:
             path = './tools/super/results/'
             fileName = glob.glob(path+"*")
             print('Filename ---> '+str(fileName))
-            if not os.path.isdir(fileName[0]):  
-                os.system('mv ' + fileName[0] + ' ./json_results/Super/'+md5+'.json')
-                self.build_scan_format(md5)
-                os.system('rm -r ./tools/super/results/')
+            if not os.path.isdir(fileName[0]):
+                if package == '':
+                    os.system('mv ' + fileName[0] + ' ./json_results/Super/'+md5+'.json')
+                    self.build_scan_format(md5)
+                    os.system('rm -r ./tools/super/results/')
+                else:
+                    os.system('mv ' + fileName[0] + ' ./json_results/Super/' + package + '.json')
+                    self.build_scan_format(package)
+                    os.system('rm -r ./tools/super/results/')
             else:
-                directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
-                os.system('mv ' + fileName[0]+'/'+os.path.basename(directory[0]) + ' ./json_results/Super/'+md5+'.json')
-                self.build_scan_format(md5)
-                os.system('rm -r ./tools/super/results/')
+                if package == '':
+                    directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
+                    os.system('mv ' + fileName[0]+'/'+os.path.basename(directory[0]) + ' ./json_results/Super/'+md5+'.json')
+                    self.build_scan_format(md5)
+                    os.system('rm -r ./tools/super/results/')
+                else:
+                    directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
+                    os.system('mv ' + fileName[0] + '/' + os.path.basename(directory[0]) + ' ./json_results/Super/' + package + '.json')
+                    self.build_scan_format(package)
+                    os.system('rm -r ./tools/super/results/')
 
     
     def build_scan_format(self, md5):

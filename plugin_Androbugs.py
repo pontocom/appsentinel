@@ -434,19 +434,32 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
-            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+            if package == '':
+                print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+                log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+            else:
+                print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --package " + package + " -o " + jsonResultsLocation)
+                log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --package " + package + " -o " + jsonResultsLocation)
             # run the tool
             # ----- Start Time ------
             startTime = datetime.datetime.now()
-            os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
+            if package == '':
+                os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
+            else:
+                os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --package " + package + " -o " + jsonResultsLocation)
             # this tool produces a text-based output... we need to consider what to do with this
             # convert to JSON
             #self.convert_to_json(md5)
             #self.convert_to_new_json(md5)
-            self.build_scan_format(md5)
-            # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+            if package == '':
+                self.build_scan_format(md5)
+                # have also the information registered on the database
+                db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+            else:
+                self.build_scan_format(package)
+                # have also the information registered on the database
+                db.insert_results(package, pluginName, jsonResultsLocation + package + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+
 
             endTime = datetime.datetime.now()
 
@@ -454,8 +467,10 @@ class PluginClass:
             if not os.path.exists(dir):
                 os.system("mkdir " + dir)
             
-            
-            data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
+            if package == '':
+                data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
+            else:
+                data = package + ' ' + pluginName + ' ' + str(endTime - startTime) + '\n'
             
             with open(dir + '.txt', 'a') as f:
                 f.write(data)

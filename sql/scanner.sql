@@ -1,5 +1,5 @@
 CREATE TABLE apk (
-  md5 VARCHAR(32) PRIMARY KEY NOT NULL ,
+  md5 VARCHAR(250) PRIMARY KEY NOT NULL ,
   applicationName TEXT NOT NULL ,
   applicationPackage TEXT NOT NULL ,
   applicationVersion TEXT,
@@ -12,7 +12,7 @@ CREATE TABLE apk (
 
 CREATE TABLE apk2scan (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  md5 VARCHAR(32) NOT NULL,
+  md5 VARCHAR(250) NOT NULL,
   created_at DATETIME  NOT NULL
 );
 
@@ -23,9 +23,9 @@ CREATE TABLE apkscantools (
 
 CREATE TABLE apkresults (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  md5 VARCHAR(32) NOT NULL ,
+  md5 VARCHAR(250) NOT NULL ,
   scantool VARCHAR(32) NOT NULL ,
-  results_location VARCHAR(128) NOT NULL ,
+  results_location TEXT NOT NULL ,
   status INTEGER NOT NULL,
   details TEXT ,
   created_at DATETIME NOT NULL
@@ -33,8 +33,8 @@ CREATE TABLE apkresults (
 
 CREATE TABLE  apkvulnerabilitylevel (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  md5 VARCHAR(32) NOT NULL ,
-  results_location VARCHAR(128) NOT NULL ,
+  md5 VARCHAR(250) NOT NULL ,
+  results_location TEXT NOT NULL ,
   status INTEGER NOT NULL,
   details TEXT ,
   created_at DATETIME NOT NULL
@@ -42,7 +42,7 @@ CREATE TABLE  apkvulnerabilitylevel (
 
 CREATE TABLE  apklevels (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  md5 VARCHAR(32) NOT NULL ,
+  md5 VARCHAR(250) NOT NULL ,
   results_location VARCHAR(128) NOT NULL ,
   status INTEGER NOT NULL,
   details TEXT ,
@@ -64,8 +64,8 @@ CREATE TABLE apkrules (
 
 CREATE TABLE apkfinalresults (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
-  md5 VARCHAR(32) NOT NULL ,
-  results_location VARCHAR(128) NOT NULL ,
+  md5 VARCHAR(250) NOT NULL ,
+  results_location TEXT NOT NULL ,
   status INTEGER NOT NULL,
   details TEXT ,
   created_at DATETIME NOT NULL

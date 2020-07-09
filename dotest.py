@@ -386,7 +386,10 @@ def run_sequence_tests_from_scraping(aptoide):
             print(pyfiglet.figlet_format(str(count)))
             print("[" + str(count) + "] TESTING APP ===========================>>>>>>>>>> " + id_app)
             sheet.write(rows, 0, count)
-            sheet.write(rows, 1, id_app)
+            if aptoide == 0:
+                sheet.write(rows, 1, package_name)
+            else:
+                sheet.write(rows, 1, id_app)
             starttime = datetime.datetime.now()
             format2 = workbook.add_format({'num_format': 'dd/mm/yy hh:mm:ss'})
             sheet.write(rows, 2, starttime, format2)

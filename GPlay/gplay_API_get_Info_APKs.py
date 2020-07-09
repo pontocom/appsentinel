@@ -86,10 +86,10 @@ def get_apk_info():
         sheet.write(0, cols, var, bold)
         cols = cols + 1
 
-    for file in os.listdir("./downloads"):
+    for file in os.listdir("../download-GPlay"):
         if file[-4:] == ".apk":
             print('[' + str(count + 1) + '][' + file[:-4] + '] Requesting [' + baseAPIURL2 + file[:-4] + ".json")
-            if count >= 100:  # just to overcome the API limitations
+            if count >= 200:  # just to overcome the API limitations
                 response = requests.get(baseAPIURL2 + file[:-4] + ".json",
                                         auth=(APIKEY2, "X"),
                                         params={"country": "US"},
@@ -141,8 +141,8 @@ def compute_md5():
 if __name__ == "__main__":
     # get_top_apks()
     # download_apks()
-    # get_apk_info()
-    compute_md5()
+    get_apk_info()
+    # compute_md5()
     workbook.close()
 
 # curl -u "ea67957f7f28f0b01183c872412c1d649ce94046:X" "https://api.appmonsta.com/v1/stores/android/details/com.facebook.orca.json?country=PT"
