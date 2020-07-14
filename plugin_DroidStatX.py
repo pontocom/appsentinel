@@ -63,15 +63,20 @@ class PluginClass:
             log.debug(pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             os.system("xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             # move the json results to proper folder
-            print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
-            log.debug(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
-            os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
-
-            self.analyseVulnerability(md5)
-
-
-            # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
+            if package == '':
+                print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+                log.debug(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+                os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+                self.analyseVulnerability(md5)
+                # have also the information registered on the database
+                db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
+            else:
+                print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
+                log.debug(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
+                os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
+                self.analyseVulnerability(package)
+                # have also the information registered on the database
+                db.insert_results(package, pluginName, jsonResultsLocation + package + ".json", 0, "")
 
             endTime = datetime.datetime.now()
 
@@ -80,9 +85,11 @@ class PluginClass:
                 os.system("mkdir " + dir)
             
             
-            
-            data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
-            
+            if package == '':
+                data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
+            else:
+                data = package + ' ' + pluginName + ' ' + str(endTime - startTime) + '\n'
+
             with open(dir + '.txt', 'a') as f:
                 f.write(data)
 
