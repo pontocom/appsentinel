@@ -6,50 +6,10 @@ import os.path
 from os import path
 from statistics import mean
 
-# ## Testing Try to lool config.ini file
-# config = configparser.ConfigParser()
-# config.read('config.ini')
-
-
-# plugin_scores={}
-# n_plugins=0
-# enabled_plugins=[]
-# enabled_plugins_name=[]
-
-# # looking for the plugins
-# pluginDir = os.path.dirname(os.path.abspath(__file__))
-# for file in os.listdir(pluginDir):
-#     if file[0:7] == "plugin_" and file[-3:] == ".py":
-#         # print(file)
-#         # we need to do something with them... need to check if it is better to import or to spawn (decide later)
-#         thisPlugin = __import__(".".join(file.split(".")[0:-1]))
-#         # print(thisPlugin.pluginName +' is enabled:'+ str(thisPlugin.enable))
-#         if thisPlugin.enable and thisPlugin not in enabled_plugins:
-#             # print('Adding '+thisPlugin.pluginName)
-#             enabled_plugins.append(thisPlugin)
-#             enabled_plugins_name.append(thisPlugin.pluginName.lower())
-
-# print(str(enabled_plugins))
-# print(str(enabled_plugins_name))
-
-# for section in config.sections():
-#     if str(section) == 'TOOL_SCORES':
-#         for (name, val) in config.items(section):
-#             if name in enabled_plugins_name:
-#                 plugin_scores[name]=val
-#                 n_plugins +=1
-# print(plugin_scores)
-
-############################
-
-## Test for getting the vulnerability scores
-
-
 class calculatorClass:
 
     config = configparser.ConfigParser()
     config.read('config.ini')
-
 
     def __init__(self, md5):
         ''' constructor '''
@@ -57,6 +17,9 @@ class calculatorClass:
         self.plugin_scores={}
         self.enabled_plugins=[]
         self.setup()
+        self.notices = 0
+        self.warnings = 0
+        self.criticals = 0
 
     # Seting up the calculator, getting the enabled plugins and their correspondent scores
     def setup(self):
@@ -103,6 +66,12 @@ class calculatorClass:
 
         for category in feedback_content:
             for vuln in feedback_content[category]:
+                if vuln['severity'] == 'Notice':
+                    self.notices+=1
+                elif vuln['severity'] == 'Warning':
+                    self.warnings+=1
+                else:
+                    self.criticals+=1
                 vuln_name = vuln['vulnerability']
                 # print('Checking for '+vuln_name)
                 detectedby=""
@@ -145,10 +114,24 @@ class calculatorClass:
                                             _aux_score = score['score']
                                         # print('Test: '+str(_aux))
                                         if keywords==score['keywords']:
-                                            isMatch = True
                                             _aux_score = score['score']
                                             break
                                     fscore = _aux_score
+                                     ## MÉTODO 2 dar um extra a vulnerabilidades criticas e warnings
+                                    # print('Fscore before: '+str(fscore))
+                                    # if fscore >= 7.0 and fscore < 9.0:
+                                    #     fscore += 0.5
+                                    # elif fscore >= 9.0:
+                                    #     fscore += 1
+                                    # elif fscore >= 6.0 and fscore < 7.0:
+                                    #     fscore += 0.2
+                                    # elif fscore >= 4.0 and fscore < 6.0:
+                                    #     fscore += 0.1
+                                    # print('Fscore after: '+str(fscore))
+                                    # if fscore > 10.0:
+                                    #     fscore = 10.0
+                                    ##
+
                                     # Adding the score for each plugin that detected it
                                     for plugin in detectedby:
                                         plugin_vuln_scores[plugin].append(fscore)
@@ -194,6 +177,12 @@ class calculatorClass:
             # else:
             #     dividend_total += 0
         final_score = dividend_total/float(len(plugin_vuln_scores))
+        
+        # print("Score before ---> "+str(final_score))
+        # Add bonus
+        if self.criticals >= 10 or self.warnings >= 10:
+            final_score = self.add_weights(final_score)            
+
         # print('Final Score ---> '+str(final_score))
         return round(final_score,2)
 
@@ -242,3 +231,12 @@ class calculatorClass:
 
         # print('What about now!! ' + str(new_plugin_scores))
         return new_plugin_scores
+    
+    def add_weights(self, final_score):
+        if self.criticals >= 10:
+            bonus = self.criticals * 0.01
+            final_score += bonus
+        if self.warnings >= 10:
+            bonus = self.warnings * 0.002
+            final_score += bonus
+        return final_score
