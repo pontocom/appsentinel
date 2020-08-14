@@ -26,6 +26,7 @@ count = 0
 
 
 def get_top_apks():
+    grpNumber = 0
     vars = ["#", "Name", "Package", "Category"]
     sheet = workbook.add_worksheet("Results")
     bold = workbook.add_format({'bold': True})
@@ -140,8 +141,8 @@ def compute_md5():
 
 if __name__ == "__main__":
     # get_top_apks()
-    # download_apks()
-    get_apk_info()
+    download_apks()
+    # get_apk_info()
     # compute_md5()
     workbook.close()
 
