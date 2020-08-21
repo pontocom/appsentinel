@@ -1,0 +1,355 @@
+{
+    "results": [
+        {
+            "name": "Allows Backup",
+            "deatils": "This option allows backups of the application data via adb. Malicious people with physical access could use adb to get private data of your app into their PC.",
+            "category": "M2",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["adb"]
+        },
+        {
+            "name": "Large heap",
+            "deatils": "The application needs a large heap. This is not a vulnerability as such, but could be in devices with small heap. Check if the large heap is actually needed.",
+            "category": "M1",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["heap"]
+        },
+        {
+            "name": "Manifest Debug",
+            "deatils": "The application is in debug mode. This allows any malicious person to inject arbitrary code in the application. This option should only be used while in development.",
+            "category": "M1",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["debuggable"]
+        },
+        {
+            "name": "URL Disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of private URLs.",
+            "category": "M2",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["url", "disclosure"]
+        },
+        {
+            "name": "Generic Exception in catch",
+            "deatils": "Exception catching should be specific. Generic Exception type could not be safe and lead to silent error suppresion",
+            "category": "M7",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["exception", "catch", "method"]
+        },
+        {
+            "name": "Generic Exception in Throws",
+            "deatils": "The exceptions thrown by a method should be specific. Generic Exception type could could not be safe and lead to silent error suppresion.",
+            "category": "M7",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["exception", "throws", "method"]
+        },
+        {
+            "name": "Hidden fields",
+            "deatils": "Hidden fields are often used to cover data from the user, but they are discouraged, since they can lead to data disclosure.",
+            "category": "M7",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["fields", "class"]
+        },
+        {
+            "name": "IP Disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of private IPs.",
+            "category": "M2",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["IP", "disclosure"]
+        },
+        {
+            "name": "Math Random method",
+            "deatils": "This method is not as random as it is supossed to be. It should not be use to generate OTP codes.",
+            "category": "M7",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["randomMethod", "method"]
+        },
+        {
+            "name": "Unchecked output in Logs",
+            "deatils": "Sensitive information should never be logged since it can lead to that information being disclosed.",
+            "category": "M2",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["logs"]
+        },
+        {
+            "name": "Hardcoded file separator",
+            "deatils": "Paths like C:\\\\Program Files\\\\... can cause problems, and are considered vulnerabilities, since some OSs use backslashes `\\\\` (DOS/Windows) and others slashes `/` (Unix).",
+            "category": "M1",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["hardcoded", "separator"]
+        },
+        {
+            "name": "Weak Algorithms",
+            "deatils": "Using weak algorithms allows an attacker to break the cyphered communications gaining access to plain text content.",
+            "category": "M5",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["algorithms"]
+        },
+        {
+            "name": "Sleep Method",
+            "deatils": "Sleep Method is used with vars as arguments. If those vars are modified it could force the aplication to stop indefinitely.",
+            "category": "M7",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["sleepMethod","method"]
+        },
+        {
+            "name": "World readable permissions",
+            "deatils": "Setting world readable permissions allows to anyone (with access to the target file) to read file content.",
+            "category": "M1",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["read", "permissions"]
+        },
+        {
+            "name": "World writable permissions",
+            "deatils": "Setting world writable permissions allows to anyone (with access to the target file) to modify file content.",
+            "category": "M1",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["write", "permissions"]
+        },
+        {
+            "name": "Write-Read in external storage",
+            "deatils": "Application can read/write in external storage. Any app can read data written in external storage.",
+            "category": "M1",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["write","read","external storage"]
+        },
+        {
+            "name": "Temp File Use",
+            "deatils": "Applications is creating temp files. Sensitive information should never be written in temp files.",
+            "category": "M2",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["tempFile", "sensitiveInfo"]
+        },
+        {
+            "name": "WebView XSS",
+            "deatils": "Webview insecure implementation. This issue could allow to a remote attacker to code execution in WebView and performing Cross Site Scripting attacks.",
+            "category": "M1",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["xss"]
+        },
+        {
+            "name": "WebView ignores SSL errors",
+            "deatils": "WebView is ignoring SSL errors and it accepts any SSL certificate. This application could be affected by Man in the Middle attacks.",
+            "category": "M3",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["webview","ssl", "CA"]
+        },
+        {
+            "name": "SQL injection",
+            "deatils": "This application is vulnerable to SQL injection. Any data stored in database can be exposed as any attacker is able to retrive, modify and delete the stored information.",
+            "category": "M1",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["SQLInjection"]
+        },
+        {
+            "name": "Accepting all SSL certificates",
+            "deatils": "Insecure application SSL implementation. This application accepts all certificates, including self signed by default. This is a critical issue as Man in the Middle attacks may be performed.",
+            "category": "M3",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["ssl","CA", "allAcepted"]
+        },
+        {
+            "name": "Sending sms-mms",
+            "deatils": "This application is sending sms or mms and it might be without the user's knowledge.",
+            "category": "M10",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["sms"]
+        },
+        {
+            "name": "Super user privileges.",
+            "deatils": "This applications may require super user privileges.",
+            "category": "M1",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["privilege"]
+        },
+        {
+            "name": "Rooted device detection",
+            "deatils": "This applications is performing checks for rooted device. This could be use to execute specific code if the device is rooted to take control of it.",
+            "category": "M8",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["rootedCheck"]
+        },
+        {
+            "name": "Cell Location (Base Stations)",
+            "deatils": "This app is using cell location by Base Station method. This process might be performed without the user's knowledge.",
+            "category": "M1",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["location", "baseStation"]
+        },
+        {
+            "name": "Get Device ID",
+            "deatils": "The application is recording the device ID (IMEI). This process might be performed without the user's knowledge.",
+            "category": "M1",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["identifiers","IMEI"]
+        },
+        {
+            "name": "Get SIM Serial",
+            "deatils": "The application is recording the SIM serial. This process might be performed without the user's knowledge.",
+            "category": "M1",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["identifiers","SIM"]
+        },
+        {
+            "name": "GPS location",
+            "deatils": "This app is using cell location by GPS method. This process might be performed without the user's knowledge.",
+            "category": "M1",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["location", "GPS"]
+        },
+        {
+            "name": "Base64 Encode",
+            "deatils": "This application is using Base64 encoding. This is not a secure method to encode data.",
+            "category": "M5",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["encryption","base64","encode"]
+        },
+        {
+            "name": "Base64 decode",
+            "deatils": "This application is using Base64 decoding.",
+            "category": "M5",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["encryption","base64","decode"]
+        },
+        {
+            "name": "Infinite Loop",
+            "deatils": "The application contains infinite loops. It is not a good practice to use infinite loops inside a program.",
+            "category": "M7",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["loop"]
+        },
+        {
+            "name": "Email disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of private email information.",
+            "category": "M2",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["email","disclosure"]
+        },
+        {
+            "name": "Certificate or Keystore disclosure",
+            "deatils": "The decompilation of the source code could lead to the disclosure of hardcoded certificate or keystore.",
+            "category": "M2",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["keystore","disclosure"]
+        },
+        {
+            "name": "Get SIM Operator",
+            "deatils": "The application is recording the device network operator. This process might be performed without the user's knowledge.",
+            "category": "M2",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["SIMOperator","sensitiveInfo"]
+        },
+        {
+            "name": "Get SIM OperatorName",
+            "deatils": "The application is recording the device network operator name. This process might be performed without the user's knowledge.",
+            "category": "M2",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["SimOperatorName","sensitiveInfo"]
+        },
+        {
+            "name": "Obfuscated code",
+            "deatils": "The code of this application could be obfuscated.",
+            "category": "",
+            "level": "Warning",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": []
+        },
+        {
+            "name": "System command execution",
+            "deatils": "The application could execute system command.",
+            "category": "M7",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["runtime command"]
+        },
+        {
+            "name": "SSL getInsecure method",
+            "deatils": "Insecure application SSL implementation. This applications in using the getInsecure Method which returns a new instance of a socketFactory with all SSL security checks disabled. These sockets are vulnerable to MITM attacks.",
+            "category": "M3",
+            "level": "Critical",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["ssl", "method", "getInsecure"]
+        },
+        {
+            "name": "Finally with return statement",
+            "deatils": "Finally structure with return statement inside will bypass any error thrown.",
+            "category": "M7",
+            "level": "Notice",
+            "cvssV3": 0.0,
+            "vectorStringV3": "",
+            "keywords": ["method","finally"]
+        }
+    ]
+}

@@ -5,6 +5,7 @@ import configparser
 import logging as log
 import linecache
 import json
+import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -22,6 +23,9 @@ jsonResultsLocationVulnLevel = config['SCANNER']['jsonResultsLocation'] + "/" + 
 jsonResultsLocationLevels = config['SCANNER']['jsonResultsLocation'] + "/" + pluginName + "/" + levelsfolder + "/"
 
 androbugsLocation = config['ANDROBUGS']['androbugsLocation']
+
+dictionary = config['DICTIONARY']['androbugsDict']
+
 
 
 class PluginClass:
@@ -369,16 +373,17 @@ class PluginClass:
         #critical = 0
 
         for x in read_content:
-            data['results'].append({
-                'vulnerability': x['vulnerability'],
-                'details': x['details'],
-                'severity': x['level'],
-                'detectedby': 'Androbugs',
-                'feedback': [{"url": "Nothing to show"},
-                             {"video": "Nothing to show"},
-                             {"book": "Nothing to show"},
-                             {"other": "Nothing to show"}]
-            })
+            if not x['level'].lower()=='info':
+                data['results'].append({
+                    'vulnerability': x['vulnerability'],
+                    'details': x['details'],
+                    'severity': x['level'],
+                    'detectedby': 'Androbugs',
+                    'feedback': [{"url": "Nothing to show"},
+                                {"video": "Nothing to show"},
+                                {"book": "Nothing to show"},
+                                {"other": "Nothing to show"}]
+                })
 
             #data_vuln_level['vulnerabilities&level'].append({
             #    'vulnerability': x['tag'],
@@ -412,7 +417,7 @@ class PluginClass:
         #with open(jsonResultsLocationLevels + md5 + ".json", "a") as save_file:
         #    json.dump(data_level_for_apk, save_file)
 
-    def run(self, apk_file, md5):
+    def run(self, apk_file, md5, package=''):
         print(pluginName + ": Running the Androbugs plugin!...")
         log.debug(pluginName + ": Running the Androbugs plugin!...")
         # test the existence of the results directory
@@ -429,17 +434,51 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
-            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + androbugsLocation + "androbugs.py -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+            if package == '':
+                print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+                log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 + " -o " + jsonResultsLocation)
+            else:
+                print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --package " + package + " -o " + jsonResultsLocation)
+                log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --package " + package + " -o " + jsonResultsLocation)
             # run the tool
-            os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
+            # ----- Start Time ------
+            startTime = datetime.datetime.now()
+            if package == '':
+                os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --md5file " + md5 +" -o " + jsonResultsLocation)
+            else:
+                os.system(config['GENERAL']['python2cmd'] + " " + androbugsLocation + "androbugs.py -v -f " + apk_file + " --package " + package + " -o " + jsonResultsLocation)
             # this tool produces a text-based output... we need to consider what to do with this
             # convert to JSON
             #self.convert_to_json(md5)
             #self.convert_to_new_json(md5)
-            self.build_scan_format(md5)
-            # have also the information registered on the database
-            db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+            if package == '':
+                self.build_scan_format(md5)
+                # have also the information registered on the database
+                db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+            else:
+                self.build_scan_format(package)
+                # have also the information registered on the database
+                db.insert_results(package, pluginName, jsonResultsLocation + package + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+
+
+            endTime = datetime.datetime.now()
+
+            dir = './apkTimeAnalysis'
+            if not os.path.exists(dir):
+                os.system("mkdir " + dir)
+            
+            if package == '':
+                data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
+            else:
+                data = package + ' ' + pluginName + ' ' + str(endTime - startTime) + '\n'
+            
+            with open(dir + '.txt', 'a') as f:
+                f.write(data)
+
+
+
+
+
             # add vulnerability and level information to database
             #db.insert_results_vullevel(md5, pluginName, jsonResultsLocationVulnLevel + md5 + ".json", 0, "TRY TO SEE BETTER WAY")
             # add level information to database

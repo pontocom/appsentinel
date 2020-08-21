@@ -1,7 +1,7 @@
 [GENERAL]
 #logDir = /home/cserrao/Documents/AppSentinel/appsentinel/
 #logDir = /Users/cserrao/Documents/Development/AppSentinel/appsentinel/
-appsentinel = /home/umabreolhos/appsentinel/
+appsentinel = /home/nuno/Desktop/appsentinel
 logDir = ./
 
 
@@ -12,28 +12,27 @@ supercmd = target/release/super-analyzer
 [DOWNLOAD]
 aptoideAPIEndpoint = http://ws2.aptoide.com/api/7/app/get/apk_md5sum=
 apkDownloadDir = ./download
-jsonDir = ./json_data
 external_apps = ./download/external_apps
+jsonDir = ./json_data
 
 [MYSQL]
 host = localhost
 database = apkscanner
 user = appsentinel
-password = !AppSentinel123#
+password = teste123
 
 [SCANNER]
 jsonResultsLocation = ./json_results
 json_results_androbugs =./json_results/Androbugs
 json_results_droidstatx = ./json_results/DroidStatX
-json_results_super = ./json_results/Super
 
 [DROIDSTATX]
 aapt2ToolLocation =  /usr/bin/
 #aapt2ToolLocation =  /usr/local/Caskroom/android-sdk/4333796/build-tools/28.0.3/
 droidStatXLocation = ./tools/droidstatx/
-dstatx_out_apktool= ./tools/droidstatx/output_apktool
-dstatx_out_txt= ./tools/droidstatx/output_txt
-dstatx_out_xmind= ./tools/droidstatx/output_xmind
+dstatx_out_apktool= /tools/droidstatx/output_apktool
+dstatx_out_txt= /tools/droidstatx/output_txt
+dstatx_out_xmind= /tools/droidstatx/output_xmind
 
 [ANDROBUGS]
 androbugsLocation = ./tools/AndroBugs/
@@ -54,16 +53,7 @@ feedback_vuln_levelsResultsLocation = ./json_results/final_output/feedback_vulne
 androbugsDict = ./dictionaries/androbugs_dict.json
 droidstatxDict = ./dictionaries/droidstatx_dict.json
 baseKnowledge = ./dictionaries/baseKnowledge.json
-superDict = ./dictionaries/super_dict.json
 
-
-
-
-
-[TOOL_SCORES] 
-droidstatx = 0.5
-androbugs = 1.5
-super = 1
 
 [TOOLSPECIFIC]
 TOOLSPECIFICLocation = ./

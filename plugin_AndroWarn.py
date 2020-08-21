@@ -4,7 +4,7 @@ import database as db
 import subprocess
 import configparser
 import logging as log
-
+import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -25,7 +25,7 @@ class PluginClass:
     def __init__(self):
         ''' constructor '''
         
-    def run(self, apk_file, md5):
+    def run(self, apk_file, md5, package=''):
         print("Running the AndroWarn plugin!...")
         log.debug("Running the AndroWarn plugin!...")
         # test the existence of the results directory
@@ -42,6 +42,8 @@ class PluginClass:
             log.debug(pluginName + ": Running on -> " + apk_file)
             print(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androWarnLocation + "androwarn.py -i " + apk_file + " -r json -v 3")
             log.debug(pluginName + ": Executing -> " + config['GENERAL']['python2cmd'] + " " + androWarnLocation + "androwarn.py -i " + apk_file + " -r json -v 3")
+            # ----- Start Time ------
+            startTime = datetime.datetime.now()
             os.system(config['GENERAL']['python2cmd'] + " " + androWarnLocation + "androwarn.py -i " + apk_file + " -r json -v 3")
             # move the json result file to the appropriate location
             print(pluginName + ": mv " + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
@@ -49,3 +51,15 @@ class PluginClass:
             os.system("mv " + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
             # have also the information registered on the database
             db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
+
+            endTime = datetime.datetime.now()
+
+            dir = './apkTimeAnalysis'
+            if not os.path.exists(dir):
+                os.system("mkdir " + dir)
+            
+                       
+            data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
+            
+            with open(dir + '.txt', 'a') as f:
+                f.write(data)

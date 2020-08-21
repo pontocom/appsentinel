@@ -1,0 +1,1437 @@
+{
+    "results":[
+        {
+            "category":"M1",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M1-Improper_Platform_Usage"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 2.7,
+                    "vectorString": "AV:P/AC:H/PR:H/UI:N/S:U/C:N/I:L/A:L",
+                    "keywords":["nativeLibrary"]
+                },
+                {
+                    "score": 1.0,
+                    "vectorString": "",
+                    "keywords": ["heap"]
+                },
+                {
+                    "score": 7.8,
+                    "vectorString": "AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords": ["read", "permissions", "write"]
+                },
+                {
+                    "score": 6.5,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+                    "keywords":["webview", "localFile"]
+                },
+                {
+                    "score": 5.9,
+                    "keywords":["javascriptInterface"]
+                },
+                {
+                    "score":9.3,
+                    "keywords":["webview", "RCE"]
+                },
+                {
+                    "score":8.1,
+                    "keywords":["fragment"]
+                },
+                {
+                    "score":6.8,
+                    "keywords":["contentProvider", "androidManifest"]
+                },
+                {
+                    "score": 2.2,
+                    "keywords":["debuggable", "codes"]
+                },
+                {
+                    "score": 8.0,
+                    "keywords":["debuggable"]
+                },
+                {
+                    "score": 8.4,
+                    "keywords": ["contentProvider", "androidManifest","SQLInjection"]
+                },
+                {
+                    "score": 2.0,
+                    "keywords":["googleCloud"]
+                },
+                {
+                    "score": 1.8,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:R/S:U/C:N/I:L/A:N",
+                    "keywords":["screenshot"]
+                },
+                {
+                    "score": 9.3,
+                    "vectorString": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
+                    "keywords":["xss", "RCE"]
+                },
+                {
+                    "score": 5.4,
+                    "vectorString": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
+                    "keywords":["xss"]
+                },
+                {
+                    "score": 8.4,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords": ["SQLInjection"]
+                },
+                {
+                    "score": 2.7,
+                    "vectorString": "AV:P/AC:H/PR:H/UI:N/S:U/C:N/I:L/A:L",
+                    "keywords":["library"]
+                },
+                {
+                    "score": 1.6,
+                    "vectorString": "AV:P/AC:H/PR:H/UI:N/S:U/C:N/I:N/A:L",
+                    "keywords":["nativeMethods"]
+                },
+                {
+                    "score": 8.1,
+                    "vectorString": "AV:L/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:L",
+                    "keywords":["fragmentInjection","vulnerable"]
+                },
+                {
+                    "score": 5.3,
+                    "vectorString": "AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:L/A:N",
+                    "keywords":["fragmentInjection", "possible"]
+                },
+                {
+                    "score": 7.1,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+                    "keywords":["permission"]
+                },
+                {
+                    "score": 8.0,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:L",
+                    "keywords":["permission","androidManifest","dangerous"]
+                },
+                {
+                    "score": 6.1,
+                    "vectorString": "AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:L",
+                    "keywords":["permission","androidManifest","normal"]
+                },
+                {
+                    "score": 7.8,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+                    "keywords":["prefix","androidManifest"]
+                },
+                {
+                    "score": 6.1,
+                    "vectorString": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N",
+                    "keywords":["components","androidManifest"]
+                },
+                {
+                    "score": 2.3,
+                    "vectorString": "AV:L/AC:L/PR:H/UI:N/S:U/C:N/I:L/A:N",
+                    "keywords":["components","androidManifest", "2"]
+                },
+                {
+                    "score": 4.4,
+                    "vectorString": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N",
+                    "keywords":["intent-filter"]
+                },
+                {
+                    "score": 7.3,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:L",
+                    "keywords":["intent"]
+                },
+                {
+                    "score": 1.0,
+                    "vectorString": "",
+                    "keywords":["androidManifest", "sharedUserId"]
+                },
+                {
+                    "score": 6.5,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
+                    "keywords":["webview", "fileAcess"]
+                },
+                {
+                    "score": 9.3,
+                    "vectorString": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
+                    "keywords":["webview", "RCE"]
+                },
+                {
+                    "score": 6.8,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
+                    "keywords":["pathTransversal"]
+                },
+                {
+                    "score": 5.4,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:L/A:N",
+                    "keywords":["webview", "JSenabled"]
+                },
+                {
+                    "score": 1.9,
+                    "vectorString": "",
+                    "keywords": ["hardcoded", "separator"]
+                }                
+            ],
+            "keywords":[
+                
+                {
+                    "name": ["debuggable"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["debuggable", "codes"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["permission"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["permissionGroup", "androidManifest"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["permission", "androidManifest"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["googleCloud","message"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["screenshot"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["nativeLibrary"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["nativeMethods"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["dynamic code"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["fragmentInjection"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["permission","androidManifest"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["prefix","androidManifest"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["components","androidManifest"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["androidManifest","intent-filter"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["intent"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["androidManifest", "sharedUserId"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["webview", "fileAcess"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["SQLInjection"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["pathTransversal"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["fragmentInjection"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["javascriptInterface"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["webview", "JSenabled"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["webview","univelsalAcess"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["heap"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["hardcoded", "separator"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["read", "permissions"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["write", "permissions"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["xss"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["location", "baseStation"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["identifiers","IMEI"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["identifiers","SIM"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["location", "GPS"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["write","read","external storage"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["privilege"] ,
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "contentProvider",
+                    "links": ["https://developer.android.com/guide/topics/manifest/manifest-intro.html","https://www.nowsecure.com/blog/2013/10/03/ebay-for-android-content-provider-injection-vulnerability/","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-sensitive-functionality-exposure-through-ipc"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "androidManifest",
+                    "links": ["https://developer.android.com/reference/android/Manifest.permission.html","https://developer.android.com/guide/topics/manifest/manifest-intro.html","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05a-Platform-Overview.md"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "debuggable",
+                    "links": ["https://cwe.mitre.org/data/definitions/215.html","https://nvd.nist.gov/vuln/detail/CVE-2019-10212","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md","https://www.owasp.org/index.php/Leftover_Debug_Code","https://github.com/OWASP/owasp-mstg/blob/master//Document/0x05i-Testing-Code-Quality-and-Build-Settings.md#testing-if-the-app-is-debuggable"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "fragment",
+                    "links": ["https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-6271","https://securityintelligence.com/new-vulnerability-android-framework-fragment-injection/","https://nvd.nist.gov/vuln/detail/CVE-2013-6272","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-for-fragment-injection"],
+                    "books": ["https://securityintelligence.com/wp-content/uploads/2013/12/android-collapses-into-fragments.pdf"],
+                    "articles": []
+                },
+                {
+                    "name": "javascriptInterface",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "webview",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#determining-whether-java-objects-are-exposed-through-webviews","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05h-Testing-Platform-Interaction.md#testing-webview-protocol-handlers"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "security",
+                    "links": ["https://www.owasp.org/index.php/Unsafe_Mobile_Code"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "permission",
+                    "links": ["https://www.owasp.org/index.php/Least_Privilege_Violation"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "cloud",
+                    "links": ["https://developer.android.com/about/dashboards/index.html","http://developer.android.com/google/gcm/gcm.html"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "library",
+                    "links": ["https://www.owasp.org/index.php/Unsafe_JNI"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "intent",
+                    "links": ["http://developer.android.com/guide/topics/manifest/intent-filter-element.html"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "sharedUserId",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05a-Platform-Overview.md"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "methods",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M2",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M2-Insecure_Data_Storage"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 3.7,
+                    "vectorString": "AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N",
+                    "keywords":["keystore","disclosure"]
+                },
+                {
+                    "score":5.5,
+                    "vecctorString":"AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
+                    "keywords":["data leaked"]
+                },
+                {
+                    "score": 2.6,
+                    "vectorString": "AV:A/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N",
+                    "keywords":["keyStore", "location"]
+                },
+                {
+                    "score": 1.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
+                    "keywords":["sqlite", "encryption", "SEE"]
+                },
+                {
+                    "score": 7.1,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+                    "keywords":["permission", "sandbox"]
+                },
+                {
+                    "score": 1.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N (...) This vulnerability when affects Android versions under than 4.0, the score score is 7.5, AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+                    "keywords":["sqlite","database"]
+                },
+                {
+                    "score": 1.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
+                    "keywords":["sqlite", "encryption", "SEE"]
+                },
+                {
+                    "score": 6.8,
+                    "vecctorString":"AV:P/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords":["adb"]
+                },{
+                    "score": 4.8,
+                    "vectorString": "AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+                    "keywords": ["url", "sensitiveInfo"]
+                },
+                {
+                    "score": 3.7,
+                    "vectorString": "",
+                    "keywords": ["IP", "sensitiveInfo"]
+                },
+                {
+                    "score": 3.7,
+                    "vectorString": "",
+                    "keywords": ["logs"]
+                },
+                {
+                    "score": 8.2,
+                    "vectorString": "",
+                    "keywords": ["tempFile", "sensitiveInfo"]
+                },
+                {
+                    "score": 5.8,
+                    "vectorString": "",
+                    "keywords": ["email","sensitiveInfo"]
+                },
+                {
+                    "score":9.8,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords":["sqlite","transaction"]
+                }
+            ],
+            "keywords":[
+                {
+                    "name": "data leaked",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md#finding-sensitive-information-in-auto-generated-screenshots"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "keystore",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "sqlite",
+                    "links": ["https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#beginTransactionNonExclusive()","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md","http://www.sqlite.org/android"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "permission",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "storage",
+                    "links": ["https://www.owasp.org/index.php/Insecure_Storage","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05d-Testing-Data-Storage.md"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "database",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "backup",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "androidManifest",
+                    "links": ["http://developer.android.com/guide/topics/manifest/application-element.html","http://blog.c22.cc/advisories/cve-2013-5112-evernote-android-insecure-storage-of-pin-data-bypass-of-pin-protection/","http://www.securityfocus.com/archive/1/530288/30/0/threaded"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["email", "disclosure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["adb"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["url", "disclosure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["IP", "disclosure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["logs"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["tempFile", "sensitiveInfo"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["email","disclosure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["SIMOperator","sensitiveInfo"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["SimOperatorName","sensitiveInfo"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["flag_secure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["keystore","disclosure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["keyStore", "location"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["sqlite","transaction"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["permission", "sandbox"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["externalStorage"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["sqlite","database"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+                
+            ]
+        },
+        {
+            "category":"M3",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M3-Insecure_Communication"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["certificate pinning"]
+                },
+                {
+                    "score":8.0,
+                    "keywords":["network security"]
+                },
+                {
+                    "score": 8.5,
+                    "keywords":["ssl"]
+                },
+                {
+                    "score": 1.6,
+                    "keywords":["security"]
+                },
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["webview", "CA","ssl"]
+                },
+                {
+                    "score": 8.6,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:L",
+                    "keywords":["trustManager", "CA","ssl"]
+                },
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["hostNameVerifier", "ssl"]
+                },
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["setHostnameVerifier", "ssl"]
+                },
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["hostNameVerifier", "ssl","noUsage"]
+                },
+                {
+                    "score": 8.2,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
+                    "keywords":["networkSecurityConfig"]
+                },
+                {
+                    "score": 6.0,
+                    "vectorString":"",
+                    "keywords":["networkSecurityConfig","noUsage"]
+                },
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["certificatePinning","noUsage"]
+                }
+            ],
+            "keywords":[
+                {
+                    "name": "trustManager",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#verifying-the-server-certificate", "https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification","https://support.google.com/faqs/answer/6346016"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "ssl",
+                    "links": ["https://www.owasp.org/index.php/Insecure_Transport", "https://developer.android.com/training/articles/security-ssl.html", "https://developer.android.com/training/articles/security-ssl.html","http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html#getInsecure(int,android.net.SSLSessionCache).", "https://jira.appcelerator.org/browse/TIMOB-4488"],
+                    "books": ["http://goo.gl/BFb65r", "The Most Dangerous Code in the World: Validating SSL Certificates in Non-Browser Software"],
+                    "articles": []
+                },
+                {
+                    "name": "webview",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#webview-server-certificate-verification"],
+                    "books": ["http://seclab.tuwien.ac.at/papers/webview_leet13.pdf","https://www.owasp.org/images/9/99/GiuseppePorcu-OWASPItalyDay19-10-2018.pdf"],
+                    "articles": []
+                },
+                {
+                    "name": "xss",
+                    "links": ["https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "webview",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "CA",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "hostname verification",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#hostname-verification", "https://support.google.com/faqs/answer/7188426?hl=en", "https://www.immuniweb.com/vulnerability/improper-validation-of-certificate-with-host-mismatch.html"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "network security",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#network-security-configuration"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "certificate pinning",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x05g-Testing-Network-Communication.md#testing-custom-certificate-stores-and-certificate-pinning"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["webview","ssl", "CA"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","CA", "allAcepted"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl", "method", "getInsecure"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["trustManager"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["hostNameVerifier"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["setHostnameVerifier"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["hostNameVerifier","noUsage"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["networkSecurityConfig"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["networkSecurityConfig","noUsage"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["certificatePinning","noUsage"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","checking"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["security","method"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["security", "classes"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","checking","hostName","class"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","checking","hostName","fields"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","checking","component"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","checking","httpHost"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["ssl","checking","webviewClient"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["webview", "CA","ssl"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M4",
+            "links_by_category": [],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "keywords":[
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M5",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M5-Insufficient_Cryptography"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 8.2,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
+                    "keywords": ["algorithms"]
+                },
+                {
+                    "score": 1.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
+                    "keywords":["sqlite", "encryption"]
+                },
+                {
+                    "score": 7.1,
+                    "vectorString": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N",
+                    "keywords":["keystore"]
+                },
+                {
+                    "score": 6.0,
+                    "vectorString":"",
+                    "keywords":["keystore","sensitiveInfo"]
+                },
+                {
+                    "score": 7.4,
+                    "vectorString": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["encryption","base64"]
+                },
+                {
+                    "score":9.3,
+                    "vectorString": "AV:N/AC:M/Au:N/C:C/I:C/A:C",
+                    "keywords":["master key"]
+                },
+                {
+                    "score": 8.2,
+                    "vectorString":"AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N",
+                    "keywords":["keyStore", "BKS"]
+                },
+                {
+                    "score": 1.9,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N",
+                    "keywords":["sqlite", "encryption","sqlCipher"]
+                },
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:H/UI:N/S:C/C:H/I:H/A:H",
+                    "keywords":["master key","root"]
+                },
+                {
+                    "score": 7.4,
+                    "vectorString": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["encryption", "AES", "ECB"]
+                },
+                {
+                    "score": 7.4,
+                    "vectorString": "AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N",
+                    "keywords":["encryption","DES","3DES"]
+                }
+
+            ],
+            "keywords":[
+                {
+                    "name": "master key",
+                    "links": ["https://nvd.nist.gov/vuln/detail/CVE-2013-4787","https://cwe.mitre.org/data/definitions/320.html","https://www.owasp.org/index.php/Category:Cryptographic_Vulnerability","https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "encryption",
+                    "links": ["https://github.com/OWASP/owasp-mstg/blob/master/Document/0x04g-Testing-Cryptography.md#identifying-insecure-andor-deprecated-cryptographic-algorithms"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "keystore",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "sqlCipher",
+                    "links": [],
+                    "books": ["https://www.owasp.org/images/5/56/OWASP_ChapterMeeting_SqlCipher-2012.pdf"],
+                    "articles": []
+                },
+                {
+                    "name": ["algorithms"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption","base64","encode"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption","base64","decode"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption", "AES", "ECB"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption","DES","3DES"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["keystore"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["master key"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["keyStore", "BKS"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption","bangcle"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption","Ijiami"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["encryption", "MonoDroid"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["sqlite", "encryption","sqlCipher"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["sqlite", "encryption", "SEE"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["sqlite", "encryption","key"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": ["master key","root"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M6",
+            "links_by_category": [],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 7.5,
+                    "vectorString": "",
+                    "keywords": ["authorization"]
+                },
+                {
+                    "score": 6.1,
+                    "vectorString": "AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:L/A:N",
+                    "keywords":["externalStorage"]
+                }
+            ],
+            "keywords":[
+                {
+                    "name": ["privilege"],
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M7",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M7-Poor_Code_Quality"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 3.7,
+                    "vectorString": "",
+                    "keywords": ["method","finally"]
+                },
+                {
+                    "score": 2.5,
+                    "vectorString": "",
+                    "keywords": ["fields", "class"]
+                },
+                {
+                    "score": 3.5,
+                    "vectorString": "",
+                    "keywords": ["exception", "method"]
+                },
+                {
+                    "score": 2.0,
+                    "vectorString": "AV:L/AC:L/PR:H/UI:R/S:U/C:N/I:L/A:N",
+                    "keywords":["unsafe delete file"]
+                },
+                {
+                    "score": 9.8,
+                    "vectorString": "AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+                    "keywords":["runtime command"]
+                },
+                {
+                    "score": 8.2,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:H",
+                    "keywords": ["sleepMethod","method"]
+                },
+                {
+                    "score": 5.5,
+                    "vectorString": "",
+                    "keywords": ["loop"]
+                }
+            ],
+            "keywords":[
+                {
+                    "name": "runtime command",
+                    "links": ["https://www.owasp.org/index.php/Category:Access_Control"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "file",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M8",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M8-Code_Tampering"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 9.1,
+                    "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+                    "keywords": ["rootedCheck"]
+                },
+                {
+                   "score": 2.8,
+                   "vectorString": "AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:L/A:N",
+                   "keywords": ["signature"]
+                },
+                {
+                   "score": 3.9,
+                   "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:L/A:L",
+                   "keywords":["privilege"]
+                },
+                {
+                    "score": 1.0,
+                    "vectorString": "",
+                    "keywords":["installation"]
+                }
+           ],
+            "keywords":[
+                {
+                    "name": "signature",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "previlege",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "installation",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "webview",
+                    "links": ["https://labs.mwrinfosecurity.com/blog/2012/04/23/adventures-with-android-webviews/","http://developer.android.com/reference/android/webkit/WebSettings.html"],
+                    "books": [],
+                    "articles": []
+                },
+                {
+                    "name": "localFile",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M9",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M9-Reverse_Engineering"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 5.2,
+                    "vectorString": "AV:L/AC:H/PR:H/UI:N/S:U/C:L/I:H/A:L",
+                    "keywords":["identifiers","IMEI"]
+                },
+                {
+                    "score": 4.3,
+                    "vectorString": "AV:N/AC:M/Au:N/C:N/I:P/A:N",
+                    "keywords":["identifiers","android_ID"]
+                }
+            ],
+            "keywords":[
+                {
+                    "name": "identifiers",
+                    "links": ["https://android-developers.googleblog.com/2011/03/identifying-app-installations.html"],
+                    "books": [],
+                    "articles": []
+                },{
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        },
+        {
+            "category":"M10",
+            "links_by_category": ["https://www.owasp.org/index.php/Mobile_Top_10_2016-M10-Extraneous_Functionality"],
+            "books_by_category": [],
+            "articles_by_cateory": [],
+            "scores":[
+                {
+                    "score": 5.0,
+                    "vectorString": "",
+                    "keywords":["sms"]
+                },
+                {
+                    "score": 6.6,
+                    "vectorString": "AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:L",
+                    "keywords":["dynamic code"]
+                }
+            ],
+            "keywords":[
+                {
+                    "name": "sms",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                },{
+                    "name": "",
+                    "links": [],
+                    "books": [],
+                    "articles": []
+                }
+            ]
+        }
+    ]
+}

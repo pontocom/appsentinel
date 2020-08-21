@@ -11,6 +11,10 @@ config.read('config.ini')
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 
+plugins = []
+thisPlugin = None
+counter_plugins = 0
+
 # location of the unprocessed APKs
 # apkDir = "/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/"
 
@@ -39,10 +43,10 @@ def runSelectedPlugin():
     c.run()
 
 
-def run_this_plugin(plugin_number, apk_location, apk_md5):
+def run_this_plugin(plugin_number, apk_location, apk_md5, package):
     thisPlugin = plugins[plugin_number]
     c = thisPlugin.PluginClass()
-    c.run(apk_location, apk_md5)
+    c.run(apk_location, apk_md5, package)
 
 
 '''
@@ -51,11 +55,6 @@ A tool to scan APKs and look for vulnerabilities
 if __name__=="__main__":
     VERSION = '0.1'
     banner = "SCANNER"
-
-    plugins = []
-    thisPlugin = 0
-    counter_plugins = 0
-
     print(str(banner))
 
     text = "Tool that scans APKs and looks for vulnerabilities"
@@ -65,6 +64,8 @@ if __name__=="__main__":
                         action='store', dest='apkfile', nargs=1, default='')
     parser.add_argument('-m', '--md5', help='The APK file MD5 id to analyse.',
                         action='store', dest='md5Id', nargs=1, default='')
+    parser.add_argument('-p', '--package', help='The package name of the APK.',
+                        action='store', dest='packageName', nargs=1, default='')
     args = parser.parse_args()
 
     print(args)
@@ -72,8 +73,16 @@ if __name__=="__main__":
     apkFile = args.apkfile[0]
     md5Id = args.md5Id[0]
 
-    print("APK FILE -> " + apkFile)
-    print("APK MD5 -> " + md5Id)
+    package = ''
+    if args.packageName != '':
+        package = args.packageName[0]
+
+    #if args.apkfile != "":
+    #    apkFile = args.apkfile[0]
+    #    print("APK FILE -> " + apkFile)
+    #else:
+    #    md5Id = args.md5Id[0]
+    #    print("APK MD5 -> " + md5Id)
 
     # looking for the plugins
     pluginDir = os.path.dirname(os.path.abspath(__file__))
@@ -102,7 +111,7 @@ if __name__=="__main__":
     # an alternative testing to run the tools in parallel
     for i in range(counter_plugins):
         jobs = []
-        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkFile, md5Id))
+        p = multiprocessing.Process(target=run_this_plugin, args=(i, apkFile, md5Id, package))
         jobs.append(p)
         p.start()
 

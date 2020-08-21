@@ -1,3 +1,4 @@
+requests
 Flask
 pymysql
 flasgger
@@ -5,3 +6,6 @@ tqdm
 xmindparser
 XlsxWriter
 requests
+bs4
+nltk
+sklearn
