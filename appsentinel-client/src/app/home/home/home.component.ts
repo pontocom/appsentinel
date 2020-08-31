@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../home.service';  
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  apkFileToUpload: File = null;
+
+  constructor(private homeService: HomeService) { }
 
   ngOnInit(): void {
+  }
+
+  handleFileInput(files: FileList) {
+    this.apkFileToUpload = files.item(0);
+  }
+
+  onAnalyze() {
+    console.log('Start Analyzing ' + this.apkFileToUpload.name)
+    this.homeService.postFile(this.apkFileToUpload).subscribe(data => {
+      // do something, if upload success
+      console.log('SUCESS');
+      }, error => {
+        console.log(error);
+      });
   }
 
 }

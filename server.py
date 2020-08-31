@@ -56,6 +56,34 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 def home():
     return jsonify({'status': True, 'message': 'API is responding... keep trying!'}), 200
 
+# New Endpoint to process apk files from the web interface
+@app.route("/apkfiles", methods=["POST"])
+def post_file(filename):
+    """Upload a file."""
+    print(request.files)
+    # check if the post request has the file part
+    if 'file' not in request.files:
+        print('no file in request')
+        return jsonify({'status': False, 'message': 'no subdirectories directories allowed'}), 400, {'Access-Control-Allow-Origin':'*'}
+    file = request.files['file']
+    if file.filename == '':
+        print('no selected file')
+        return jsonify({'status': False, 'message': 'no subdirectories directories allowed'}), 400, {'Access-Control-Allow-Origin':'*'}
+    else:
+        return jsonify({'status': True, 'message': 'apk file was passed'}), 200, {'Access-Control-Allow-Origin':'*'}
+    print("end")
+    return""
+
+    # if "/" in filename:
+    #     # Return 400 BAD REQUEST
+    #     return jsonify({'status': False, 'message': 'no subdirectories directories allowed'}), 400, {'Access-Control-Allow-Origin':'*'}
+    # else:
+    #     return jsonify({'status': True, 'message': 'apk file was passed'}), 200, {'Access-Control-Allow-Origin':'*'}
+    # # with open(os.path.join(UPLOAD_DIRECTORY, filename), "wb") as fp:
+    #     # fp.write(request.data)
+
+    # Return 201 CREATED
+    return "", 201
 
 @app.route('/apkscan', methods=['POST'])
 @swag_from('./docs/apkscan.yml')
