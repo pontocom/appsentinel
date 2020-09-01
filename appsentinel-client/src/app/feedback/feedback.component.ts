@@ -23,14 +23,27 @@ export class FeedbackComponent implements OnInit {
 
   toApk(data: Object): void{
     this.apks = new Array()
-    data.list.forEach(element => {
+    const jsonData = JSON.stringify(data)
+    let obj = JSON.parse(jsonData);
+    console.log(obj.list)
+    console.log('Data from service: '+obj.list);
+    obj.list.forEach(element => {
       const apk = new Apk()
       apk.md5 = element.apk_md5
+      console.log('The list of levels: '+element.vulnerability_levels)
       element.vulnerability_levels.forEach(elementItem => {
-        if(elementItem == 'Notice')
-        apk.notice = elementItem.Info
-        apk.warning = elementItem.Warning
-        apk.critical = elementItem.Critical
+        console.log('what is happening here: '+Object.keys(elementItem))
+        switch(Object.keys(elementItem)[0]){
+          case 'Notice': {
+            apk.notice = elementItem.Notice;
+          }
+          case 'Warning': {
+            apk.warning = elementItem.Warning;
+          }
+          case 'Critical': {
+            apk.critical = elementItem.Critical
+          }
+        }
       })
       
       this.apks.push(apk)
