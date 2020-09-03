@@ -16,3 +16,9 @@
         id="inputGroupFileAddon04">Analyze</button>
     </div>
 </div>
+<div class="input-group mb-3">
+    <input #textbox type="text" class="form-control" [(ngModel)]="inputMD5"  placeholder="Insert MD5 here" aria-label="Insert MD5 here" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" (click)="onAnalyze()">Analyze</button>
+    </div>
+  </div>

@@ -9,6 +9,7 @@ import { HomeService } from '../home.service';
 export class HomeComponent implements OnInit {
 
   apkFileToUpload: File = null;
+  inputMD5 = '';
 
   constructor(private homeService: HomeService) { }
 
@@ -20,13 +21,20 @@ export class HomeComponent implements OnInit {
   }
 
   onAnalyze() {
-    console.log('Start Analyzing ' + this.apkFileToUpload.name)
-    this.homeService.postFile(this.apkFileToUpload).subscribe(data => {
-      // do something, if upload success
-      console.log('SUCESS');
-      }, error => {
-        console.log(error);
-      });
+    // Dont forget about validations, specialy to avoid security problems
+
+    if(this.inputMD5 === ''){
+      console.log('Start Analyzing ' + this.apkFileToUpload.name)
+      this.homeService.postFile(this.apkFileToUpload).subscribe(data => {
+        // do something, if upload success
+        console.log('SUCESS');
+        }, error => {
+          console.log(error);
+        });
+    }else{
+      console.log('The md5 is: '+this.inputMD5)
+      this.homeService.postMd5(this.inputMD5);
+    }
   }
 
 }
