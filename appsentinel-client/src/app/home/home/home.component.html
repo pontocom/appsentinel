@@ -22,3 +22,7 @@
       <button class="btn btn-outline-secondary" type="button" (click)="onAnalyze()">Analyze</button>
     </div>
   </div>
+
+  <div>
+    <span *ngIf="responseMessage!=''">{{responseMessage}}</span>
+  </div>

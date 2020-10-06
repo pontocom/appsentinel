@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
 
   apkFileToUpload: File = null;
   inputMD5 = '';
+  responseMessage : string = '';
 
   constructor(private homeService: HomeService) { }
 
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   onAnalyze() {
     // Dont forget about validations, specialy to avoid security problems
 
-    if(this.inputMD5 === ''){
+    if(this.inputMD5 === '' && this.apkFileToUpload != null){
       console.log('Start Analyzing ' + this.apkFileToUpload.name)
       this.homeService.postFile(this.apkFileToUpload).subscribe(data => {
         // do something, if upload success
@@ -32,8 +33,15 @@ export class HomeComponent implements OnInit {
           console.log(error);
         });
     }else{
-      console.log('The md5 is: '+this.inputMD5)
-      this.homeService.postMd5(this.inputMD5);
+      console.log('The md5 is: '+this.inputMD5);
+      this.homeService.postMd5(this.inputMD5)
+      .subscribe(
+        response => {
+          const data = JSON.stringify(response)
+          const obj = JSON.parse(data);
+          this.responseMessage = obj.message
+        }
+      );
     }
   }
 

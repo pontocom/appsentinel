@@ -83,7 +83,7 @@ def post_file(filename):
     #     # fp.write(request.data)
 
     # Return 201 CREATED
-    return "", 201
+    # return "", 201
 
 @app.route('/apkscan', methods=['POST'])
 @swag_from('./docs/apkscan.yml')

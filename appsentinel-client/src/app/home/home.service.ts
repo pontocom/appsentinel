@@ -36,8 +36,6 @@ export class HomeService {
     } : {};
     console.log('Parameters: '+httpOptions.params)
     return this.httpClient
-      .post(endpoint, null, httpOptions).subscribe(
-        response => {console.log('Response: '+JSON.stringify(response))}
-      )
+      .post(endpoint, null, httpOptions)
   }
 }
