@@ -187,13 +187,26 @@ def feedback_levels(md5):
     # })
 
     score_calculator = calculatorClass(md5)
-    data = {'status': 'OK', 'value': score_calculator.calculate()}
+    data = {'status': 'OK', 'value': score_calculator.calculate() , 'summary':
+    {
+       'high_weigthed_vulns': {
+            'detected':score_calculator.get_heavy_vulns(),
+            'details':'this vulnerabilities have more impact in the App Risk Score, they have a CVSS greater than 7.0 and they are detected by the majority of the available scanning tools'
+        },
+        'detected_by_each_tool':{
+            'detections':score_calculator.get_feedback_by_tool(),
+            'vuln_socres':score_calculator.get_vuln_scores_by_plugin(),
+            'weigth_by_tool': score_calculator.get_weights_tools(),
+            'details': 'each tool has its own impact in the final App Risk Score, vulnerabilities found by the most weigthed tool will add more impact.'
+        },
+        'summary': 'This score is achived accordingly to the number, type and severity of the detected vulnerabilities and by wich tool detects those vulnerabilities.' 
+    }}
 
     with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
     db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
     try:
-        payload = {'md5': md5, 'Vulnerability_level': calculatorClass.calculate(md5)}
+        payload = {'md5': md5, 'Vulnerability_level': calculatorClass.calculate()}
         r = requests.post("https://5.79.81.140:5001/autoFeedback/send", data=payload)
         print(r)
     except:

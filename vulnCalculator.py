@@ -14,12 +14,15 @@ class calculatorClass:
     def __init__(self, md5):
         ''' constructor '''
         self.md5=md5
+        self.vuln_scores_by_plugin={}
         self.plugin_scores={}
         self.enabled_plugins=[]
         self.setup()
         self.notices = 0
         self.warnings = 0
         self.criticals = 0
+        self.high_weigthed_vulns = 0
+        self.feedback_by_tool={}
 
     # Seting up the calculator, getting the enabled plugins and their correspondent scores
     def setup(self):
@@ -84,6 +87,7 @@ class calculatorClass:
                     break
                     # detectedby = vuln['detectedby'].lower()  # this detectedby has to be an array
                 # for detectedby as an Array
+                numb_of_detectedby = len(detectedby)
                 for p in detectedby:
                     # print('checking if '+p+' is in '+str(plugin_vuln_scores))
                     if p not in plugin_vuln_scores:
@@ -117,45 +121,27 @@ class calculatorClass:
                                             _aux_score = score['score']
                                             break
                                     fscore = _aux_score
-                                     ## MÉTODO 2 dar um extra a vulnerabilidades criticas e warnings
-                                    # print('Fscore before: '+str(fscore))
-                                    # if fscore >= 7.0 and fscore < 9.0:
-                                    #     fscore += 0.5
-                                    # elif fscore >= 9.0:
-                                    #     fscore += 1
-                                    # elif fscore >= 6.0 and fscore < 7.0:
-                                    #     fscore += 0.2
-                                    # elif fscore >= 4.0 and fscore < 6.0:
-                                    #     fscore += 0.1
-                                    # print('Fscore after: '+str(fscore))
-                                    # if fscore > 10.0:
-                                    #     fscore = 10.0
-                                    ##
 
                                     # Adding the score for each plugin that detected it
                                     for plugin in detectedby:
                                         plugin_vuln_scores[plugin].append(fscore)
                                     #     print('plugin_vuln_scores: '+str(plugin_vuln_scores))
                                     # print('Score: '+str(score))
-                # if detectedby not in plugin_vuln_scores:
-                #     plugin_vuln_scores[detectedby] = []
-                # with open('dictionaries/'+detectedby+'_dict.json', "r") as json_file:
-                #     plugin_dict = json.load(json_file)
-                # for result in plugin_dict['results']:
-                #     if result['name'] == vuln_name and len(result['keywords']) > 0:
-                #         print('Checking: '+vuln_name+' is equal to '+result['name'])
-                #         keywords=result['keywords']
-                #         for data in baseKnowledge['results']:
-                #             if category == data['category']:
-                #                 for score in data['scores']:
-                #                     print('Comparing: '+str(keywords)+' with '+str(score['keywords']))
-                #                     if keywords==score['keywords']:
-                #                         print(str(keywords)+' is equal to '+str(score['keywords']))
-                #                         fscore = score['score']
-                #                         plugin_vuln_scores[detectedby].append(fscore)
-                #                         print('Score: '+str(score)) 
-        # print('\n'+str(plugin_vuln_scores))
 
+                # for statistic purposes
+                if numb_of_detectedby == len(self.plugin_scores) and current_vuln_score >= 7.0:
+                    print('detectby:')
+                    self.detectedby3 += 1
+                    self.high_weigthed_vulns += 1
+                max_value = len(self.plugin_scores)
+                while max_value > 0:
+                    if numb_of_detectedby == 3:
+                        print('ITS'+str(max_value))
+                        self.detectedbies = {'detectedby'+str(max_value): 'ok'}
+                        break
+                    else:
+                        max_value =- 1
+        self.vuln_scores_by_plugin = plugin_vuln_scores
         #### TODO ####
         # Check how many plugins analysed the current apk and adjust the scores
         # check plugin_vuln_scores and change plugin_scores
@@ -176,6 +162,7 @@ class calculatorClass:
             #     dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
             # else:
             #     dividend_total += 0
+            self.feedback_by_tool[plugin] = len(plugin_vuln_scores[plugin])
         final_score = dividend_total/float(len(plugin_vuln_scores))
         
         # print("Score before ---> "+str(final_score))
@@ -240,3 +227,24 @@ class calculatorClass:
             bonus = self.warnings * 0.002
             final_score += bonus
         return final_score
+
+    def get_heavy_vulns(self):
+        return self.high_weigthed_vulns
+
+    def get_detectedby1(self):
+        return self.detectedby1
+    
+    def get_detectedby2(self):
+        return self.detectedby2
+
+    def get_detectedby3(self):
+        return self.detectedby3
+
+    def get_feedback_by_tool(self):
+        return self.feedback_by_tool
+    
+    def get_weights_tools(self):
+        return self.plugin_scores
+    
+    def get_vuln_scores_by_plugin(self):
+        return self.vuln_scores_by_plugin
