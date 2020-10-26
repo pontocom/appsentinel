@@ -419,6 +419,55 @@ def updaterules():
     else:
         return jsonify({'status': True, 'message': 'Some error occured while updating the feedback rules!!!'}), 200, {'Access-Control-Allow-Origin': '*'}
 
+@app.route('/knowledgeBase/content/', methods=['GET'])
+@swag_from('/docs/showKnowledgeBase.yml')
+def showKnowledgeBase():
+    log.debug("GET KNOWLEDGE BASE CONTENT")
+    data ={}
+    data['results']=[]
+    file = open('./dictionaries/baseKnowledge.json')
+    content = json.load(file)
+    for info in content['results']:
+        for  keyInfo in info['keywords']:
+            data['results'].append({
+                'category': info['category'],
+                'name': keyInfo['name'],
+                'links': keyInfo['links'],
+                'books': keyInfo['books'],
+                'articles': keyInfo['articles']
+            })
+    data2 = {'results':data['results']}
+    return jsonify(data2), 200, {'Access-Control-Allow-Origin': '*'}
+
+@app.route('/knowledgeBase/add', methods=['POST'],strict_slashes=False)
+@swag_from('./docs/postKnowledgeBase.yml')
+def postKnowledgeBase():
+    log.debug("ADD INFO TO KNOWLEDGE BASE")
+    data =request.values
+
+    with open('/home/umabreolhos/appsentinel/dictionaries/baseKnowledge.json') as f:
+        content= json.load(f)
+
+
+    for i in range(0, 10):
+        for result in content['results'][i]['keywords']:
+            #result['keywords']['links'].append("teste Link")
+            keywordsList = data['keyword'].split(',')
+            if keywordsList == result['name']:
+                if data['link']:
+                    result['links'].append(data['link'])
+                if data['book']:
+                    result['books'].append(data['book'])
+                if data['article']:
+                    result['articles'].append(data['article'])
+
+    with open('/home/umabreolhos/appsentinel/dictionaries/baseKnowledge.json', 'w') as f:
+        json.dump(content, f)
+    return jsonify({'status': True, 'message': 'Information successfully added!'}), 200, {'Access-Control-Allow-Origin':'*'}
+
+
+    
+
 
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':

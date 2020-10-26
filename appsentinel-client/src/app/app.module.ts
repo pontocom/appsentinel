@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
+import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { FeedbackItemComponent } from './feedback/feedback-list/feedback-item/fe
 import { FeedbackReportComponent } from './feedback/feedback-detail/feedback-report/feedback-report.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { KnowledgeBaseComponent } from './knowledge-base/knowledge-base.component';
+import { KnowledgeBaseAddComponent } from './knowledge-base/knowledge-base-add/knowledge-base-add.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { MatTableModule } from '@angular/material/table';
     FeedbackListComponent,
     FeedbackDetailComponent,
     FeedbackItemComponent,
-    FeedbackReportComponent
+    FeedbackReportComponent,
+    KnowledgeBaseComponent,
+    KnowledgeBaseAddComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
     NgbModule,
     CoreModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

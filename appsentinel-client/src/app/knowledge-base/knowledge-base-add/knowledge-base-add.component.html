@@ -1,0 +1,26 @@
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">@</span>
+    </div>
+    <select class = "form-control" [(ngModel)]="category">
+        <option>M1</option>
+        <option>M2</option>
+        <option>M3</option>
+        <option>M4</option>
+        <option>M5</option>
+        <option>M6</option>
+        <option>M7</option>
+        <option>M8</option>
+        <option>M9</option>
+        <option>M10</option>
+    </select>
+    <input type="text" class="form-control" [(ngModel)]="keywords" placeholder="Keyword" aria-label="Keyword" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" [(ngModel)]="links" placeholder="Link" aria-label="Link" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" [(ngModel)]="books" placeholder="Book" aria-label="Book" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" [(ngModel)]="articles" placeholder="Article" aria-label="Article" aria-describedby="basic-addon1">
+</div>
+<div>
+    <button class="btn btn-primary" (click)="onSave()">
+        save
+    </button>
+</div>

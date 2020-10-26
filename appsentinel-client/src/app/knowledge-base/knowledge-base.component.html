@@ -1,0 +1,28 @@
+<div>
+  <a [routerLink]="['/knowledge-base/add']" routerLinkActive="router-linl-active" type="button" class="btn btn-primary" (click)="onClick()">
+    add
+  </a>
+</div>
+<div>
+  <app-knowledge-base-add *ngIf="add">
+    
+  
+  </app-knowledge-base-add>
+  
+</div>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th *ngFor = 'let column of headers'>
+            {{column}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = 'let keywordInfo of keywordInfoList'>
+          <td *ngFor = 'let column of headers'>
+              {{keywordInfo[column]}}
+          </td>
+      </tr>
+    </tbody>
+  
