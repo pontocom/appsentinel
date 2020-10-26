@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <h1>"Application Name" <span class="badge badge-warning" (click)='showModal=true' data-toggle="modal"
+                    data-target=".bd-example-modal-lg" aria-expanded="false" aria-controls="collapseExample">
+                    {{apkLevel.value}}
+                </span></h1>
+        </div>
+        <div class="col-2" *ngIf="!showReport">
+            Go to Report: <button class="btn btn-primary" (click)="goToReport(true)">Go</button>
+        </div>
+        <div class="col-2" *ngIf="showReport">
+            Go to Graphs: <button class="btn btn-primary" (click)="goToReport(false)">Go</button>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade bd-example-modal-lg" [ngClass]="{'show':showModal}" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)='showModal=false' data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    {{summary.summary}}
+                    <div>
+                        <label for="detections"> Detected vulnerabilities by tool:</label>
+                    </div>
+                    <div id="detections" *ngFor="let item of detections | keyvalue">
+                        <p>{{item.key}} - {{item.value}}</p>
+                    </div>
+                    <div>
+                        <label for="detections"> Vulnerability scores by tool (CVSS):</label>
+                    </div>
+                    <div id="detections" *ngFor="let item of vuln_scores | keyvalue">
+                        <p>{{item.key}} - {{item.value}}</p>
+                    </div>
+                    <div>
+                        <label for="detections"> Weight by tool, impact for the ASRS:</label>
+                    </div>
+                    <div id="detections" *ngFor="let item of weigth_by_tool | keyvalue">
+                        <p>{{item.key}} - {{item.value}}</p>
+                    </div>
+                    <div>
+                        <label>Vulnerabilities of great impact on the ASRS: {{detected_high_weigthed_vulns}}</label>
+                    </div>
+                    <div>
+                        <p>{{summary.high_weigthed_vulns.details}}</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                        (click)='showModal=false'>Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div [hidden]="showReport">
+        <div class="row">
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        </div>
+        <div class="row">
+            <div id="chartBySeverity" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+        </div>
+    </div>
+    <div class="row" *ngIf="showReport">
+        <app-feedback-report [apkFeedbackByCategories]="apkFeedbackByCategories"></app-feedback-report>
+    </div>
+</div>

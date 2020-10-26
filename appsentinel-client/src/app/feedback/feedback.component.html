@@ -1,16 +1,19 @@
-<table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th *ngFor = 'let column of headers'>
-            {{column}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor = 'let apk of apks'>
-          <td *ngFor = 'let column of headers'>
-              {{apk[column]}}
-          </td>
-      </tr>
-    </tbody>
-  
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <app-feedback-list></app-feedback-list>
+      </table>
+    </div>
+
+
+<!-- -------------------------------------------------- -->
+
+
+    <div class = "col-md-12">
+      <app-feedback-detail
+      *ngIf="selectedAPK"
+      [apkSelected] = "selectedAPK"></app-feedback-detail>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<thead class="thead-dark">
+    <tr>
+        <th scope="col" *ngFor='let column of headers'>
+            {{column}}
+        </th>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let apk of apks">
+       <app-feedback-item [apk]='apk' [headers]="headers"></app-feedback-item>
+    </tr>
+</tbody>
+<!-- 
+<tr *ngFor="let ch of characters | async" 
+app-table-row 
+[character]="ch" 
+[columns]="columns">
+</tr> -->

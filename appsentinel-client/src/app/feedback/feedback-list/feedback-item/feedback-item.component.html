@@ -1,0 +1,13 @@
+<th scope="row">#</th>
+<td><img src="{{apk.iconPath}}" alt="appIcon" height=75 width=75></td>
+<td>{{apk.appName}}</td>
+<td>{{apk.notice}}</td>
+<td>{{apk.warning}}</td>
+<td>{{apk.critical}}</td>
+<td>
+    <a [routerLink]="['/feedback/detail', apk.md5]" 
+    routerLinkActive="router-link-active" 
+    type="button" 
+    class="btn btn-primary"
+    (click)="onSelect()">Inspect</a>
+</td>

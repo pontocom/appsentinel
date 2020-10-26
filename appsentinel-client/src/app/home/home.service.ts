@@ -36,6 +36,6 @@ export class HomeService {
     } : {};
     console.log('Parameters: '+httpOptions.params)
     return this.httpClient
-      .post(endpoint, null, httpOptions)
+      .post(endpoint, null, httpOptions);
   }
 }
