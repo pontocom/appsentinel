@@ -8,7 +8,7 @@ import { ApkFeedback } from '../models/apk-feedback.model';
 import { Vulnerability } from '../models/vulnerability.model';
 import { VulnerabilityFeedback } from '../models/vulnerability-feedback.model';
 import { ApkLevel } from '../models/apk-level.model';
-import * as CanvasJS from '../../../assets/canvasjs.min';
+import * as CanvasJS from '../../../assets/canvasjs-3.2/canvasjs.min';
 
 @Component({
   selector: 'app-feedback-detail',
@@ -212,6 +212,7 @@ export class FeedbackDetailComponent implements OnInit {
       dataPointsTmp.push({y: element.detailedFeedback.length, label: element.OWASPCategory})
     });
     console.log(dataPointsTmp)
+    console.log("Canvas chama0000000000000000000000000000000000000000000000000000000000000000do")
     let chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: false,
