@@ -4,7 +4,7 @@ Mobile platforms and mobile applications are more and more used by millions of u
 
 ## Set Up
 
-Intall Docker https://docs.docker.com/get-docker/
+Install Docker https://docs.docker.com/get-docker/
 
 Once you have docker, clone the repository and inside the project run:
 ```bash
