@@ -10,7 +10,7 @@ Once you have docker, clone the repository and inside the project run:
 ```bash
 docker-compose build
 ```
-After build, start the containers
+After build, start the containers to do the magic!!!!
 ```bash
 docker-compose up -d
 ```
