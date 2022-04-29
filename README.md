@@ -16,7 +16,7 @@ docker-compose up -d
 ```
 Then you need to go inside the database container to create the tables
 ```bash
-docker exec -it appsentinel_mariadb_1 bash
+docker exec -it appsentinel-mariadb-1 bash
 mysql -u appsentinel -p < data/application/scanner.sql
 exit
 ```
