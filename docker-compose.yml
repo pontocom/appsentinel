@@ -1,6 +1,26 @@
 version: '3'
-
 services:
+
+  # DataBase Service (MariaDB)
+  mariadb:
+    build: .
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: teste123
+      MYSQL_DATABASE: apkscanner
+      MYSQL_USER: appsentinel
+      MYSQL_PASSWORD: teste123
+    ports:
+    - "3307:3306"
+      # options:
+      #   tag: "{{.DaemonName}}(image={{.ImageName}};name={{.Name}};id={{.ID}})"
+    # networks:
+    #   - backend
+    # restart: on-failure
+    #command:
+    #   - /bin/bash -c "mysql -u appsentinel -p teste123 < data/application/scanner.sql"
+    volumes:
+        - ./sql/scanner.sql:/data/application/scanner.sql
 
   # Server Service
   server:
@@ -11,29 +31,10 @@ services:
       - PORT=5000
       - FLASK_ENV=development
     ports:
-     - "5000:5000"
+      - "5000:5000"
     # # This service depends on the databse to run
-    # depends_on:
-    #   - database
+    depends_on:
+      - mariadb
     # volumes:
     #   - ./server:/root/server:cached
   
-  # DataBase Service (MariaDB)
-  mariadb:
-    image: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: teste123
-      MYSQL_DATABASE: apkscanner
-      MYSQL_USER: appsentinel
-      MYSQL_PASSWORD: teste123
-    ports:
-    - 3306:3306
-      # options:
-      #   tag: "{{.DaemonName}}(image={{.ImageName}};name={{.Name}};id={{.ID}})"
-    # networks:
-    #   - backend
-    # restart: on-failure
-    # command: 
-    #     - bash -c "mysql -uappsentinel -pteste123 < data/application/scanner.sql"
-    volumes:
-        - ./sql/scanner.sql:/data/application/scanner.sql
