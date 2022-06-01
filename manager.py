@@ -12,8 +12,9 @@ import owasp_engine as oe
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
-
+log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a',
+                format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s',
+                datefmt='%H:%M:%S', level=log.DEBUG)
 
 aptoide_API_endpoint = config['DOWNLOAD']['aptoideAPIEndpoint']
 dir = config['DOWNLOAD']['apkDownloadDir']
@@ -63,7 +64,7 @@ def write_json_data(jsondata, whick_apk):
     return True
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     VERSION = '0.1'
     banner = "APK Downloader"
     print(str(banner))
@@ -83,7 +84,8 @@ if __name__=="__main__":
                 # that APK can't be found
                 log.debug("This APK doesn't exist on APTOIDE -> APK = " + apk[1])
                 db.delete_apk2scan(apk[1])
-                db.insert_results(apk[1], "", "", -1, "This APK does not exist, or it could not be downloaded from the Aptoide app store!")
+                db.insert_results(apk[1], "", "", -1,
+                                  "This APK does not exist, or it could not be downloaded from the Aptoide app store!")
             else:
                 applicationName = jsondata["nodes"]["meta"]["data"]["name"]
                 applicationPackage = jsondata["nodes"]["meta"]["data"]["package"]
@@ -100,8 +102,10 @@ if __name__=="__main__":
                 download_apk(appPath)
                 write_json_data(jsondata, apk[1])
                 db.insert_new_apk(apk[1], applicationName, applicationPackage, appVersion, appPath, apkfile)
-                log.debug(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
-                os.system(config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
+                log.debug(
+                    config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
+                os.system(
+                    config['GENERAL']['python3cmd'] + " scanner.py --md5 " + appMD5 + " --file " + dir + "/" + apkfile)
                 db.delete_apk2scan(apk[1])
                 oe.startEngine(appMD5)
     else:

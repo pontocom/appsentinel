@@ -14,7 +14,7 @@ from collections import Counter
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-plugins_name_sorted={'DroidStatX'}
+plugins_name_sorted = {'DroidStatX'}
 
 jsonResultsLocation = config['SCANNER']['jsonResultsLocation']
 resultsOWASP = config['OWASP_OUTPUT']['owasp_OutputLocation']
@@ -26,9 +26,11 @@ dictionaryAndrobugs = config['DICTIONARY']['androbugsDict']
 dictionaryDroidstatx = config['DICTIONARY']['droidstatxDict']
 dictionarySuper = config['DICTIONARY']['superDict']
 
-plugins_dict ={ 'DroidStatX': [dictionaryDroidstatx, plugDroid], 'Androbugs': [dictionaryAndrobugs, plugAbugs],'Super':[dictionarySuper, plugSuper]}
+plugins_dict = {'DroidStatX': [dictionaryDroidstatx, plugDroid], 'Androbugs': [dictionaryAndrobugs, plugAbugs],
+                'Super': [dictionarySuper, plugSuper]}
 
 baseknowledge = config['DICTIONARY']['baseKnowledge']
+
 
 # enabled_plugins=[]
 
@@ -63,105 +65,103 @@ def init():
 
 def feedback(md5):
     dataNormalization = {}
-    dataNormalization['results']=[]
-    data={}
+    dataNormalization['results'] = []
+    data = {}
 
-    owasp_category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
+    owasp_category = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10']
     for category in owasp_category:
-       data[category]= []
-       dataNormalization[category] = []
+        data[category] = []
+        dataNormalization[category] = []
     with open(baseknowledge, 'r') as bk_file:
         bk_content = json.load(bk_file)
     for plugin in plugins_dict:
         if plugins_dict[plugin][1].enable:
-            if path.isfile(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json') and os.stat(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json').st_size > 0:
+            if path.isfile(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json') and os.stat(
+                    jsonResultsLocation + '/' + plugin + '/' + md5 + '.json').st_size > 0:
                 with open(jsonResultsLocation + '/' + plugin + '/' + md5 + '.json') as plugin_output:
                     print("OEngine: Reading -> " + jsonResultsLocation + '/' + plugin + '/' + md5 + '.json')
                     read_data = json.load(plugin_output)
                 dict_plugin_name = plugin.lower()
-                with open('./dictionaries/'+dict_plugin_name+'_dict.json', 'r') as d:
+                with open('./dictionaries/' + dict_plugin_name + '_dict.json', 'r') as d:
                     dictionary = json.load(d)
                 for x in read_data['results']:
-                    
+
                     for z in owasp_category:
                         for y in dictionary['results']:
 
                             if y['category'] == z:
 
-                                if y['name'] == x['vulnerability'] :
-
+                                if y['name'] == x['vulnerability']:
                                     data[z].append({
                                         'vulnerability': x['vulnerability'],
                                         'details': x['details'],
                                         'severity': y['level'],
                                         'detectedby': [plugin],
                                         'feedback': {
-                                            "url": [] ,
+                                            "url": [],
                                             "video": "",
                                             "book": [],
                                             "other": "Nothing to show"
                                         },
                                         'keywords': y['keywords']
                                     })
-                                                    
-                for category in owasp_category:                     
+
+                for category in owasp_category:
                     for d in data[category]:
                         for info in dictionary['results']:
-                            if d['vulnerability']== info['name']:
+                            if d['vulnerability'] == info['name']:
 
                                 for content in bk_content['results']:
                                     for bk_info in content['keywords']:
                                         for keyword in info['keywords']:
-                                            
-                                            if keyword==bk_info['name']:
+
+                                            if keyword == bk_info['name']:
                                                 for link in bk_info['links']:
                                                     d['feedback']['url'].append(link)
 
     isEqual = False
     dataNormalization = data
     for category in owasp_category:
-        #dataNormalization[category]=[]
+        # dataNormalization[category]=[]
         for vul1 in data[category]:
-            #if dataNormalization[category]==[]:
-                #dataNormalization[category].append(vul1)
-            #print(vul1['keywords'])
+            # if dataNormalization[category]==[]:
+            # dataNormalization[category].append(vul1)
+            # print(vul1['keywords'])
             for vul2 in dataNormalization[category]:
-                #if vul1 not in dataNormalization[category]:
-                    #print(vul2['keywords'][0] +' '+ vul1['keywords'][0])
+                # if vul1 not in dataNormalization[category]:
+                # print(vul2['keywords'][0] +' '+ vul1['keywords'][0])
                 if vul2['keywords'][0] == vul1['keywords'][0]:
-                    
+
                     isEqual == True
-                    #print(vul2['detectedby'][0]+ ' '+vul1['detectedby'][0])
+                    # print(vul2['detectedby'][0]+ ' '+vul1['detectedby'][0])
 
                     if vul2['detectedby'][0] != vul1['detectedby'][0]:
                         vul2['detectedby'].append(vul1['detectedby'][0])
-                vul2['detectedby']=list(dict.fromkeys(vul2['detectedby']))
-    
+                vul2['detectedby'] = list(dict.fromkeys(vul2['detectedby']))
+
     for category in owasp_category:
         for key in dataNormalization[category]:
             for key2 in dataNormalization[category]:
                 if Counter(key2['keywords']) == Counter(key['keywords']):
                     if key2['vulnerability'] != key['vulnerability']:
                         dataNormalization[category].remove(key2)
-    
+
     for cat in owasp_category:
         for result in dataNormalization[cat]:
             result.pop('keywords', None)
-        
 
-            
-    with open(resultsFeedback+'/'+md5+'.json', 'w') as f:
+    with open(resultsFeedback + '/' + md5 + '.json', 'w') as f:
         json.dump(dataNormalization, f)
     db.insert_final_results(md5, resultsFeedback + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
 
 
 def feedback_levels(md5):
-    with open(resultsFeedback +'/'+ md5 + ".json", "r") as json_file:
+    with open(resultsFeedback + '/' + md5 + ".json", "r") as json_file:
         read_content = json.load(json_file)
     data_apk_levels = {}
     data_apk_levels['value'] = []
     data = {}
-    
+
     info = 0
     notice = 0
     warning = 0
@@ -189,7 +189,7 @@ def feedback_levels(md5):
     score_calculator = calculatorClass(md5)
     data = {'status': 'OK', 'value': score_calculator.calculate()}
 
-    with open(resultsFeedbackLevels +'/'+ md5 + ".json", "w") as save_file:
+    with open(resultsFeedbackLevels + '/' + md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
     db.insert_results_levels(md5, resultsFeedbackLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
     try:
@@ -199,16 +199,16 @@ def feedback_levels(md5):
     except:
         print('not sended')
 
-        
+
 def feedback_vulnerability_levels(md5):
     with open(resultsFeedback + '/' + md5 + ".json", "r") as json_file:
         read_content = json.load(json_file)
-    data_vuln_level ={}
+    data_vuln_level = {}
     data_vuln_level['vulnerabilities'] = []
 
-    data={}
+    data = {}
 
-    category = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10']
+    category = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10']
 
     for c in category:
         for x in read_content[c]:
@@ -217,11 +217,12 @@ def feedback_vulnerability_levels(md5):
                 'severity': x['severity'],
             })
 
-    data = {'status':'OK', 'vulnerabilities': data_vuln_level['vulnerabilities']}
+    data = {'status': 'OK', 'vulnerabilities': data_vuln_level['vulnerabilities']}
 
     with open(resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", "w") as save_file:
         json.dump(data, save_file)
-    db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0, "NOT YET IN THE FINAL FORMAT")
+    db.insert_results_vulnerabilitylevel(md5, resultsFeedbackVulnerabilityLevels + '/' + md5 + ".json", 0,
+                                         "NOT YET IN THE FINAL FORMAT")
 
 
 def get_number_owasp_vulns(md5):
@@ -255,8 +256,8 @@ def get_number_owasp_vulns(md5):
             m9 = len(read_content["M9"])
             m10 = len(read_content["M10"])
 
-    print("M1:" + str(m1) + ":M2:" + str(m2) + ":M3:" + str(m3) + ":M4:" + str(m4) + ":M5:" + str(m5) + ":M6:" + str(m6) + ":M7:" + str(m7) + ":M8:" + str(m8) + ":M9:" + str(m9) + ":M10:" + str(m10))
+    print("M1:" + str(m1) + ":M2:" + str(m2) + ":M3:" + str(m3) + ":M4:" + str(m4) + ":M5:" + str(m5) + ":M6:" + str(
+        m6) + ":M7:" + str(m7) + ":M8:" + str(m8) + ":M9:" + str(m9) + ":M10:" + str(m10))
 
-    data = {'status': 'OK', 'M1': str(m1), 'M2': str(m2), 'M3': str(m3), 'M4': str(m4), 'M5': str(m5), 'M6': str(m6), 'M7': str(m7), 'M8': str(m8), 'M9': str(m9), 'M10': str(m10)}
-
-
+    data = {'status': 'OK', 'M1': str(m1), 'M2': str(m2), 'M3': str(m3), 'M4': str(m4), 'M5': str(m5), 'M6': str(m6),
+            'M7': str(m7), 'M8': str(m8), 'M9': str(m9), 'M10': str(m10)}

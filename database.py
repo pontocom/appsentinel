@@ -7,7 +7,9 @@ import datetime
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
+log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a',
+                format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s',
+                datefmt='%H:%M:%S', level=log.DEBUG)
 
 
 def insert_results(md5, tool, results_location, status, details):
@@ -16,7 +18,8 @@ def insert_results(md5, tool, results_location, status, details):
                          password=config['MYSQL']['password'],
                          database=config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apkresults (md5, scantool, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', NOW())" % (md5, tool, results_location, status, details)
+    sql = "INSERT INTO apkresults (md5, scantool, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', NOW())" % (
+    md5, tool, results_location, status, details)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -27,6 +30,7 @@ def insert_results(md5, tool, results_location, status, details):
         db.rollback()
         return False
     db.close()
+
 
 def insert_final_results(md5, results_location, status, details):
     db = pymysql.connect(host=config['MYSQL']['host'],
@@ -34,7 +38,8 @@ def insert_final_results(md5, results_location, status, details):
                          password=config['MYSQL']['password'],
                          database=config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apkfinalresults (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
+    sql = "INSERT INTO apkfinalresults (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (
+    md5, results_location, status, details)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -45,6 +50,7 @@ def insert_final_results(md5, results_location, status, details):
         db.rollback()
         return False
     db.close()
+
 
 def insert_results_vulnerabilitylevel(md5, results_location, status, details):
     db = pymysql.connect(host=config['MYSQL']['host'],
@@ -52,7 +58,8 @@ def insert_results_vulnerabilitylevel(md5, results_location, status, details):
                          password=config['MYSQL']['password'],
                          database=config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apkvulnerabilitylevel (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
+    sql = "INSERT INTO apkvulnerabilitylevel (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (
+    md5, results_location, status, details)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -63,6 +70,7 @@ def insert_results_vulnerabilitylevel(md5, results_location, status, details):
         db.rollback()
         return False
     db.close()
+
 
 def insert_results_levels(md5, results_location, status, details):
     db = pymysql.connect(host=config['MYSQL']['host'],
@@ -70,7 +78,8 @@ def insert_results_levels(md5, results_location, status, details):
                          password=config['MYSQL']['password'],
                          database=config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "INSERT INTO apklevels (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
+    sql = "INSERT INTO apklevels (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (
+    md5, results_location, status, details)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -81,7 +90,6 @@ def insert_results_levels(md5, results_location, status, details):
         db.rollback()
         return False
     db.close()
-
 
 
 def insert_new_apk2scan(md5):
@@ -209,7 +217,7 @@ def get_apk_month_level(id):
                          password=config['MYSQL']['password'],
                          database=config['MYSQL']['database'])
     now = datetime.datetime.now()
-    now_date = str(now.year)+ '/' + str(now.month) + '/' + str(now.day+1)
+    now_date = str(now.year) + '/' + str(now.month) + '/' + str(now.day + 1)
 
     start_date = ""
 
@@ -220,7 +228,7 @@ def get_apk_month_level(id):
         start_date = str((now.year - 1)) + '/' + str((12 - int(id) + now.month + 1)) + '/' + str(now.day)
         print(start_date)
     cursor = db.cursor()
-    sql = "SELECT * FROM apkvulnerabilitylevel WHERE created_at BETWEEN '" + start_date + "' AND '" + now_date+"'"
+    sql = "SELECT * FROM apkvulnerabilitylevel WHERE created_at BETWEEN '" + start_date + "' AND '" + now_date + "'"
 
     log.debug(sql)
     cursor.execute(sql)
@@ -231,6 +239,7 @@ def get_apk_month_level(id):
         json_data.append(dict(zip(row_headers, result)))
     db.close()
     return json_data
+
 
 def get_apk_levels(md5):
     db = pymysql.connect(host=config['MYSQL']['host'],
@@ -267,6 +276,7 @@ def get_all_apk_levels():
     db.close()
     return json_data
 
+
 def get_rules():
     db = pymysql.connect(host=config['MYSQL']['host'],
                          user=config['MYSQL']['user'],
@@ -282,7 +292,7 @@ def get_rules():
         for result in results:
             json_data.append(dict(zip(row_headers, result)))
         db.close()
-    else :
+    else:
         sql = "INSERT INTO apkrules (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template) VALUES (FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,'email')"
         cursor.execute(sql)
         db.commit()
@@ -302,7 +312,8 @@ def insert_rules(info, notice, warning, critical, vulnerability_name, videos, li
                          password=config['MYSQL']['password'],
                          database=config['MYSQL']['database'])
     cursor = db.cursor()
-    sql = "UPDATE apkrules SET info = %r, notice = %r, warning = %r, critical = %r, vulnerability_name = %r, videos = %r, link = %r, severity_levels = %r, email_template = '%s' WHERE id = 1" % (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
+    sql = "UPDATE apkrules SET info = %r, notice = %r, warning = %r, critical = %r, vulnerability_name = %r, videos = %r, link = %r, severity_levels = %r, email_template = '%s' WHERE id = 1" % (
+    info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
     log.debug(sql)
     try:
         cursor.execute(sql)
@@ -314,6 +325,7 @@ def insert_rules(info, notice, warning, critical, vulnerability_name, videos, li
         return False
     db.close()
     return True
+
 
 def reset_database(tables):
     db = pymysql.connect(host=config['MYSQL']['host'],

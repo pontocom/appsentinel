@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 import manager as man
 import configparser
 
-
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -18,7 +17,7 @@ DEFAULT_URL = BASE_URL + "/group/applications"
 
 APPS_PER_CATEGORY = 1
 
-workbook = xlsxwriter.Workbook("./tests/testResults-init-"+str(datetime.datetime.now())+".xlsx")
+workbook = xlsxwriter.Workbook("./tests/testResults-init-" + str(datetime.datetime.now()) + ".xlsx")
 
 
 def run_scrapper():
@@ -62,7 +61,7 @@ def run_scrapper():
         apps_html = apps_page_html.find_all(class_="bundle-item__info__span bundle-item__info__span--big")
 
         # small modification to consider only the top 10 apps in each category 
-        count_apps = 0    
+        count_apps = 0
         for app in apps_html:
             if app.find("a") != "None" and count_apps <= APPS_PER_CATEGORY:
                 app_location = app.find("a")['href']
@@ -79,7 +78,9 @@ def run_scrapper():
                     data = man.get_json_data(id_app)
 
                     count = count + 1
-                    print("[" + str(count) + "][" + category_name + "][" + str(count_apps + 1) + "][" + data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" + info_table[0].find_all("td")[1].get_text() + " : " + info_table[8].find_all("td")[1].get_text() + "]")
+                    print("[" + str(count) + "][" + category_name + "][" + str(count_apps + 1) + "][" +
+                          data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" + info_table[0].find_all("td")[
+                              1].get_text() + " : " + info_table[8].find_all("td")[1].get_text() + "]")
 
                     sheet.write(rows, 0, count)
                     sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
@@ -124,7 +125,8 @@ def run_analyse_downloads():
             print(data)
             exit(0)
 
-            print("[" + str(count) + "][" + data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" + data["nodes"]["meta"]["data"]["name"] + "]")
+            print("[" + str(count) + "][" + data["nodes"]["meta"]["data"]["file"]["md5sum"] + "][" +
+                  data["nodes"]["meta"]["data"]["name"] + "]")
             sheet.write(rows, 0, count)
             sheet.write(rows, 1, data["nodes"]["meta"]["data"]["file"]["md5sum"])
             sheet.write(rows, 2, data["nodes"]["meta"]["data"]["name"])
@@ -144,8 +146,8 @@ def download_all_apks():
         for line in f:
             id_app = line
             data = man.get_json_data(id_app)
-            #print(data)
-            if(data["info"]["status"] != "FAIL"): 
+            # print(data)
+            if (data["info"]["status"] != "FAIL"):
                 appPath = data["nodes"]["meta"]["data"]["file"]["path"]
                 print("[" + str(count) + "][" + appPath + "]")
                 man.download_apk(appPath)

@@ -6,16 +6,16 @@ import os.path
 from os import path
 from statistics import mean
 
-class calculatorClass:
 
+class calculatorClass:
     config = configparser.ConfigParser()
     config.read('config.ini')
 
     def __init__(self, md5):
         ''' constructor '''
-        self.md5=md5
-        self.plugin_scores={}
-        self.enabled_plugins=[]
+        self.md5 = md5
+        self.plugin_scores = {}
+        self.enabled_plugins = []
         self.setup()
         self.notices = 0
         self.warnings = 0
@@ -24,8 +24,8 @@ class calculatorClass:
     # Seting up the calculator, getting the enabled plugins and their correspondent scores
     def setup(self):
         # print('Setting up the Calculator')
-        n_plugins=0
-        enabled_plugins_name=[]
+        n_plugins = 0
+        enabled_plugins_name = []
 
         # looking for the plugins
         pluginDir = os.path.dirname(os.path.abspath(__file__))
@@ -47,34 +47,34 @@ class calculatorClass:
             if str(section) == 'TOOL_SCORES':
                 for (name, val) in self.config.items(section):
                     if name in enabled_plugins_name:
-                        self.plugin_scores[name]=val
-                        n_plugins +=1
+                        self.plugin_scores[name] = val
+                        n_plugins += 1
         print(self.plugin_scores)
 
     def calculate(self):
 
-        plugin_vuln_scores={}
+        plugin_vuln_scores = {}
 
         try:
-            with open('json_results/final_output/feedback/'+self.md5+'.json', "r") as json_file:
-                        feedback_content = json.load(json_file)
+            with open('json_results/final_output/feedback/' + self.md5 + '.json', "r") as json_file:
+                feedback_content = json.load(json_file)
             with open('dictionaries/baseKnowledge.json', "r") as json_file:
-                        baseKnowledge = json.load(json_file)
+                baseKnowledge = json.load(json_file)
         except Exception as e:
-            print('ERROR in VulnCalculator: ' +e)
-            print('Type od error: '+type(e))
+            print('ERROR in VulnCalculator: ' + e)
+            print('Type od error: ' + type(e))
 
         for category in feedback_content:
             for vuln in feedback_content[category]:
                 if vuln['severity'] == 'Notice':
-                    self.notices+=1
+                    self.notices += 1
                 elif vuln['severity'] == 'Warning':
-                    self.warnings+=1
+                    self.warnings += 1
                 else:
-                    self.criticals+=1
+                    self.criticals += 1
                 vuln_name = vuln['vulnerability']
                 # print('Checking for '+vuln_name)
-                detectedby=""
+                detectedby = ""
                 if isinstance(vuln['detectedby'], list):
                     detectedby = []
                     for plug in vuln['detectedby']:
@@ -94,12 +94,12 @@ class calculatorClass:
                     if plug not in plugin_vuln_scores:
                         # print('Adding '+plug+' in plugin_vuln_scores')
                         plugin_vuln_scores[plug] = []
-                    with open('dictionaries/'+plug+'_dict.json', "r") as json_file:
+                    with open('dictionaries/' + plug + '_dict.json', "r") as json_file:
                         plugin_dict = json.load(json_file)
                     for result in plugin_dict['results']:
                         if result['name'] == vuln_name and len(result['keywords']) > 0:
                             # print('Checking: '+vuln_name+' is equal to '+result['name'])
-                            keywords=result['keywords']
+                            keywords = result['keywords']
                             # print('These are the keywords for this vuln: '+str(keywords))
                             for data in baseKnowledge['results']:
                                 if category == data['category']:
@@ -108,16 +108,16 @@ class calculatorClass:
                                     for score in data['scores']:
                                         # print('Comparing: '+str(keywords)+' with '+str(score['keywords']))
                                         # checking if there are more matching keywords
-                                        if len(_aux)<len(set(keywords)&set(score['keywords'])):
+                                        if len(_aux) < len(set(keywords) & set(score['keywords'])):
                                             # print('NEW CANDIDATE')
-                                            _aux = set(keywords)&set(score['keywords'])
+                                            _aux = set(keywords) & set(score['keywords'])
                                             _aux_score = score['score']
                                         # print('Test: '+str(_aux))
-                                        if keywords==score['keywords']:
+                                        if keywords == score['keywords']:
                                             _aux_score = score['score']
                                             break
                                     fscore = _aux_score
-                                     ## MÉTODO 2 dar um extra a vulnerabilidades criticas e warnings
+                                    ## MÉTODO 2 dar um extra a vulnerabilidades criticas e warnings
                                     # print('Fscore before: '+str(fscore))
                                     # if fscore >= 7.0 and fscore < 9.0:
                                     #     fscore += 0.5
@@ -161,30 +161,30 @@ class calculatorClass:
         # check plugin_vuln_scores and change plugin_scores
         if len(plugin_vuln_scores) == 0:
             return 0
-        
+
         # print('BEFORE plugin_scores: '+str(self.plugin_scores))
         if len(plugin_vuln_scores) < len(self.enabled_plugins):
             self.plugin_scores = self.adjust_plugin_scores(plugin_vuln_scores)
         #### TODO ####
-        dividend_total=0
+        dividend_total = 0
         # print('New plugin_scores '+str(self.plugin_scores))
         for plugin in plugin_vuln_scores:
             # print("\nCalculando "+plugin)
-            dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(self.plugin_scores[plugin])
+            dividend_total += (mean(plugin_vuln_scores[plugin]) * 0.1) * float(self.plugin_scores[plugin])
             # if len(plugin_vuln_scores[plugin]) > 0:
             #     print("Calculando "+plugin)
             #     dividend_total += (mean(plugin_vuln_scores[plugin])*0.1) * float(plugin_scores[plugin])
             # else:
             #     dividend_total += 0
-        final_score = dividend_total/float(len(plugin_vuln_scores))
-        
+        final_score = dividend_total / float(len(plugin_vuln_scores))
+
         # print("Score before ---> "+str(final_score))
         # Add bonus
         if self.criticals >= 10 or self.warnings >= 10:
-            final_score = self.add_weights(final_score)            
+            final_score = self.add_weights(final_score)
 
-        # print('Final Score ---> '+str(final_score))
-        return round(final_score,2)
+            # print('Final Score ---> '+str(final_score))
+        return round(final_score, 2)
 
     def adjust_plugin_scores(self, plugin_vuln_scores):
         # print('\nSTARTING ADJSUTMENT')
@@ -212,10 +212,10 @@ class calculatorClass:
                 if sum(new_scores) > len(plugin_vuln_scores):
                     for i in range(len(new_scores)):
                         new_scores[i] -= 0.05
-                i=0
+                i = 0
                 for plug in new_plugin_scores:
-                    new_plugin_scores[plug]=new_scores[i]
-                    i+=1
+                    new_plugin_scores[plug] = new_scores[i]
+                    i += 1
             else:
                 while sum(new_scores) > len(plugin_vuln_scores):
                     for i in range(len(new_scores)):
@@ -223,15 +223,15 @@ class calculatorClass:
                 if sum(new_scores) < len(plugin_vuln_scores):
                     for i in range(len(new_scores)):
                         new_scores[i] += 0.05
-                i=0
+                i = 0
                 for plug in new_plugin_scores:
-                    new_plugin_scores[plug]=new_scores[i]
-                    i+=1
+                    new_plugin_scores[plug] = new_scores[i]
+                    i += 1
             print(sum(new_scores))
 
         # print('What about now!! ' + str(new_plugin_scores))
         return new_plugin_scores
-    
+
     def add_weights(self, final_score):
         if self.criticals >= 10:
             bonus = self.criticals * 0.01

@@ -8,6 +8,7 @@ jsonResultsLocation = "./json_results"
 # location of the unprocessed APKs
 apkDir = "/Users/cserrao/Documents/Development/AppSentinel/apks/unprocessed/"
 
+
 def listPlugins():
     print("These are the available plugins:")
     for m in plugins:
@@ -41,7 +42,7 @@ def run_this_plugin(plugin_number, apk_location):
 '''
 A tool to scan APKs and look for vulnerabilities
 '''
-if __name__=="__main__":
+if __name__ == "__main__":
     VERSION = '0.1'
     banner = """
                 .__           _________                        _____                                             
@@ -60,7 +61,8 @@ if __name__=="__main__":
     text = "Tool that scans APKs and looks for vulnerabilities"
     parser = argparse.ArgumentParser(description=text)
     parser.add_argument('-v', '--version', action='version', version='Vulnerability Scan Manager ' + VERSION)
-    parser.add_argument('-d', '--directory', help='Location to the directory that contains APKs to analyse.', action='store', dest='apkdir', nargs=1, default='./')
+    parser.add_argument('-d', '--directory', help='Location to the directory that contains APKs to analyse.',
+                        action='store', dest='apkdir', nargs=1, default='./')
     args = parser.parse_args()
 
     print(args)
@@ -95,4 +97,3 @@ if __name__=="__main__":
         p = multiprocessing.Process(target=run_this_plugin, args=(i, apkDir))
         jobs.append(p)
         p.start()
-
