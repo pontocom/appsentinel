@@ -20,3 +20,5 @@ docker exec -it appsentinel_mariadb_1 bash
 mysql -uappsentinel -p < data/application/scanner.sql
 exit
 ```
+
+Xpto 123

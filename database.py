@@ -11,8 +11,10 @@ log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemo
 
 
 def insert_results(md5, tool, results_location, status, details):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "INSERT INTO apkresults (md5, scantool, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', '%s', NOW())" % (md5, tool, results_location, status, details)
     log.debug(sql)
@@ -27,8 +29,10 @@ def insert_results(md5, tool, results_location, status, details):
     db.close()
 
 def insert_final_results(md5, results_location, status, details):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "INSERT INTO apkfinalresults (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
     log.debug(sql)
@@ -43,8 +47,10 @@ def insert_final_results(md5, results_location, status, details):
     db.close()
 
 def insert_results_vulnerabilitylevel(md5, results_location, status, details):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "INSERT INTO apkvulnerabilitylevel (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
     log.debug(sql)
@@ -59,8 +65,10 @@ def insert_results_vulnerabilitylevel(md5, results_location, status, details):
     db.close()
 
 def insert_results_levels(md5, results_location, status, details):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "INSERT INTO apklevels (md5, results_location, status, details, created_at) VALUES ('%s', '%s', '%s', '%s', NOW())" % (md5, results_location, status, details)
     log.debug(sql)
@@ -77,8 +85,10 @@ def insert_results_levels(md5, results_location, status, details):
 
 
 def insert_new_apk2scan(md5):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "INSERT INTO apk2scan (md5, created_at) VALUES ('%s', NOW())" % (md5)
     log.debug(sql)
@@ -95,8 +105,10 @@ def insert_new_apk2scan(md5):
 
 
 def get_all_apk2scan():
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM apk2scan"
     log.debug(sql)
@@ -107,8 +119,10 @@ def get_all_apk2scan():
 
 
 def delete_apk2scan(md5):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "DELETE FROM apk2scan WHERE md5 = '" + md5 + "'"
     log.debug(sql)
@@ -118,8 +132,10 @@ def delete_apk2scan(md5):
 
 
 def insert_new_apk(md5, applicationName, applicationPackage, applicationVersion, applicationPath, apkFile):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "INSERT INTO apk (md5, applicationName, applicationPackage, applicationVersion, applicationPath, apkFile, status, created_at, updated_at) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', %s, NOW(), NOW())" % \
           (md5, applicationName, applicationPackage, applicationVersion, applicationPath, apkFile, 1)
@@ -137,8 +153,10 @@ def insert_new_apk(md5, applicationName, applicationPackage, applicationVersion,
 
 
 def apk_id_exists(md5, table):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM " + table + " WHERE md5 = '" + md5 + "'"
     log.debug(sql)
@@ -150,8 +168,10 @@ def apk_id_exists(md5, table):
 
 
 def get_apk_status(md5):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM apkfinalresults WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
     log.debug(sql)
@@ -166,8 +186,10 @@ def get_apk_status(md5):
 
 
 def get_apk_vuln_level(md5):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM apkvulnerabilitylevel WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
     log.debug(sql)
@@ -182,8 +204,10 @@ def get_apk_vuln_level(md5):
 
 
 def get_apk_month_level(id):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     now = datetime.datetime.now()
     now_date = str(now.year)+ '/' + str(now.month) + '/' + str(now.day+1)
 
@@ -209,8 +233,10 @@ def get_apk_month_level(id):
     return json_data
 
 def get_apk_levels(md5):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM apklevels WHERE md5 = '" + md5 + "' ORDER BY id DESC LIMIT 1"
     log.debug(sql)
@@ -225,8 +251,10 @@ def get_apk_levels(md5):
 
 
 def get_all_apk_levels():
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM apkvulnerabilitylevel"
     log.debug(sql)
@@ -240,8 +268,10 @@ def get_all_apk_levels():
     return json_data
 
 def get_rules():
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "SELECT * FROM apkrules"
     log.debug(sql)
@@ -267,8 +297,10 @@ def get_rules():
 
 
 def insert_rules(info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     sql = "UPDATE apkrules SET info = %r, notice = %r, warning = %r, critical = %r, vulnerability_name = %r, videos = %r, link = %r, severity_levels = %r, email_template = '%s' WHERE id = 1" % (info, notice, warning, critical, vulnerability_name, videos, link, severity_levels, email_template)
     log.debug(sql)
@@ -284,8 +316,10 @@ def insert_rules(info, notice, warning, critical, vulnerability_name, videos, li
     return True
 
 def reset_database(tables):
-    db = pymysql.connect(config['MYSQL']['host'], config['MYSQL']['user'], config['MYSQL']['password'],
-                         config['MYSQL']['database'])
+    db = pymysql.connect(host=config['MYSQL']['host'],
+                         user=config['MYSQL']['user'],
+                         password=config['MYSQL']['password'],
+                         database=config['MYSQL']['database'])
     cursor = db.cursor()
     for table in tables:
         sql = "DELETE FROM " + str(table)

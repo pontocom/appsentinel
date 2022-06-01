@@ -43,12 +43,18 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             if package == '':
                 # probably it is not necessary to have this... maybe apktool is enough for this
-                cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
+                # cmd = aapt2ToolLocation + "aapt2 dump packagename " + apk_file + " | grep 'Package name'"
+                cmd = aapt2ToolLocation + "aapt2 dump packagename " + apk_file
+                print("--> " + cmd)
                 p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
                 (output, err) = p.communicate()
-                apkPackageName = str(output)[15:-9]
+                # apkPackageName = str(output)[15:-9]
+                apkPackageName = output.decode()[:-1]
+                print("PACKAGE NAME FROM AAPT2 --> " + apkPackageName)
             else:
                 apkPackageName = package
+                print("PACKAGE NAME --> " + apkPackageName)
+
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
             print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)

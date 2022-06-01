@@ -39,38 +39,40 @@ class PluginClass:
             print(pluginName + ': Running on -> ' + apk_file)
             log.debug(pluginName + ': Running on -> ' + apk_file)
             os.chdir(superLocation)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
+            print("PATH -> " + str(os.getcwd()))
+            print(config['SUPER']['supercmd'] + " " + "--json " + config['GENERAL']['appsentinel'] + apk_file[2:])
+            log.debug(config['SUPER']['supercmd'] + " " + "--json " + config['GENERAL']['appsentinel'] + apk_file[2:])
             # run the tool and move the json results to proper folder
-            os.system(config['GENERAL']['supercmd'] + " " + "--json ../." + apk_file)
-            #os.system('mv results/'+)
-            os.chdir('../../')
-            print(os.system)
-            print(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
-            log.debug(superLocation + config['GENERAL']['supercmd'] + " " + "--json " + apk_file)
-            path = './tools/super/results/'
+            os.system(config['SUPER']['supercmd'] + " " + "--json " + config['GENERAL']['appsentinel'] + apk_file[2:])
+            # os.system('mv results/'+)
+            # os.chdir('../../')
+            os.chdir(config['GENERAL']['appsentinel'])
+            print("PATH -> " + str(os.getcwd()))
+            # print(superLocation + config['SUPER']['supercmd'] + " " + "--json " + apk_file)
+            # log.debug(superLocation + config['SUPER']['supercmd'] + " " + "--json " + apk_file)
+            path = '../tools/super/results/'
             fileName = glob.glob(path+"*")
             print('Filename ---> '+str(fileName))
             if not os.path.isdir(fileName[0]):
                 if package == '':
                     os.system('mv ' + fileName[0] + ' ./json_results/Super/'+md5+'.json')
                     self.build_scan_format(md5)
-                    os.system('rm -r ./tools/super/results/')
+                    os.system('rm -r ../tools/super/results/')
                 else:
                     os.system('mv ' + fileName[0] + ' ./json_results/Super/' + package + '.json')
                     self.build_scan_format(package)
-                    os.system('rm -r ./tools/super/results/')
+                    os.system('rm -r ../tools/super/results/')
             else:
                 if package == '':
                     directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
                     os.system('mv ' + fileName[0]+'/'+os.path.basename(directory[0]) + ' ./json_results/Super/'+md5+'.json')
                     self.build_scan_format(md5)
-                    os.system('rm -r ./tools/super/results/')
+                    os.system('rm -r ../tools/super/results/')
                 else:
                     directory = glob.glob(path + os.path.basename(fileName[0]) + '/*')
                     os.system('mv ' + fileName[0] + '/' + os.path.basename(directory[0]) + ' ./json_results/Super/' + package + '.json')
                     self.build_scan_format(package)
-                    os.system('rm -r ./tools/super/results/')
+                    os.system('rm -r ../tools/super/results/')
 
     
     def build_scan_format(self, md5):
