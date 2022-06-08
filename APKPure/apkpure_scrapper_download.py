@@ -10,7 +10,7 @@ import hashlib
 import pyfiglet
 
 baseURL = 'https://apkpure.com'
-APPS_PER_GROUP = 10
+APPS_PER_GROUP = 1
 
 workbook = xlsxwriter.Workbook("./tests/testResults-APKpure-init-" + str(datetime.datetime.now()) + ".xlsx")
 
@@ -58,17 +58,24 @@ def run_scrapper():
     print("Starting web scrapping of APKPure web site.... :-)")
 
     # Run all the categories and download top apps as JSON format
-    with open('./apkpure_categories.txt', 'r') as f:
+    with open('apkpure_categories.txt', 'r') as f:
         allGroups = f.readlines()
         for group in allGroups:
             print('[' + str(grpNumber + 1) + '][' + group.rstrip('\r\n').upper() + ']')
 
             # run the scrapper for this category
             print('Getting...: ' + baseURL + '/' + group.rstrip('\r\n'))
-            response = requests.get(baseURL + '/' + group.rstrip('\r\n'))
+
+            headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"}
+            response = requests.get(baseURL + '/' + group.rstrip('\r\n'), headers=headers)
+            print("Response -> " + str(response))
+
             html = BeautifulSoup(response.text, 'html.parser')
 
+            # print("HTML ->" + str(html))
+
             apps = html.find_all(class_="category-template-img")
+            # print("apps ->" + str(apps))
             apps_number = 1
 
             for app in apps:
@@ -80,11 +87,11 @@ def run_scrapper():
                     print("Entering -> " + baseURL + app_location)
                     a = urlparse(baseURL + app_location)
                     app_package = os.path.basename(a.path)
-                    appresponse = requests.get(baseURL + app_location)
+                    appresponse = requests.get(baseURL + app_location, headers=headers)
                     html2 = BeautifulSoup(appresponse.text, 'html.parser')
                     download_link = html2.find(class_="ny-down").find("a")['href']
                     print('Getting...: ' + baseURL + download_link)
-                    response = requests.get(baseURL + download_link)
+                    response = requests.get(baseURL + download_link, headers=headers)
                     html3 = BeautifulSoup(response.text, 'html.parser')
                     download_link_apk = html3.find(class_="down-click").find("a")['href']
                     sheet.write(rows, 1, app_name[:-4])
@@ -164,8 +171,8 @@ def run_sequence_tests_from_scraping():
 
 
 if __name__ == "__main__":
-    # run_scrapper()
+    run_scrapper()
     # compute file MD5
     # compute_md5()
-    run_sequence_tests_from_scraping()
+    # run_sequence_tests_from_scraping()
     workbook.close()
