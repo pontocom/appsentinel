@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import requests
 import xlsxwriter
 import os
@@ -15,6 +16,9 @@ APPS_PER_GROUP = 1
 workbook = xlsxwriter.Workbook("./tests/testResults-APKpure-init-" + str(datetime.datetime.now()) + ".xlsx")
 
 def download_apk(apk, link):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15"}
+
     # check if the download dir exists or not
     if not os.path.exists('./downloads'):
         os.system("mkdir " + './downloads')
@@ -27,7 +31,10 @@ def download_apk(apk, link):
     # print(filename)
 
     # Streaming, so we can iterate over the response.
-    r = requests.get(link, stream=True)
+    r = requests.get(link, headers=headers, stream=True)
+    #print(r.status_code)
+    #print(r.reason)
+    #print(r.headers)
 
     # Total size in bytes.
     total_size = int(r.headers.get('content-length', 0))
@@ -66,7 +73,7 @@ def run_scrapper():
             # run the scrapper for this category
             print('Getting...: ' + baseURL + '/' + group.rstrip('\r\n'))
 
-            headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36"}
+            headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15"}
             response = requests.get(baseURL + '/' + group.rstrip('\r\n'), headers=headers)
             print("Response -> " + str(response))
 
@@ -92,14 +99,26 @@ def run_scrapper():
                     download_link = html2.find(class_="ny-down").find("a")['href']
                     print('Getting...: ' + baseURL + download_link)
                     response = requests.get(baseURL + download_link, headers=headers)
+                    #print(response.status_code)
+                    #print(response.reason)
+                    #print(response.headers)
                     html3 = BeautifulSoup(response.text, 'html.parser')
                     download_link_apk = html3.find(class_="down-click").find("a")['href']
+                    print("Download link = " + download_link_apk)
+                    #response = requests.get(download_link_apk, headers=headers)
+                    #print(response.status_code)
+                    #print(response.reason)
+                    #print(response.headers)
+                    #with open("./downloads/" + app_package, 'wb') as fl:
+                    #    fl.write(response.content)
+
                     sheet.write(rows, 1, app_name[:-4])
                     sheet.write(rows, 2, app_package)
                     sheet.write(rows, 3, group.rstrip('\r\n').upper())
 
                     # print("Downloading -> " + download_link_apk)
                     download_apk(app_package, download_link_apk)
+
                     apps_number += 1
                     rows += 1
                     count += 1
@@ -133,7 +152,7 @@ def compute_md5():
 
 def run_sequence_tests_from_scraping():
     vars = ["#", "Package", "Start Time", "End Time", "Duration"]
-    sheet = workbook.add_worksheet("Results - Sequence")
+    sheet = workbook.add_worksheet("Results - Tests")
     bold = workbook.add_format({'bold': True})
     # write the header
     cols = 0
@@ -173,6 +192,6 @@ def run_sequence_tests_from_scraping():
 if __name__ == "__main__":
     run_scrapper()
     # compute file MD5
-    # compute_md5()
-    # run_sequence_tests_from_scraping()
+    compute_md5()
+    run_sequence_tests_from_scraping()
     workbook.close()
