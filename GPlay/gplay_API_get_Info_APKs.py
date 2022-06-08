@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 import requests
 import json
@@ -140,8 +141,8 @@ def compute_md5():
 
 
 if __name__ == "__main__":
-    # get_top_apks()
-    download_apks()
+    get_top_apks()
+    # download_apks()
     # get_apk_info()
     # compute_md5()
     workbook.close()

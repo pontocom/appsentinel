@@ -96,7 +96,8 @@ def run_scrapper():
                     app_package = os.path.basename(a.path)
                     appresponse = requests.get(baseURL + app_location, headers=headers)
                     html2 = BeautifulSoup(appresponse.text, 'html.parser')
-                    download_link = html2.find(class_="ny-down").find("a")['href']
+                    download_link = html2.find(class_="ny-down").find(class_="da no-right-radius")['href']
+                    print(html2.find(class_="ny-down").find(class_="da no-right-radius")['href'])
                     print('Getting...: ' + baseURL + download_link)
                     response = requests.get(baseURL + download_link, headers=headers)
                     #print(response.status_code)
