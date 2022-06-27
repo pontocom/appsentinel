@@ -15,13 +15,22 @@ APPS_PER_GROUP = 1
 
 workbook = xlsxwriter.Workbook("./tests/testResults-APKpure-init-" + str(datetime.datetime.now()) + ".xlsx")
 
-def download_apk(apk, link):
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15"}
 
+def check_and_create_dirs():
     # check if the download dir exists or not
     if not os.path.exists('./downloads'):
         os.system("mkdir " + './downloads')
+        os.system("chmod 775 " + './downloads')
+
+    # check if the download dir exists or not
+    if not os.path.exists('./tests'):
+        os.system("mkdir " + './tests')
+        os.system("chmod 775 " + './tests')
+
+
+def download_apk(apk, link):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15"}
 
     # write the file to the filesystem
     # a = urlparse(which_apk)
@@ -75,7 +84,7 @@ def run_scrapper():
 
             headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15"}
             response = requests.get(baseURL + '/' + group.rstrip('\r\n'), headers=headers)
-            print("Response -> " + str(response))
+            # print("Response -> " + str(response))
 
             html = BeautifulSoup(response.text, 'html.parser')
 
@@ -191,6 +200,7 @@ def run_sequence_tests_from_scraping():
 
 
 if __name__ == "__main__":
+    check_and_create_dirs()
     run_scrapper()
     # compute file MD5
     compute_md5()

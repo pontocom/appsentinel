@@ -28,6 +28,18 @@ dataResult = []
 workbook = xlsxwriter.Workbook("./tests/testResults-init-" + str(datetime.datetime.now()) + ".xlsx")
 
 
+def check_and_create_dirs():
+    # check if the download dir exists or not
+    if not os.path.exists('./downloads'):
+        os.system("mkdir " + dir)
+        os.system("chmod 775 " + dir)
+
+    # check if the download dir exists or not
+    if not os.path.exists('./tests'):
+        os.system("mkdir " + './tests')
+        os.system("chmod 775 " + './tests')
+
+
 def get_json_data(which_apk):
     response = requests.get(aptoide_API_endpoint + which_apk)
     jsondata = response.json()
@@ -35,10 +47,6 @@ def get_json_data(which_apk):
 
 
 def download_apk(which_apk):
-    # check if the download dir exists or not
-    if not os.path.exists(dir):
-        os.system("mkdir " + dir)
-
     # write the file to the filesystem
     a = urlparse(which_apk)
     filename = dir + "/" + os.path.basename(a.path)
@@ -60,6 +68,8 @@ def download_apk(which_apk):
 
 
 if __name__ == "__main__":
+    check_and_create_dirs()
+
     vars = ["#", "MD5", "Name", "Package", "Category", "Downloads", "APK Size", "Version Name", "Version Code"]
     sheet = workbook.add_worksheet("Results - Sequence")
     bold = workbook.add_format({'bold': True})

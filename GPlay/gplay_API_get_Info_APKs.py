@@ -8,6 +8,8 @@ import xlsxwriter
 import datetime
 import hashlib
 
+
+
 baseAPIURL = 'https://api.apptweak.com/android/categories/'
 APIKEY = 'zj3KJJShkBsvomVrxv8T16hD2IQ'
 
@@ -45,6 +47,7 @@ def get_top_apks():
             print('Requesting [' + baseAPIURL + group.rstrip('\r\n') + '/top.json?country=pt&language=en&type=free]')
             response = requests.get(baseAPIURL + group.rstrip('\r\n') + '/top.json?country=pt&language=en&type=free',
                                     headers={"X-Apptweak-Key": APIKEY})
+            print(response)
             content = response.json()
             print('./tops/' + group.rstrip('\r\n') + '.json')
             with open('./tops/' + group.rstrip('\r\n') + '.json', 'w') as s:
