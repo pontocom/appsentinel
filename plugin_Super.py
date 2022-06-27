@@ -15,7 +15,7 @@ log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemo
                 datefmt='%H:%M:%S', level=log.DEBUG)
 
 pluginName = "Super"
-enable = True
+enable = False
 
 superLocation = config['SUPER']['superLocation']
 

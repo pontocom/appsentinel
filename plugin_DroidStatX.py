@@ -10,9 +10,7 @@ import datetime
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a',
-                format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s',
-                datefmt='%H:%M:%S', level=log.DEBUG)
+log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemode='a', format='%(asctime)s,%(msecs)d | %(name)s | %(levelname)s | %(funcName)s:%(lineno)d | %(message)s', datefmt='%H:%M:%S', level=log.DEBUG)
 
 pluginName = "DroidStatX"
 enable = True
@@ -25,13 +23,14 @@ jsonResultsLocation = config['SCANNER']['jsonResultsLocation'] + "/" + pluginNam
 dictionary = config['DICTIONARY']['droidstatxDict']
 
 
+
 class PluginClass:
     def __init__(self):
         ''' constructor '''
-
+        
     def run(self, apk_file, md5, package=''):
         print("Running the DroidStatX plugin!...")
-
+        
         log.debug("Running the DroidStatX plugin!...")
         # test the existence of the results directory
         if not os.path.exists(jsonResultsLocation):
@@ -44,53 +43,37 @@ class PluginClass:
         if apk_file[-4:] == ".apk":
             if package == '':
                 # probably it is not necessary to have this... maybe apktool is enough for this
-                # cmd = aapt2ToolLocation + "aapt2 dump packagename " + apk_file + " | grep 'Package name'"
-                cmd = aapt2ToolLocation + "aapt2 dump packagename " + apk_file
-                print("--> " + cmd)
+                cmd = aapt2ToolLocation + "aapt2 dump " + apk_file + " | grep 'Package name'"
                 p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
                 (output, err) = p.communicate()
-                # apkPackageName = str(output)[15:-9]
-                apkPackageName = output.decode()[:-1]
-                print("PACKAGE NAME FROM AAPT2 --> " + apkPackageName)
+                apkPackageName = str(output)[15:-9]
             else:
                 apkPackageName = package
-                print("PACKAGE NAME --> " + apkPackageName)
-
             print(pluginName + ": Running on -> " + apk_file)
             log.debug(pluginName + ": Running on -> " + apk_file)
-            print(pluginName + ": Executing -> " + config['GENERAL'][
-                'python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
-            log.debug(pluginName + ": Executing -> " + config['GENERAL'][
-                'python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            print(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
+            log.debug(pluginName + ": Executing -> " + config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # run the tool
             # ----- Start Time ------
             startTime = datetime.datetime.now()
             os.system(config['GENERAL']['python3cmd'] + " " + droidStatXLocation + "droidstatx.py --apk " + apk_file)
             # convert .xmind file to JSON -> using xmindparser (already installed)
             # from here: https://github.com/tobyqin/xmindparser
-            print(
-                pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
-            log.debug(
-                pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
+            print(pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
+            log.debug(pluginName + ": Executing -> xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             os.system("xmindparser " + droidStatXLocation + "output_xmind/" + apkPackageName + ".xmind -json")
             # move the json results to proper folder
             if package == '':
-                print(
-                    pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
-                log.debug(
-                    pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
-                os.system(
-                    "mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+                print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+                log.debug(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
+                os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + md5 + ".json")
                 self.analyseVulnerability(md5)
                 # have also the information registered on the database
                 db.insert_results(md5, pluginName, jsonResultsLocation + md5 + ".json", 0, "")
             else:
-                print(
-                    pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
-                log.debug(
-                    pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
-                os.system(
-                    "mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
+                print(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
+                log.debug(pluginName + ": mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
+                os.system("mv " + droidStatXLocation + "output_xmind/" + apkPackageName + ".json " + jsonResultsLocation + package + ".json")
                 self.analyseVulnerability(package)
                 # have also the information registered on the database
                 db.insert_results(package, pluginName, jsonResultsLocation + package + ".json", 0, "")
@@ -100,22 +83,26 @@ class PluginClass:
             dir = './apkTimeAnalysis'
             if not os.path.exists(dir):
                 os.system("mkdir " + dir)
-
+            
+            
             if package == '':
-                data = md5 + ' ' + pluginName + ' ' + str(endTime - startTime) + '\n'
+                data = md5+' '+pluginName+' '+str(endTime-startTime)+'\n'
             else:
                 data = package + ' ' + pluginName + ' ' + str(endTime - startTime) + '\n'
 
             with open(dir + '.txt', 'a') as f:
                 f.write(data)
 
+
+
+
     def analyseVulnerability(self, md5):
         data = {}
-
+        
         data['results'] = []
-        # output={}
-        category = {'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'}
-        # for level in m_aux_array:
+        #output={}
+        category= {'M1','M2','M3','M4','M5','M6','M7','M8','M9','M10'}
+        #for level in m_aux_array:
         #    output[level] = []
         try:
             with open(jsonResultsLocation + md5 + '.json', 'r') as f:
@@ -124,17 +111,17 @@ class PluginClass:
             methodology = content['topic']['topics'][1]['topics']
 
             for m_level in methodology:
-                m_title = m_level['title']
+                m_title=m_level['title']
                 for vulnerability in m_level['topics']:
                     if 'makers' in vulnerability:
                         if 'green' in vulnerability['makers'][0]:
                             continue
                         else:
-                            # if '?' not in vulnerability['title']:
+                # if '?' not in vulnerability['title']:
                             _link = ''
                             _severity = ''
                             _details = 'nothing'
-                            # if hasMoreVulnerabilities(vulnerability):
+                            #if hasMoreVulnerabilities(vulnerability):
                             #    analyseVulnerability(vulnerability['topics'])
                             # inside a vulnerabilities there is another JSON array with some details
                             # if 'topics' in vulnerability:
@@ -148,9 +135,9 @@ class PluginClass:
 
                             # some vulnerabilities dont have flags
 
-                            # if 'makers' not in vulnerability:
+                            #if 'makers' not in vulnerability:
                             #    _severity = 'info'
-                            # else:
+                            #else:
                             _severity = self.flag_to_severity(vulnerability['makers'][0])
 
                             # some vulnerabilities dont have links
@@ -159,7 +146,7 @@ class PluginClass:
                             else:
                                 _link = vulnerability['link']
 
-                            # data[self.owasp_level(m_title)].append({
+                            #data[self.owasp_level(m_title)].append({
                             #    'vulnerability': vulnerability['title'],
                             #    'severity': _severity,
                             #    'link': _link,
@@ -172,19 +159,21 @@ class PluginClass:
                                 'severity': _severity,
                                 'detectedby': 'Droidstatx',
                                 'feedback': [{"url": ""},
-                                             {"video": ""},
-                                             {"book": ""},
-                                             {"other": ""}]
+                                            {"video": ""},
+                                            {"book": ""},
+                                            {"other": ""}]
                             })
+
 
             with open(jsonResultsLocation + md5 + '.json', 'w') as outfile:
                 json.dump(data, outfile)
-
+        
         except:
             try:
                 os.mknod(jsonResultsLocation + md5 + '.json')
             except:
                 pass
+
 
     # set the current OWASP M level
     def owasp_level(self, argument):
@@ -198,14 +187,14 @@ class PluginClass:
             'Client Code Quality': 'M7',
             'Code Tampering': 'M8',
             'Reverse Engineering': 'M9',
-            'Extraneous Functionality': 'M10',
+            'Extraneous Functionality' : 'M10',
         }
         return switcher.get(argument, "nothing")
 
     # according to given flag passes it to severity level
     def flag_to_severity(self, flag):
         switcher = {
-            # 'flag-green': 'info',
+            #'flag-green': 'info',
             'flag-yellow': 'warning',
             'flag-red': 'critical'
         }
