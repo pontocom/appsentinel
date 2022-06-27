@@ -13,6 +13,7 @@ import logging as log
 import configparser
 import datetime
 import time
+# from waitress import serve
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -53,6 +54,7 @@ log.basicConfig(filename=config['GENERAL']['logDir'] + "appsentinel.log", filemo
 # This is purely to see if the server is running, there is currently no website planned
 @app.route('/')
 def home():
+    print("REQUEST RECEIVED")
     return jsonify({'status': True, 'message': 'API is responding... keep trying!'}), 200
 
 
@@ -401,3 +403,4 @@ def updaterules():
 # If we're running in stand alone mode, run the application
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+    #serve(app, listen='*:5000')
